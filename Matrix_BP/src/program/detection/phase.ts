@@ -1,7 +1,7 @@
 import { Player, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
-import { fastAbs } from "../../util/fastmath";
+import { fastAbs, pythag } from "../../util/fastmath";
 
 const MIN_SPEED = 0.25;
 const MAX_SPEED = 0.7;
@@ -47,7 +47,7 @@ antiPhase.register();
 function tickEvent(player: Player) {
     const data = phaseDataMap.get(player.id)!;
     const { x, y, z } = player.getVelocity();
-    const currentSpeed = Math.hypot(x, z);
+    const currentSpeed = pythag(x, z);
 
     const clipStartLocation = calculateClipStartLocation(data, currentSpeed);
 
