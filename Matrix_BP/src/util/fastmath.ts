@@ -1,7 +1,7 @@
 import { Block, Dimension, Vector3 } from "@minecraft/server";
 
 // Define variables
-export const PI = 105414357.0 / 33554432.0 + 1.984187159361080883e-9;
+export const PI = 3.14159;
 // Angle functions
 export function calculateAngleFromView(pos1: Vector3, pos2: Vector3, rotationY: number): number {
     const commonAngle = (Math.atan2(pos2.z - pos1.z, pos2.x - pos1.x) * 180) / PI;
@@ -12,7 +12,7 @@ export function calculateAngleFromView(pos1: Vector3, pos2: Vector3, rotationY: 
 
 // Distance functions
 export function calculateDistance(pos1: Vector3, pos2: Vector3): number {
-    return fastHypot(pos1.x - pos2.x, pos1.z - pos2.z);
+    return pythag(pos1.x - pos2.x, pos1.z - pos2.z);
 }
 
 // General Maths functions
@@ -40,7 +40,11 @@ export function fastHypot(x: number, y: number) {
     }
 }
 export function pythag (a: number, b: number) {
-    return fastSqrt(a * a + b * b);
+    return Math.sqrt(a ** 2 + b ** 2);
+}
+
+export function pythag3d (a: number, b: number, c: number) {
+    return Math.sqrt(a ** 2, b ** 2, c ** 2);
 }
 const DOUBLE_PI = PI * 2;
 const HALF_PI = PI * 0.5;
@@ -66,6 +70,8 @@ for (let i = 0; i < 1024; i++) {
  * @description Fast sqrt
  */
 export function fastSqrt(x: number) {
+    // Just did some better testing, this needs recoding. When I get to it I will make another pull request - 4urxra
+    return Math.sqrt(x)
     try {
         // Handle special cases
         if (x < 0) return NaN;
