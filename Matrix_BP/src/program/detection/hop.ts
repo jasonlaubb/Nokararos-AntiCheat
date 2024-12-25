@@ -1,7 +1,7 @@
 import { Player, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
-import { fastHypot, fastTotalDelta } from "../../util/fastmath";
+import { pythag, fastTotalDelta } from "../../util/fastmath";
 const MAX_DEVIATION = 1.5;
 const SPIKE_LIKE_LIMIT = 3;
 const MAX_FLAG_AMOUNT = 7;
@@ -53,7 +53,7 @@ function tickEvent(player: Player) {
     // Straight line speed
     const actualDeltaX = player.location.x - pastLocations[0].x;
     const actualDeltaZ = player.location.z - pastLocations[0].z;
-    const deviation = fastHypot(actualDeltaX - smoothDeltaX, actualDeltaZ - smoothDeltaZ);
+    const deviation = pythag(actualDeltaX - smoothDeltaX, actualDeltaZ - smoothDeltaZ);
     const now = Date.now();
     if (deviation > MAX_DEVIATION && deviation < SPIKE_LIKE_LIMIT && !player.isFlying && !player.isGliding && now - player.timeStamp.knockBack > 1500 && now - player.timeStamp.riptide > 5000) {
         if (now - data.lastFlagTimestamp > MAX_FLAG_INTERVAL) {

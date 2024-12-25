@@ -43,7 +43,8 @@ function tickEvent(player: Player) {
         if (now - data.lastFlag > 1000) {
             data.flagCount = 0;
         }
-        data.lastFlag++;
+        data.lastFlag = now;
+        data.flagCount++;
         if (data.flagCount > 10) {
             player.flag(invalidSprint);
         }
