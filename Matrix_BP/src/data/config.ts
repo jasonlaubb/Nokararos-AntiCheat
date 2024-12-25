@@ -74,5 +74,8 @@ export default {
         defaultRank: "Member",
         topRankOnly: false,
     },
+    antiXray: {
+        debug: false,
+    },
     userRecruitmentFunction: true,
 };

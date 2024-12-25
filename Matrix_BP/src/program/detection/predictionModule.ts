@@ -104,7 +104,7 @@ function tickEvent (player: Player) {
 	predictionData.set(player.id, data);
 }
 const DOWN_FACTOR = -0.00655;
-const THRESHOLD = 5;
+const THRESHOLD = 20;
 const MAX_INTERVAL = 4000;
 function checkPrediction(data: PredictionData, now: number): PredictionData {
     // Check if the player is in the air.
