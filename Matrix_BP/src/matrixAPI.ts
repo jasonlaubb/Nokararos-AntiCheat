@@ -289,6 +289,7 @@ class Command {
     public executeFunc?: (player: Player, ...args: (string | number | Player | boolean | undefined)[]) => Promise<void>;
     public subCommands?: Command[];
     public description: RawText = rawtext({ text: "§cUnknown§r" });
+    public shortDescription: RawText | null = null;
     public setName(name: string) {
         this.availableId.push(name);
         return this;
@@ -303,6 +304,10 @@ class Command {
     }
     public setMinPermissionLevel(level: number) {
         this.minLevel = level;
+        return this;
+    }
+    public addShortDescription(sd: RawText) {
+        this.shortDescription(sd);
         return this;
     }
     public addOption(name: RawText, description: RawText, type: OptionTypes, typeInfo?: undefined | TypeInfo, optional = false) {
