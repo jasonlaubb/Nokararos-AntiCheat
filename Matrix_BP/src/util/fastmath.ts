@@ -39,11 +39,11 @@ export function fastHypot(x: number, y: number) {
         return Math.hypot(x, y);
     }
 }
-export function pythag (a: number, b: number) {
+export function pythag(a: number, b: number) {
     return Math.sqrt(a ** 2 + b ** 2);
 }
 
-export function pythag3d (a: number, b: number, c: number) {
+export function pythag3d(a: number, b: number, c: number) {
     return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 const DOUBLE_PI = PI * 2;
@@ -71,17 +71,17 @@ for (let i = 0; i < 1024; i++) {
  */
 export function fastSqrt(x: number) {
     // Just did some better testing, this needs recoding. When I get to it I will make another pull request - 4urxra
-    return Math.sqrt(x)
+    return Math.sqrt(x);
     try {
         // Handle special cases
         if (x < 0) return NaN;
         if (x === 0 || x === 1) return x;
-        
+
         // Use lookup table for small integers
         if (x < 1024 && Number.isInteger(x)) {
             return SQRT_TABLE[x];
         }
-        
+
         // Fast inverse square root approximation
         const halfX = x * 0.5;
         let i = new Float32Array(1);
@@ -89,10 +89,10 @@ export function fastSqrt(x: number) {
         let j = new Int32Array(i.buffer);
         j[0] = 0x5f375a86 - (j[0] >> 1);
         let y = new Float32Array(j.buffer)[0];
-        
+
         // One Newton iteration for better accuracy
-        y = y * (1.5 - (halfX * y * y));
-        
+        y = y * (1.5 - halfX * y * y);
+
         return x * y;
     } catch (e) {
         console.warn("[FastSqrt] Error: " + e);
@@ -103,7 +103,7 @@ export function fastSqrt(x: number) {
 /**
  * @description Most efficient way to get all the blocks around a block.
  */
-export function fastSurround (centerLocation: Vector3, dimension: Dimension): (Block | undefined )[] | undefined {
+export function fastSurround(centerLocation: Vector3, dimension: Dimension): (Block | undefined)[] | undefined {
     try {
         const block = dimension.getBlock(centerLocation);
         // directions
@@ -138,7 +138,7 @@ export function fastSurround (centerLocation: Vector3, dimension: Dimension): (B
         return undefined;
     }
 }
-export function fastBelow (centerLocation: Vector3, dimension: Dimension): (Block | undefined )[] | undefined {
+export function fastBelow(centerLocation: Vector3, dimension: Dimension): (Block | undefined)[] | undefined {
     try {
         const block = dimension.getBlock(centerLocation);
         // directions

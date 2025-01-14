@@ -14,14 +14,12 @@ export function setupFlagFunction() {
             .endline()
             .addTranRawText("flag.detected.module", detected.getName())
             .endline()
-            .addTran("flag.detected.object", data?.type as string ?? data?.t ?? "§eCLASSIC")
+            .addTran("flag.detected.object", (data?.type as string) ?? data?.t ?? "§eCLASSIC")
             .endline()
             .addRawText(extractData(data, config.customize.dataValueToPrecision))
             .endline()
             .addTran("flag.detected.punishment", punishment);
-        if (config.customize.askWetherFalseFlag) flagMessage
-            .endline()
-            .addTran("flag.detected.description");
+        if (config.customize.askWetherFalseFlag) flagMessage.endline().addTran("flag.detected.description");
         world.sendMessage(flagMessage.build());
         if (this.hasTag("matrix-debug:punishmentResistance")) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {
@@ -52,26 +50,28 @@ export function setupFlagFunction() {
     };
 }
 const nonePreset = rawtextTranslate("flag.detected.none");
-function extractData (data: { [key: string]: string | number | (string | number)[] } | undefined, precision: number): RawText {
+function extractData(data: { [key: string]: string | number | (string | number)[] } | undefined, precision: number): RawText {
     if (!data) return nonePreset;
     const dataExtract = Object.entries(data);
     if (dataExtract.length <= 1) return nonePreset;
     const typeIndex = dataExtract.findIndex((data) => data[0] === "type" || data[0] === "t");
     if (typeIndex !== -1) dataExtract.splice(typeIndex, 1);
-    const dataString = dataExtract.map(([key, value]) => {
-        if (typeof value === "object") {
-            value = value.map((v) => {
-                if (typeof v === "number" && !Number.isInteger(v)) {
-                    return v.toPrecision(precision);
-                }
-                return '"' + v + '"';
-            })
-            value = "[" + value.join(", ") + "]";
-        }
-        if (typeof value === "number" && !Number.isInteger(value)) {
-            value = value.toPrecision(precision);
-        }
-        return `      §f${key} §j§l|  §r§f${value}`;
-    }).join("\n");
+    const dataString = dataExtract
+        .map(([key, value]) => {
+            if (typeof value === "object") {
+                value = value.map((v) => {
+                    if (typeof v === "number" && !Number.isInteger(v)) {
+                        return v.toPrecision(precision);
+                    }
+                    return '"' + v + '"';
+                });
+                value = "[" + value.join(", ") + "]";
+            }
+            if (typeof value === "number" && !Number.isInteger(value)) {
+                value = value.toPrecision(precision);
+            }
+            return `      §f${key} §j§l|  §r§f${value}`;
+        })
+        .join("\n");
     return rawtext({ text: dataString });
 }

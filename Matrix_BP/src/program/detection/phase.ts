@@ -56,7 +56,7 @@ function tickEvent(player: Player) {
         let containsSolid = undefined;
         try {
             containsSolid = blockLocations.map((block) => player.dimension.getBlock(block)).find((block) => block?.isSolid);
-        } catch { }
+        } catch {}
         if (containsSolid) {
             player.teleport(clipStartLocation);
             player.flag(antiPhase, { passedBlock: containsSolid.typeId });

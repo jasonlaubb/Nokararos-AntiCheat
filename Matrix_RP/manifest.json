@@ -4,7 +4,7 @@
         "name": "§bMatrix§a+ §gAnti-Cheat §7(RP§7) V6.0.11§r",
         "description": "pack.description",
         "uuid": "44408a4d-808d-4c6a-bd46-77dd6c3f5fbb",
-        "version": [6, 0, 11],
+        "version": [6, 0, 20],
         "min_engine_version": [1, 21, 50]
     },
     "modules": [

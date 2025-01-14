@@ -56,7 +56,13 @@ export function unBan(playerName: string) {
         return unBan(playerName);
     }
     if (!obj!.getParticipants().every((id) => id.displayName.slice(2) !== playerName)) return null;
-    if (world.scoreboard.getObjective(`matrix:banRecord`)!.getParticipants().every((id) => id.displayName.slice(2) !== playerName)) return null;
+    if (
+        world.scoreboard
+            .getObjective(`matrix:banRecord`)!
+            .getParticipants()
+            .every((id) => id.displayName.slice(2) !== playerName)
+    )
+        return null;
     obj.setScore("::" + playerName, 0);
     return true;
 }

@@ -119,17 +119,17 @@ export function waitShowActionForm(ui: ActionFormData, player: Player): Promise<
 /**
  * @description Check if a block is surrounded by air
  */
-export function isSurroundedByAir (centerLocation: Vector3, dimension: Dimension): boolean {
+export function isSurroundedByAir(centerLocation: Vector3, dimension: Dimension): boolean {
     const surroundedBlocks = fastSurround(centerLocation, dimension);
     if (!surroundedBlocks) return !!surroundedBlocks;
     return surroundedBlocks.every((block) => block?.isAir);
 }
-export function isSteppingOnIceOrSlime ({ location, dimension }: Player): boolean {
+export function isSteppingOnIceOrSlime({ location, dimension }: Player): boolean {
     const belowBlocks = fastBelow(location, dimension);
     if (!belowBlocks) return false;
     return belowBlocks.some((block) => block?.typeId?.includes("ice") || block?.typeId === MinecraftBlockTypes.Slime);
 }
-export function isMovedUp (lastPositions: Vector3[]) {
+export function isMovedUp(lastPositions: Vector3[]) {
     for (const [i, position] of lastPositions.entries()) {
         if (i < lastPositions.length - 1) {
             const deltaY = position.y - lastPositions[i + 1].y;
