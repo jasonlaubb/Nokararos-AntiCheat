@@ -30,7 +30,7 @@ const entityFly = new Module()
 	});
 entityFly.register();
 interface EntityFlyData {
-	pastVelocityY: string[];
+	pastVelocityY: number[];
 	lastNotRidingLocation: Vector3;
 	prefectCombo: number;
 	superCombo: number;
@@ -43,13 +43,14 @@ const MIN_COMBO_BEFORE_FLAG = 10;
 const NORMAL_SPEED = 0.25;
 const MIN_SUPER_COMBO = 20;
 const FACTOR_MIN_FLAG_AMOUNT = 4;
-const FACTOR = 0.01;
+const FACTOR = 100;
 function tickEvent (player: Player) {
 	const isRiding = player.getComponent("riding")?.entityRidingOn;
 	const data = entityFlyData.get(player.id)!;
 	const { x, y: velocityY, z } = player.getVelocity();
-	data.pastVelocityY.push(velocityY.toFixed(4));
+	data.pastVelocityY.push(velocityY);
 	data.pastVelocityY.shift();
+	player.onScreenDisplay.setActionBar(`${velocityY}`);
 	if (!isRiding) {
 		data.lastNotRidingLocation = player.location;
 		data.prefectCombo = 0;
@@ -93,7 +94,7 @@ function tickEvent (player: Player) {
 				} else if (data.superCombo > 0) data.superCombo -= 1;
 			} else if (data.superCombo > 0) data.superCombo -= 1;
 		} else data.superCombo = 0;
-		if (isRiding.typeId !== MinecraftEntityTypes.Minecart && velocityY % FACTOR === 0) {
+		if (isRiding.typeId !== MinecraftEntityTypes.Minecart && velocityY !== 0 && Number.isInteger(velocityY * FACTOR)) {
 			data.illegalFactorAmount++;
 			if (data.illegalFactorAmount >= FACTOR_MIN_FLAG_AMOUNT) {
 				player.teleport(data.lastNotRidingLocation);
