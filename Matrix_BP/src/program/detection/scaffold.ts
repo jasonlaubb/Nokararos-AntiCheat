@@ -65,14 +65,14 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
     if (player.getGameMode() == GameMode.creative || player.isAdmin()) return;
     if (!block?.isValid()) {
         // Type 1
-        player.flag(scaffold);
+        player.flag(scaffold, { t: "1" });
         return;
     }
     const { x: rotX, y: rotY } = player.getRotation();
     const absRotX = fastAbs(rotX);
-    if (absRotX != 90 && (rotX % 5 == 0 || Number.isInteger(rotX))) {
+    if (absRotX != 90 && (rotX % 5 == 0 || Number.isInteger(rotY))) {
         // Type 2
-        player.flag(scaffold);
+        player.flag(scaffold, { t: "2", rotX, rotY });
         return;
     }
     const headLocation = event.player.getHeadLocation();
@@ -83,14 +83,14 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
         const angleLimit = getAngleLimit(player.clientSystemInfo.platformType);
         if (angle > angleLimit) {
             // Type 3
-            player.flag(scaffold);
+            player.flag(scaffold, { t: "3", angle, angleLimit });
             return;
         }
     }
     const data = scaffoldDataMap.get(player.id)!;
     if (distance > HIGH_DISTANCE_THRESHOLD && absRotX > HIGH_ROTATION_THRESHOLD) {
         // Type 4
-        player.flag(scaffold);
+        player.flag(scaffold, { t: "4", distance, absRotX });
         return;
     }
     const floorPlayerLocation = floorLocation(player.location);
@@ -104,10 +104,10 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
     if (lowExtenderScaffold) {
         if (voidScaffold && data.blockLogs.length >= GOD_BRIDGE_AMOUNT_LIMIT && noBypassEffect) {
             // Type 5
-            player.flag(scaffold);
+            player.flag(scaffold, { t: "5" });
         } else if (rotX < NO_EXTENDER_ROTATION_THRESHOLD) {
             // Type 6
-            player.flag(scaffold);
+            player.flag(scaffold, { t: "6", rotX });
         }
     }
     const fairHeight = block.location.y - player.location.y;
@@ -122,13 +122,13 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
         if (data.potentialDiagFlags >= 3) {
             data.potentialDiagFlags = 0;
             // Type 7
-            player.flag(scaffold);
+            player.flag(scaffold, { t: "7", placeInterval, maxDiagSpeed, extender, lastExtender: data.lastExtender });
         }
     }
     const lastBlockDistance = calculateDistance(headLocation, getBlockCenterLocation(data.lastLocation));
     if (rotX < COMMON_ROTATION_THRESHOLD && placeInterval < 600 && distance < 1.44 && lastBlockDistance < 1.44 && player.location.y > block.location.y) {
         // Type 8
-        player.flag(scaffold);
+        player.flag(scaffold, { t: "8", placeInterval, distance, lastBlockDistance });
     }
     const scaffoldState =
         !player.isFlying &&
@@ -136,11 +136,12 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
             (player.location.y > block.location.y && player.isOnGround && !player.isJumping && block.location.y == data.lastLocation.y && calculateDistance(block.location, data.lastLocation) < Math.SQRT2));
     if (scaffoldState) {
         if (!diagScaffold || placeInterval > 500) data.potentialDiagFlags = 0;
-        if (placeInterval < 200 && placeInterval >= 100 && fastAbs(data.lastRotX - rotX) > MAX_ROTATION_X_DIFFERENCE && !diagScaffold && player.hasTag("moving")) {
+        const rotXDeviation = fastAbs(data.lastRotX - rotX);
+        if (placeInterval < 200 && placeInterval >= 100 && rotXDeviation > MAX_ROTATION_X_DIFFERENCE && !diagScaffold && player.hasTag("moving")) {
             data.potentialRotFlags++;
             if (data.potentialRotFlags >= 3) {
                 // Type 9
-                player.flag(scaffold);
+                player.flag(scaffold, { t: "9", rotXDeviation, placeInterval });
                 data.potentialRotFlags = 0;
             }
         } else if (placeInterval > 200 || placeInterval < 25 || Math.abs(data.lastRotX - rotX) < 0.5) data.potentialRotFlags = 0;
@@ -148,7 +149,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
             data.potentialLowExtenderFlags++;
             if (data.potentialLowExtenderFlags >= 3) {
                 // Type 10
-                player.flag(scaffold);
+                player.flag(scaffold, { t: "10", rotX, extender });
                 data.potentialLowExtenderFlags = 0;
             }
         } else data.potentialLowExtenderFlags = 0;
@@ -156,7 +157,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
             data.godBridgeAmount++;
             if (data.godBridgeAmount >= GOD_BRIDGE_AMOUNT_LIMIT) {
                 // Type 11
-                player.flag(scaffold);
+                player.flag(scaffold, { t: "11" });
                 data.godBridgeAmount = 0;
             }
         } else data.godBridgeAmount = 0;

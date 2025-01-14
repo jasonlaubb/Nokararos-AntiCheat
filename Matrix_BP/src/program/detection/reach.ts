@@ -65,7 +65,7 @@ function onEntityAttack({ damagingEntity: player, hitEntity: target }: EntityHit
             const buffer = ++locationTrackData[player.id].buffer;
             if (buffer >= 6) {
                 locationTrackData[player.id].lastValidTimeStamp = 0;
-                player.flag(reach);
+                player.flag(reach, { distance, dynamicLimit: limit + REACH_BUFFER });
             }
         }
     }

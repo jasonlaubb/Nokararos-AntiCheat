@@ -3,7 +3,7 @@ import { Module } from "../matrixAPI";
 import { fastText, rawtext, rawtextTranslate } from "./rawtext";
 import { ban, freeze, mute, softBan, strengthenKick, tempKick } from "../program/system/moderation";
 export function setupFlagFunction() {
-    Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number }) {
+    Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number | (string | number)[] }) {
         const punishment = detected.modulePunishment;
         if (!punishment || this.isAdmin()) return;
         const config = Module.config;
@@ -52,13 +52,22 @@ export function setupFlagFunction() {
     };
 }
 const nonePreset = rawtextTranslate("flag.detected.none");
-function extractData (data: { [key: string]: string | number } | undefined, precision: number): RawText {
+function extractData (data: { [key: string]: string | number | (string | number)[] } | undefined, precision: number): RawText {
     if (!data) return nonePreset;
     const dataExtract = Object.entries(data);
     if (dataExtract.length <= 1) return nonePreset;
     const typeIndex = dataExtract.findIndex((data) => data[0] === "type" || data[0] === "t");
     if (typeIndex !== -1) dataExtract.splice(typeIndex, 1);
     const dataString = dataExtract.map(([key, value]) => {
+        if (typeof value === "object") {
+            value = value.map((v) => {
+                if (typeof v === "number" && !Number.isInteger(v)) {
+                    return v.toPrecision(precision);
+                }
+                return '"' + v + '"';
+            })
+            value = "[" + value.join(", ") + "]";
+        }
         if (typeof value === "number" && !Number.isInteger(value)) {
             value = value.toPrecision(precision);
         }

@@ -97,7 +97,7 @@ function tickEvent (player: Player) {
 			data = checkPrediction(data, now);
 			if (data.totalFlagAmount > THRESHOLD) {
 				player.teleport(data.lastOnGroundLocation);
-				player.flag(predictionModule);
+				player.flag(predictionModule, data as unknown as any);
 				data.totalFlagAmount = 0;
 			}
 		}
@@ -112,8 +112,8 @@ function tickEvent (player: Player) {
 	predictionData.set(player.id, data);
 }
 const DOWN_FACTOR = -0.00655;
-const THRESHOLD = 20;
-const MAX_INTERVAL = 4000;
+const THRESHOLD = 40;
+const MAX_INTERVAL = 3000;
 function checkPrediction(data: PredictionData, now: number): PredictionData {
     // Check if the player is in the air.
     const isAllInAir = data.locationData.every((locationData) => locationData.inAir);

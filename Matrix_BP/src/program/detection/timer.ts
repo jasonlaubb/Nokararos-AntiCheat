@@ -28,7 +28,7 @@ const timer = new Module()
     .setName(rawtextTranslate("module.timer.name"))
     .setDescription(rawtextTranslate("module.timer.description"))
     .setToggleId("antiTimer")
-    .setPunishment("ban")
+    .setPunishment("tempKick")
     .initPlayer((playerId, player) => {
         timerData.set(playerId, {
             lastLocation: player.location,
@@ -100,7 +100,7 @@ function checkTimer() {
             if (data.flagAmount >= MAX_FLAG_AMOUNT) {
                 data.lastReset = now;
                 player.teleport(data.lastNoSpeedLocation);
-                player.flag(timer);
+                player.flag(timer, { actualDeviation });
                 data.flagAmount = 0;
             }
         }
