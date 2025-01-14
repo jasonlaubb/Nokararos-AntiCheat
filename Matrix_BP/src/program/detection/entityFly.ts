@@ -2,7 +2,6 @@ import { Player, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { fastAbs, fastBelow } from "../../util/fastmath";
-import { isSurroundedByAir } from "../../util/util";
 let runId: IntegratedSystemEvent;
 const entityFly = new Module()
 	.addCategory("detection")
@@ -65,7 +64,7 @@ function tickEvent (player: Player) {
 			}
 		}
 		const horizontalSpeed = Math.sqrt(x ** 2 + z ** 2);
-		if (velocityY === 0 && horizontalSpeed > SPEED_THRESHOLD && isSurroundedByAir(player.location, player.dimension) && player.isOnGround) {
+		if (velocityY === 0 && horizontalSpeed > SPEED_THRESHOLD && !isRiding.isOnGround && player.isOnGround) {
 			data.prefectCombo++;
 			if (data.prefectCombo >= MIN_COMBO_BEFORE_FLAG) {
 				player.teleport(data.lastNotRidingLocation);
