@@ -56,7 +56,7 @@ const killauraData = new Map<string, killAuraData>();
 function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHitEntityAfterEvent) {
     if (!(player instanceof Player) || player.isAdmin()) return;
     if (target.id === player.id) {
-        player.flag(killaura);
+        player.flag(killaura, { t: "1" });
         return;
     }
 
@@ -65,7 +65,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
     const { x: pitch, y: yaw } = player.getRotation();
 
     if (isPvp && distance > KILLAURA_PVP_DISTANCE_THRESHOLD && fastAbs(yaw) > KILLAURA_ROTATION_THRESHOLD) {
-        player.flag(killaura);
+        player.flag(killaura, { t: "2", distance, yaw });
         return;
     }
     const data = killauraData.get(player.id)!;
@@ -79,13 +79,13 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
             }
             data.integerFlagAmount++;
             if (data.integerFlagAmount >= 5) {
-                player.flag(killaura);
+                player.flag(killaura, { t: "3", angle, angleLimit });
             }
         }
     }
     if (!data.entityHurtList.includes(target.id)) data.entityHurtList.push(target.id);
     if (data.entityHurtList.length >= 3) {
-        player.flag(killaura);
+        player.flag(killaura, { t: "4" });
     }
     // Checks if the player has integer pitch or yaw.
     const isNotTeleportYaw = yaw != 0;
@@ -98,7 +98,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
         data.integerFlagAmount++;
         data.lastIntegerTimestamp = now;
         if (data.integerFlagAmount >= 3) {
-            player.flag(killaura);
+            player.flag(killaura, { t: "5", pitch, yaw });
         }
     } else {
         const intRot = fastRound(yaw);
@@ -113,7 +113,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
             data.roundFlagAmount++;
             data.lastRoundTimestamp = now;
             if (data.roundFlagAmount >= 8) {
-                player.flag(killaura);
+                player.flag(killaura, { t: "6", yawDifferent, pitchDifferent });
             }
         }
     }

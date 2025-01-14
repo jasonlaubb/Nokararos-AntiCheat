@@ -2,6 +2,8 @@ import { Player, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { isSurroundedByAir, isSteppingOnIceOrSlime, isMovedUp, getDelta } from "../../util/util";
+import { fastBelow } from "../../util/fastmath";
+import { MinecraftBlockTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 let eventId: IntegratedSystemEvent;
 const EMPTY_LOCATION_DATA_ARRAY: LocationData[] = new Array(5).fill({ location: { x: 0, y: 0, z: 0 }, inAir: false });
 /**
@@ -36,6 +38,7 @@ const predictionModule = new Module()
 			totalFlagAmount: 0,
 			lastFlagTimestamp: 0,
 			lastOnGroundLocation: player.location,
+			slimeTimestamp: 0,
 		});
 	})
 	.initClear((playerId) => {
@@ -59,9 +62,10 @@ interface PredictionData {
 	totalFlagAmount: number;
 	lastFlagTimestamp: number;
 	lastOnGroundLocation: Vector3;
+	slimeTimestamp: number;
 }
 const predictionData = new Map<string, PredictionData>();
-const badEffects = ["speed", "jump_boost", "slowness", "slow_falling", "levitation", "wind_charged"];
+const badEffects = ["speed", "jump_boost", "slowness", "slow_falling", "levitating", "wind_charged"];
 function tickEvent (player: Player) {
 	let data = predictionData.get(player.id)!;
 	const now = Date.now();
@@ -69,6 +73,10 @@ function tickEvent (player: Player) {
 		data.isInit = true;
 	}
 	const velocity = player.getVelocity();
+	const blockBelow = fastBelow(player.location, player.dimension);
+	if (blockBelow?.map((block) => block?.typeId)?.includes(MinecraftBlockTypes.Slime)) {
+		data.slimeTimestamp = now;
+	}
 	const isPlayerInAir = !player.isOnGround && isSurroundedByAir(player.location, player.dimension);
 	if (isPlayerInAir) {
 		data.airTime++;

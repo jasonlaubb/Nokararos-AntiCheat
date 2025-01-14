@@ -29,14 +29,14 @@ function playerSpawn({ player, initialSpawn }: PlayerSpawnAfterEvent) {
 
     const name = player.name;
     if (name.length < MIN_NAME_LENGTH || name.length > MAX_NAME_LENGTH) {
-        player.flag(namespoof);
+        player.flag(namespoof, { t: "1", nameLength: name.length });
         return;
     }
 
     const isValidXboxName = isValidName(name);
 
     if (!isValidXboxName) {
-        player.flag(namespoof);
+        player.flag(namespoof, { t: "2" });
     }
 }
 /**

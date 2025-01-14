@@ -53,17 +53,13 @@ function tickEvent(player: Player) {
 
     if (clipStartLocation && Date.now() - player.timeStamp.knockBack > 3500 && !player.isFlying && Math.abs(y) < MAX_SPEED) {
         const blockLocations = straightLocations(clipStartLocation, player.location);
-        if (
-            blockLocations.some((block) => {
-                try {
-                    return player.dimension.getBlock(block)?.isSolid;
-                } catch {
-                    return false;
-                }
-            })
-        ) {
+        let containsSolid = undefined;
+        try {
+            containsSolid = blockLocations.map((block) => player.dimension.getBlock(block)).find((block) => block?.isSolid);
+        } catch { }
+        if (containsSolid) {
             player.teleport(clipStartLocation);
-            player.flag(antiPhase);
+            player.flag(antiPhase, { passedBlock: containsSolid.typeId });
         }
     }
 

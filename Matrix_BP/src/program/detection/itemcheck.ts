@@ -31,6 +31,7 @@ function tickEvent(player: Player) {
 
     if (isItemIllegal(mainHandItem)) {
         equipmentSlot.setItem();
-        player.flag(itemCheck);
+        const { typeId, amount } = mainHandItem;
+        player.flag(itemCheck, { typeId, amount });
     }
 }
