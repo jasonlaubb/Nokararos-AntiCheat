@@ -14,12 +14,12 @@ export function setupFlagFunction() {
             .endline()
             .addTranRawText("flag.detected.module", detected.getName())
             .endline()
-            .addTran("flag.detected.object", (data?.type as string) ?? data?.t ?? "§eCLASSIC")
+            .addTran("flag.detected.object", (data?.type ?? data?.t) ?? "§eCLASSIC")
             .endline()
             .addRawText(extractData(data, config.customize.dataValueToPrecision))
             .endline()
             .addTran("flag.detected.punishment", punishment);
-        if (config.customize.askWetherFalseFlag) flagMessage.endline().addTran("flag.detected.description");
+        if (config.customize.askWetherFalseFlag) flagMessage.endline().addTran("flag.detected.false");
         world.sendMessage(flagMessage.build());
         if (this.hasTag("matrix-debug:punishmentResistance")) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {
