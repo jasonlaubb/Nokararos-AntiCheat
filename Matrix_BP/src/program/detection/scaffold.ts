@@ -26,6 +26,7 @@ interface ScaffoldDataMap {
     potentialRotFlags: number;
     potentialLowExtenderFlags: number;
     godBridgeAmount: number;
+    isVoidScaffold: boolean[];
 }
 const scaffoldDataMap = new Map<string, ScaffoldDataMap>();
 const scaffold = new Module()
@@ -46,6 +47,7 @@ const scaffold = new Module()
             potentialRotFlags: 0,
             potentialLowExtenderFlags: 0,
             godBridgeAmount: 0,
+            isVoidScaffold: new Array(3).fill(false),
         });
     })
     .initClear((playerId) => {
@@ -154,7 +156,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
             }
         } else data.potentialLowExtenderFlags = 0;
         const downDownLocation = { x: block.location.x, y: block.location.y - 1, z: block.location.z };
-        if (placeInterval < 180 && (voidScaffold || isVoidScaffolding(block.dimension, data.lastLocation))) {
+        if (placeInterval < 180 && data.isVoidScaffold.includes(true)) {
             data.godBridgeAmount++;
             if (data.godBridgeAmount >= GOD_BRIDGE_AMOUNT_LIMIT) {
                 // Type 11
@@ -170,6 +172,8 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
     data.lastLocation = block.location;
     data.lastExtender = extender;
     data.lastRotX = rotX;
+    data.isVoidScaffold.push(voidScaffold);
+    data.isVoidScaffold.shift();
     scaffoldDataMap.set(player.id, data);
 }
 
