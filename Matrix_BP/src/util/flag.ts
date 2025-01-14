@@ -23,7 +23,7 @@ export function setupFlagFunction() {
             .endline()
             .addTran("flag.detected.description");
         world.sendMessage(flagMessage.build());
-        if (this.hasTag("matrix-debug:punishmentResistance")) return this.sendMessage("<debug> You are immune to punishments, this is testing mode.");
+        if (this.hasTag("matrix-debug:punishmentResistance")) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {
             switch (punishment) {
                 case "kick":
