@@ -57,3 +57,11 @@ export function getStandardDeviation(numbers: number[]) {
 
     return fastSqrt(variance);
 }
+export function checkRepetition(arr: number[]) {
+    const alreadyList: { [key: number]: number} = {};
+    arr.forEach((value) => {
+        alreadyList[value] ??= 0;
+        alreadyList[value]++;
+    })
+    return Math.max(...Object.values(alreadyList));
+}

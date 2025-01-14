@@ -8,7 +8,7 @@ declare module "@minecraft/server" {
 		getPermissionLevel: () => number;
 		setPermissionLevel: (level: number) => void;
 		runChatCommand: (command: string) => void;
-		flag: (detected: Module, data?: { [key: string]: string | number }) => void;
+		flag: (detected: Module, data?: { [key: string]: (string | number | (string | number)[]) }) => void;
 		safeIsOp: () => boolean;
 		timeStamp: PlayerTimeStamp;
 		opCommandUsageTimestamp: number;

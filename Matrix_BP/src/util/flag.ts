@@ -3,7 +3,7 @@ import { Module } from "../matrixAPI";
 import { fastText, rawtext, rawtextTranslate } from "./rawtext";
 import { ban, freeze, mute, softBan, strengthenKick, tempKick } from "../program/system/moderation";
 export function setupFlagFunction() {
-    Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number | (string | number)[] }) {
+    Player.prototype.flag = function (detected: Module, data?: { [key: string]: (string | number | (string | number)[]) }) {
         const punishment = detected.modulePunishment;
         if (!punishment || this.isAdmin()) return;
         const config = Module.config;
@@ -50,7 +50,7 @@ export function setupFlagFunction() {
     };
 }
 const nonePreset = rawtextTranslate("flag.detected.none");
-function extractData(data: { [key: string]: string | number | (string | number)[] } | undefined, precision: number): RawText {
+function extractData(data: { [key: string]: (string | number | (string | number)[]) } | undefined, precision: number): RawText {
     if (!data) return nonePreset;
     const dataExtract = Object.entries(data);
     const typeIndex = dataExtract.findIndex((data) => data[0] === "type" || data[0] === "t");

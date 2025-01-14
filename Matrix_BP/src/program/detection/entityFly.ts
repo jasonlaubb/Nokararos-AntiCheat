@@ -3,6 +3,7 @@ import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { fastAbs, fastBelow } from "../../util/fastmath";
 import { MinecraftEntityTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
+import { checkRepetition } from "../../util/assets";
 let runId: IntegratedSystemEvent;
 const entityFly = new Module()
 	.addCategory("detection")
@@ -18,7 +19,7 @@ const entityFly = new Module()
 	})
 	.initPlayer((playerId, player) => {
 		entityFlyData.set(playerId, {
-			pastVelocityY: new Array(5).fill(0),
+			pastVelocityY: new Array(10).fill(0),
 			lastNotRidingLocation: player.location,
 			prefectCombo: 0,
 			superCombo: 0,
@@ -43,6 +44,7 @@ const MIN_COMBO_BEFORE_FLAG = 10;
 const NORMAL_SPEED = 0.25;
 const MIN_SUPER_COMBO = 20;
 const FACTOR_MIN_FLAG_AMOUNT = 4;
+const MIN_REPEAT_COUNT = 3;
 const FACTOR = 100;
 function tickEvent (player: Player) {
 	const isRiding = player.getComponent("riding")?.entityRidingOn;
@@ -55,17 +57,12 @@ function tickEvent (player: Player) {
 		data.lastNotRidingLocation = player.location;
 		data.prefectCombo = 0;
 	} else if (isRiding.typeId.startsWith("minecraft:") && player.isOnGround) {
-		if (fastAbs(velocityY) > LOWEST_Y_THRESHOLD) {
-			let isEntityFly = false;
-			for (let i = 1; i < data.pastVelocityY.length; i++) {
-				if (data.pastVelocityY[i] !== data.pastVelocityY[i - 1]) {
-					isEntityFly = false;
-					break;
-				}
-			}
-			if (isEntityFly) {
+		if (!data.pastVelocityY.includes(0) && fastAbs(velocityY) > LOWEST_Y_THRESHOLD) {
+			const repeated = checkRepetition(data.pastVelocityY);
+			if (repeated > MIN_REPEAT_COUNT) {
 				player.teleport(data.lastNotRidingLocation);
-				player.flag(entityFly, { t: "1", velocityY });
+				player.flag(entityFly, { t: "1", pastVelocity: data.pastVelocityY });
+				data.pastVelocityY = new Array(10).fill(0);
 			}
 		}
 		const horizontalSpeed = Math.sqrt(x ** 2 + z ** 2);
