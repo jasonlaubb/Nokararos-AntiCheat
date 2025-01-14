@@ -1,4 +1,4 @@
-import { EntityHitEntityAfterEvent, Player, Vector2, world } from "@minecraft/server";
+import { EntityHitEntityAfterEvent, InputMode, Player, Vector2, world } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { calculateAngleFromView, calculateDistance, fastAbs, fastRound } from "../../util/fastmath";
@@ -63,13 +63,14 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
     const distance = calculateDistance(player.location, target.location);
     const isPvp = target instanceof Player;
     const { x: pitch, y: yaw } = player.getRotation();
-
+    const inputMode = player.inputInfo.lastInputModeUsed;
     if (isPvp && distance > KILLAURA_PVP_DISTANCE_THRESHOLD && fastAbs(yaw) > KILLAURA_ROTATION_THRESHOLD) {
         player.flag(killaura, { t: "2", distance, yaw });
         return;
     }
     const data = killauraData.get(player.id)!;
-    if (distance > KILLAURA_DISTANCE_THRESHOLD && isPvp) {
+    const notKillAuraTag = inputMode === InputMode.Touch && pitch === data.lastAttackRot.x && yaw === data.lastAttackRot.y;
+    if (!notKillAuraTag && distance > KILLAURA_DISTANCE_THRESHOLD && isPvp) {
         const angle = calculateAngleFromView(player.location, target.location, yaw);
         const angleLimit = getAngleLimit(player.clientSystemInfo.platformType);
         if (angle > angleLimit) {
@@ -90,7 +91,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
     // Checks if the player has integer pitch or yaw.
     const isNotTeleportYaw = yaw != 0;
     const isNotTeleportPitch = pitch != 0;
-    if ((Number.isInteger(pitch) && isNotTeleportPitch) || (Number.isInteger(yaw) && isNotTeleportYaw) && (data.lastAttackRot.x != pitch || data.lastAttackRot.y != yaw)) {
+    if (!notKillAuraTag && (Number.isInteger(pitch) && isNotTeleportPitch) || (Number.isInteger(yaw) && isNotTeleportYaw) && (data.lastAttackRot.x != pitch || data.lastAttackRot.y != yaw)) {
         const now = Date.now();
         if (now - data.lastIntegerTimestamp > 3000) {
             data.integerFlagAmount = 0;
@@ -105,7 +106,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
         const intPitch = fastRound(pitch);
         const yawDifferent = fastAbs(yaw - intRot);
         const pitchDifferent = fastAbs(pitch - intPitch);
-        if ((data.lastAttackRot.x != pitch && data.lastAttackRot.y != yaw && yawDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportYaw) || (pitchDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportPitch)) {
+        if ((data.lastAttackRot.x !== pitch || data.lastAttackRot.y !== yaw) && (yawDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportYaw) || (pitchDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportPitch)) {
             const now = Date.now();
             if (now - data.lastRoundTimestamp > 2000) {
                 data.roundFlagAmount = 0;
