@@ -194,7 +194,11 @@ function onPlayerSpawn({ player, initialSpawn }: PlayerSpawnAfterEvent) {
                 unBanRequest!.removeParticipant("::" + player.name);
             }
             const banRecord = world.scoreboard.getObjective(`matrix:banRecord`);
-            if (banRecord && banRecord.getScore("::" + player.name)) {
+            let hasBanRecord;
+            try {
+                hasBanRecord = banRecord?.getScore("::" + player.name);
+            } catch { };
+            if (banRecord && hasBanRecord) {
                 banRecord.removeParticipant("::" + player.name);
             }
         } else {
@@ -207,7 +211,11 @@ function onPlayerSpawn({ player, initialSpawn }: PlayerSpawnAfterEvent) {
             unBanRequest!.removeParticipant("::" + player.name);
         }
         const banRecord = world.scoreboard.getObjective(`matrix:banRecord`);
-        if (banRecord && banRecord.getScore("::" + player.name)) {
+        let hasBanRecord;
+        try {
+            hasBanRecord = banRecord?.getScore("::" + player.name);
+        } catch { };
+        if (banRecord && hasBanRecord) {
             banRecord.removeParticipant("::" + player.name);
         }
     }

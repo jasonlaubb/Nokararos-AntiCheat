@@ -10,7 +10,7 @@ const FLAT_ROTATION_THRESHOLD = 69.5;
 const HIGH_ROTATION_THRESHOLD = 79;
 const NO_EXTENDER_ROTATION_THRESHOLD = 20;
 const COMMON_ROTATION_THRESHOLD = 30;
-const GOD_BRIDGE_AMOUNT_LIMIT = 3;
+const GOD_BRIDGE_AMOUNT_LIMIT = 5;
 const LOG_CLEAR_TIME = 750;
 const MAX_ROTATION_X_DIFFERENCE = 10;
 const MAX_LOW_EXTENDER_ROTATION_X = 50;
@@ -64,7 +64,7 @@ scaffold.register();
 function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
     const block = event.block;
     const player = event.player;
-    if (player.getGameMode() == GameMode.creative || player.isAdmin()) return;
+    if (player.isFlying || player.getGameMode() == GameMode.creative || player.isAdmin()) return;
     if (!block?.isValid()) {
         // Type 1
         player.flag(scaffold, { t: "1" });
@@ -155,8 +155,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
                 data.potentialLowExtenderFlags = 0;
             }
         } else data.potentialLowExtenderFlags = 0;
-        const downDownLocation = { x: block.location.x, y: block.location.y - 1, z: block.location.z };
-        if (placeInterval < 180 && (voidScaffold || data.isVoidScaffold.includes(true))) {
+        if (placeInterval < 200 && (voidScaffold || data.isVoidScaffold.includes(true))) {
             data.godBridgeAmount++;
             if (data.godBridgeAmount >= GOD_BRIDGE_AMOUNT_LIMIT) {
                 // Type 11
@@ -221,7 +220,7 @@ function isVoidScaffolding(dimension: Dimension, blockLocation: Vector3) {
     const belowLocation = { x: blockLocation.x, y: blockLocation.y - 1, z: blockLocation.z };
     try {
         const belowBlock = dimension.getBlock(belowLocation);
-        return belowBlock?.isValid() && belowBlock.isAir;
+        return !!belowBlock?.isValid() && belowBlock.isAir;
     } catch {
         return true;
     }
