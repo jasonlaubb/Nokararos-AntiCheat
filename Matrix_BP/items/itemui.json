@@ -4,19 +4,17 @@
         "description": {
             "identifier": "matrix:itemui",
             "menu_category": {
-                "category": "none",
-                "is_hidden_in_commands": true
+                "category": "items"
             }
         },
         "components": {
             "minecraft:display_name": {
                 "value": "item.matrix.itemui"
             },
-            "minecraft:icon": "matrix:diamond",
+            "minecraft:icon": "banner_pattern",
             "minecraft:glint": true,
             "minecraft:max_stack_size": 1,
-            "minecraft:can_destroy_in_creative": false,
-            "minecraft:should_despawn": true
+            "minecraft:can_destroy_in_creative": false
         }
     }
 }
