@@ -45,12 +45,13 @@ new Command()
         },
         true
     )
-    .onExecute(async (player, target, duration) => {
+    .addOption(rawtextTranslate("command.moderation.reason"), rawtextTranslate("command.moderation.reason.description"), "string", undefined, true)
+    .onExecute(async (player, target, duration, reason) => {
         const targetPlayer = target as Player;
         // Finish the action
         const msDuration = minuteToMilliseconds((duration as number) ?? -1);
         if (isBanned(targetPlayer.name)) return player.sendMessage(fastText().addText("§bMatrix§a+ §7> §c").addTran("command.moderation.removal.failed").build());
-        ban(targetPlayer, msDuration);
+        ban(targetPlayer, msDuration, player.name, reason as string);
         world.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.moderation.success", targetPlayer.name, player.name).endline().addTranRawText("command.moderation.action", rawtextTranslate("command.moderation.ban")).build());
     })
     .register();

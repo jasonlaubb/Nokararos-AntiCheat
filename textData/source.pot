@@ -825,3 +825,9 @@ msgstr "   §fPunishment§r§i│ §f%s"
 
 msgid "flag.detected.false"
 msgstr "   §7[?] Is it a §cfalse flag§7? Please report it to the developer when you have time."
+
+msgid "command.moderation.reason.description"
+msgstr "The reason for the moderation action."
+
+msgid "command.moderation.reason"
+msgstr "Reason"

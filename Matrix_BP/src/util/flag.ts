@@ -42,7 +42,7 @@ export function setupFlagFunction() {
                     softBan(this, -1);
                     break;
                 case "ban":
-                    ban(this, Module.config.flag.banDuration);
+                    ban(this, Module.config.flag.banDuration, "[Auto Moderation]", "Using hack client, module: " + detected.getToggleId());
                     break;
             }
         } catch (error) {

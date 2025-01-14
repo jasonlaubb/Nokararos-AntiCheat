@@ -19,24 +19,35 @@ export function tempKick(player: Player) {
     // Punish player
     player.triggerEvent("matrix:tempkick");
 }
-export function ban(player: Player, duration: number) {
+export function ban(player: Player, duration: number, responser?: string, reason?: string) {
     // Punish player
     const obj = world.scoreboard.getObjective(`matrix:banRecord`);
     if (!obj) {
         world.scoreboard.addObjective(`matrix:banRecord`, "Matrix AntiCheat");
-        return ban(player, duration);
+        return ban(player, duration, reason);
     }
     obj.setScore("::" + player.name, 0);
+    player.getTags().forEach((tag) => {
+        if (tag.startsWith("matrix:ban")) {
+            player.removeTag(tag);
+        }
+    });
+    if (reason) player.addTag("matrix:banReason::" + reason);
+    if (responser) player.addTag("matrix:banResponser::" + responser);
     player.setDynamicProperty("isBanned", duration == -1 ? -1 : Date.now() + duration);
     kickForBan(player, Date.now() + duration);
 }
 export function isBanned(playerName: string) {
-    const obj = world.scoreboard.getObjective(`matrix:banRecord`);
-    if (!obj) {
-        world.scoreboard.addObjective(`matrix:banRecord`, "Matrix AntiCheat");
+    try {
+        const obj = world.scoreboard.getObjective(`matrix:banRecord`);
+        if (!obj) {
+            world.scoreboard.addObjective(`matrix:banRecord`, "Matrix AntiCheat");
+            return false;
+        }
+        return !!obj.getScore("::" + playerName);
+    } catch {
         return false;
     }
-    return !!obj.getScore("::" + playerName);
 }
 export function unBan(playerName: string) {
     const obj = world.scoreboard.getObjective(`matrix:unBanRequest`);
@@ -57,12 +68,16 @@ export function bannedList(): string[] | undefined {
     return obj.getParticipants().map((participant) => participant.displayName.slice(2));
 }
 export function isUnBanned(playerName: string) {
-    const obj = world.scoreboard.getObjective(`matrix:unBanRequest`);
-    if (!obj) {
-        world.scoreboard.addObjective(`matrix:unBanRequest`, "Matrix AntiCheat");
+    try {
+        const obj = world.scoreboard.getObjective(`matrix:unBanRequest`);
+        if (!obj) {
+            world.scoreboard.addObjective(`matrix:unBanRequest`, "Matrix AntiCheat");
+            return false;
+        }
+        return !!obj.getScore("::" + playerName);
+    } catch {
         return false;
     }
-    return !!obj.getScore("::" + playerName);
 }
 /**
  * @description Prevent anti kick from stopping the kick.
@@ -219,6 +234,11 @@ function kickForBan(player: Player, banStatus: number) {
     } else {
         message += "§gYou have been§e banned§g from the server, this ban will be valid until §e" + new Date(banStatus).toUTCString();
     }
+    const tags = player.getTags();
+    const responser = tags.find((tag) => tag.startsWith("matrix:banResponser::"));
+    const reason = tags.find((tag) => tag.startsWith("matrix:banReason::"));
+    if (responser) message += `\n§bResponser: §e${responser.replace("matrix:banResponser::", "")}`;
+    if (reason) message += `\n§bReason: §e${reason.replace("matrix:banReason::", "")}`;
     player
         .runCommandAsync(`kick "${player.name}" ${message}`)
         .then((commandResult) => {
