@@ -831,3 +831,9 @@ msgstr "The reason for the moderation action."
 
 msgid "command.moderation.reason"
 msgstr "Reason"
+
+msgid "module.entityFly.name"
+msgstr "Anti Entity Fly"
+
+msgid "module.entityFly.description"
+msgstr "Prevent the entity fly from working."
