@@ -73,12 +73,14 @@ function tickEvent (player: Player) {
 				data.prefectCombo = 0;
 			}
 		} else data.prefectCombo = 0;
-		if (isRiding.typeId.includes("boat") && horizontalSpeed > NORMAL_SPEED && player.isOnGround) {
-			const blockBelow = fastBelow(isRiding.location, isRiding.dimension);
-			if (blockBelow) {
-				const isAllNonIce = blockBelow.every((block) => block ? block.typeId?.includes("ice") : true);
-				const atLeastOneSolid = blockBelow.some((block) => block ? block.isSolid : false);
-				if (isAllNonIce && atLeastOneSolid) {
+		if (isRiding.typeId.includes("boat") && horizontalSpeed > NORMAL_SPEED) {
+			const stringPoint = player.location.y.toString();
+			const isOnGround = stringPoint.endsWith(".225") || stringPoint.endsWith(".725");
+			if (isOnGround) {
+				const actualLocation = { x: player.location.x, y: player.location.y - 0.225, z: player.location.z };
+				const blockBelow = fastBelow(actualLocation, isRiding.dimension);
+				const isAllNonIce = blockBelow ? blockBelow.every((block) => block ? block.typeId?.includes("ice") : true) : false;
+				if (isAllNonIce && isOnGround) {
 					data.superCombo++;
 					if (data.superCombo >= MIN_SUPER_COMBO) {
 						player.teleport(data.lastNotRidingLocation);
@@ -86,8 +88,8 @@ function tickEvent (player: Player) {
 						data.superCombo = 0;
 					} else if (data.superCombo > 0) data.superCombo -= 1;
 				} else if (data.superCombo > 0) data.superCombo -= 1;
-			} else data.superCombo = 0;
-		}
+			} else if (data.superCombo > 0) data.superCombo -= 1;
+		} else data.superCombo = 0;
 	}
 	entityFlyData.set(player.id, data);
 }
