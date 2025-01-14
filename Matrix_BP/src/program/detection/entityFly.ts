@@ -73,7 +73,7 @@ function tickEvent (player: Player) {
 			}
 		} else data.prefectCombo = 0;
 		if (isRiding.typeId.includes("boat") && horizontalSpeed > NORMAL_SPEED) {
-			const stringPoint = player.location.y.toString();
+			const stringPoint = player.location.y.toFixed(3);
 			const isOnGround = stringPoint.endsWith(".225") || stringPoint.endsWith(".725");
 			if (isOnGround) {
 				const actualLocation = { x: player.location.x, y: player.location.y + 0.225, z: player.location.z };
