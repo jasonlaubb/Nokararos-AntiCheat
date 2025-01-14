@@ -76,11 +76,12 @@ function tickEvent (player: Player) {
 			const stringPoint = player.location.y.toString();
 			const isOnGround = stringPoint.endsWith(".225") || stringPoint.endsWith(".725");
 			if (isOnGround) {
-				const actualLocation = { x: player.location.x, y: player.location.y - 0.225, z: player.location.z };
+				const actualLocation = { x: player.location.x, y: player.location.y + 0.225, z: player.location.z };
 				const blockBelow = fastBelow(actualLocation, isRiding.dimension);
 				const isAllNonIce = blockBelow ? blockBelow.every((block) => block ? block.typeId?.includes("ice") : true) : false;
 				if (isAllNonIce && isOnGround) {
 					data.superCombo++;
+					player.sendMessage(`${data.superCombo}`);
 					if (data.superCombo >= MIN_SUPER_COMBO) {
 						player.teleport(data.lastNotRidingLocation);
 						player.flag(entityFly, { t: "3", horizontalSpeed });
