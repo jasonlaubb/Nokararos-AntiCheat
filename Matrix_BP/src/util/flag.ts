@@ -14,7 +14,7 @@ export function setupFlagFunction() {
             .endline()
             .addTranRawText("flag.detected.module", detected.getName())
             .endline()
-            .addTran("flag.detected.object", (data?.type ?? data?.t) ?? "§eCLASSIC")
+            .addTran("flag.detected.object", data?.t ?? "§eCLASSIC")
             .endline()
             .addRawText(extractData(data, config.customize.dataValueToPrecision))
             .endline()
