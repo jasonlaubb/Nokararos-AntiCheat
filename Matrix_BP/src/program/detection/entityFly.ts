@@ -30,7 +30,7 @@ interface EntityFlyData {
 	prefectCombo: number;
 }
 const entityFlyData = new Map<string, EntityFlyData>();
-const SPEED_THRESHOLD = 0.5;
+const SPEED_THRESHOLD = 0.35;
 const LOWEST_Y_THRESHOLD = 0.4;
 const MIN_COMBO_BEFORE_FLAG = 10;
 function tickEvent (player: Player) {
