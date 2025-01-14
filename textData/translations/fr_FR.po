@@ -1079,7 +1079,7 @@ msgid "   §fModule§r§i│ §f%s"
 msgstr ""
 
 #: flag.detected.object
-msgid "   §fobject§r§i│ §ftype §i[§f1§i] §f¬"
+msgid "   §fobject§r§i│ §ftype §i[§f%s§i] §f¬"
 msgstr ""
 
 #: flag.detected.none

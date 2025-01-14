@@ -1079,8 +1079,8 @@ msgid "   §fModule§r§i│ §f%s"
 msgstr "   §f模組§r§i│ §f%s"
 
 #: flag.detected.object
-msgid "   §fobject§r§i│ §ftype §i[§f1§i] §f¬"
-msgstr "   §f對向§r§i│ §f類型 §i[§f1§i] §f¬"
+msgid "   §fobject§r§i│ §ftype §i[§f%s§i] §f¬"
+msgstr "   §f對向§r§i│ §f類型 §i[§f%s§i] §f¬"
 
 #: flag.detected.none
 msgid "         §cNo data is given by the module."

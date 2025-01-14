@@ -815,7 +815,7 @@ msgid "flag.detected.module"
 msgstr "   §fModule§r§i│ §f%s"
 
 msgid "flag.detected.object"
-msgstr "   §fobject§r§i│ §ftype §i[§f1§i] §f¬"
+msgstr "   §fobject§r§i│ §ftype §i[§f%s§i] §f¬"
 
 msgid "flag.detected.none"
 msgstr "         §cNo data is given by the module."
