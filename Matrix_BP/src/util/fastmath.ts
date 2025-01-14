@@ -44,7 +44,7 @@ export function pythag (a: number, b: number) {
 }
 
 export function pythag3d (a: number, b: number, c: number) {
-    return Math.sqrt(a ** 2, b ** 2, c ** 2);
+    return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 const DOUBLE_PI = PI * 2;
 const HALF_PI = PI * 0.5;
