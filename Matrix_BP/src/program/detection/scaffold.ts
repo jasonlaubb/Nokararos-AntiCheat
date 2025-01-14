@@ -156,7 +156,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
             }
         } else data.potentialLowExtenderFlags = 0;
         const downDownLocation = { x: block.location.x, y: block.location.y - 1, z: block.location.z };
-        if (placeInterval < 180 && data.isVoidScaffold.includes(true)) {
+        if (placeInterval < 180 && (voidScaffold || data.isVoidScaffold.includes(true))) {
             data.godBridgeAmount++;
             if (data.godBridgeAmount >= GOD_BRIDGE_AMOUNT_LIMIT) {
                 // Type 11
