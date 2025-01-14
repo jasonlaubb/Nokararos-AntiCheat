@@ -1102,3 +1102,11 @@ msgstr ""
 msgid "Reason"
 msgstr ""
 
+#: module.entityFly.name
+msgid "Anti Entity Fly"
+msgstr ""
+
+#: module.entityFly.description
+msgid "Prevent the entity fly from working."
+msgstr ""
+
