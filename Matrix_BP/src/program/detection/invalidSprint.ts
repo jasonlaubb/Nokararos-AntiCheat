@@ -46,13 +46,13 @@ function tickEvent(player: Player) {
         data.lastFlag = now;
         data.flagCount++;
         if (data.flagCount > 10) {
-            player.flag(invalidSprint);
+            player.flag(invalidSprint, { t: "1" });
         }
     } else if (player.getEffect(MinecraftEffectTypes.Blindness)) {
         system.run(() => {
             const stillEffect = player.getEffect(MinecraftEffectTypes.Blindness);
             if (stillEffect && player.isSprinting) {
-                player.flag(invalidSprint);
+                player.flag(invalidSprint, { t: "2" });
             }
         });
     }

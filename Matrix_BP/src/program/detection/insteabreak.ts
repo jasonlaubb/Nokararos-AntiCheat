@@ -62,7 +62,7 @@ function tickEvent(player: Player) {
     if (breakData[player.id].brokenAmount > MAX_BREAK_IN_TICK || breakData[player.id].flagInsteaBreak) {
         // Recover the blocks
         system.runJob(recoverBlocks(breakData[player.id].brokenBlocks, player.dimension));
-        player.flag(insteabreak);
+        player.flag(insteabreak, { type: breakData[player.id].flagInsteaBreak ? "instabreak" : "nuking", breakAmount: breakData[player.id].brokenAmount });
     }
     breakData[player.id] = DEFAULT_BREAK_DATA;
 }

@@ -307,7 +307,7 @@ class Command {
         return this;
     }
     public addShortDescription(sd: RawText) {
-        this.shortDescription(sd);
+        this.shortDescription = sd;
         return this;
     }
     public addOption(name: RawText, description: RawText, type: OptionTypes, typeInfo?: undefined | TypeInfo, optional = false) {
@@ -694,11 +694,19 @@ Player.prototype.safeIsOp = function () {
     }
 };
 Player.prototype.isAdmin = function () {
-    const isAdminState = ((this.getDynamicProperty("uniqueLevel") as number) ?? 0) >= 1;
-    return isAdminState;
+    try {
+        const isAdminState = ((this.getDynamicProperty("uniqueLevel") as number) ?? 0) >= 1;
+        return isAdminState;
+    } catch {
+        return false;
+    }
 };
 Player.prototype.getPermissionLevel = function () {
-    return (this.getDynamicProperty("uniqueLevel") as number) ?? 0;
+    try {
+        return (this.getDynamicProperty("uniqueLevel") as number) ?? 0;
+    } catch {
+        return 0;
+    }
 };
 Player.prototype.setPermissionLevel = function (level: number) {
     if (!Number.isInteger(level)) {
