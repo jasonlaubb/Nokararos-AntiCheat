@@ -1,13 +1,29 @@
-import { Player, world } from "@minecraft/server";
+import { Player, RawText, world } from "@minecraft/server";
 import { Module } from "../matrixAPI";
-import { rawtextTranslate } from "./rawtext";
+import { fastText, rawtext, rawtextTranslate } from "./rawtext";
 import { ban, freeze, mute, softBan, strengthenKick, tempKick } from "../program/system/moderation";
 export function setupFlagFunction() {
-    Player.prototype.flag = function (detected: Module) {
+    Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number }) {
         const punishment = detected.modulePunishment;
         if (!punishment || this.isAdmin()) return;
-        world.sendMessage(rawtextTranslate("util.flag.alert", this.name, detected.getToggleId()!, punishment));
-        if (this.hasTag("matrix-debug:punishmentResistance")) return this.sendMessage("§7[You are immune to punishments!]");
+        const config = Module.config;
+        const flagMessage = fastText()
+            .addTran("flag.detected.title")
+            .endline()
+            .addTran("flag.detected.player", this.name)
+            .endline()
+            .addTranRawText("flag.detected.module", detected.getName())
+            .endline()
+            .addTran("flag.detected.object", data?.type as string ?? "§eCLASSIC")
+            .endline()
+            .addRawText(extractData(data, config.customize.dataValueToPrecision))
+            .endline()
+            .addTran("flag.detected.punishment", punishment);
+        if (config.customize.askWetherFalseFlag) flagMessage
+            .endline()
+            .addTran("flag.detected.description");
+        world.sendMessage(flagMessage.build());
+        if (this.hasTag("matrix-debug:punishmentResistance")) return this.sendMessage("<debug> You are immune to punishments, this is testing mode.");
         try {
             switch (punishment) {
                 case "kick":
@@ -34,4 +50,19 @@ export function setupFlagFunction() {
             tempKick(this);
         }
     };
+}
+const nonePreset = rawtextTranslate("flag.detected.none");
+function extractData (data: { [key: string]: string | number } | undefined, precision: number): RawText {
+    if (!data) return nonePreset;
+    const dataExtract = Object.entries(data);
+    if (dataExtract.length <= 1) return nonePreset;
+    const typeIndex = dataExtract.findIndex((data) => data[0] === "type");
+    if (typeIndex !== -1) dataExtract.splice(typeIndex, 1);
+    const dataString = dataExtract.map(([key, value]) => {
+        if (typeof value === "number" && !Number.isInteger(value)) {
+            value = value.toPrecision(precision);
+        }
+        return `      §f${key} §j§l|  §r§f${value}`;
+    }).join("\n");
+    return rawtext({ text: dataString });
 }

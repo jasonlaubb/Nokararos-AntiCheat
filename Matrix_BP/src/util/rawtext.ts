@@ -30,12 +30,20 @@ class FastText {
         this.currentRawText.push({ text: "\n" } as RawMessage);
         return this;
     }
+    public newline() {
+        this.currentRawText.push({ text: "\n§r" } as RawMessage);
+        return this;
+    }
     public space() {
         this.currentRawText.push({ text: " " } as RawMessage);
         return this;
     }
+
     public build() {
         return rawtext(...this.currentRawText);
+    }
+    public clone() {
+        return new FastText().addRawText(this.build());
     }
 }
 export function rawtext(...args: RawMessage[]) {

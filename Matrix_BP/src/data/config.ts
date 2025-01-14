@@ -53,6 +53,10 @@ export default {
         setrank: true,
         reset: true,
     } as { [key: string]: boolean },
+    customize: {
+        dataValueToPrecision: 4,
+        askWetherFalseFlag: true,
+    },
     flag: {
         banDuration: 604800,
     },
