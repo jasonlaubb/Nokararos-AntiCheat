@@ -53,9 +53,9 @@ const nonePreset = rawtextTranslate("flag.detected.none");
 function extractData(data: { [key: string]: string | number | (string | number)[] } | undefined, precision: number): RawText {
     if (!data) return nonePreset;
     const dataExtract = Object.entries(data);
-    if (dataExtract.length <= 1) return nonePreset;
     const typeIndex = dataExtract.findIndex((data) => data[0] === "type" || data[0] === "t");
     if (typeIndex !== -1) dataExtract.splice(typeIndex, 1);
+    if (dataExtract.length === 0) return nonePreset;
     const dataString = dataExtract
         .map(([key, value]) => {
             if (typeof value === "object") {
