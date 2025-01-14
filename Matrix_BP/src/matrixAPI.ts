@@ -229,6 +229,7 @@ class Module {
         system.runInterval(() => {
             const allPlayers = Module.allWorldPlayers;
             for (const player of allPlayers) {
+                if (!player?.isValid()) continue;
                 Module.playerLoopRunTime.forEach((event) => {
                     if (!(!event.booleanData && player.isAdmin())) {
                         try {
