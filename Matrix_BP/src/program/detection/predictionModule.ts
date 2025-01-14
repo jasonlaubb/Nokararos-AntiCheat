@@ -5,7 +5,7 @@ import { isSurroundedByAir, isSteppingOnIceOrSlime, isMovedUp, getDelta } from "
 import { fastBelow } from "../../util/fastmath";
 import { MinecraftBlockTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 let eventId: IntegratedSystemEvent;
-const EMPTY_LOCATION_DATA_ARRAY: LocationData[] = new Array(5).fill({ location: { x: 0, y: 0, z: 0 }, inAir: false });
+const EMPTY_LOCATION_DATA_ARRAY: LocationData[] = new Array(8).fill({ location: { x: 0, y: 0, z: 0 }, inAir: false });
 /**
  * @author 4urxa
  * @link https://github.com/Dream23322/Isolate-Anticheat/tree/b5c443c739ff06fdfeeb7ced4ec30a9cc5c52933/scripts/checks/movement/prediction
