@@ -111,14 +111,14 @@ function aimModule(player: Player, tickData: AimData, deltaYaw: number, deltaPit
         data.buffer[0]++;
         data.lastFlagTimestamp = now;
         if (data.buffer[0] > EXTREME_DELTA_BUFFER) {
-            player.flag(aim);
+            player.flag(aim, { t: "1", yawAccel, deltaYaw });
         }
     }
     if ((deltaPitch % 1 == 0 || (deltaYaw % 360) % 1 == 0) && deltaPitch != 0 && deltaYaw != 0) {
         data.buffer[1]++;
         data.lastFlagTimestamp = now;
         if (data.buffer[1] > DELTA_CHECK_BUFFER) {
-            player.flag(aim);
+            player.flag(aim, { t: "2", deltaPitch, deltaYaw });
         }
     }
     const deltaPitchAmount = amountDeltaPitch(5, data.previousDeltaPitch);
@@ -130,7 +130,7 @@ function aimModule(player: Player, tickData: AimData, deltaYaw: number, deltaPit
             data.buffer[2]++;
             data.lastFlagTimestamp = now;
             if (data.buffer[2] > AMOUNT_CHECK_BUFFER) {
-                player.flag(aim);
+                player.flag(aim, { t: "3", pitchMagnitude, yawMagnitude });
             }
         }
     }
@@ -139,7 +139,7 @@ function aimModule(player: Player, tickData: AimData, deltaYaw: number, deltaPit
         data.buffer[3]++;
         data.lastFlagTimestamp = now;
         if (data.buffer[3] > EXTREME_DELTA_BUFFER) {
-            player.flag(aim);
+            player.flag(aim, { t: "3", deltaDifferent, deltaYaw });
         }
     }
     if (isAttacking && deltaYaw >= 1.5) {
@@ -155,7 +155,7 @@ function aimModule(player: Player, tickData: AimData, deltaYaw: number, deltaPit
             data.buffer[4]++;
             data.lastFlagTimestamp = now;
             if (data.buffer[4] > INVALID_CHECK_BUFFER) {
-                player.flag(aim);
+                player.flag(aim), { t: "4", yawAccelDeviation, pitchAccelDeviation };
             }
         }
     }

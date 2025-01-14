@@ -14,7 +14,7 @@ export function setupFlagFunction() {
             .endline()
             .addTranRawText("flag.detected.module", detected.getName())
             .endline()
-            .addTran("flag.detected.object", data?.type as string ?? "§eCLASSIC")
+            .addTran("flag.detected.object", data?.type as string ?? data?.t ?? "§eCLASSIC")
             .endline()
             .addRawText(extractData(data, config.customize.dataValueToPrecision))
             .endline()
@@ -56,7 +56,7 @@ function extractData (data: { [key: string]: string | number } | undefined, prec
     if (!data) return nonePreset;
     const dataExtract = Object.entries(data);
     if (dataExtract.length <= 1) return nonePreset;
-    const typeIndex = dataExtract.findIndex((data) => data[0] === "type");
+    const typeIndex = dataExtract.findIndex((data) => data[0] === "type" || data[0] === "t");
     if (typeIndex !== -1) dataExtract.splice(typeIndex, 1);
     const dataString = dataExtract.map(([key, value]) => {
         if (typeof value === "number" && !Number.isInteger(value)) {

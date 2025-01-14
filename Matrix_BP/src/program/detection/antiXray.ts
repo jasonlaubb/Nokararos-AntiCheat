@@ -1,3 +1,7 @@
+//@ts-nocheck
+/**
+ * @description Just idea :(
+ */
 import { Dimension, MinecraftDimensionTypes, system, Vector3, VectorXZ, world } from "@minecraft/server";
 import { Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";

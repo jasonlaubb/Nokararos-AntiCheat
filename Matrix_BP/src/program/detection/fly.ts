@@ -81,13 +81,13 @@ function tickEvent(player: Player) {
             data.lastFlagTimestamp = now;
             player.teleport(data.lastOnGroundLocation);
             if (data.flagAmount >= 3) {
-                player.flag(fly);
+                player.flag(fly, { t: "1", lastVelocityY: data.lastVelocityY, velocityY });
             }
         }
     }
     if (playerStarted && velocityY > HIGH_VELOCITY_Y && now - player.timeStamp.knockBack > 2000 && !player.isGliding) {
         player.teleport(data.lastOnGroundLocation);
-        player.flag(fly);
+        player.flag(fly, { t: "2", velocityY });
     }
     if (player.isFlying) {
         data.velocityYList.push(HIGH_VELOCITY_Y);
@@ -102,7 +102,7 @@ function tickEvent(player: Player) {
         const { highestRepeatedVelocity, highestRepeatedAmount } = repeatChecks(data.velocityYList);
         if (highestRepeatedAmount >= MIN_REQUIRED_REPEAT_AMOUNT && highestRepeatedVelocity > MAX_VELOCITY_Y && minAmount <= -MAX_VELOCITY_Y && maxAmount < HIGH_VELOCITY_Y) {
             player.teleport(data.lastOnGroundLocation);
-            player.flag(fly);
+            player.flag(fly, { t: "3", bdsPrediction, highestRepeatedVelocity, highestRepeatedAmount, minAmount, maxAmount });
         }
     }
     if (playerStarted && player.isGliding && !isEquippedWithElytra(player) && !player.hasTag("matrix:checkingGlideTag") && JSON.stringify(player.location) != JSON.stringify(data.lastFlaggedLocation)) {
@@ -111,7 +111,7 @@ function tickEvent(player: Player) {
             player.removeTag("matrix:checkingGlideTag");
             if (!player.isGliding || isEquippedWithElytra(player)) return;
             player.teleport(data.lastFlaggedLocation);
-            player.flag(fly);
+            player.flag(fly, { t: "4" });
         });
         data.lastFlaggedLocation = player.location;
     }

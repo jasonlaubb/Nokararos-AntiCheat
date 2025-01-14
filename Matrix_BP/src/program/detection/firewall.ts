@@ -39,7 +39,7 @@ function playerSpawnAfterEvent(event: PlayerSpawnAfterEvent) {
     const [limitThreshold, minThreshold] = getThresholds(platformType, tierNumber);
 
     if (renderDistanceLimit > limitThreshold || renderDistanceLimit < minThreshold) {
-        player.flag(firewall);
+        player.flag(firewall, { renderDistanceLimit, limitThreshold, minThreshold });
     }
 }
 

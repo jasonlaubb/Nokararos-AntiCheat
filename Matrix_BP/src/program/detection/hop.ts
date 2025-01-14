@@ -63,7 +63,7 @@ function tickEvent(player: Player) {
         data.flagAmount++;
         if (data.flagAmount >= MAX_FLAG_AMOUNT) {
             player.teleport(pastLocations[0]);
-            player.flag(hop);
+            player.flag(hop, { deviation });
         }
     }
     hopData.set(player.id, data);
