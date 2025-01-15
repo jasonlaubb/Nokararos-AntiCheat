@@ -76,7 +76,7 @@ function checkTimer() {
     const players = Module.allNonAdminPlayers;
     for (const player of players) {
         const data = timerData.get(player.id)!;
-        if (player.hasTag("dead") || now - data.lastRespawn < 2000 || data.isTickIgnored || data.totalDistance === 0 || now - data.lastReset < 2000 || player.getGameMode() === GameMode.creative) {
+        if (player.hasTag("dead") || now - data.lastRespawn < 5000 || data.isTickIgnored || data.totalDistance === 0 || player.getGameMode() === GameMode.creative) {
             data.isTickIgnored = false;
             data.totalDistance = 0;
             data.totalVelocity = 0;
@@ -93,7 +93,7 @@ function checkTimer() {
             data.negativeCombo++;
         } else data.negativeCombo = 0;
         const overSlow = data.negativeCombo >= 3;
-        if (actualDeviation > 3.5 && Module.config.sensitivity.antiBlink && now - data.lastReset > 1500) {
+        if (actualDeviation > 3.5 && Module.config.sensitivity.antiBlink && now - data.lastReset > 2500) {
             player.teleport(data.lastNoSpeedLocation);
             data.lastReset = now;
             player.sendMessage(`§7(Anti Blink) §cAuto corrected your location. To disable (staff only): "-set sensitivity.antiBlink false"`);
