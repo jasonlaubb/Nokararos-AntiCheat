@@ -89,6 +89,10 @@ function checkTimer() {
             data.negativeCombo++;
         } else data.negativeCombo = 0;
         const overSlow = data.negativeCombo >= 3;
+        if (actualDeviation > 3.5 && Module.config.sensitivity.antiBlink) {
+            player.teleport(data.lastNoSpeedLocation);
+            player.sendMessage(`§7(Anti Blink) §cAuto corrected your location. To disable (staff only): "-set sensitivity.antiBlink false"`);
+        }
         if ((highDeviationState || absDeviation > maxDeviation * 0.31 || overSlow) && actualDeviation < 14) {
             if (now - data.lastFlagTimestamp > 3000) {
                 data.flagAmount = 0;
@@ -100,7 +104,7 @@ function checkTimer() {
             if (data.flagAmount >= MAX_FLAG_AMOUNT) {
                 data.lastReset = now;
                 player.teleport(data.lastNoSpeedLocation);
-                player.flag(timer, { actualDeviation });
+                player.flag(timer, { t: "1", actualDeviation });
                 data.flagAmount = 0;
             }
         }
@@ -137,8 +141,7 @@ function playerTickEvent(player: Player) {
         now - player.timeStamp.knockBack < 2500 ||
         now - player.timeStamp.riptide < 5000
     ) {
-        if (data.isTickIgnored) return;
-        data.isTickIgnored = true;
+        if (!data.isTickIgnored) data.isTickIgnored = true;
         timerData.set(player.id, data);
         return;
     }

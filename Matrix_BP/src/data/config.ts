@@ -59,6 +59,10 @@ export default {
         dataValueToPrecision: 4,
         askWetherFalseFlag: true,
     },
+    sensitivity: {
+        antiBlink: true, // Stop blink movement (antiTimer), more lagback will be given.
+        strengthenAntiSpeed: false, // Stronger anti speed, reverses the location instantly.
+    },
     flag: {
         banDuration: 604800,
     },

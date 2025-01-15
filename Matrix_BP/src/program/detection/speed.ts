@@ -89,7 +89,10 @@ function tickEvent(player: Player) {
                 player.flag(speed, { velocityDelta });
                 data.flagAmount = 0;
             }
-            if (velocityDelta >= 3) player.teleport(data.lastStopLocation);
+            if (velocityDelta >= 3 || Module.config.sensitivity.strengthenAntiSpeed) {
+                if (velocityDelta < 3) player.sendMessage(`§7(Strengthen Anti Speed) §cAuto corrected your location. To disable (staff only): "-set sensitivity.strengthenAntiSpeed false"`);
+                player.teleport(data.lastStopLocation);
+            }
         }
     }
     data.lastVelocity = velocity;
