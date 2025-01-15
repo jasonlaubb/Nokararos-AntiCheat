@@ -1,8 +1,9 @@
 import { EntityHitEntityAfterEvent, InputMode, Player, Vector2, world } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
-import { calculateAngleFromView, calculateDistance, fastAbs, fastRound } from "../../util/fastmath";
+import { calculateAngleFromView, calculateDistance, fastAbs, fastRound, pythag } from "../../util/fastmath";
 import { getAngleLimit } from "../../util/util";
+import { getTotalAbsMovementVector } from "../../util/assets";
 const KILLAURA_DISTANCE_THRESHOLD = 3.5;
 const KILLAURA_PVP_DISTANCE_THRESHOLD = 4.5;
 const KILLAURA_ROTATION_THRESHOLD = 89;
@@ -102,19 +103,24 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
             player.flag(killaura, { t: "5", pitch, yaw });
         }
     } else {
-        const intRot = fastRound(yaw);
-        const intPitch = fastRound(pitch);
-        const yawDifferent = fastAbs(yaw - intRot);
-        const pitchDifferent = fastAbs(pitch - intPitch);
-        if (((data.lastAttackRot.x !== pitch || data.lastAttackRot.y !== yaw) && yawDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportYaw) || (pitchDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportPitch)) {
-            const now = Date.now();
-            if (now - data.lastRoundTimestamp > 2000) {
-                data.roundFlagAmount = 0;
-            }
-            data.roundFlagAmount++;
-            data.lastRoundTimestamp = now;
-            if (data.roundFlagAmount >= 8) {
-                player.flag(killaura, { t: "6", yawDifferent, pitchDifferent });
+        const { x, z } = target.getVelocity();
+        const targetSpeed = pythag(x, z);
+        const { x: x2, z: z2 } = player.getVelocity();
+        if (targetSpeed > 0.01 || (isPvp && (x2 !== 0 || z2 !== 0) && getTotalAbsMovementVector(player) > 0)) {
+            const intRot = fastRound(yaw);
+            const intPitch = fastRound(pitch);
+            const yawDifferent = fastAbs(yaw - intRot);
+            const pitchDifferent = fastAbs(pitch - intPitch);
+            if (((data.lastAttackRot.x !== pitch || data.lastAttackRot.y !== yaw) && yawDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportYaw) || (pitchDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportPitch)) {
+                const now = Date.now();
+                if (now - data.lastRoundTimestamp > 2000) {
+                    data.roundFlagAmount = 0;
+                }
+                data.roundFlagAmount++;
+                data.lastRoundTimestamp = now;
+                if (data.roundFlagAmount >= 8) {
+                    player.flag(killaura, { t: "6", yawDifferent, pitchDifferent });
+                }
             }
         }
     }

@@ -39,6 +39,7 @@ export function getAverageDifference(arr: number[]) {
 export function fastAverage(arr: number[]) {
     return arr.reduce((sum, current) => sum + current, 0) / arr.length;
 }
+import { Player } from "@minecraft/server";
 import { fastAbs, fastSqrt } from "./fastmath";
 export function getStandardDeviation(numbers: number[]) {
     const n = numbers.length;
@@ -64,4 +65,9 @@ export function checkRepetition(arr: number[]) {
         alreadyList[value]++;
     })
     return Math.max(...Object.values(alreadyList));
+}
+
+export function getTotalAbsMovementVector (player: Player) {
+    const { x, y } = player.inputInfo.getMovementVector();
+    return (fastAbs(x) + fastAbs(y)) as 0 | 1 | 2;
 }
