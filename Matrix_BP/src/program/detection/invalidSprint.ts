@@ -58,4 +58,5 @@ function tickEvent(player: Player) {
     if (!hasEffect || !player.isSprinting) {
         data.nonBlindnessSprintState = player.isSprinting;
     }
+    sprintData.set(player.id, data);
 }
