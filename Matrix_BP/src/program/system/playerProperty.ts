@@ -1,10 +1,11 @@
-import { EntityDamageCause, EntityHitEntityAfterEvent, EntityHurtAfterEvent, EquipmentSlot, ItemReleaseUseAfterEvent, ItemUseAfterEvent, Player, world } from "@minecraft/server";
+import { EntityDamageCause, EntityHitEntityAfterEvent, EntityHurtAfterEvent, EquipmentSlot, ItemReleaseUseAfterEvent, ItemUseAfterEvent, PistonActivateAfterEvent, Player, world } from "@minecraft/server";
 import { Module } from "../../matrixAPI";
 import { MinecraftEnchantmentTypes, MinecraftItemTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 
 export interface PlayerTimeStamp {
     knockBack: number;
     riptide: number;
+    pistonPush: number;
 }
 export function registerTimeStampModule() {
     new Module()
@@ -15,11 +16,13 @@ export function registerTimeStampModule() {
             world.afterEvents.itemReleaseUse.subscribe(onPlayerThrow);
             world.afterEvents.itemUse.subscribe(onPlayerUse);
             world.afterEvents.entityHitEntity.subscribe(onPlayerAttack);
+            world.afterEvents.pistonActivate.subscribe(onPistonPush);
         })
         .initPlayer((_playerId, player) => {
             player.timeStamp = {
                 knockBack: 0,
                 riptide: 0,
+                pistonPush: 0,
             };
         })
         .register();
@@ -50,4 +53,22 @@ function onPlayerAttack({ damagingEntity }: EntityHitEntityAfterEvent) {
             }
         }
     }
+}
+
+function onPistonPush ({ dimension, isExpanding, piston }: PistonActivateAfterEvent) {
+    if (!isExpanding) return;
+    const now = Date.now();
+    const allAffectedBlockLocation = piston.getAttachedBlocksLocations();
+    allAffectedBlockLocation.push(piston.block.location);
+    const playerNearby = [] as Player[];
+    allAffectedBlockLocation.forEach((location) => {
+        playerNearby.push(...dimension.getPlayers({
+            maxDistance: 2,
+            minDistance: 0,
+            location,
+        }));
+    })
+    new Set(playerNearby).forEach((player) => {
+        player.timeStamp.pistonPush = now;
+    });
 }

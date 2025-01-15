@@ -52,7 +52,6 @@ function tickEvent (player: Player) {
 	const { x, y: velocityY, z } = player.getVelocity();
 	data.pastVelocityY.push(velocityY);
 	data.pastVelocityY.shift();
-	player.onScreenDisplay.setActionBar(`${velocityY}`);
 	if (!isRiding) {
 		data.lastNotRidingLocation = player.location;
 		data.prefectCombo = 0;

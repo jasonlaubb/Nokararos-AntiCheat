@@ -7,8 +7,9 @@ const MAX_VELOCITY_Y = 0.7;
 const MIN_REQUIRED_REPEAT_AMOUNT = 6;
 const HIGH_VELOCITY_Y = 22;
 const MAX_BDS_PREDICTION = 20;
-const START_SKIP_CEHCK = 15000;
+const START_SKIP_CHECK = 15000;
 interface FlyData {
+    previousVelocityY: number;
     lastVelocityY: number;
     lastOnGroundLocation: Vector3;
     lastFlaggedLocation: Vector3;
@@ -41,6 +42,7 @@ const fly = new Module()
             flagAmount: 0,
             lastFlagTimestamp: 0,
             hasStarted: Date.now(),
+            previousVelocityY: 0,
         });
     })
     .initClear((playerId) => {
@@ -55,39 +57,50 @@ function tickEvent(player: Player) {
     const now = Date.now();
     const data = flyData.get(player.id)!;
     const { y: velocityY } = player.getVelocity();
-    const surroundAir = isSurroundedByAir(player.location, player.dimension);
-    const playerStarted = now - data.hasStarted > START_SKIP_CEHCK;
+    const surroundAir = !player.isOnGround && isSurroundedByAir(player.location, player.dimension);
+    const playerStarted = now - data.hasStarted > START_SKIP_CHECK;
     const isPlayerNotCreative = player.getGameMode() !== GameMode.creative;
+    const pistonNotPushed = now - player.timeStamp.pistonPush > 4000;
     if (player.isOnGround && velocityY === 0) {
         data.lastOnGroundLocation = player.location;
     } else if (
         playerStarted &&
+        pistonNotPushed &&
         now - player.timeStamp.knockBack > 2000 &&
         now - player.timeStamp.riptide > 5000 &&
-        data.lastVelocityY < -MAX_VELOCITY_Y &&
+        (data.lastVelocityY < 0 || (data.previousVelocityY < 0 && velocityY === 0)) &&
         !player.hasTag("riding") &&
         !player.isFlying &&
-        !player.isOnGround &&
         !player.isGliding &&
-        surroundAir &&
+        !player.isInWater &&
         isPlayerNotCreative &&
         !data.velocityYList.some((yV) => yV == HIGH_VELOCITY_Y)
     ) {
         if (velocityY > MAX_VELOCITY_Y) {
-            if (now - data.lastFlagTimestamp > 7000) {
-                data.flagAmount = 0;
+            if (surroundAir) {
+                data.flagAmount++;
+            } else {
+                data.flagAmount += 0.5;
             }
-            data.flagAmount++;
+            player.sendMessage(`(+) increased to ${data.flagAmount + 1}`);
             data.lastFlagTimestamp = now;
-            player.teleport(data.lastOnGroundLocation);
             if (data.flagAmount >= 3) {
+                data.flagAmount = 0;
+                player.teleport(data.lastOnGroundLocation);
                 player.flag(fly, { t: "1", lastVelocityY: data.lastVelocityY, velocityY });
             }
         }
     }
-    if (playerStarted && velocityY > HIGH_VELOCITY_Y && now - player.timeStamp.knockBack > 2000 && !player.isGliding) {
+    if (data.flagAmount > 0 && now - data.lastFlagTimestamp > 1200) {
+        data.flagAmount -= 0.1;
+        player.sendMessage(`decrease to ${data.flagAmount}`);
+    };;
+    player.onScreenDisplay.setActionBar(`${velocityY.toFixed(4)} | ${data.flagAmount.toFixed(1)}`);
+    if (pistonNotPushed && playerStarted && velocityY > HIGH_VELOCITY_Y && now - player.timeStamp.knockBack > 2000 && !player.isGliding) {
         player.teleport(data.lastOnGroundLocation);
         player.flag(fly, { t: "2", velocityY });
+    }
+    if (pistonNotPushed && playerStarted && velocityY > 0.7) {
     }
     if (player.isFlying) {
         data.velocityYList.push(HIGH_VELOCITY_Y);
@@ -98,7 +111,7 @@ function tickEvent(player: Player) {
     const minAmount = Math.min(...data.velocityYList);
     const maxAmount = Math.max(...data.velocityYList);
     const bdsPrediction = calculateBdsPrediction(data.velocityYList);
-    if (!player.hasTag("riding") && playerStarted && isPlayerNotCreative && !player.isOnGround && data.velocityYList.length >= 60 && !player.getEffect(MinecraftEffectTypes.JumpBoost) && bdsPrediction >= MAX_BDS_PREDICTION) {
+    if (pistonNotPushed && !player.hasTag("riding") && playerStarted && isPlayerNotCreative && !player.isOnGround && data.velocityYList.length >= 60 && !player.getEffect(MinecraftEffectTypes.JumpBoost) && bdsPrediction >= MAX_BDS_PREDICTION) {
         const { highestRepeatedVelocity, highestRepeatedAmount } = repeatChecks(data.velocityYList);
         if (highestRepeatedAmount >= MIN_REQUIRED_REPEAT_AMOUNT && highestRepeatedVelocity > MAX_VELOCITY_Y && minAmount <= -MAX_VELOCITY_Y && maxAmount < HIGH_VELOCITY_Y) {
             player.teleport(data.lastOnGroundLocation);
@@ -115,6 +128,7 @@ function tickEvent(player: Player) {
         });
         data.lastFlaggedLocation = player.location;
     }
+    data.previousVelocityY = data.lastVelocityY;
     data.lastVelocityY = velocityY;
     flyData.set(player.id, data);
 }
