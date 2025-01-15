@@ -49,11 +49,11 @@ function tickEvent(player: Player) {
             player.flag(invalidSprint, { t: "1" });
         }
     } else if (player.getEffect(MinecraftEffectTypes.Blindness)) {
-        system.run(() => {
+        system.runTimeout(() => {
             const stillEffect = player.getEffect(MinecraftEffectTypes.Blindness);
             if (stillEffect && player.isSprinting) {
                 player.flag(invalidSprint, { t: "2" });
             }
-        });
+        }, 10);
     }
 }
