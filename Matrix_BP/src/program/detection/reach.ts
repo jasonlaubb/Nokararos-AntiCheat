@@ -7,7 +7,7 @@ const reach = new Module()
     .setName(rawtextTranslate("module.reach.name"))
     .setDescription(rawtextTranslate("module.reach.description"))
     .setToggleId("antiReach")
-    .setPunishment("ban")
+    .setPunishment("tempKick")
     .onModuleEnable(() => {
         world.afterEvents.entityHitEntity.subscribe(onEntityAttack);
     })
