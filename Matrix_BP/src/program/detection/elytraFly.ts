@@ -28,6 +28,8 @@ const elytraFly = new Module()
 			highestGlidingSpeed: 0,
 			isLastTickGliding: false,
 			usedRocket: false,
+			lastSpeedDeviation: 0,
+			triggeredType2: false,
 		});
 	})
 	.initClear((playerId) => {
@@ -42,6 +44,8 @@ interface ElytraFlyData {
 	highestGlidingSpeed: number;
 	isLastTickGliding: boolean;
 	usedRocket: boolean;
+	lastSpeedDeviation: number;
+	triggeredType2: boolean;
 }
 const elytraFlyData = new Map<string, ElytraFlyData>();
 function tickEvent (player: Player) {
@@ -52,25 +56,29 @@ function tickEvent (player: Player) {
 	}
 	const { x, z } = player.getVelocity();
 	const glidingSpeed = pythag(x, z);
-	if (player.isGliding && !data.usedRocket && now - data.startGlideTime > 1500) {
+	const speedDeviation = data.lastGlidingSpeed / glidingSpeed;
+	if (player.isGliding && !data.usedRocket && now - data.startGlideTime > 1000) {
 		if (glidingSpeed > data.highestGlidingSpeed) {
 			data.highestGlidingSpeed = glidingSpeed;
-		} else if (data.highestGlidingSpeed > 0.5) {
-			const speedDeviation = data.highestGlidingSpeed / glidingSpeed;
-			if (speedDeviation > 5) {
-				const slot = player.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Chest);
-				const item = slot?.getItem();
-				if (item) {
-					// Good bye elytra >w<
-					player.dimension.spawnItem(item, player.location);
-					slot!.setItem();
-				}
+		} else if (glidingSpeed > 0) {
+			if (speedDeviation > 50) {
+				dropElytra(player);
 				player.flag(elytraFly, { t: "1", speedDeviation });
-			}
+			} else if (speedDeviation.toFixed(4) === data.lastSpeedDeviation.toFixed(4)) {
+				if (data.triggeredType2) {
+					data.triggeredType2 = false;
+					dropElytra(player);
+					player.flag(elytraFly, { t: "2", fixedSpeedDeviation: speedDeviation.toFixed(4) });
+				}
+				data.triggeredType2 = true;
+			} else data.triggeredType2 = false;
 		}
-		player.onScreenDisplay.setActionBar(`${glidingSpeed.toFixed(2)} of ${data.highestGlidingSpeed.toFixed(2)}`);
 	}
-	if (!player.isGliding && data.usedRocket) data.usedRocket = false;
+	if (!player.isGliding) {
+		data.usedRocket = false;
+		data.highestGlidingSpeed = 0;
+	}
+	data.lastSpeedDeviation = speedDeviation;
 	data.lastGlidingSpeed = glidingSpeed;
 	data.isLastTickGliding = player.isGliding;
 	elytraFlyData.set(player.id, data);
@@ -80,5 +88,14 @@ function onItemUse ({ itemStack, source }: ItemUseAfterEvent) {
 		const data = elytraFlyData.get(source.id)!;
 		data.usedRocket = true;
 		elytraFlyData.set(source.id, data);
+	}
+}
+function dropElytra (player: Player) {
+	const slot = player.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Chest);
+	const item = slot?.getItem();
+	if (item) {
+		// Good bye elytra >w<
+		player.dimension.spawnItem(item, player.location);
+		slot!.setItem();
 	}
 }
