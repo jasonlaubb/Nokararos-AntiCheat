@@ -129,6 +129,7 @@ function playerTickEvent(player: Player) {
     if (
         isTickIgnored ||
         player.isGliding ||
+        now - player.timeStamp.pistonPush < 1500 ||
         player.hasTag("riding") ||
         player.isFlying ||
         player.getEffect(MinecraftEffectTypes.Speed) ||

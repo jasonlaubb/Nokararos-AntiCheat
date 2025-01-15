@@ -96,8 +96,7 @@ function tickEvent(player: Player) {
     if (data.flagAmount >= 0.05 && ((now - data.lastFlagTimestamp > 8000 && player.isOnGround) || (!player.isOnGround && velocityY === 0 && now - data.lastFlagTimestamp > 1200))) {
         data.flagAmount -= 0.05;
         if (hasFlyDebugTag) player.sendMessage(`<flyDebug> §c(-) decreased to ${data.flagAmount}`);
-    };;
-    player.onScreenDisplay.setActionBar(`${velocityY.toFixed(4)} | ${data.flagAmount.toFixed(1)}`);
+    }
     if (pistonNotPushed && playerStarted && velocityY > HIGH_VELOCITY_Y && now - player.timeStamp.knockBack > 2000 && !player.isGliding) {
         player.teleport(data.lastOnGroundLocation);
         player.flag(fly, { t: "2", velocityY });
