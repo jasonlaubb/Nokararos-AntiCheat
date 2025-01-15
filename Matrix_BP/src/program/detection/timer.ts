@@ -1,4 +1,4 @@
-import { EntityHitEntityAfterEvent, GameMode, Player, system, Vector3 } from "@minecraft/server";
+import { EntityHitEntityAfterEvent, GameMode, Player, PlayerSpawnAfterEvent, system, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { calculateDistance, fastHypot, fastAbs } from "../../util/fastmath";
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
@@ -18,6 +18,7 @@ interface TimerData {
     lastAttack: number;
     negativeCombo: number;
     flyingNotOnGround: boolean;
+    lastRespawn: number;
 }
 let lastTime: number;
 let runId: number;
@@ -42,6 +43,7 @@ const timer = new Module()
             lastAttack: 0,
             negativeCombo: 0,
             flyingNotOnGround: false,
+            lastRespawn: Date.now(),
         });
     })
     .initClear((playerId) => {
@@ -51,11 +53,13 @@ const timer = new Module()
         runId = system.runInterval(checkTimer, 20);
         eventId = Module.subscribePlayerTickEvent(playerTickEvent);
         world.afterEvents.entityHitEntity.subscribe(playerAttack);
+        world.afterEvents.playerSpawn.subscribe(playerSpawn);
     })
     .onModuleDisable(() => {
         Module.clearPlayerTickEvent(eventId);
         system.clearRun(runId);
         world.afterEvents.entityHitEntity.unsubscribe(playerAttack);
+        world.afterEvents.playerSpawn.unsubscribe(playerSpawn);
         timerData.clear();
     });
 timer.register();
@@ -72,7 +76,7 @@ function checkTimer() {
     const players = Module.allNonAdminPlayers;
     for (const player of players) {
         const data = timerData.get(player.id)!;
-        if (data.isTickIgnored || data.totalDistance === 0 || now - data.lastReset < 2000 || player.getGameMode() === GameMode.creative) {
+        if (player.hasTag("dead") || now - data.lastRespawn < 2000 || data.isTickIgnored || data.totalDistance === 0 || now - data.lastReset < 2000 || player.getGameMode() === GameMode.creative) {
             data.isTickIgnored = false;
             data.totalDistance = 0;
             data.totalVelocity = 0;
@@ -89,8 +93,9 @@ function checkTimer() {
             data.negativeCombo++;
         } else data.negativeCombo = 0;
         const overSlow = data.negativeCombo >= 3;
-        if (actualDeviation > 3.5 && Module.config.sensitivity.antiBlink) {
+        if (actualDeviation > 3.5 && Module.config.sensitivity.antiBlink && now - data.lastReset > 1500) {
             player.teleport(data.lastNoSpeedLocation);
+            data.lastReset = now;
             player.sendMessage(`§7(Anti Blink) §cAuto corrected your location. To disable (staff only): "-set sensitivity.antiBlink false"`);
         }
         if ((highDeviationState || absDeviation > maxDeviation * 0.31 || overSlow) && actualDeviation < 14) {
@@ -156,5 +161,10 @@ function playerAttack({ damagingEntity: player }: EntityHitEntityAfterEvent) {
     if (!(player instanceof Player)) return;
     const data = timerData.get(player.id)!;
     data.lastAttack = Date.now();
+    timerData.set(player.id, data);
+}
+function playerSpawn({ player }: PlayerSpawnAfterEvent) {
+    const data = timerData.get(player.id)!;
+    data.lastRespawn = Date.now();
     timerData.set(player.id, data);
 }
