@@ -18,6 +18,20 @@ const elytraFly = new Module()
 		Module.clearPlayerTickEvent(runId);
 		elytraFlyData.clear();
 		world.afterEvents.itemUse.unsubscribe(onItemUse);
+	})
+	.initPlayer((playerId) => {
+		elytraFlyData.set(playerId, {
+			lastGlidingSpeed: 0,
+			startGlideTime: 0,
+			startGlideSpeed: 0,
+			isSpeedDecreasing: false,
+			highestGlidingSpeed: 0,
+			isLastTickGliding: false,
+			usedRocket: false,
+		});
+	})
+	.initClear((playerId) => {
+		elytraFlyData.delete(playerId);
 	});
 elytraFly.register();
 interface ElytraFlyData {
