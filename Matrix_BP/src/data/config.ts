@@ -27,6 +27,7 @@ export default {
         antiCombatLog: false,
         captcha: false,
         antiEntityFly: true,
+        antiElytraFly: true,
     } as { [key: string]: boolean },
     command: {
         about: true,

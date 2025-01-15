@@ -20,6 +20,7 @@ import "./detection/invalidSprint";
 import "./detection/captcha";
 import "./detection/hop";
 import "./detection/entityFly";
+import "./detection/elytraFly";
 // Import the util modules
 import "./utility/welcomer";
 import "./utility/worldBorder";
