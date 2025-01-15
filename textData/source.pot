@@ -837,3 +837,9 @@ msgstr "Anti Entity Fly"
 
 msgid "module.entityFly.description"
 msgstr "Prevent the entity fly from working."
+
+msgid "command.echestwipe.success"
+msgstr "The echest of %s has been wiped successfully."
+
+msgid "command.echestwipe.description"
+msgstr "Wipe the ender chest of a player."

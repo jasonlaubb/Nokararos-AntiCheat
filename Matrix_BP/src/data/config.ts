@@ -54,6 +54,7 @@ export default {
         configui: true,
         setrank: true,
         reset: true,
+        unblink: true,
     } as { [key: string]: boolean },
     customize: {
         dataValueToPrecision: 4,

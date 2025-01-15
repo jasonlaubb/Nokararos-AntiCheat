@@ -187,7 +187,7 @@ function onPlayerSpawn({ player, initialSpawn }: PlayerSpawnAfterEvent) {
     const banStatus = player.getDynamicProperty("isBanned") as number;
     if (banStatus) {
         const unBanRequest = world.scoreboard.getObjective("matrix:unBanRequest");
-        const isUnBanned = unBanRequest!.getParticipants().some((id) => id.displayName.slice(2) == player.name);
+        const isUnBanned = unBanRequest!.getParticipants().some((id) => id.displayName.slice(2) === player.name);
         if (isUnBanned || (banStatus != -1 && Date.now() > banStatus)) {
             player.setDynamicProperty("isBanned");
             if (isUnBanned) {
