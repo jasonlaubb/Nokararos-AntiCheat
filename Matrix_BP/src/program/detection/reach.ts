@@ -63,7 +63,7 @@ function onEntityAttack({ damagingEntity: player, hitEntity: target }: EntityHit
         const distance = findMinimumDistance(playerLocationData.locationData, targetLocationData.locationData);
         if (distance > limit + REACH_BUFFER && distance > 3.5) {
             const buffer = ++locationTrackData[player.id].buffer;
-            if (buffer >= 6) {
+            if (buffer >= 12) {
                 locationTrackData[player.id].lastValidTimeStamp = 0;
                 player.flag(reach, { distance, dynamicLimit: limit + REACH_BUFFER });
             }
