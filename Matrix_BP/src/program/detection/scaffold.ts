@@ -155,7 +155,8 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
                 data.potentialLowExtenderFlags = 0;
             }
         } else data.potentialLowExtenderFlags = 0;
-        if (placeInterval < 200 && (voidScaffold || data.isVoidScaffold.includes(true)) && player.inputInfo.getMovementVector().x > 0) {
+        const { x, y } = player.inputInfo.getMovementVector();
+        if (placeInterval < 200 && (voidScaffold || data.isVoidScaffold.includes(true)) && (y > 0 || fastAbs(x) === 1)) {
             data.godBridgeAmount++;
             if (data.godBridgeAmount >= GOD_BRIDGE_AMOUNT_LIMIT) {
                 // Type 11
