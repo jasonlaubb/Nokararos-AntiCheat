@@ -3,6 +3,7 @@ import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { isSurroundedByAir } from "../../util/util";
 import { MinecraftEffectTypes, MinecraftItemTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
+import { fastAbs } from "../../util/fastmath";
 const MAX_VELOCITY_Y = 0.7;
 const MIN_REQUIRED_REPEAT_AMOUNT = 6;
 const HIGH_VELOCITY_Y = 22;
@@ -69,7 +70,7 @@ function tickEvent(player: Player) {
         pistonNotPushed &&
         now - player.timeStamp.knockBack > 2000 &&
         now - player.timeStamp.riptide > 5000 &&
-        (data.lastVelocityY < 0 || (data.previousVelocityY < 0 && velocityY === 0) || (data.lastVelocityY > 5 && velocityY === 0)) &&
+        (data.lastVelocityY < 0 || (data.previousVelocityY < 0 && velocityY === 0) || (velocityY > 0 && data.previousVelocityY / velocityY > 4 && data.previousVelocityY > 2.5 && fastAbs(data.lastVelocityY - velocityY) < 0.5)) &&
         !player.hasTag("riding") &&
         !player.isFlying &&
         !player.isGliding &&

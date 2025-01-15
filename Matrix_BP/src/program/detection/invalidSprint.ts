@@ -1,4 +1,4 @@
-import { Player, system } from "@minecraft/server";
+import { Player } from "@minecraft/server";
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
@@ -6,6 +6,7 @@ let runId: IntegratedSystemEvent;
 interface SprintData {
     lastFlag: number;
     flagCount: number;
+    nonBlindnessSprintState: boolean;
 }
 const sprintData = new Map<string, SprintData>();
 const invalidSprint = new Module()
@@ -21,10 +22,11 @@ const invalidSprint = new Module()
         sprintData.clear();
         Module.clearPlayerTickEvent(runId);
     })
-    .initPlayer((playerId) => {
+    .initPlayer((playerId, player) => {
         sprintData.set(playerId, {
             lastFlag: 0,
             flagCount: 0,
+            nonBlindnessSprintState: player.isSprinting,
         });
     })
     .initClear((playerId) => {
@@ -38,6 +40,7 @@ function isMovementKeyPressed(player: Player) {
 function tickEvent(player: Player) {
     if (!player.isSprinting) return;
     const data = sprintData.get(player.id)!;
+    const hasEffect = player.getEffect(MinecraftEffectTypes.Blindness);
     if (player.isSneaking || !isMovementKeyPressed(player)) {
         const now = Date.now();
         if (now - data.lastFlag > 1000) {
@@ -48,12 +51,11 @@ function tickEvent(player: Player) {
         if (data.flagCount > 10) {
             player.flag(invalidSprint, { t: "1" });
         }
-    } else if (player.getEffect(MinecraftEffectTypes.Blindness)) {
-        system.runTimeout(() => {
-            const stillEffect = player.getEffect(MinecraftEffectTypes.Blindness);
-            if (stillEffect && player.isSprinting) {
-                player.flag(invalidSprint, { t: "2" });
-            }
-        }, 10);
+    }
+    if (hasEffect && player.isSprinting && !data.nonBlindnessSprintState) {
+        player.flag(invalidSprint, { t: "2" });
+    }
+    if (!hasEffect || !player.isSprinting) {
+        data.nonBlindnessSprintState = player.isSprinting;
     }
 }
