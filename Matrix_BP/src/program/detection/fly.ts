@@ -7,7 +7,7 @@ const MAX_VELOCITY_Y = 0.7;
 const MIN_REQUIRED_REPEAT_AMOUNT = 6;
 const HIGH_VELOCITY_Y = 22;
 const MAX_BDS_PREDICTION = 20;
-const START_SKIP_CHECK = 15000;
+const START_SKIP_CHECK = 6000;
 interface FlyData {
     previousVelocityY: number;
     lastVelocityY: number;
@@ -54,6 +54,7 @@ fly.register();
  * @description Anti Fly.
  */
 function tickEvent(player: Player) {
+    const hasFlyDebugTag = player.hasTag("matrix:flyDebug");
     const now = Date.now();
     const data = flyData.get(player.id)!;
     const { y: velocityY } = player.getVelocity();
@@ -68,7 +69,7 @@ function tickEvent(player: Player) {
         pistonNotPushed &&
         now - player.timeStamp.knockBack > 2000 &&
         now - player.timeStamp.riptide > 5000 &&
-        (data.lastVelocityY < 0 || (data.previousVelocityY < 0 && velocityY === 0)) &&
+        (data.lastVelocityY < 0 || (data.previousVelocityY < 0 && velocityY === 0) || (data.lastVelocityY > 5 && velocityY === 0)) &&
         !player.hasTag("riding") &&
         !player.isFlying &&
         !player.isGliding &&
@@ -82,7 +83,7 @@ function tickEvent(player: Player) {
             } else {
                 data.flagAmount += 0.5;
             }
-            player.sendMessage(`(+) increased to ${data.flagAmount + 1}`);
+            if (hasFlyDebugTag) player.sendMessage(`<flyDebug> §a(+) increased to ${data.flagAmount}`);
             data.lastFlagTimestamp = now;
             if (data.flagAmount >= 3) {
                 data.flagAmount = 0;
@@ -91,9 +92,9 @@ function tickEvent(player: Player) {
             }
         }
     }
-    if (data.flagAmount > 0 && now - data.lastFlagTimestamp > 1200) {
-        data.flagAmount -= 0.1;
-        player.sendMessage(`decrease to ${data.flagAmount}`);
+    if (data.flagAmount >= 0.05 && ((now - data.lastFlagTimestamp > 8000 && player.isOnGround) || (!player.isOnGround && velocityY === 0 && now - data.lastFlagTimestamp > 1200))) {
+        data.flagAmount -= 0.05;
+        if (hasFlyDebugTag) player.sendMessage(`<flyDebug> §c(-) decreased to ${data.flagAmount}`);
     };;
     player.onScreenDisplay.setActionBar(`${velocityY.toFixed(4)} | ${data.flagAmount.toFixed(1)}`);
     if (pistonNotPushed && playerStarted && velocityY > HIGH_VELOCITY_Y && now - player.timeStamp.knockBack > 2000 && !player.isGliding) {
