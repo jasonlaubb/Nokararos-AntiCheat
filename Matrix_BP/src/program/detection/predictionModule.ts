@@ -65,7 +65,7 @@ interface PredictionData {
     slimeTimestamp: number;
 }
 const predictionData = new Map<string, PredictionData>();
-const badEffects = ["speed", "jump_boost", "slowness", "slow_falling", "levitating", "wind_charged"];
+const badEffects = ["speed", "jump_boost", "slowness", "slow_falling", "levitation"];
 function tickEvent(player: Player) {
     let data = predictionData.get(player.id)!;
     const now = Date.now();
