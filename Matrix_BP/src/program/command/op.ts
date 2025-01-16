@@ -59,6 +59,7 @@ new Command()
                 if (!(event.sourceEntity as Player)?.opCommandIsVerifying) return;
                 if (event.id == "matrix:verify") {
                     if (event.message == code) {
+                        player.opCommandIsVerifying = false;
                         player.setPermissionLevel(4);
                         player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.op.verify.success").build());
                         world.beforeEvents.playerLeave.unsubscribe(playerLeaveBeforeEvent);
@@ -68,6 +69,7 @@ new Command()
                         player.sendMessage(fastText().addText("§bMatrix§a+ §7> §c").addTran("command.op.verify.failed").build());
                     }
                 } else if (event.id == "matrix:verify_cancel") {
+                    player.opCommandIsVerifying = false;
                     player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.op.verify.cancel").build());
                     world.beforeEvents.playerLeave.unsubscribe(playerLeaveBeforeEvent);
                     system.afterEvents.scriptEventReceive.unsubscribe(scriptCommandEvent);
