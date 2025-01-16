@@ -41,6 +41,13 @@ function onPlayerThrow({ itemStack, source: player }: ItemReleaseUseAfterEvent) 
 function onPlayerUse({ itemStack, source: player }: ItemUseAfterEvent) {
     if (itemStack.typeId === MinecraftItemTypes.WindCharge) {
         player.timeStamp.knockBack = Date.now();
+    } else if (itemStack.typeId === MinecraftItemTypes.FishingRod) {
+        player.dimension.getPlayers({
+            minDistance: 0,
+            maxDistance: 8,
+        }).filter((a) => a.id !== player.id).forEach((a) => {
+            a.timeStamp.knockBack = Date.now();
+        })
     }
 }
 function onPlayerAttack({ damagingEntity }: EntityHitEntityAfterEvent) {
