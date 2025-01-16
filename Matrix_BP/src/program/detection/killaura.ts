@@ -66,6 +66,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
     const { x: pitch, y: yaw } = player.getRotation();
     const inputMode = player.inputInfo.lastInputModeUsed;
     if (isPvp && distance > KILLAURA_PVP_DISTANCE_THRESHOLD && fastAbs(pitch) > KILLAURA_ROTATION_THRESHOLD) {
+        // No false positive maybe
         player.flag(killaura, { t: "2", distance, pitch });
         return;
     }
