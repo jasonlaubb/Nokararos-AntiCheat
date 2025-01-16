@@ -47,3 +47,4 @@ import "./command/rank";
 import "./command/reset";
 import "./command/unblink";
 import "./command/log";
+import "./command/reconnect";
