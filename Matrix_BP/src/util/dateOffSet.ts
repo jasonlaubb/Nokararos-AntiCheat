@@ -6,7 +6,7 @@ interface MiniTime {
     minute: number;
     second: number;
 }
-function currentTimezoneOffset(): string {
+export function currentTimezoneOffset(): string {
     const date = -(new Date().getTimezoneOffset() / 60);
     if (date === 0) {
         return "UTC";
@@ -14,7 +14,7 @@ function currentTimezoneOffset(): string {
         return date > 0 ? `UTC+${date}` : `UTC-${date}`;
     }
 }
-function getUTCTime(now: number): MiniTime {
+export function getUTCTime(now: number): MiniTime {
     const date = new Date(now);
     return {
         day: date.getUTCDate(),

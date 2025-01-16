@@ -194,6 +194,7 @@ export function timeStringCorrectToDay(time: number) {
     const dayEnd = dayStart + 1439999;
     return { dayStart, dayEnd };
 }
+import { currentTimezoneOffset, getUTCTime } from "./dateOffSet";
 export function generateShortTimeStr(time: number, timezoneOffset = localTimezoneOffset()) {
     const { year, month, day, hour, minute, second } = getUTCTime(time - timezoneOffset);
     const shortTimeStr = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
