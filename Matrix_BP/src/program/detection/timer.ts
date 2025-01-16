@@ -1,6 +1,6 @@
 import { EntityHitEntityAfterEvent, GameMode, Player, PlayerSpawnAfterEvent, system, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
-import { calculateDistance, fastHypot, fastAbs } from "../../util/fastmath";
+import { calculateDistance, fastHypot, fastAbs, pythag } from "../../util/fastmath";
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { rawtextTranslate } from "../../util/rawtext";
 import { world } from "@minecraft/server";
@@ -123,7 +123,7 @@ function playerTickEvent(player: Player) {
     const data = timerData.get(player.id)!;
     const now = Date.now();
     const isTickIgnored = data.isTickIgnored;
-    const { x, z } = player.getVelocity();
+    const { x, y, z } = player.getVelocity();
     const noVelocity = x === 0 && z === 0;
     const distance = calculateDistance(player.location, data.lastLocation);
     if (data.flyingNotOnGround) {
@@ -144,7 +144,9 @@ function playerTickEvent(player: Player) {
         player.getEffect(MinecraftEffectTypes.Speed) ||
         (noVelocity && distance > 0.005) ||
         now - player.timeStamp.knockBack < 2500 ||
-        now - player.timeStamp.riptide < 5000
+        now - player.timeStamp.riptide < 5000 ||
+        // Ignore pure falling movement.
+        player.isFalling && y > pythag(x, z)
     ) {
         if (!data.isTickIgnored) data.isTickIgnored = true;
         timerData.set(player.id, data);
