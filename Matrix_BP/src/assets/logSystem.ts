@@ -32,7 +32,7 @@ export function logRestart () {
 }
 export function getRestartLogs () {
 	const restartString = world.getDynamicProperty("restartLogs");
-	const restartLog = restartString ? JSON.parse(restartString as string) : [];
+	const restartLog = restartString ? JSON.parse(restartString as string) as string[] : [] as string[];
 	return restartLog;
 }
 export function getAllLogs () {

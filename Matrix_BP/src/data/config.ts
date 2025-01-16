@@ -60,8 +60,10 @@ export default {
         dataValueToPrecision: 4,
         askWetherFalseFlag: true,
     },
-    logging: {
-        maxLatestRecordPerPages: 150,
+    logSettings: {
+        logCommandUsage: true,
+        logAutoMod: true,
+        logPlayerJoinLeave: true,
     },
     sensitivity: {
         antiBlink: true, // Stop blink movement (antiTimer), more lagback will be given.

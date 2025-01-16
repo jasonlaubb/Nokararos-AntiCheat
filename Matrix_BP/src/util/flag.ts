@@ -2,6 +2,7 @@ import { Player, RawText, world } from "@minecraft/server";
 import { Module } from "../matrixAPI";
 import { fastText, rawtext, rawtextTranslate } from "./rawtext";
 import { ban, freeze, mute, softBan, strengthenKick, tempKick } from "../program/system/moderation";
+import { write } from "../assets/logSystem";
 export function setupFlagFunction() {
     Player.prototype.flag = function (detected: Module, data?: { [key: string]: (string | number | (string | number)[]) }) {
         const punishment = detected.modulePunishment;
@@ -20,8 +21,16 @@ export function setupFlagFunction() {
             .endline()
             .addTran("flag.detected.punishment", punishment);
         if (config.customize.askWetherFalseFlag) flagMessage.endline().addTran("flag.detected.false");
+        const bypass = this.hasTag("matrix-debug:punishmentResistance");
+        if (config.logSettings.logAutoMod) {
+            write(true, `§4${punishment} §8(Flag)`, this.name, {
+                moduleId: detected.getToggleId() ?? `Unknown`,
+                bypassed: bypass,
+                ...data,
+            })
+        }
         world.sendMessage(flagMessage.build());
-        if (this.hasTag("matrix-debug:punishmentResistance")) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
+        if (bypass) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {
             switch (punishment) {
                 case "kick":

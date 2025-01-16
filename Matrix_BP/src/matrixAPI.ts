@@ -3,6 +3,7 @@ import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import defaultConfig from "./data/config";
 import { fastText, rawtext, rawtextTranslate } from "./util/rawtext";
 import { Punishment } from "./program/system/moderation";
+import { write } from "./assets/logSystem";
 // The class that store the tick event that is handled by the Module class
 export class IntegratedSystemEvent {
     private func: Function;
@@ -181,6 +182,12 @@ class Module {
         world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
             if (!initialSpawn) return;
             Module.currentPlayers.push(player);
+            if (Module.config.logSettings.logPlayerJoinLeave) {
+                write(false, "§aJoin §8(Connection)", player.name, {
+                    playerId: player.id,
+                    joinLocation: Object.values(player.location).map((x) => Math.floor(x).toFixed(0)).join(" "),
+                });
+            }
             for (const module of Module.moduleList) {
                 if (!module.enabled || !module.playerSpawn) continue;
                 try {
@@ -217,16 +224,24 @@ class Module {
                 }
             }
         }
-        world.afterEvents.playerLeave.subscribe(({ playerId }) => {
-            Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id != playerId);
-            for (const module of Module.moduleList) {
-                if (!module.enabled || !module.playerLeave) continue;
-                try {
-                    module.playerLeave(playerId);
-                } catch (error) {
-                    Module.sendError(error as Error);
-                }
+        world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
+            if (Module.config.logSettings.logPlayerJoinLeave) {
+                write(false, "§cLeave §8(Connection)", playerName, {
+                    playerId: playerId,
+                    leaveLocation: Object.values(location).map((x) => Math.floor(x).toFixed(0)).join(" "),
+                });
             }
+            Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
+            system.run(() => {
+                for (const module of Module.moduleList) {
+                    if (!module.enabled || !module.playerLeave) continue;
+                    try {
+                        module.playerLeave(playerId);
+                    } catch (error) {
+                        Module.sendError(error as Error);
+                    }
+                }
+            });
         });
         system.runInterval(() => {
             const allPlayers = Module.allWorldPlayers;
@@ -390,6 +405,11 @@ class Command {
                     if (targetSubCommand) {
                         const argValues = Command.getArgValue(args, targetSubCommand, this);
                         if (argValues === null) return;
+                        if (Module.config.logSettings.logCommandUsage) {
+                            write(false, `§1${command.availableId[0]} §7(ChatCMD)`, this.name, {
+                                executedCommand: commandString,
+                            })
+                        }
                         if (targetSubCommand?.executeFunc) {
                             targetSubCommand.executeFunc(this, ...args.slice(2)).catch((error) => Module.sendError(error as Error));
                         }
@@ -400,6 +420,14 @@ class Command {
             } else {
                 const argValues = Command.getArgValue(args, command, this);
                 if (argValues === null) return;
+                if (Module.config.logSettings.logCommandUsage) {
+                    if (["op", "setpassword"].includes(command.availableId[0])) {
+                        commandString = `${args[0]} ****`
+                    }
+                    write(false, `§1${command.availableId[0]} §8(ChatCMD)`, this.name, {
+                        executedCommand: commandString,
+                    })
+                }
                 if (command?.executeFunc) {
                     command.executeFunc(this, ...argValues).catch((error) => Command.sendErrorToPlayer(this, error as Error));
                 }

@@ -14,20 +14,7 @@ function currentTimezoneOffset (): string {
 		return date > 0 ? `UTC+${date}` : `UTC-${date}`;
 	}
 }
-function getLocalTime (): MiniTime {
-	const now = Date.now();
-	const date = new Date(now);
-	return {
-		day: date.getDate(),
-		month: date.getMonth() + 1,
-		year: date.getFullYear(),
-		hour: date.getHours(),
-		minute: date.getMinutes(),
-		second: date.getSeconds(),
-	};
-}
-function getUTCTime (): MiniTime {
-	const now = Date.now();
+function getUTCTime (now: number): MiniTime {
 	const date = new Date(now);
 	return {
 		day: date.getUTCDate(),
