@@ -79,7 +79,7 @@ new Command()
 	.register();
 new Command()
 	.setName("logui")
-	.setAliases("logrecord")
+	.setAliases("logrecord", "getlogbyrestart")
 	.setMinPermissionLevel(1)
 	.setDescription(rawtextTranslate("command.logui.description"))
 	.onExecute(async (player) => {
