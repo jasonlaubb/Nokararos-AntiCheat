@@ -894,3 +894,36 @@ msgstr "Click into the §gbutton§f of the log can see the §adetail information
 
 msgid "ui.log.detail"
 msgstr "Detail information"
+
+msgid "command.echestwipe.description"
+msgstr "Clear a player's ender chest"
+
+msgid "command.help.sd"
+msgstr "Get the command list"
+
+msgid "command.logui.sd"
+msgstr "View logs by restart time"
+
+msgid "command.daylog.sd"
+msgstr "View logs by date"
+
+msgid "command.fastlog.ad"
+msgstr "View logs in past few days"
+
+msgid "command.setpassword.sd"
+msgstr "Change password"
+
+msgid "command.configui.sd"
+msgstr "Edit config"
+
+msgid "command.op.sd"
+msgstr "Gain matrix admin"
+
+msgid "command.deop.sd"
+msgstr "Remove your admin perm"
+
+msgid "command.vanish.sd"
+msgstr "(Un)vanish yourself"
+
+msgid "command.about.sd"
+msgstr "Get info of Matrix-anti"

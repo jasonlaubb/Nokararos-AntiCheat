@@ -42,7 +42,7 @@ import "./command/moderation";
 import "./command/invsee";
 import "./command/setpassword";
 import "./command/configui";
-import "./command.echestwipe";
+import "./command/echestwipe";
 import "./command/rank";
 import "./command/reset";
 import "./command/unblink";

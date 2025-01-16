@@ -8,6 +8,7 @@ new Command()
     .setAliases("flog", "getlogbytime")
     .setMinPermissionLevel(1)
     .setDescription(rawtextTranslate("command.fastlog.description"))
+	.addShortDescription(rawtextTranslate("command.fastlog.sd"))
     .addOption(
         rawtextTranslate("command.log.day"),
         rawtextTranslate("command.log.day.description"),
@@ -62,6 +63,7 @@ new Command()
 new Command()
     .setName("daylog")
     .setAliases("dlog", "getlogbydate")
+	.addShortDescription(rawtextTranslate("command.daylog.sd"))
     .setMinPermissionLevel(1)
     .setDescription(rawtextTranslate("command.daylog.description"))
     .addOption(rawtextTranslate("command.log.day"), rawtextTranslate("command.log.date"), "integer", {
@@ -94,6 +96,7 @@ new Command()
 new Command()
     .setName("logui")
     .setAliases("logrecord", "getlogbyrestart")
+	.addShortDescription(rawtextTranslate("command.logui.sd"))
     .setMinPermissionLevel(1)
     .setDescription(rawtextTranslate("command.logui.description"))
     .onExecute(async (player) => {
@@ -116,4 +119,5 @@ new Command()
         const logs = log.getLog(startTime, endTime);
         if (logs.length === 0) return player.sendMessage(fastText().addText("§bMatrix§a+ §7> §c").addTran("command.log.nodata").build());
         parseLogUserInterface(logs, player);
-    });
+    })
+	.register();

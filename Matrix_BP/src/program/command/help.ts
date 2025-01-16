@@ -7,6 +7,7 @@ new Command()
     .setMinPermissionLevel(1)
     .setAliases("commands")
     .setDescription(rawtextTranslate("command.help.description"))
+    .addShortDescription(rawtextTranslate("command.help.sd"))
     .addOption(rawtextTranslate("command.help.command.name"), rawtextTranslate("command.help.command.name.description"), "string", undefined, true)
     .onExecute(async (player, ...args) => {
         const targetCommand = args[0] as string;

@@ -5,6 +5,7 @@ import { fastText, rawtextTranslate } from "../../util/rawtext";
 new Command()
     .setName("echestwipe")
     .setAliases("ecw", "enderchestwipe", "wipeenderchest", "clearenderchest", "clearechest", "wipeechest")
+    .addShortDescription(rawtextTranslate("command.echestwipe.sd"))
     .setMinPermissionLevel(1)
     .setDescription(rawtextTranslate("command.echestwipe.description"))
     .addOption(rawtextTranslate("command.moderation.target"), rawtextTranslate("command.moderation.target.description"), "target", undefined, false)

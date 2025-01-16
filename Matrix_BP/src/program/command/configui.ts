@@ -79,7 +79,8 @@ async function editor(player: Player, path: string[]) {
 
 new Command()
     .setName("configui")
-    .setMinPermissionLevel(4)
+    .setMinPermissionLevel(1)
+    .addShortDescription(rawtextTranslate("command.configui.sd"))
     .setDescription(rawtextTranslate("command.configui.description"))
     .onExecute(async (player) => {
         player.sendMessage(rawtextTranslate("ui.closechat"));
