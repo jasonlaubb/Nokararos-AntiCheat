@@ -169,6 +169,8 @@ class Module {
                 .then(() => {
                     Module.initialize();
                 });
+            // Log the restart.
+            logRestart();
         });
     }
     public static initialize() {
@@ -723,4 +725,5 @@ export { Module, Command, Config };
 // Start the AntiCheat
 Module.ignite();
 import { setupFlagFunction } from "./util/flag";
-import { changeValueOfObject, getValueFromObject, waitShowActionForm } from "./util/util";
+import { changeValueOfObject, getValueFromObject, waitShowActionForm } from "./util/util";import { logRestart } from "./assets/logSystem";
+

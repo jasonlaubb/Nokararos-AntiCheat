@@ -144,3 +144,7 @@ export function getDelta(list: number[]) {
     }
     return list.slice(0, -1).map((x, i) => x - list[i + 1]);
 }
+import { Log } from "../assets/logSystem";
+export function parseLogUserInterface(log: Log[]) {
+    // Unfinished
+}

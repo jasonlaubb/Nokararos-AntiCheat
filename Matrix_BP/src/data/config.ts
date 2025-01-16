@@ -60,6 +60,9 @@ export default {
         dataValueToPrecision: 4,
         askWetherFalseFlag: true,
     },
+    logging: {
+        maxLatestRecordPerPages: 150,
+    },
     sensitivity: {
         antiBlink: true, // Stop blink movement (antiTimer), more lagback will be given.
         strengthenAntiSpeed: false, // Stronger anti speed, reverses the location instantly.
