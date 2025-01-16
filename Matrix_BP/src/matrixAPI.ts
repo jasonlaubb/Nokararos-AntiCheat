@@ -610,7 +610,7 @@ export class DirectPanel {
         const ui = new ActionFormData().title(rawtextTranslate("directpanel.title")).body(rawtextTranslate("directpanel.body"));
         const allCommands = Command.allCommands;
         for (const command of allCommands) {
-            const theAction = command.description;
+            const theAction = command.shortDescription ?? command.description;
             const commandId = command.availableId[0];
             ui.button(fastText().addText("§1").addRawText(theAction).addText("§j").endline().addTran("directpanel.button", commandId).build());
         }
