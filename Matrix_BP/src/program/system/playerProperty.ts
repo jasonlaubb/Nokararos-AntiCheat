@@ -42,12 +42,15 @@ function onPlayerUse({ itemStack, source: player }: ItemUseAfterEvent) {
     if (itemStack.typeId === MinecraftItemTypes.WindCharge) {
         player.timeStamp.knockBack = Date.now();
     } else if (itemStack.typeId === MinecraftItemTypes.FishingRod) {
-        player.dimension.getPlayers({
-            minDistance: 0,
-            maxDistance: 8,
-        }).filter((a) => a.id !== player.id).forEach((a) => {
-            a.timeStamp.knockBack = Date.now();
-        })
+        player.dimension
+            .getPlayers({
+                minDistance: 0,
+                maxDistance: 8,
+            })
+            .filter((a) => a.id !== player.id)
+            .forEach((a) => {
+                a.timeStamp.knockBack = Date.now();
+            });
     }
 }
 function onPlayerAttack({ damagingEntity }: EntityHitEntityAfterEvent) {
@@ -62,19 +65,21 @@ function onPlayerAttack({ damagingEntity }: EntityHitEntityAfterEvent) {
     }
 }
 
-function onPistonPush ({ dimension, isExpanding, piston }: PistonActivateAfterEvent) {
+function onPistonPush({ dimension, isExpanding, piston }: PistonActivateAfterEvent) {
     if (!isExpanding) return;
     const now = Date.now();
     const allAffectedBlockLocation = piston.getAttachedBlocksLocations();
     allAffectedBlockLocation.push(piston.block.location);
     const playerNearby = [] as Player[];
     allAffectedBlockLocation.forEach((location) => {
-        playerNearby.push(...dimension.getPlayers({
-            maxDistance: 2,
-            minDistance: 0,
-            location,
-        }));
-    })
+        playerNearby.push(
+            ...dimension.getPlayers({
+                maxDistance: 2,
+                minDistance: 0,
+                location,
+            })
+        );
+    });
     new Set(playerNearby).forEach((player) => {
         player.timeStamp.pistonPush = now;
     });

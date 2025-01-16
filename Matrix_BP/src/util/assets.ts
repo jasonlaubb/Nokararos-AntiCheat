@@ -59,15 +59,15 @@ export function getStandardDeviation(numbers: number[]) {
     return fastSqrt(variance);
 }
 export function checkRepetition(arr: number[]) {
-    const alreadyList: { [key: number]: number} = {};
+    const alreadyList: { [key: number]: number } = {};
     arr.forEach((value) => {
         alreadyList[value] ??= 0;
         alreadyList[value]++;
-    })
+    });
     return Math.max(...Object.values(alreadyList));
 }
 
-export function getTotalAbsMovementVector (player: Player) {
+export function getTotalAbsMovementVector(player: Player) {
     const { x, y } = player.inputInfo.getMovementVector();
     return (fastAbs(x) + fastAbs(y)) as 0 | 1 | 2;
 }

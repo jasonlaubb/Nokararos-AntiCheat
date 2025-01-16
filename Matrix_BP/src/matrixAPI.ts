@@ -185,7 +185,9 @@ class Module {
             if (Module.config.logSettings.logPlayerJoinLeave) {
                 write(false, "§aJoin §8(Connection)", player.name, {
                     playerId: player.id,
-                    joinLocation: Object.values(player.location).map((x) => Math.floor(x).toFixed(0)).join(" "),
+                    joinLocation: Object.values(player.location)
+                        .map((x) => Math.floor(x).toFixed(0))
+                        .join(" "),
                 });
             }
             for (const module of Module.moduleList) {
@@ -228,7 +230,9 @@ class Module {
             if (Module.config.logSettings.logPlayerJoinLeave) {
                 write(false, "§cLeave §8(Connection)", playerName, {
                     playerId: playerId,
-                    leaveLocation: Object.values(location).map((x) => Math.floor(x).toFixed(0)).join(" "),
+                    leaveLocation: Object.values(location)
+                        .map((x) => Math.floor(x).toFixed(0))
+                        .join(" "),
                 });
             }
             Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
@@ -408,7 +412,7 @@ class Command {
                         if (Module.config.logSettings.logCommandUsage) {
                             write(false, `§1${command.availableId[0]} §7(ChatCMD)`, this.name, {
                                 executedCommand: commandString,
-                            })
+                            });
                         }
                         if (targetSubCommand?.executeFunc) {
                             targetSubCommand.executeFunc(this, ...args.slice(2)).catch((error) => Module.sendError(error as Error));
@@ -422,11 +426,11 @@ class Command {
                 if (argValues === null) return;
                 if (Module.config.logSettings.logCommandUsage) {
                     if (["op", "setpassword"].includes(command.availableId[0])) {
-                        commandString = `${args[0]} ****`
+                        commandString = `${args[0]} ****`;
                     }
                     write(false, `§1${command.availableId[0]} §8(ChatCMD)`, this.name, {
                         executedCommand: commandString,
-                    })
+                    });
                 }
                 if (command?.executeFunc) {
                     command.executeFunc(this, ...argValues).catch((error) => Command.sendErrorToPlayer(this, error as Error));
@@ -753,5 +757,5 @@ export { Module, Command, Config };
 // Start the AntiCheat
 Module.ignite();
 import { setupFlagFunction } from "./util/flag";
-import { changeValueOfObject, getValueFromObject, waitShowActionForm } from "./util/util";import { logRestart } from "./assets/logSystem";
-
+import { changeValueOfObject, getValueFromObject, waitShowActionForm } from "./util/util";
+import { logRestart } from "./assets/logSystem";

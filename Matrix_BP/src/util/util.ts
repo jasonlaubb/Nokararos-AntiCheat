@@ -147,9 +147,7 @@ export function getDelta(list: number[]) {
 import { Log } from "../assets/logSystem";
 import { rawtextTranslate } from "./rawtext";
 export async function parseLogUserInterface(logs: Log[], player: Player) {
-    const ui = new ActionFormData()
-        .title(rawtextTranslate("ui.log.title", currentTimezoneOffset()))
-        .body(rawtextTranslate("ui.log.body", logs.length.toString()));
+    const ui = new ActionFormData().title(rawtextTranslate("ui.log.title", currentTimezoneOffset())).body(rawtextTranslate("ui.log.body", logs.length.toString()));
     const timezoneOffset = localTimezoneOffset();
     for (const log of logs) {
         const buttonText = `§g${log.action} §0[${log.object}§0]\n§8${generateShortTimeStr(log.now, timezoneOffset)}`;
@@ -159,39 +157,35 @@ export async function parseLogUserInterface(logs: Log[], player: Player) {
     if (result === null) return;
     const selection = result.selection!;
     const selectedLog = logs[selection];
-    const detailText = selectedLog.data ? Object.entries(selectedLog.data).map((([key, value]) => {
-        switch (typeof value) {
-            case "boolean": {
-                value = value ? "true" : "false";
-                break;
-            }
-            case "number": {
-                value = value.toString();
-                break;
-            }
-            case "string": {
-                value = '"' + value + '"';
-                break;
-            }
-            case "object": {
-                value = value.map((a) => String(a)).join(",");
-            }
-        }
-        return `§g${key} §7>> §e${value}`;
-    })) : [] as string[];
-    const message = [
-        `§gAuto Mod §7>> §e${selectedLog.autoMod ? "true" : "false"}`,
-        `§gAction §7>> §e${selectedLog.action}`,
-        `§gObject §7>> §e${selectedLog.object}`,
-        `§gTime §7>> §e${generateShortTimeStr(selectedLog.now, timezoneOffset)}`,
-    ]
+    const detailText = selectedLog.data
+        ? Object.entries(selectedLog.data).map(([key, value]) => {
+              switch (typeof value) {
+                  case "boolean": {
+                      value = value ? "true" : "false";
+                      break;
+                  }
+                  case "number": {
+                      value = value.toString();
+                      break;
+                  }
+                  case "string": {
+                      value = '"' + value + '"';
+                      break;
+                  }
+                  case "object": {
+                      value = value.map((a) => String(a)).join(",");
+                  }
+              }
+              return `§g${key} §7>> §e${value}`;
+          })
+        : ([] as string[]);
+    const message = [`§gAuto Mod §7>> §e${selectedLog.autoMod ? "true" : "false"}`, `§gAction §7>> §e${selectedLog.action}`, `§gObject §7>> §e${selectedLog.object}`, `§gTime §7>> §e${generateShortTimeStr(selectedLog.now, timezoneOffset)}`];
     const detailUI = new ActionFormData()
         .title(rawtextTranslate("ui.log.detail"))
         .body([...message, ...detailText].join("\n"))
         .button(rawtextTranslate("ui.exit"), "ui/realms_red_x.png");
     //@ts-expect-error
     detailUI.show(player);
-        
 }
 export const day_ms = 1440000;
 export function timeStringCorrectToDay(time: number) {
@@ -200,11 +194,11 @@ export function timeStringCorrectToDay(time: number) {
     const dayEnd = dayStart + 1439999;
     return { dayStart, dayEnd };
 }
-export function generateShortTimeStr (time: number, timezoneOffset = localTimezoneOffset()) {
+export function generateShortTimeStr(time: number, timezoneOffset = localTimezoneOffset()) {
     const { year, month, day, hour, minute, second } = getUTCTime(time - timezoneOffset);
     const shortTimeStr = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
     return shortTimeStr;
 }
-export function localTimezoneOffset () {
+export function localTimezoneOffset() {
     return new Date().getTimezoneOffset() * 60000;
 }

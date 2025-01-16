@@ -146,7 +146,7 @@ function playerTickEvent(player: Player) {
         now - player.timeStamp.knockBack < 2500 ||
         now - player.timeStamp.riptide < 5000 ||
         // Ignore pure falling movement.
-        player.isFalling && y > pythag(x, z)
+        (player.isFalling && y > pythag(x, z))
     ) {
         if (!data.isTickIgnored) data.isTickIgnored = true;
         timerData.set(player.id, data);

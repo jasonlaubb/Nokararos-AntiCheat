@@ -197,7 +197,7 @@ function onPlayerSpawn({ player, initialSpawn }: PlayerSpawnAfterEvent) {
             let hasBanRecord;
             try {
                 hasBanRecord = banRecord?.getScore("::" + player.name);
-            } catch { };
+            } catch {}
             if (banRecord && hasBanRecord) {
                 banRecord.removeParticipant("::" + player.name);
             }
@@ -214,7 +214,7 @@ function onPlayerSpawn({ player, initialSpawn }: PlayerSpawnAfterEvent) {
         let hasBanRecord;
         try {
             hasBanRecord = banRecord?.getScore("::" + player.name);
-        } catch { };
+        } catch {}
         if (banRecord && hasBanRecord) {
             banRecord.removeParticipant("::" + player.name);
         }
