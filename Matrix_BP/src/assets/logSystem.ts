@@ -22,18 +22,22 @@ export function write (auto: boolean, action: string, object: string, data: { [k
 		}
 	}
 }
+interface RestartLog {
+	now: number;
+	amount: string;
+}
 export function logRestart () {
 	const restartString = world.getDynamicProperty("restartLogs");
-	const restartLog = restartString ? JSON.parse(restartString as string) : [];
+	const restartLog = restartString ? JSON.parse(restartString as string) as RestartLog[] : [] as RestartLog[];
 	restartLog.unshift({
 		now: Date.now(),
-		amount: restartLog.length + 1,
-	});
+		amount: (restartLog.length + 1).toString(),
+	} as RestartLog);
 	world.setDynamicProperty("restartLogs", JSON.stringify(restartLog));
 }
 export function getRestartLogs () {
 	const restartString = world.getDynamicProperty("restartLogs");
-	const restartLog = restartString ? JSON.parse(restartString as string) as string[] : [] as string[];
+	const restartLog = restartString ? JSON.parse(restartString as string) as RestartLog[] : [] as RestartLog[];
 	return restartLog;
 }
 export function getAllLogs () {

@@ -150,11 +150,9 @@ export async function parseLogUserInterface(logs: Log[], player: Player) {
     const ui = new ActionFormData()
         .title(rawtextTranslate("ui.log.title", currentTimezoneOffset()))
         .body(rawtextTranslate("ui.log.body", logs.length.toString()));
-    const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+    const timezoneOffset = localTimezoneOffset();
     for (const log of logs) {
-        const { year, month, day, hour, minute, second } = getUTCTime(log.now - timeZoneOffset);
-        const shortTimeStr = `§8${year}/${month}/${day} ${hour}:${minute}:${second}`;
-        const buttonText = `§g${log.action} §0[${log.object}§0]\n${shortTimeStr}`;
+        const buttonText = `§g${log.action} §0[${log.object}§0]\n§8${generateShortTimeStr(log.now, timezoneOffset)}`;
         ui.button(buttonText);
     }
     const result = await waitShowActionForm(ui, player);
@@ -181,13 +179,11 @@ export async function parseLogUserInterface(logs: Log[], player: Player) {
         }
         return `§g${key} §7>> §e${value}`;
     })) : [] as string[];
-    const { year, month, day, hour, minute, second } = getUTCTime(selectedLog.now - timeZoneOffset);
-    const shortTimeStr = `§8${year}/${month}/${day} ${hour}:${minute}:${second}`;
     const message = [
         `§gAuto Mod §7>> §e${selectedLog.autoMod ? "true" : "false"}`,
         `§gAction §7>> §e${selectedLog.action}`,
         `§gObject §7>> §e${selectedLog.object}`,
-        `§gTime §7>> §e${shortTimeStr}`,
+        `§gTime §7>> §e${generateShortTimeStr(selectedLog.now, timezoneOffset)}`,
     ]
     const detailUI = new ActionFormData()
         .title(rawtextTranslate("ui.log.detail"))
@@ -203,4 +199,12 @@ export function timeStringCorrectToDay(time: number) {
     const dayStart = time - exceeded;
     const dayEnd = dayStart + 1439999;
     return { dayStart, dayEnd };
+}
+export function generateShortTimeStr (time: number, timezoneOffset = localTimezoneOffset()) {
+    const { year, month, day, hour, minute, second } = getUTCTime(time - timezoneOffset);
+    const shortTimeStr = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
+    return shortTimeStr;
+}
+export function localTimezoneOffset () {
+    return new Date().getTimezoneOffset() * 60000;
 }
