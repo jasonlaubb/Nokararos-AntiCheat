@@ -1186,3 +1186,47 @@ msgstr ""
 msgid "Detail information"
 msgstr ""
 
+#: command.echestwipe.description
+msgid "Clear a player's ender chest"
+msgstr ""
+
+#: command.help.sd
+msgid "Get the command list"
+msgstr ""
+
+#: command.logui.sd
+msgid "View logs by restart time"
+msgstr ""
+
+#: command.daylog.sd
+msgid "View logs by date"
+msgstr ""
+
+#: command.fastlog.ad
+msgid "View logs in past few days"
+msgstr ""
+
+#: command.setpassword.sd
+msgid "Change password"
+msgstr ""
+
+#: command.configui.sd
+msgid "Edit config"
+msgstr ""
+
+#: command.op.sd
+msgid "Gain matrix admin"
+msgstr ""
+
+#: command.deop.sd
+msgid "Remove your admin perm"
+msgstr ""
+
+#: command.vanish.sd
+msgid "(Un)vanish yourself"
+msgstr ""
+
+#: command.about.sd
+msgid "Get info of Matrix-anti"
+msgstr ""
+
