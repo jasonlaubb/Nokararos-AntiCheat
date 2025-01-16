@@ -25,10 +25,11 @@ export function write (auto: boolean, action: string, object: string, data: { [k
 export function logRestart () {
 	const restartString = world.getDynamicProperty("restartLogs");
 	const restartLog = restartString ? JSON.parse(restartString as string) : [];
-	restartLog.push({
+	restartLog.unshift({
 		now: Date.now(),
 		amount: restartLog.length + 1,
 	});
+	world.setDynamicProperty("restartLogs", JSON.stringify(restartLog));
 }
 export function getRestartLogs () {
 	const restartString = world.getDynamicProperty("restartLogs");
