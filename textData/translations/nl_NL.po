@@ -1110,3 +1110,79 @@ msgstr ""
 msgid "Prevent the entity fly from working."
 msgstr ""
 
+#: command.echestwipe.success
+msgid "The echest of %s has been wiped successfully."
+msgstr ""
+
+#: command.echestwipe.description
+msgid "Wipe the ender chest of a player."
+msgstr ""
+
+#: command.fastlog.description
+msgid "Get the log in today, yesterday or the day before yesterday"
+msgstr ""
+
+#: command.log.day
+msgid "Day"
+msgstr ""
+
+#: command.log.day.description
+msgid "The day of the logs(s)"
+msgstr ""
+
+#: command.log.nodata
+msgid "No data. Unable to get the log that you want in the database."
+msgstr ""
+
+#: command.log.description
+msgid "View the recent logs in the database"
+msgstr ""
+
+#: command.log.amount
+msgid "Amount"
+msgstr ""
+
+#: command.log.amount.description
+msgid "The amount of the latest logs that you what to view."
+msgstr ""
+
+#: command.daylog.description
+msgid "View all of the logs in a specific day."
+msgstr ""
+
+#: command.log.month
+msgid "The month of the log(s)."
+msgstr ""
+
+#: command.log.years
+msgid "The years of the log(s)."
+msgstr ""
+
+#: command.log.invalid
+msgid "Invalid time: You should not select a time that is in the future."
+msgstr ""
+
+#: command.logui.description
+msgid "Select one of the the restart point and view all of the log(s) during the restart point to the next restart point."
+msgstr ""
+
+#: command.logui.title
+msgid "Select one of the restart point in below"
+msgstr ""
+
+#: command.logui.button
+msgid "Server initialization #%s"
+msgstr ""
+
+#: ui.log.title
+msgid "Log record | Timezone: %s"
+msgstr ""
+
+#: ui.log.body
+msgid "Click into the §gbutton§f of the log can see the §adetail information§f of the selected log. If you want to exit this ui, you can click the 'X' in the corner."
+msgstr ""
+
+#: ui.log.detail
+msgid "Detail information"
+msgstr ""
+
