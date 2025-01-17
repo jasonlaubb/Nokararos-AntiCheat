@@ -13,7 +13,8 @@ new Command()
         const targetPlayer = target as Player;
         system.runJob(clearPlayerEnderchest(targetPlayer));
         player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.echestwipe.success", targetPlayer.name).build());
-    });
+    })
+    .register();
 
 function* clearPlayerEnderchest(player: Player): Generator<void, void, void> {
     for (let i = 0; i < 27; i++) {
