@@ -87,6 +87,7 @@ new Command()
                 }
             });
             timeoutEvent = system.runTimeout(() => {
+                event.player.opCommandIsVerifying = false;
                 world.beforeEvents.playerLeave.unsubscribe(playerLeaveBeforeEvent);
                 system.afterEvents.scriptEventReceive.unsubscribe(scriptCommandEvent);
             }, 2400);
