@@ -85,7 +85,7 @@ new Command()
     )
     .onExecute(async (player, day, month, years) => {
         // Target UTC time
-        const targetTime = new Date(`${years ?? new Date(Date.now()).getFullYear()}-${month}-${day}T00:00:00.000`).getTime() + new Date().getTimezoneOffset();
+        const targetTime = new Date(`${years ?? new Date(Date.now()).getFullYear()}-${month}-${day}T00:00:00.000`).getTime() + new Date().getTimezoneOffset() * 60000;
         if (targetTime > Date.now()) return player.sendMessage(fastText().addText("§bMatrix§a+ §7> §c").addTran("command.log.invalid").build());
         const dayEnd = targetTime + 1439999;
         const dayLogs = log.getLog(targetTime, dayEnd);
