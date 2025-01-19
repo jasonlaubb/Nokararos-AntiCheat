@@ -9,6 +9,7 @@ import "./detection/predictionModule";
 import "./detection/phase";
 import "./detection/fly";
 import "./detection/killaura";
+import "./detection/mobAura";
 import "./detection/aim";
 import "./detection/timer";
 import "./detection/autoclicker";

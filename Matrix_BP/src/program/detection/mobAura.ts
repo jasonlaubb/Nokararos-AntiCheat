@@ -6,7 +6,7 @@ const mobAura = new Module()
 	.addCategory("detection")
 	.setName(rawtextTranslate("module.mobaura.name"))
 	.setDescription(rawtextTranslate("module.mobaura.description"))
-	.setToggleId("mobAura")
+	.setToggleId("antiMobAura")
 	.setPunishment("ban")
 	.onModuleEnable(() => {
 		world.afterEvents.entityHitEntity.subscribe(entityHitEntity);
@@ -32,7 +32,6 @@ function entityHitEntity ({ damagingEntity, hitEntity }: EntityHitEntityAfterEve
 	if (isDummyHit) {
 		// Prevent spamming
 		if (damagingEntity.dimension.getEntities({
-			type: "minecraft:player",
 			tags: ["matrix:dummy::" + damagingEntity.id],
 		}).length <= 1) spawnDummy(damagingEntity.location, damagingEntity.getRotation().y, damagingEntity.id, damagingEntity.dimension);
 		const now = Date.now();
@@ -46,7 +45,6 @@ function entityHitEntity ({ damagingEntity, hitEntity }: EntityHitEntityAfterEve
 			damagingEntity.mobAuraFlag = 0;
 		}
 	} else if (damagingEntity.dimension.getEntities({
-			type: "minecraft:player",
 			tags: ["matrix:dummy::" + damagingEntity.id],
 	}).length === 0) {
 		spawnDummy(damagingEntity.location, damagingEntity.getRotation().y, damagingEntity.id, damagingEntity.dimension);

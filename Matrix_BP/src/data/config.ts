@@ -12,6 +12,7 @@ export default {
         firewall: false, // Not tested :(
         antiNamespoof: true,
         antiKillAura: true,
+        antiMobAura: true,
         antiScaffold: true,
         antiInsteaBreak: false,
         antiReach: true,
