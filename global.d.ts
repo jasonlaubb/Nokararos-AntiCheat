@@ -13,6 +13,8 @@ declare module "@minecraft/server" {
 		timeStamp: PlayerTimeStamp;
 		opCommandUsageTimestamp: number;
 		opCommandIsVerifying: boolean;
+		mobAuraFlag: number;
+		mobAuraLastFlagTimestamp: number;
 	}
 }
 interface Console {
