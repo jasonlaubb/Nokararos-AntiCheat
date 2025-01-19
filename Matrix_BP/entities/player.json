@@ -169,7 +169,7 @@
             "matrix:dummy_gethit": {
                 // Despawn the entity after a tick after the entity already get hit
                 "minecraft:timer": {
-                    "time": 0.05,
+                    "time": 0.04,
                     "looping": false,
                     "time_down_event": {
                         "event": "matrix:despawn",

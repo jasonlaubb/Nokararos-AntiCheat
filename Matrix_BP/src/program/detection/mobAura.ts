@@ -19,8 +19,8 @@ const mobAura = new Module()
 		player.mobAuraLastFlagTimestamp = 0;
 	});
 mobAura.register();
-const SUMMON_RANDOM_OFFSET = 1.2;
-const SUMMON_LOWEST_OFFSET = 1.3;
+const SUMMON_RANDOM_OFFSET = 1.3;
+const SUMMON_LOWEST_OFFSET = 1;
 const SUMMON_Y_OFFSET = 1.25;
 const SAFE_ANGLE_ZONE = 120;
 const TEST_ENTITY = "minecraft:player";
