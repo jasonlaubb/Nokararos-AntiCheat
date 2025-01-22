@@ -23,7 +23,7 @@ const SUMMON_RANDOM_OFFSET = 1.3;
 const SUMMON_LOWEST_OFFSET = 1;
 const SUMMON_Y_OFFSET = 1.25;
 const SAFE_ANGLE_ZONE = 120;
-const TEST_ENTITY = "minecraft:player";
+const TEST_ENTITY = "matrix:killaura_dummy";
 const MAX_FLAG_AMOUNT = 7;
 const MIN_FLAG_INTERVAL = 4000;
 function entityHitEntity ({ damagingEntity, hitEntity }: EntityHitEntityAfterEvent) {
@@ -55,7 +55,6 @@ function spawnDummy (centerLocation: Vector3, pitch: number, playerId: string, d
 	const viewAngle = calculateAngleFromView(centerLocation, expectedSpawnLocation, pitch);
 	if (viewAngle > SAFE_ANGLE_ZONE) {
 		const dummy = dimension.spawnEntity(TEST_ENTITY, expectedSpawnLocation);
-		dummy.triggerEvent("matrix:transfer_to_dummy");
 		dummy.addTag("matrix:dummy::" + playerId);
 		return dummy;
 	} else {
