@@ -4,6 +4,7 @@ import defaultConfig from "./data/config";
 import { fastText, rawtext, rawtextTranslate } from "./util/rawtext";
 import { Punishment } from "./program/system/moderation";
 import { write } from "./assets/logSystem";
+import program from "./program/import";
 // The class that store the tick event that is handled by the Module class
 export class IntegratedSystemEvent {
     private func: Function;
@@ -38,24 +39,25 @@ export class IntegratedSystemEvent {
 class Module {
     public static readonly version: [number, number, number] = [6, 0, 30];
     public static readonly discordInviteLink = "CqZGXeRKPJ";
+    public static isInitialized: boolean = false;
     // The var of index runtime
-    private static moduleList: Module[] = [];
-    private static playerLoopRunTime: IntegratedSystemEvent[] = [];
-    private static tickLoopRunTime: IntegratedSystemEvent[] = [];
+    public static moduleList: Module[] = [];
+    public static playerLoopRunTime: IntegratedSystemEvent[] = [];
+    public static tickLoopRunTime: IntegratedSystemEvent[] = [];
     // Types
     public static readonly Config = typeof defaultConfig;
     // Properties of module
-    private toggleId!: string;
-    private name: RawText = rawtext({ text: "§cUnknown§r" });
-    private description!: RawText;
-    private category: string = "§cUnknown§r";
-    private locked: boolean = false;
-    private onEnable!: () => void;
-    private onDisable!: () => void;
-    private playerSpawn?: (playerId: string, player: Player) => void;
-    private playerLeave?: (playerId: string) => void;
-    private enabled: boolean = false;
-    private punishment?: Punishment;
+    public toggleId!: string;
+    public name: RawText = rawtext({ text: "§cUnknown§r" });
+    public description!: RawText;
+    public category: string = "§cUnknown§r";
+    public locked: boolean = false;
+    public onEnable!: () => void;
+    public onDisable!: () => void;
+    public playerSpawn?: (playerId: string, player: Player) => void;
+    public playerLeave?: (playerId: string) => void;
+    public enabled: boolean = false;
+    public punishment?: Punishment;
     // This is the constructor of antiCheat
     public constructor() {}
     // For other uses
@@ -161,116 +163,22 @@ class Module {
             }
         });
         // Run when the world fires
-        world.afterEvents.worldInitialize.subscribe(() => {
-            // For some module that required Module.
-            import("./program/import")
-                .catch((error) => {
-                    Module.sendError(error as Error);
-                })
-                .then(() => {
-                    Module.initialize();
-                });
-            // Log the restart.
-            logRestart();
-        });
-    }
-    public static initialize() {
-        console.log("The server is running with §b§lMatrix §gAntiCheat§r | Made by jasonlaubb");
-        Config.loadData();
-        // Initialize the command system
-        Command.initialize();
-        world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
-            if (!initialSpawn) return;
-            Module.currentPlayers.push(player);
-            if (Module.config.logSettings.logPlayerJoinLeave) {
-                write(false, "§aJoin §8(Connection)", player.name, {
-                    playerId: player.id,
-                    joinLocation: Object.values(player.location)
-                        .map((x) => Math.floor(x).toFixed(0))
-                        .join(" "),
-                });
-            }
-            for (const module of Module.moduleList) {
-                if (!module.enabled || !module.playerSpawn) continue;
-                try {
-                    module.playerSpawn(player.id, player);
-                } catch (error) {
-                    Module.sendError(error as Error);
-                }
-            }
-            system.runTimeout(() => {
-                if (player?.isValid() && Module.config.userRecruitmentFunction) player.sendMessage(rawtextTranslate("ad.running", Module.discordInviteLink));
-                let obj = world.scoreboard.getObjective("matrix:script-online");
-                if (!obj) {
-                    obj = world.scoreboard.addObjective("matrix:script-online", "Made by jasonlaubb");
-                    obj.setScore("is_enabled", -1);
-                }
-            }, 200);
-        });
-        for (const module of Module.moduleList) {
-            if (module.locked || Module.config.modules[module.toggleId] === true) {
-                module.onEnable();
-                module.enabled = true;
-            }
-        }
-        if (world.getAllPlayers().length > 0) {
-            for (const player of world.getAllPlayers()) {
-                Module.currentPlayers.push(player);
-                for (const module of Module.moduleList) {
-                    if (!module.enabled || !module.playerSpawn) continue;
-                    try {
-                        module.playerSpawn(player.id, player);
-                    } catch (error) {
-                        Module.sendError(error as Error);
-                    }
-                }
-            }
-        }
-        world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
-            if (Module.config.logSettings.logPlayerJoinLeave) {
-                write(false, "§cLeave §8(Connection)", playerName, {
-                    playerId: playerId,
-                    leaveLocation: Object.values(location)
-                        .map((x) => Math.floor(x).toFixed(0))
-                        .join(" "),
-                });
-            }
-            Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
-            system.run(() => {
-                for (const module of Module.moduleList) {
-                    if (!module.enabled || !module.playerLeave) continue;
-                    try {
-                        module.playerLeave(playerId);
-                    } catch (error) {
-                        Module.sendError(error as Error);
-                    }
-                }
-            });
-        });
-        system.runInterval(() => {
-            const allPlayers = Module.allWorldPlayers;
-            for (const player of allPlayers) {
-                if (!player?.isValid()) continue;
-                Module.playerLoopRunTime.forEach((event) => {
-                    if (!(!event.booleanData && player.isAdmin())) {
-                        try {
-                            event.moduleFunction(player);
-                        } catch (error) {
-                            Module.sendError(error as Error);
-                        }
-                    }
-                });
-            }
-            Module.tickLoopRunTime.forEach((event) => {
-                try {
-                    event.moduleFunction();
-                } catch (error) {
-                    Module.sendError(error as Error);
-                }
+        world.afterEvents.worldInitialize.subscribe(async () => {
+            const currentTime = Date.now();
+            system.runJob(loadModuleRegistry());
+            new Promise<void>((resolve) => {
+                const id = system.runInterval(() => {
+                    if (!Module.isInitialized) return;
+                    system.clearRun(id);
+                    resolve();
+                }, 1);
+            }).then(() => {
+                logRestart();
+                console.log(`Matrix+ AntiCheat has been initialized in ${Date.now() - currentTime}ms | Author: jasonlaubb`);
             });
         });
     }
-    private static currentPlayers: Player[] = [];
+    public static currentPlayers: Player[] = [];
     public static get allWorldPlayers() {
         return Module.currentPlayers;
     }
@@ -753,6 +661,115 @@ Player.prototype.setPermissionLevel = function (level: number) {
         this.setDynamicProperty("uniqueLevel", level);
     }
 };
+function* loadModuleRegistry (): Generator<void, void, void> {
+    try {
+    const items = program;
+    for (const item of items) {
+        import(item).catch((error) => console.warn(`loadModuleRegistry :: ${item} :: (${error.name}) ${error.message}`));
+        yield;
+    }
+        yield Config.loadData();
+        // Initialize the command system
+        yield Command.initialize();
+        world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
+            if (!initialSpawn) return;
+            Module.currentPlayers.push(player);
+            if (Module.config.logSettings.logPlayerJoinLeave) {
+                write(false, "§aJoin §8(Connection)", player.name, {
+                    playerId: player.id,
+                    joinLocation: Object.values(player.location)
+                        .map((x) => Math.floor(x).toFixed(0))
+                        .join(" "),
+                });
+            }
+            for (const module of Module.moduleList) {
+                if (!module.enabled || !module.playerSpawn) continue;
+                try {
+                    module.playerSpawn(player.id, player);
+                } catch (error) {
+                    Module.sendError(error as Error);
+                }
+            }
+            system.runTimeout(() => {
+                if (player?.isValid() && Module.config.userRecruitmentFunction) player.sendMessage(rawtextTranslate("ad.running", Module.discordInviteLink));
+                let obj = world.scoreboard.getObjective("matrix:script-online");
+                if (!obj) {
+                    obj = world.scoreboard.addObjective("matrix:script-online", "Made by jasonlaubb");
+                    obj.setScore("is_enabled", -1);
+                }
+            }, 200);
+        });
+        for (const module of Module.moduleList) {
+            if (module.locked || Module.config.modules[module.toggleId] === true) {
+                module.onEnable();
+                module.enabled = true;
+                yield;
+            }
+        }
+        if (world.getAllPlayers().length > 0) {
+            for (const player of world.getAllPlayers()) {
+                Module.currentPlayers.push(player);
+                for (const module of Module.moduleList) {
+                    if (!module.enabled || !module.playerSpawn) continue;
+                    try {
+                        module.playerSpawn(player.id, player);
+                    } catch (error) {
+                        Module.sendError(error as Error);
+                    }
+                }
+                yield;
+            }
+        }
+        world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
+            if (Module.config.logSettings.logPlayerJoinLeave) {
+                write(false, "§cLeave §8(Connection)", playerName, {
+                    playerId: playerId,
+                    leaveLocation: Object.values(location)
+                        .map((x) => Math.floor(x).toFixed(0))
+                        .join(" "),
+                });
+            }
+            Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
+                for (const module of Module.moduleList) {
+                    if (!module.enabled || !module?.playerLeave) continue;
+                    try {
+                        system.run(() => {
+                            if (!module?.playerLeave) return;
+                            module?.playerLeave(playerId);
+                        });
+                    } catch (error) {
+                        Module.sendError(error as Error);
+                    }
+                }
+        });
+        system.runInterval(() => {
+            const allPlayers = Module.allWorldPlayers;
+            for (const player of allPlayers) {
+                if (!player?.isValid()) continue;
+                Module.playerLoopRunTime.forEach((event) => {
+                    if (!(!event.booleanData && player.isAdmin())) {
+                        try {
+                            event.moduleFunction(player);
+                        } catch (error) {
+                            Module.sendError(error as Error);
+                        }
+                    }
+                });
+            }
+            Module.tickLoopRunTime.forEach((event) => {
+                try {
+                    event.moduleFunction();
+                } catch (error) {
+                    Module.sendError(error as Error);
+                }
+            });
+        });
+    } catch (error) {
+        Module.sendError(error as Error);
+    } finally {
+        Module.isInitialized = true;
+    }
+}
 export { Module, Command, Config };
 // Start the AntiCheat
 Module.ignite();

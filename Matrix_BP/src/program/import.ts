@@ -2,49 +2,48 @@ import { registerModeration } from "./system/moderation";
 registerModeration();
 import { registerTimeStampModule } from "./system/playerProperty";
 registerTimeStampModule();
-// Import the modules
-import "./detection/firewall";
-import "./detection/speed";
-import "./detection/predictionModule";
-import "./detection/phase";
-import "./detection/fly";
-import "./detection/killaura";
-import "./detection/mobAura";
-import "./detection/aim";
-import "./detection/timer";
-import "./detection/autoclicker";
-import "./detection/namespoof";
-import "./detection/scaffold";
-import "./detection/insteabreak";
-import "./detection/reach";
-import "./detection/invalidSprint";
-import "./detection/captcha";
-import "./detection/hop";
-import "./detection/entityFly";
-import "./detection/elytraFly";
-// Import the util modules
-import "./utility/welcomer";
-import "./utility/worldBorder";
-import "./utility/chatRankAndAntiSpam";
-import "./utility/antiAfk";
-import "./utility/antiCombatLog";
-// Import the commands
-import "./command/about";
-import "./command/help";
-import "./command/op";
-import "./command/deop";
-import "./command/setadmin";
-import "./command/setmodule";
-import "./command/listmodule";
-import "./command/set";
-import "./command/matrixui";
-import "./command/vanish";
-import "./command/moderation";
-import "./command/invsee";
-import "./command/setpassword";
-import "./command/configui";
-import "./command/echestwipe";
-import "./command/rank";
-import "./command/reset";
-import "./command/log";
-import "./command/reconnect";
+export default [
+	"./detection/firewall",
+	"./detection/speed",
+	"./detection/predictionModule",
+	"./detection/phase",
+	"./detection/fly",
+	"./detection/killaura",
+	"./detection/mobAura",
+	"./detection/aim",
+	"./detection/timer",
+	"./detection/autoclicker",
+	"./detection/namespoof",
+	"./detection/scaffold",
+	"./detection/insteabreak",
+	"./detection/reach",
+	"./detection/invalidSprint",
+	"./detection/captcha",
+	"./detection/hop",
+	"./detection/entityFly",
+	"./detection/elytraFly",
+	"./utility/welcomer",
+	"./utility/worldBorder",
+	"./utility/chatRankAndAntiSpam",
+	"./utility/antiAfk",
+	"./utility/antiCombatLog",
+	"./command/about",
+	"./command/help",
+	"./command/op",
+	"./command/deop",
+	"./command/setadmin",
+	"./command/setmodule",
+	"./command/listmodule",
+	"./command/set",
+	"./command/matrixui",
+	"./command/vanish",
+	"./command/moderation",
+	"./command/invsee",
+	"./command/setpassword",
+	"./command/configui",
+	"./command/echestwipe",
+	"./command/rank",
+	"./command/reset",
+	"./command/log",
+	"./command/reconnect"
+];
