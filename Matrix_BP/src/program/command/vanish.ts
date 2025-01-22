@@ -13,7 +13,6 @@ new Command()
                 player.removeTag("matrix:vanished");
                 player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.vanish.deleted").build());
             } else {
-                player.triggerEvent("matrix:vanish");
                 player.runCommand("effect give @s invisibility infinite 1 true");
                 player.addTag("matrix:vanished");
                 player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.vanish.success").build());
