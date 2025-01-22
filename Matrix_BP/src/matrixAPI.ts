@@ -661,6 +661,12 @@ Player.prototype.setPermissionLevel = function (level: number) {
         this.setDynamicProperty("uniqueLevel", level);
     }
 };
+Player.prototype.isRiding = function () {
+    return !!this.getComponent("riding")?.entityRidingOn;
+}
+Player.prototype.isAlive = function () {
+    return this.getComponent("health")!.currentValue <= 0;
+}
 function* loadModuleRegistry (): Generator<void, void, void> {
     try {
     const items = program;

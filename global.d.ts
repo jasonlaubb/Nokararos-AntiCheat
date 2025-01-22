@@ -10,6 +10,8 @@ declare module "@minecraft/server" {
 		runChatCommand: (command: string) => void;
 		flag: (detected: Module, data?: { [key: string]: (string | number | (string | number)[]) }) => void;
 		safeIsOp: () => boolean;
+		isRiding: () => boolean;
+		isAlive: () => boolean;
 		timeStamp: PlayerTimeStamp;
 		opCommandUsageTimestamp: number;
 		opCommandIsVerifying: boolean;
