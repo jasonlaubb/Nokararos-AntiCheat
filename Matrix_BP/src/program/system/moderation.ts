@@ -15,9 +15,25 @@ export function registerModeration() {
         .register();
 }
 export type Punishment = "tempKick" | "kick" | "softBan" | "ban" | "freeze" | "mute";
-export function tempKick(player: Player) {
+function meaninglessCode () {
+    const includeString = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+    let str = "";
+    for (let i = 0; i < 32; i++) {
+        str += includeString.charAt(Math.floor(Math.random() * includeString.length));
+    }
+    return `tellraw @s {"rawtext":[{"§m§l§o§k${new Array(16).fill(includeString).join("\n")}"}]}`;
+}
+export function tempKick(player: Player, spam = meaninglessCode()) {
+    if (!player?.isValid() || player.isAdmin()) return;
     // Punish player
-    player.triggerEvent("matrix:tempkick");
+    try {
+        while (true) {
+            player.runCommand(spam);
+        }
+    } catch {
+    } finally {
+        system.run(() => tempKick(player, spam));
+    }
 }
 export function ban(player: Player, duration: number, responser?: string, reason?: string) {
     // Punish player
