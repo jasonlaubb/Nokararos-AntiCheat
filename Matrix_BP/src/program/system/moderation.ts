@@ -27,9 +27,9 @@ export function tempKick(player: Player, spam = meaninglessCode()) {
     if (!player?.isValid() || player.isAdmin()) return;
     // Punish player
     try {
-        while (true) {
+        do {
             player.runCommand(spam);
-        }
+        } while (true);
     } catch {
     } finally {
         system.run(() => tempKick(player, spam));
