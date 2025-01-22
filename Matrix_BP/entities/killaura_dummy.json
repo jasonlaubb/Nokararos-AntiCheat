@@ -1,0 +1,78 @@
+{
+    "format_version": "1.18.20",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "matrix:killaura_dummy",
+            "is_spawnable": false,
+            "is_summonable": true,
+            "is_experimental": false
+		},
+		"components": {
+			"minecraft:damage_sensor": {
+				"triggers": {
+					"on_damage": {
+						"event": "matrix:despawn_delayed"
+					}
+				}
+			},
+			// Kill the entities after 3 seconds
+			"minecraft:timer": {
+				"time": 3,
+				"looping": false,
+				"time_down_event": {
+					"event": "matrix:despawn",
+					"target": "self"
+				}
+			},
+			"minecraft:spell_effects": {
+				// Add the slow falling effect (prevent the entity drop the void)
+				"add_effects": [
+					{
+						"duration": 5,
+						"effect": "levitation",
+						"visible": false,
+						"amplifier": 0
+					}
+				]
+			},
+			"minecraft:collision_box": {
+                "width": 0.6,
+                "height": 1.8
+            },
+			"minecraft:health": {
+				"max": 20,
+				"min": 20
+			},
+			"minecraft:physics": {}
+		},
+		"component_groups": {
+			"matrix:despawn_delayed": {
+				"minecraft:timer": {
+					"time": 0.05,
+					"looping": false,
+					"time_down_event": {
+						"event": "matrix:despawn",
+						"target": "self"
+					}
+				}
+			},
+			"matrix:despawn": {
+				"minecraft:instant_despawn": {
+					"remove_child_entities": false
+				}
+			}
+		},
+		"events": {
+			"matrix:despawn": {
+				"add": {
+					"component_groups": ["matrix:despawn"]
+				}
+			},
+			"matrix:despawn_delayed": {
+				"add": {
+					"component_groups": ["matrix:despawn_delayed"]
+				}
+			}
+		}
+	}
+}
