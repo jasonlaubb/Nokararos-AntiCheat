@@ -12,6 +12,7 @@ declare module "@minecraft/server" {
 		safeIsOp: () => boolean;
 		isRiding: () => boolean;
 		isAlive: () => boolean;
+		isMoving: () => boolean;
 		timeStamp: PlayerTimeStamp;
 		opCommandUsageTimestamp: number;
 		opCommandIsVerifying: boolean;

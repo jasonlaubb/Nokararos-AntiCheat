@@ -76,7 +76,7 @@ function checkTimer() {
     const players = Module.allNonAdminPlayers;
     for (const player of players) {
         const data = timerData.get(player.id)!;
-        if (player.hasTag("dead") || now - data.lastRespawn < 5000 || data.isTickIgnored || data.totalDistance === 0 || player.getGameMode() === GameMode.creative) {
+        if (now - data.lastRespawn < 5000 || data.isTickIgnored || data.totalDistance === 0 || player.getGameMode() === GameMode.creative) {
             data.isTickIgnored = false;
             data.totalDistance = 0;
             data.totalVelocity = 0;
@@ -139,12 +139,13 @@ function playerTickEvent(player: Player) {
         isTickIgnored ||
         player.isGliding ||
         now - player.timeStamp.pistonPush < 1500 ||
-        player.hasTag("riding") ||
+        player.isRiding() ||
         player.isFlying ||
         player.getEffect(MinecraftEffectTypes.Speed) ||
         (noVelocity && distance > 0.005) ||
         now - player.timeStamp.knockBack < 2500 ||
         now - player.timeStamp.riptide < 5000 ||
+        !player.isAlive() ||
         // Ignore pure falling movement.
         (player.isFalling && y > pythag(x, z))
     ) {

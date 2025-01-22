@@ -71,7 +71,7 @@ function tickEvent(player: Player) {
         now - player.timeStamp.knockBack > 2000 &&
         now - player.timeStamp.riptide > 5000 &&
         (data.lastVelocityY < 0 || (data.previousVelocityY < 0 && velocityY === 0) || (velocityY > 0 && data.previousVelocityY / velocityY > 4 && data.previousVelocityY > 2.5 && fastAbs(data.lastVelocityY - velocityY) < 0.5)) &&
-        !player.hasTag("riding") &&
+        !player.isRiding() &&
         !player.isFlying &&
         !player.isGliding &&
         !player.isInWater &&
@@ -112,7 +112,7 @@ function tickEvent(player: Player) {
     const minAmount = Math.min(...data.velocityYList);
     const maxAmount = Math.max(...data.velocityYList);
     const bdsPrediction = calculateBdsPrediction(data.velocityYList);
-    if (pistonNotPushed && !player.hasTag("riding") && playerStarted && isPlayerNotCreative && !player.isOnGround && data.velocityYList.length >= 60 && !player.getEffect(MinecraftEffectTypes.JumpBoost) && bdsPrediction >= MAX_BDS_PREDICTION) {
+    if (pistonNotPushed && !player.isRiding() && playerStarted && isPlayerNotCreative && !player.isOnGround && data.velocityYList.length >= 60 && !player.getEffect(MinecraftEffectTypes.JumpBoost) && bdsPrediction >= MAX_BDS_PREDICTION) {
         const { highestRepeatedVelocity, highestRepeatedAmount } = repeatChecks(data.velocityYList);
         if (highestRepeatedAmount >= MIN_REQUIRED_REPEAT_AMOUNT && highestRepeatedVelocity > MAX_VELOCITY_Y && minAmount <= -MAX_VELOCITY_Y && maxAmount < HIGH_VELOCITY_Y) {
             player.teleport(data.lastOnGroundLocation);

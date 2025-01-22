@@ -84,7 +84,7 @@ function tickEvent(player: Player) {
     if (player.isOnGround && velocity.y === 0) {
         data.lastOnGroundLocation = player.location;
     }
-    if (data.isInit && !player.isFlying && !player.isGliding) {
+    if (data.isInit && !player.isFlying && !player.isGliding && !player.isRiding()) {
         const hasBadEffect = badEffects.some((effect) => player.getEffect(effect));
         const isDamaged = now - player.timeStamp.knockBack < 2000 || now - player.timeStamp.riptide < 5000;
         const isTeleported = velocity.x === 0 && velocity.z === 0 && (data.lastLocation.x !== player.location.x || data.lastLocation.z !== player.location.z);

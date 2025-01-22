@@ -139,7 +139,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
     if (scaffoldState) {
         if (!diagScaffold || placeInterval > 500) data.potentialDiagFlags = 0;
         const rotXDeviation = fastAbs(data.lastRotX - rotX);
-        if (placeInterval < 200 && placeInterval >= 100 && rotXDeviation > MAX_ROTATION_X_DIFFERENCE && !diagScaffold && player.hasTag("moving")) {
+        if (placeInterval < 200 && placeInterval >= 100 && rotXDeviation > MAX_ROTATION_X_DIFFERENCE && !diagScaffold && player.isMoving()) {
             data.potentialRotFlags++;
             if (data.potentialRotFlags >= 3) {
                 // Type 9

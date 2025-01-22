@@ -60,7 +60,7 @@ function tickEvent(player: Player) {
     if (velocityX === 0 && velocityY === 0 && velocityZ === 0) {
         data.lastStopLocation = player.location;
     }
-    if (player.isSleeping || player.isFlying || player.isGliding || player.hasTag("riding")) {
+    if (player.isSleeping || player.isFlying || player.isGliding || player.isRiding()) {
         data.lastSleep = now;
     }
     if (
@@ -74,7 +74,7 @@ function tickEvent(player: Player) {
         player.getGameMode() !== GameMode.creative &&
         !player.isSleeping &&
         now - data.lastSleep > 1000 &&
-        !player.hasTag("riding") &&
+        !player.isRiding() &&
         (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) <= 2 &&
         !isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension)
     ) {

@@ -667,6 +667,11 @@ Player.prototype.isRiding = function () {
 Player.prototype.isAlive = function () {
     return this.getComponent("health")!.currentValue <= 0;
 }
+Player.prototype.isMoving = function () {
+    const { x: iX, y: iY } = this.inputInfo.getMovementVector();
+    const { x: vX, z: vZ } = this.getVelocity();
+    return (iX !== 0 && vX !== 0) || (iY !== 0 && vZ !== 0);
+}
 function* loadModuleRegistry (): Generator<void, void, void> {
     try {
     const items = program;
