@@ -442,7 +442,7 @@ class Command {
             }
             case "number":
             case "integer": {
-                const number = parseInt(arg);
+                const number = Number(arg);
                 const notNumber = Number.isNaN(number);
                 if (option.type == "integer" && (notNumber || !Number.isInteger(number))) {
                     Command.sendSyntaxErrorMessage(player, "commandsynax.syntax.integer.nan", option.name, beforeArgs, arg, afterArgs);
