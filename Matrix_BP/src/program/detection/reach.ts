@@ -20,6 +20,7 @@ const reach = new Module()
             locationData: [],
             lastValidTimeStamp: 0,
             buffer: 0,
+            lastFlag: 0,
         };
     })
     .initClear((playerId) => {
@@ -34,6 +35,7 @@ interface TrackData {
     locationData: Vector3[];
     lastValidTimeStamp: number;
     buffer: number;
+    lastFlag: number;
 }
 let locationTrackData: { [key: string]: TrackData } = {};
 /**
@@ -58,7 +60,7 @@ function onEntityAttack({ damagingEntity: player, hitEntity: target }: EntityHit
     locationTrackData[target.id].lastValidTimeStamp = now;
     if (targetTrackInvalid || playerTrackInvalid) return;
     const { x: pitch } = player.getRotation();
-    if (fastAbs(pitch) < MAX_ROTATION) {
+    if (fastAbs(pitch) < MAX_ROTATION && now - locationTrackData[player.id].lastFlag > 600) {
         const limit = calculateDistanceLimit(pitch);
         const distance = findMinimumDistance(playerLocationData.locationData, targetLocationData.locationData);
         if (distance > limit + REACH_BUFFER && distance > 3.5) {
