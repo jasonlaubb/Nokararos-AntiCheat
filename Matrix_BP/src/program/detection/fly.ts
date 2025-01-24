@@ -101,8 +101,6 @@ function tickEvent(player: Player) {
         player.teleport(data.lastOnGroundLocation);
         player.flag(fly, { t: "2", velocityY });
     }
-    if (pistonNotPushed && playerStarted && velocityY > 0.7) {
-    }
     if (player.isFlying) {
         data.velocityYList.push(HIGH_VELOCITY_Y);
     } else {
