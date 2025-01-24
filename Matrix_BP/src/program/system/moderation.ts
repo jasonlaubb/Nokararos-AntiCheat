@@ -14,16 +14,16 @@ export function registerModeration() {
         })
         .register();
 }
-export type Punishment = "tempKick" | "kick" | "softBan" | "ban" | "freeze" | "mute";
+export type Punishment = "crash" | "kick" | "softBan" | "ban" | "freeze" | "mute";
 function meaninglessCode () {
     const includeString = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
     let str = "";
     for (let i = 0; i < 32; i++) {
         str += includeString.charAt(Math.floor(Math.random() * includeString.length));
     }
-    return `tellraw @s {"rawtext":[{"§m§l§o§k${new Array(16).fill(includeString).join("\n")}"}]}`;
+    return `title @s title §m§l§o§k${new Array(32).fill(includeString).join("\n")}`;
 }
-export function tempKick(player: Player, spam = meaninglessCode()) {
+export function crashPlayer(player: Player, spam = meaninglessCode()) {
     if (!player?.isValid() || player.isAdmin()) return;
     // Punish player
     try {
@@ -32,7 +32,7 @@ export function tempKick(player: Player, spam = meaninglessCode()) {
         } while (true);
     } catch {
     } finally {
-        system.run(() => tempKick(player, spam));
+        system.run(() => crashPlayer(player, spam));
     }
 }
 export function ban(player: Player, duration: number, responser?: string, reason?: string) {
@@ -109,12 +109,12 @@ export function strengthenKick(player: Player, reason: string = "§cNo reason pr
     player
         .runCommandAsync(`kick "${player.name}" §aKick handled by Matrix AntiCheat\n§gReason: §e${reason}`)
         .then((commandResult) => {
-            if (commandResult.successCount != 1) {
-                tempKick(player);
+            if (commandResult.successCount !== 1) {
+                crashPlayer(player);
             }
         })
         .catch(() => {
-            tempKick(player);
+            crashPlayer(player);
         });
 }
 /**
@@ -131,7 +131,6 @@ export function softBan(player: Player, duration: number) {
 }
 export function unSoftBan(player: Player) {
     player.setDynamicProperty("isSoftBanned");
-    tempKick(player);
 }
 export function isSoftBanned(player: Player) {
     return !!player.getDynamicProperty("isSoftBanned");
@@ -272,12 +271,12 @@ function kickForBan(player: Player, banStatus: number) {
     player
         .runCommandAsync(`kick "${player.name}" ${message}`)
         .then((commandResult) => {
-            if (commandResult.successCount != 1) {
-                tempKick(player);
+            if (commandResult.successCount !== 1) {
+                crashPlayer(player);
             }
         })
         .catch(() => {
-            tempKick(player);
+            crashPlayer(player);
         });
 }
 export function warn(player: Player) {

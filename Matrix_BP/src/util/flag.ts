@@ -1,7 +1,7 @@
 import { Player, RawText, world } from "@minecraft/server";
 import { Module } from "../matrixAPI";
 import { fastText, rawtext, rawtextTranslate } from "./rawtext";
-import { ban, freeze, mute, softBan, strengthenKick, tempKick } from "../program/system/moderation";
+import { ban, freeze, mute, softBan, strengthenKick, crashPlayer } from "../program/system/moderation";
 import { write } from "../assets/logSystem";
 export function setupFlagFunction() {
     Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number | (string | number)[] }) {
@@ -29,15 +29,22 @@ export function setupFlagFunction() {
                 ...data,
             });
         }
-        world.sendMessage(flagMessage.build());
+        if (bypass || punishment !== "crash") {
+            world.sendMessage(flagMessage.build());
+        } else {
+            const build = flagMessage.build();
+            world.getPlayers({ excludeNames: [this.name] }).forEach((p) => {
+                p.sendMessage(build);
+            })
+        }
         if (bypass) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {
             switch (punishment) {
                 case "kick":
                     strengthenKick(this);
                     break;
-                case "tempKick":
-                    tempKick(this);
+                case "crash":
+                    crashPlayer(this);
                     break;
                 case "freeze":
                     freeze(this, -1);
@@ -54,7 +61,7 @@ export function setupFlagFunction() {
             }
         } catch (error) {
             Module.sendError(error as Error);
-            tempKick(this);
+            crashPlayer(this);
         }
     };
 }

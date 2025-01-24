@@ -2,22 +2,10 @@ import { Player, world } from "@minecraft/server";
 import { Command } from "../../matrixAPI";
 import { fastText, rawtextTranslate } from "../../util/rawtext";
 // Import all moderation functions (Quite a lot lol)
-import { tempKick, ban, mute, softBan, strengthenKick, freeze, warn, unBan, unMute, unSoftBan, unFreeze, clearWarn, isBanned, isSoftBanned, isMuted, isFrozen, isWarned, getWarns, bannedList } from "../system/moderation";
+import { ban, mute, softBan, strengthenKick, freeze, warn, unBan, unMute, unSoftBan, unFreeze, clearWarn, isBanned, isSoftBanned, isMuted, isFrozen, isWarned, getWarns, bannedList, crashPlayer } from "../system/moderation";
 function minuteToMilliseconds(minute: number): number {
     return minute * 60000;
 }
-new Command()
-    .setName("tempkick")
-    .setDescription(rawtextTranslate("command.tempkick.description"))
-    .setMinPermissionLevel(2)
-    .addOption(rawtextTranslate("command.moderation.target"), rawtextTranslate("command.moderation.target.description"), "target", undefined, false)
-    .onExecute(async (player, target) => {
-        const targetPlayer = target as Player;
-        // Finish the action
-        tempKick(targetPlayer);
-        world.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.moderation.success", targetPlayer.name, player.name).endline().addTranRawText("command.moderation.action", rawtextTranslate("command.moderation.tempkick")).build());
-    })
-    .register();
 new Command()
     .setName("kick")
     .setDescription(rawtextTranslate("command.kick.description"))
@@ -225,3 +213,16 @@ new Command()
         world.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.moderation.success", targetPlayer.name, player.name).endline().addTranRawText("command.moderation.action", rawtextTranslate("command.moderation.clearwarn")).build());
     })
     .register();
+new Command()
+    .setName("crash")
+    .setDescription(rawtextTranslate("command.crash.description"))
+    .setMinPermissionLevel(2)
+    .addOption(rawtextTranslate("command.moderation.target"), rawtextTranslate("command.moderation.target.description"), "target", undefined, false)
+    .onExecute(async (player, target) => {
+        const targetPlayer = target as Player;
+        crashPlayer(targetPlayer);
+        const msg = fastText().addText("§bMatrix§a+ §7> §g").addTran("command.moderation.success", targetPlayer.name, player.name).endline().addTranRawText("command.moderation.action", rawtextTranslate("command.moderation.crash")).build();
+        world.getPlayers({ excludeNames: [targetPlayer.name] }).forEach((p) => {
+            p.sendMessage(msg);
+        });
+    })
