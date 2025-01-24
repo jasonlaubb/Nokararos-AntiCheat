@@ -1068,185 +1068,185 @@ msgstr "より多くのフライハッカーを検出できる高度なチェッ
 
 #: flag.detected.title
 msgid "§bMatrix§i│ §eSuspicious client detected"
-msgstr ""
+msgstr "§bMatrix§i│ §e疑わしいクライアントが検出されました"
 
 #: flag.detected.player
 msgid "   §fPlayer§r§i│ §f%s"
-msgstr ""
+msgstr "   §fプレイヤー§r§i│ §f%s"
 
 #: flag.detected.module
 msgid "   §fModule§r§i│ §f%s"
-msgstr ""
+msgstr "   §fモジュール§r§i│ §f%s"
 
 #: flag.detected.object
 msgid "   §fobject§r§i│ §ftype §i[§f%s§i] §f¬"
-msgstr ""
+msgstr "   §fオブジェクト§r§i│ §fタイプ §i[§f%s§i] §f¬"
 
 #: flag.detected.none
 msgid "         §cNo data is given by the module."
-msgstr ""
+msgstr "         §cモジュールからのデータはありません。"
 
 #: flag.detected.punishment
 msgid "   §fPunishment§r§i│ §f%s"
-msgstr ""
+msgstr "   §f罰§r§i│ §f%s"
 
 #: flag.detected.false
 msgid "   §7[?] Is it a §cfalse flag§7? Please report it to the developer when you have time."
-msgstr ""
+msgstr "   §7[?] これは§c誤検出§7ですか？時間があるときに開発者に報告してください。"
 
 #: command.moderation.reason.description
 msgid "The reason for the moderation action."
-msgstr ""
+msgstr "管理アクションの理由。"
 
 #: command.moderation.reason
 msgid "Reason"
-msgstr ""
+msgstr "理由"
 
 #: module.entityFly.name
 msgid "Anti Entity Fly"
-msgstr ""
+msgstr "反エンティティ飛行"
 
 #: module.entityFly.description
 msgid "Prevent the entity fly from working."
-msgstr ""
+msgstr "エンティティ飛行の機能を防止します。"
 
 #: command.echestwipe.success
 msgid "The echest of %s has been wiped successfully."
-msgstr ""
+msgstr "%s のエンダーチェストが正常にクリアされました。"
 
 #: command.echestwipe.description
 msgid "Wipe the ender chest of a player."
-msgstr ""
+msgstr "プレイヤーのエンダーチェストをクリアします。"
 
 #: command.fastlog.description
 msgid "Get the log in today, yesterday or the day before yesterday"
-msgstr ""
+msgstr "今日、昨日、または一昨日のログを取得します。"
 
 #: command.log.day
 msgid "Day"
-msgstr ""
+msgstr "日"
 
 #: command.log.day.description
 msgid "The day of the logs(s)"
-msgstr ""
+msgstr "ログの日付"
 
 #: command.log.nodata
 msgid "No data. Unable to get the log that you want in the database."
-msgstr ""
+msgstr "データがありません。データベースから希望のログを取得できません。"
 
 #: command.log.description
 msgid "View the recent logs in the database"
-msgstr ""
+msgstr "データベースの最近のログを表示します。"
 
 #: command.log.amount
 msgid "Amount"
-msgstr ""
+msgstr "量"
 
 #: command.log.amount.description
 msgid "The amount of the latest logs that you what to view."
-msgstr ""
+msgstr "表示したい最新のログの量。"
 
 #: command.daylog.description
 msgid "View all of the logs in a specific day."
-msgstr ""
+msgstr "特定の日のすべてのログを表示します。"
 
 #: command.log.month
 msgid "The month of the log(s)."
-msgstr ""
+msgstr "ログの月。"
 
 #: command.log.years
 msgid "The years of the log(s)."
-msgstr ""
+msgstr "ログの年。"
 
 #: command.log.invalid
 msgid "Invalid time: You should not select a time that is in the future."
-msgstr ""
+msgstr "無効な時間：未来の時間を選択してはいけません。"
 
 #: command.logui.description
 msgid "Select one of the the restart point and view all of the log(s) during the restart point to the next restart point."
-msgstr ""
+msgstr "再起動ポイントの1つを選択し、再起動ポイントから次の再起動ポイントまでのすべてのログを表示します。"
 
 #: command.logui.title
 msgid "Select one of the restart point in below"
-msgstr ""
+msgstr "以下の再起動ポイントの1つを選択してください"
 
 #: command.logui.button
 msgid "Server initialization #%s"
-msgstr ""
+msgstr "サーバー初期化 #%s"
 
 #: ui.log.title
 msgid "Log record | Timezone: %s"
-msgstr ""
+msgstr "ログ記録 | タイムゾーン: %s"
 
 #: ui.log.body
 msgid "Click into the §gbutton§f of the log can see the §adetail information§f of the selected log. If you want to exit this ui, you can click the 'X' in the corner."
-msgstr ""
+msgstr "ログの§gボタン§fをクリックすると、選択したログの§a詳細情報§fが表示されます。このUIを終了するには、隅にある 'X' をクリックしてください。"
 
 #: ui.log.detail
 msgid "Detail information"
-msgstr ""
+msgstr "詳細情報"
 
 #: command.echestwipe.description
 msgid "Clear a player's ender chest"
-msgstr ""
+msgstr "プレイヤーのエンダーチェストをクリアします。"
 
 #: command.help.sd
 msgid "Get the command list"
-msgstr ""
+msgstr "コマンドリストを取得します"
 
 #: command.logui.sd
 msgid "View logs by restart time"
-msgstr ""
+msgstr "再起動時間でログを表示します"
 
 #: command.daylog.sd
 msgid "View logs by date"
-msgstr ""
+msgstr "日付でログを表示します"
 
 #: command.fastlog.ad
 msgid "View logs in past few days"
-msgstr ""
+msgstr "過去数日のログを表示します"
 
 #: command.setpassword.sd
 msgid "Change password"
-msgstr ""
+msgstr "パスワードを変更します"
 
 #: command.configui.sd
 msgid "Edit config"
-msgstr ""
+msgstr "設定を編集します"
 
 #: command.op.sd
 msgid "Gain matrix admin"
-msgstr ""
+msgstr "Matrix管理者になる"
 
 #: command.deop.sd
 msgid "Remove your admin perm"
-msgstr ""
+msgstr "管理者権限を削除します"
 
 #: command.vanish.sd
 msgid "(Un)vanish yourself"
-msgstr ""
+msgstr "（隠れる/現れる）"
 
 #: command.about.sd
 msgid "Get info of Matrix-anti"
-msgstr ""
+msgstr "Matrix-antiの情報を取得します"
 
 #: command.crash.description
 msgid "Crash a player."
-msgstr ""
+msgstr "プレイヤーをクラッシュさせます。"
 
 #: module.mobaura.name
 msgid "Anti Mob Aura"
-msgstr ""
+msgstr "反モブオーラ"
 
 #: module.mobaura.description
 msgid "Spawn dummy when player attack a mob, checks if the player is attacking the dummy."
-msgstr ""
+msgstr "プレイヤーがモブを攻撃したときにダミーを生成し、プレイヤーがダミーを攻撃しているかどうかをチェックします。"
 
 #: module.elytraFly.name
 msgid "Anti Elytra Fly"
-msgstr ""
+msgstr "反エリトラ飛行"
 
 #: module.elytraFly.description
 msgid "Prevent the player from using the illegal elytra flying."
-msgstr ""
+msgstr "プレイヤーが違法なエリトラ飛行を使用するのを防ぎます。"
 

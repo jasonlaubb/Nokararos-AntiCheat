@@ -4,7 +4,7 @@ msgstr "§7§¶La Solution Anti-Triche Suprême pour Minecraft Bedrock. API bêt
 
 #: permissions.chatmute
 msgid "§bMatrix§a+ §7> §cYou have been muted from the server!"
-msgstr "§bMatrix§a+ §7> §cVous avez été muter!"
+msgstr "§bMatrix§a+ §7> §cVous avez été muté du serveur !"
 
 #: disconnectionScreen.unexpectedPacket
 msgid "Oops, something went wrong."
@@ -24,39 +24,39 @@ msgstr "§bMatrix§a+ §7> §gIl y a une erreur dans le script, veuillez la sign
 
 #: error.name
 msgid "§7- Error: §e%s"
-msgstr "§7- Erreur: §e%s"
+msgstr "§7- Erreur : §e%s"
 
 #: error.description
 msgid "§7- Description: §e%s"
-msgstr "§7- Description: §e%s"
+msgstr "§7- Description : §e%s"
 
 #: error.stack
 msgid "§7- Stack: §e%s"
-msgstr "§7- Stack: §e%s"
+msgstr "§7- Pile : §e%s"
 
 #: util.flag.alert
 msgid "§c§lCheat Alert! §r§7A cheater (%1§r§7) has been detected automatically by Matrix AntiCheat! We have automatically blocked it. §3(moduleId: %2, punishment: %3)§r"
-msgstr "§c§lAlerte Triche! §r§7Un tricheur (%1§r§7) a été détecté automatiquement par Matrix AntiCheat! Nous l'avons automatiquement bloqué. §3(moduleId : %2, punition : %3)§r"
+msgstr "§c§lAlerte Triche ! §r§7Un tricheur (%1§r§7) a été détecté automatiquement par Matrix AntiCheat ! Nous l'avons automatiquement bloqué. §3(moduleId : %2, punition : %3)§r"
 
 #: function.help
 msgid "§bMatrix§a+ §7> §gAre you looking for help? Join our Discord Server: https://discord.gg/%1. Feel free to ask there. You are currently on Matrix anticheat version %2. You can use -op to gain matrix administrator permission and use -help to get help for the commands."
-msgstr "§bMatrix§a+ §7> §gVous cherchez de l'aide? Rejoignez notre serveur Discord: https://discord.gg/%1. N'hésitez pas à demander là-bas. Vous êtes actuellement sur la version %2 de l'anti-triche Matrix. Vous pouvez utiliser -op pour obtenir l'autorisation d'administrateur de matrix et utiliser -help pour obtenir de l'aide sur les commandes."
+msgstr "§bMatrix§a+ §7> §gVous cherchez de l'aide ? Rejoignez notre serveur Discord : https://discord.gg/%1. N'hésitez pas à demander là-bas. Vous êtes actuellement sur la version %2 de Matrix anticheat. Vous pouvez utiliser -op pour obtenir les autorisations d'administrateur de Matrix et utiliser -help pour obtenir de l'aide sur les commandes."
 
 #: function.help.typeA
 msgid "§7>> §gIs the chat command not working? Try to disable or place Matrix Anticheat above any-type of the chat rank addon."
-msgstr "§7>> §gLa commande chat ne fonctionne pas? Essayez de désactiver ou de placer Matrix Anticheat au-dessus de tout type d'addon de chat rank."
+msgstr "§7>> §gLa commande de chat ne fonctionne pas ? Essayez de désactiver ou de placer Matrix Anticheat au-dessus de tout type d'addon de rang de chat."
 
 #: function.help.typeB
 msgid "§7>> §gIs that nothing working? Don't forget to enable Beta API and update our Matrix anticheat to the latest"
-msgstr "§7>> §gEst-ce que rien ne marche? N'oubliez pas d'activer l'API bêta et de mettre à jour notre anti-triche Matrix avec la dernière version."
+msgstr "§7>> §gRien ne fonctionne ? N'oubliez pas d'activer l'API bêta et de mettre à jour notre anti-triche Matrix à la dernière version."
 
 #: function.script.online
 msgid "§7>> §aScript is active! It is so nice to have you here."
-msgstr "§7>> §aScript actif! C'est tellement agréable de vous avoir ici."
+msgstr "§7>> §aLe script est actif ! C'est tellement agréable de vous avoir ici."
 
 #: function.script.offline
 msgid "§7>> §cScript is inactive! Please check if you have Beta-API enabled."
-msgstr "§7>> §cScript inactif ! Veuillez vérifier si la bêta-API est activée."
+msgstr "§7>> §cLe script est inactif ! Veuillez vérifier si l'API bêta est activée."
 
 #: moderation.permanent
 msgid "permanent"
@@ -64,7 +64,7 @@ msgstr "permanent"
 
 #: moderation.softban.banned
 msgid "§cYou have been soft-banned§r"
-msgstr "§cVous avez été banni en douceur§r"
+msgstr "§cVous avez été banni temporairement§r"
 
 #: moderation.softban.until
 msgid "Until %s"
@@ -72,7 +72,7 @@ msgstr "Jusqu'à %s"
 
 #: ui.runcommand
 msgid "Run Command!"
-msgstr "Exécuter"
+msgstr "Exécuter la commande !"
 
 #: ui.exit
 msgid "Exit"
@@ -88,7 +88,7 @@ msgstr "Appuyez sur le bouton pour continuer"
 
 #: ui.config.button
 msgid "Continue >w<"
-msgstr "Continuer"
+msgstr "Continuer >w<"
 
 #: ui.config.body
 msgid "You can change the config in the config file. You can also use the command -set <path> <value> to change a config value."
@@ -96,11 +96,11 @@ msgstr "Vous pouvez modifier la configuration dans le fichier de configuration. 
 
 #: ui.config.selector
 msgid "Config Selector | Matrix AntiCheat"
-msgstr "Sélecteur de Config | Matrix AntiCheat"
+msgstr "Sélecteur de configuration | Matrix AntiCheat"
 
 #: ui.config.editor
 msgid "Config Editor | Matrix AntiCheat"
-msgstr "Éditeur de Config | Matrix AntiCheat"
+msgstr "Éditeur de configuration | Matrix AntiCheat"
 
 #: ui.config.value
 msgid "New value you want to set"
@@ -108,15 +108,15 @@ msgstr "Nouvelle valeur que vous souhaitez définir"
 
 #: ui.config.loc
 msgid "§gCurrent path of the config: §e%s"
-msgstr "§gChemin actuel de la config: §e%s"
+msgstr "§gChemin actuel de la configuration : §e%s"
 
 #: commandsynax.unknown
 msgid "Unknown command: %s, you can type -help to get some useful information about the commands."
-msgstr "Commande inconnue: %s, vous pouvez taper -help pour obtenir des informations utiles sur les commandes."
+msgstr "Commande inconnue : %s, vous pouvez taper -help pour obtenir des informations utiles sur les commandes."
 
 #: commandsynax.permission
 msgid "No permission to use this command. The minimum permission required is 'level %s'"
-msgstr "Aucune autorisation pour utiliser cette commande. L'autorisation minimale requise est le 'niveau %s'."
+msgstr "Aucune autorisation pour utiliser cette commande. L'autorisation minimale requise est 'niveau %s'"
 
 #: commandsystem.disabled
 msgid "Oops, this command has been disabled."
@@ -124,7 +124,7 @@ msgstr "Oups, cette commande a été désactivée."
 
 #: commandsynax.unknownsubcommand
 msgid "Unknown subcommand: %s, you can use -help <command> to know what subcommand you can use."
-msgstr "Sous-commande inconnue: %s, vous pouvez utiliser -help <command> pour savoir quelle sous-commande vous pouvez utiliser."
+msgstr "Sous-commande inconnue : %s, vous pouvez utiliser -help <command> pour savoir quelle sous-commande vous pouvez utiliser."
 
 #: commandsynax.empty
 msgid "Oops, you have to type something if you want to use some commands."
@@ -136,87 +136,87 @@ msgstr "§7>> §gUtilisez -help <command> pour obtenir des informations utiles s
 
 #: commandsynax.missing
 msgid "You missed a parameter '%s' which is required."
-msgstr "Vous avez manqué un paramètre '%s' qui est obligatoire."
+msgstr "Vous avez oublié un paramètre '%s' qui est requis."
 
 #: commandsynax.missing.subcommand
 msgid "This is a subcommand! You have to type -help <command> to know what subcommand you can use."
-msgstr "C'est une sous-commande! Vous devez taper -help <command> pour savoir quelle sous-commande vous pouvez utiliser."
+msgstr "C'est une sous-commande ! Vous devez taper -help <command> pour savoir quelle sous-commande vous pouvez utiliser."
 
 #: commandsynax.syntax.boolean
 msgid "Syntax error: The parameter '%1' is a boolean value, but you have typed '%2 >>%3<< %4'. Only 'true' or 'false' are allowed'."
-msgstr "Erreur de syntaxe: Le paramètre '%1' est une valeur booléenne, mais vous avez tapé '%2 >>%3<< %4'. Seuls 'true' ou 'false' sont autorisés."
+msgstr "Erreur de syntaxe : Le paramètre '%1' est une valeur booléenne, mais vous avez tapé '%2 >>%3<< %4'. Seuls 'true' ou 'false' sont autorisés."
 
 #: commandsynax.syntax.string.low
 msgid "Syntax error: The parameter '%1' required a string that contains at least %5 characters, but you have typed '%2 >>%3<< %4'."
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait une chaîne contenant au moins %5 caractères, mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite une chaîne contenant au moins %5 caractères, mais vous avez tapé '%2 >>%3<< %4'."
 
 #: commandsynax.syntax.string.high
 msgid "Syntax error: The parameter '%1' required a string that contains at most %5 characters, but you have typed '%2 >>%3<< %4'."
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait une chaîne contenant au plus %5 caractères, mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite une chaîne contenant au plus %5 caractères, mais vous avez tapé '%2 >>%3<< %4'."
 
 #: commandsynax.syntax.integer.nan
 msgid "Syntax error: The parameter '%1' required a integer, but you have typed '%2 >>%3<< %4'."
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un entier, mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un entier, mais vous avez tapé '%2 >>%3<< %4'."
 
 #: commandsynax.syntax.number.nan
 msgid "Syntax error: The parameter '%1' required a valid number, but you have typed '%2 >>%3<< %4'."
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un nombre valide, mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un nombre valide, mais vous avez tapé '%2 >>%3<< %4'."
 
 #: commandsynax.syntax.number.low
 msgid "Syntax error: The parameter '%1' required a number that is larger than %5, but you have typed '%2 >>%3<< %4' which is out of range."
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un nombre supérieur à %5, mais vous avez tapé '%2 >>%3<< %4' qui est hors plage."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un nombre supérieur à %5, mais vous avez tapé '%2 >>%3<< %4' qui est hors plage."
 
 #: commandsynax.syntax.number.high
 msgid "Syntax error: The parameter '%1' required a number that is smaller than %5, but you have typed '%2 >>%3<< %4' which is out of range."
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un nombre inférieur à %5, mais vous avez tapé '%2 >>%3<< %4' qui est hors plage."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un nombre inférieur à %5, mais vous avez tapé '%2 >>%3<< %4' qui est hors plage."
 
 #: commandsynax.syntax.code
 msgid "Syntax error: The parameter '%1' required a code with length that is equal to %5, but you have typed '%2 >>%3<< %4', which is out of range."
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un code d'une longueur égale à %5, mais vous avez tapé '%2 >>%3<< %4', ce qui est hors plage."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un code d'une longueur égale à %5, mais vous avez tapé '%2 >>%3<< %4', qui est hors plage."
 
 #: commandsynax.syntax.purecode
 msgid "Syntax error: The parameter '%1' required a purecode that only formed by number (0-9), upper and lower case letters (a-z or A-Z), but you have typed '%2 >>%3<< %4'"
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un code pur formé uniquement de chiffres (0-9), de lettres majuscules et minuscules (a-z ou A-Z), mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un purecode formé uniquement de chiffres (0-9), de lettres majuscules et minuscules (a-z ou A-Z), mais vous avez tapé '%2 >>%3<< %4'."
 
 #: commandsynax.syntax.choice
 msgid "Syntax error: The parameter '%1' required a choice between %5, but you have typed '%2 >>%3<< %4'"
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un choix entre %5, mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un choix entre %5, mais vous avez tapé '%2 >>%3<< %4'."
 
 #: commandsynax.syntax.player
 msgid "Syntax error: The parameter '%1' required a player which is online, but you have typed '%2 >>%3<< %4'"
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait un joueur en ligne, mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite un joueur en ligne, mais vous avez tapé '%2 >>%3<< %4'."
 
 #: commandsynax.syntax.target
 msgid "Syntax error: The parameter '%1' required a target which is online and not an administrator, but you have typed '%2 >>%3<< %4'"
-msgstr "Erreur de syntaxe: Le paramètre '%1' nécessitait une cible en ligne et non un administrateur, mais vous avez tapé '%2 >>%3<< %4'."
+msgstr "Erreur de syntaxe : Le paramètre '%1' nécessite une cible en ligne qui n'est pas un administrateur, mais vous avez tapé '%2 >>%3<< %4'."
 
 #: module.phase.name
 msgid "Anti Phase"
-msgstr ""
+msgstr "Anti Phase"
 
 #: module.phase.description
 msgid "Prevent the player from passing through the walls with the illegal movement packet."
-msgstr "Empêche le joueur de traverser les murs avec des paquets de mouvements illégaux."
+msgstr "Empêche le joueur de traverser les murs avec des paquets de mouvement illégaux."
 
 #: module.firewall.name
 msgid "Firewall"
-msgstr ""
+msgstr "Pare-feu"
 
 #: module.firewall.description
 msgid "Prevent the player who contains bad packets from accessing the server. For example, spam bot."
-msgstr "Empêche le joueur contenant des paquets défectueux d'accéder au serveur. Par exemple, un robot de spam."
+msgstr "Empêche le joueur contenant des paquets défectueux d'accéder au serveur. Par exemple, un bot de spam."
 
 #: module.namespoof.name
 msgid "Anti Name Spoofer"
-msgstr ""
+msgstr "Anti Spoofing de Nom"
 
 #: module.namespoof.description
 msgid "Prevent the player from changing their name to a invalid name and join the server."
-msgstr "Empêche le joueur de changer son nom en un nom invalide et rejoindre le serveur."
+msgstr "Empêche le joueur de changer son nom en un nom invalide et de rejoindre le serveur."
 
 #: module.killaura.name
 msgid "Anti KillAura"
-msgstr ""
+msgstr "Anti KillAura"
 
 #: module.killaura.description
 msgid "Prevent the player from hitting other players with the illegal kill packet."
@@ -224,23 +224,23 @@ msgstr "Empêche le joueur de frapper d'autres joueurs avec des paquets de mise 
 
 #: module.scaffold.name
 msgid "Anti Scaffold"
-msgstr ""
+msgstr "Anti Échafaudage"
 
 #: module.scaffold.description
 msgid "Prevent the player from using the auto-brige hack to gain unfair advantage."
-msgstr "Empêche le joueur d'utiliser le hack auto-brige pour obtenir un avantage injuste."
+msgstr "Empêche le joueur d'utiliser le hack d'auto-bridge pour obtenir un avantage injuste."
 
 #: module.insteabreak.name
 msgid "Anti Insteabreak"
-msgstr ""
+msgstr "Anti Instant Break"
 
 #: module.insteabreak.description
 msgid "Prevent the player from breaking the block without breaking time. These type of hack is not working on realm or a BDS server that is configured correctly."
-msgstr "Empêche le joueur de briser le bloc sans interrompre le temps. Ce type de hack ne fonctionne pas sur un domaine ou un serveur BDS correctement configuré."
+msgstr "Empêche le joueur de briser le bloc sans interrompre le temps. Ce type de hack ne fonctionne pas sur un realm ou un serveur BDS correctement configuré."
 
 #: module.reach.name
 msgid "Anti Reach"
-msgstr ""
+msgstr "Anti Reach"
 
 #: module.reach.description
 msgid "An advanced anti reach solution that provided reach detection up to 4.5 blocks."
@@ -248,23 +248,23 @@ msgstr "Une solution anti-reach avancée qui permet une détection de portée ju
 
 #: module.speed.name
 msgid "Anti Speed"
-msgstr ""
+msgstr "Anti Vitesse"
 
 #: module.speed.description
 msgid "The latest and strongest anti speed engine. Used the property of 'bds prediction' phenomenon to indentify the illegal movement from the players."
-msgstr "Le moteur anti-speed le plus récent et le plus puissant. Utilisation de la propriété du phénomène 'prédiction bds' pour identifier les mouvements illégaux des joueurs."
+msgstr "Le moteur anti-vitesse le plus récent et le plus puissant. Utilise la propriété du phénomène 'prédiction BDS' pour identifier les mouvements illégaux des joueurs."
 
 #: module.fly.name
 msgid "Anti Fly"
-msgstr ""
+msgstr "Anti Vol"
 
 #: module.fly.description
 msgid "Prevent most of the fly hacks from working. There is a small probability of false positive."
-msgstr "Empêche la plupart des fly hacks de fonctionner. Il existe une faible probabilité de faux positifs."
+msgstr "Empêche la plupart des hacks de vol de fonctionner. Il existe une faible probabilité de faux positifs."
 
 #: module.timer.name
 msgid "Anti Timer"
-msgstr ""
+msgstr "Anti Timer"
 
 #: module.timer.description
 msgid "Prevent someone speed up their game speed to get an unfair advantage."
@@ -272,15 +272,15 @@ msgstr "Empêche quelqu'un d'accélérer sa vitesse de jeu pour obtenir un avant
 
 #: module.itemcheck.name
 msgid "Item check"
-msgstr ""
+msgstr "Vérification des objets"
 
 #: module.itemcheck.description
 msgid "Prevent the player from using the illegal item from the server."
-msgstr "Empêche le joueur d'utiliser les objets illégaux du serveur."
+msgstr "Empêche le joueur d'utiliser des objets illégaux du serveur."
 
 #: module.hop.name
 msgid "Anti Hop"
-msgstr ""
+msgstr "Anti Hop"
 
 #: module.hop.description
 msgid "An extra checks against the illegal movement motion, to prevent a silent bypass."
@@ -288,7 +288,7 @@ msgstr "Un contrôle supplémentaire contre les mouvements illégaux, pour empê
 
 #: module.aim.name
 msgid "Aim check"
-msgstr ""
+msgstr "Vérification de la visée"
 
 #: module.aim.description
 msgid "An extra checks against the illegal aim, to prevent the killaura or aim assist, credit to 4urxa."
@@ -296,11 +296,11 @@ msgstr "Un contrôle supplémentaire contre la visée illégale, pour empêcher 
 
 #: module.invalidSprint.name
 msgid "Anti invalid sprint"
-msgstr ""
+msgstr "Anti sprint invalide"
 
 #: module.invalidSprint.description
 msgid "Prevent the player from using the illegal sprint packet client."
-msgstr ""
+msgstr "Empêche le joueur d'utiliser le client de paquets de sprint illégaux."
 
 #: command.about.description
 msgid "Show some basic information about Matrix AntiCheat."
@@ -312,27 +312,27 @@ msgstr "§bMatrix§a+ §7> §gÀ propos de Matrix AntiCheat <3"
 
 #: command.about.author
 msgid "Author: jasonlaubb (Discord: @uwu_the_great)"
-msgstr "Auteur: jasonlaubb (Discord: @uwu_the_great)"
+msgstr "Auteur : jasonlaubb (Discord : @uwu_the_great)"
 
 #: command.about.github
 msgid "Github: %s"
-msgstr "Github: %s"
+msgstr "Github : %s"
 
 #: command.about.version
 msgid "Current version: %s"
-msgstr "Version actuelle : %s"
+msgstr "Version actuelle : %s"
 
 #: command.about.joindc
 msgid "Want to download? Join our Discord Server: https://discord.gg/%s"
-msgstr "Vous voulez télécharger? Rejoignez notre serveur Discord: https://discord.gg/%s"
+msgstr "Vous voulez télécharger ? Rejoignez notre serveur Discord : https://discord.gg/%s"
 
 #: ad.running
 msgid "§bMatrix§a+ §7> §gMatrix Anticheat is protecting your game experience. Discord server: https://discord.gg/%s"
-msgstr "§bMatrix§a+ §7> §gMatrix Anticheat protège votre expérience de jeu. Serveur Discord: https://discord.gg/%s"
+msgstr "§bMatrix§a+ §7> §gMatrix Anticheat protège votre expérience de jeu. Serveur Discord : https://discord.gg/%s"
 
 #: command.help.description
 msgid "Get the useful information about the commands."
-msgstr "Obtenez les informations utiles sur les commandes."
+msgstr "Obtenez des informations utiles sur les commandes."
 
 #: command.help.command.name
 msgid "Command's name"
@@ -344,27 +344,27 @@ msgstr "Le nom de la commande pour laquelle vous avez besoin d'aide."
 
 #: command.help.title
 msgid "The command list of Matrix AntiCheat:"
-msgstr "La liste des commandes de Matrix AntiCheat:"
+msgstr "La liste des commandes de Matrix AntiCheat :"
 
 #: command.help.target.title
 msgid "Showing the usage of the selected command: %s"
-msgstr "Affiche l'utilisation de la commande sélectionnée: %s"
+msgstr "Affichage de l'utilisation de la commande sélectionnée : %s"
 
 #: command.help.target.notfound
 msgid "Not able to find the command, make sure you type a valid command so that we can show you the correct information."
-msgstr "Vous ne parvenez pas à trouver la commande, assurez-vous de saisir une commande valide afin que nous puissions vous montrer les informations correctes."
+msgstr "Impossible de trouver la commande, assurez-vous de saisir une commande valide afin que nous puissions vous montrer les informations correctes."
 
 #: command.help.m.description
 msgid "§gDescription of the command: §e%s§g"
-msgstr "§gDescription de la commande: §e%s§g"
+msgstr "§gDescription de la commande : §e%s§g"
 
 #: command.help.m.usage
 msgid "§gUsage of the command: §e"
-msgstr "§gUtilisation de la commande: §e"
+msgstr "§gUtilisation de la commande : §e"
 
 #: command.help.m.usage.empty
 msgid "§gUsage of the command: §eJust type the command name!"
-msgstr "§gUtilisation de la commande: §eTapez simplement le nom de la commande!"
+msgstr "§gUtilisation de la commande : §eTapez simplement le nom de la commande !"
 
 #: command.help.option.string
 msgid "string (A string that formed with any characters)"
@@ -376,7 +376,7 @@ msgstr "number (Un nombre flottant ou un entier)"
 
 #: command.help.option.integer
 msgid "number (Integer only, including negative)"
-msgstr "number (entier uniquement, y compris les négatifs)"
+msgstr "number (Entier uniquement, y compris les négatifs)"
 
 #: command.help.option.boolean
 msgid "boolean (A boolean value, true or false)"
@@ -404,23 +404,19 @@ msgstr "target (Le nom d'un joueur en ligne mais qui n'est pas un administrateur
 
 #: command.help.target.type
 msgid "§gType: §e%s"
-msgstr "§gType: §e%s"
+msgstr "§gType : §e%s"
 
 #: command.help.target.description
 msgid "§gDescription: §e%s"
-msgstr "§gDescription: §e%s"
-
-#: command.help.target.type
-msgid "§gType: §e%s"
-msgstr "§gType: §e%s"
+msgstr "§gDescription : §e%s"
 
 #: command.help.target.optional
 msgid " (optional)"
-msgstr "(facultatif)"
+msgstr " (facultatif)"
 
 #: command.op.description
 msgid "Make yourself to be an administrator of the server, just by a command."
-msgstr "Devenez administrateur du serveur, simplement avec une commande."
+msgstr "Devenez administrateur du serveur, simplement par une commande."
 
 #: command.op.password
 msgid "admin password"
@@ -436,11 +432,11 @@ msgstr "Vous n'avez pas encore défini de mot de passe, vous pouvez simplement l
 
 #: command.op.statement.missing
 msgid "You should type the password as the password has been set."
-msgstr "Vous devez saisir le mot de passe car le mot de passe a été défini."
+msgstr "Vous devez saisir le mot de passe car il a été défini."
 
 #: command.op.statement.already
 msgid "You have the administrator permission already. What do you want anymore by using me?"
-msgstr "Vous disposez déjà de l'autorisation d'administrateur. Que veux-tu encore en m'utilisant?"
+msgstr "Vous disposez déjà des autorisations d'administrateur. Que voulez-vous encore en m'utilisant ?"
 
 #: command.op.overheat.password
 msgid "Huh, just try later, I have almost overheated myself."
@@ -448,7 +444,7 @@ msgstr "Euh, essaie plus tard, j'ai presque surchauffé."
 
 #: command.op.overheat.normal
 msgid "You should finish the verification first!"
-msgstr "Vous devriez d'abord terminer la vérification!"
+msgstr "Vous devriez d'abord terminer la vérification !"
 
 #: command.op.success
 msgid "You have been set as an administrator of the server."
@@ -456,15 +452,15 @@ msgstr "Vous avez été défini comme administrateur du serveur."
 
 #: command.op.start
 msgid "Seems like the server has no password yet, let's start a simple verification to verify about you're an administrator of the server or not."
-msgstr "On dirait que le serveur n'a pas encore de mot de passe, commençons une simple vérification pour vérifier que vous êtes ou non un administrateur du serveur."
+msgstr "On dirait que le serveur n'a pas encore de mot de passe, commençons une simple vérification pour vérifier si vous êtes administrateur du serveur ou non."
 
 #: command.op.success.fast
 msgid "Success! We are able to verify you're an administrator of the server, you have been set as an administrator of the server."
-msgstr "Succès! Nous sommes en mesure de vérifier que vous êtes un administrateur du serveur, vous avez été défini comme administrateur du serveur."
+msgstr "Succès ! Nous avons pu vérifier que vous êtes un administrateur du serveur, vous avez été défini comme administrateur du serveur."
 
 #: command.op.require
 msgid "Please type the following slash command (/) in the chat: '%s'."
-msgstr "Veuillez saisir la commande slash suivante (/) dans le chat : '%s'."
+msgstr "Veuillez taper la commande slash suivante (/) dans le chat : '%s'."
 
 #: command.op.require.cancel
 msgid "If you want to cancel the verification, just type the slash command (/) in chat: '%s'."
@@ -476,7 +472,7 @@ msgstr "Désolé, mais vous avez tapé une mauvaise commande, veuillez réessaye
 
 #: command.op.verify.success
 msgid "Success! You have been set as an administrator of the server."
-msgstr "Succès! Vous avez été défini comme administrateur du serveur."
+msgstr "Succès ! Vous avez été défini comme administrateur du serveur."
 
 #: command.op.verify.cancel
 msgid "You have canceled the verification."
@@ -508,19 +504,19 @@ msgstr "L'identifiant du module que vous souhaitez activer ou désactiver."
 
 #: command.setmodule.state
 msgid "target state"
-msgstr ""
+msgstr "état cible"
 
 #: command.setmodule.state.description
 msgid "State that you want to switch on or off for the module."
-msgstr "Indiquez que vous souhaitez allumer ou éteindre le module."
+msgstr "État que vous souhaitez activer ou désactiver pour le module."
 
 #: command.setmodule.success.enabled
 msgid "Success! The module has been enabled by yourself."
-msgstr "Succès! Le module a été activé par vous-même."
+msgstr "Succès ! Le module a été activé par vous-même."
 
 #: command.setmodule.success.disabled
 msgid "Success! The module has been disabled by yourself."
-msgstr "Succès! Le module a été désactivé par vous-même."
+msgstr "Succès ! Le module a été désactivé par vous-même."
 
 #: command.setmodule.notfound
 msgid "Not able to find the module, make sure you type a valid module. You can use '-listmodules' to see the list of modules."
@@ -528,7 +524,7 @@ msgstr "Impossible de trouver le module, assurez-vous de saisir un module valide
 
 #: command.setmodule.already.enabled
 msgid "The module has already been enabled. Do you want to disable it?"
-msgstr "Le module a déjà été activé. Voulez-vous le désactiver?"
+msgstr "Le module a déjà été activé. Voulez-vous le désactiver ?"
 
 #: command.setmodule.already.disabled
 msgid "The module has already been disabled. Do you mean to enable it?"
@@ -536,7 +532,7 @@ msgstr "Le module a déjà été désactivé. Voulez-vous l'activer ?"
 
 #: command.listmodule.description
 msgid "Show the list of modules."
-msgstr "Affiche la liste des modules."
+msgstr "Afficher la liste des modules."
 
 #: command.listmodule.title
 msgid "The list of the modules"
@@ -544,7 +540,7 @@ msgstr "La liste des modules"
 
 #: command.listmodule.body
 msgid "Here is the list of modules. The button is the id of the module. Green means enabled, red means disabled. What a simple system, right?"
-msgstr "Voici la liste des modules. Le bouton est l'identifiant du module. Le vert signifie activé, le rouge signifie désactivé. Quel système simple, non?"
+msgstr "Voici la liste des modules. Le bouton est l'identifiant du module. Le vert signifie activé, le rouge signifie désactivé. Quel système simple, non ?"
 
 #: command.listmodule.toggle.title
 msgid "Toggling the module"
@@ -564,11 +560,11 @@ msgstr "Je souhaite désactiver ce module."
 
 #: command.listmodule.toggle.state
 msgid "What do you want to do with this module"
-msgstr "Que veux-tu faire avec ce module?"
+msgstr "Que voulez-vous faire avec ce module ?"
 
 #: command.set.invalid
 msgid "Unknown path: %s, make sure you type a valid path. Use slash (/) to separate the path."
-msgstr "Chemin inconnu: %s, assurez-vous de saisir un chemin valide. Utilisez un slash (/) pour séparer le chemin."
+msgstr "Chemin inconnu : %s, assurez-vous de saisir un chemin valide. Utilisez un slash (/) pour séparer le chemin."
 
 #: command.set.number
 msgid "The path you want to set must be a number."
@@ -576,15 +572,15 @@ msgstr "Le chemin que vous souhaitez définir doit être un nombre."
 
 #: command.set.boolean
 msgid "The path you want to set must be a boolean. Only 'true' or 'false' is allowed."
-msgstr "Le chemin que vous souhaitez définir doit être un booléen. Seuls 'vrai' ou 'faux' sont autorisés."
+msgstr "Le chemin que vous souhaitez définir doit être un booléen. Seuls 'true' ou 'false' sont autorisés."
 
 #: command.set.success
 msgid "Success! The path '%1' has been set to '%2'."
-msgstr "Succès! Le chemin '%1' a été défini sur '%2'."
+msgstr "Succès ! Le chemin '%1' a été défini sur '%2'."
 
 #: command.set.description
 msgid "Change the config dynamically. Without the data lost for different versions."
-msgstr "Modifiez la configuration dynamiquement. Sans les données perdues pour les différentes versions."
+msgstr "Modifiez la configuration dynamiquement. Sans perte de données pour différentes versions."
 
 #: command.set.key
 msgid "path (key)"
@@ -604,11 +600,11 @@ msgstr "La valeur que vous souhaitez définir. Il doit s'agir d'une chaîne, d'u
 
 #: command.matrixui.description
 msgid "Open the Matrix AntiCheat UI panel."
-msgstr "Ouvre le panneau de l'interface utilisateur de Matrix AntiCheat."
+msgstr "Ouvrir le panneau de l'interface utilisateur de Matrix AntiCheat."
 
 #: command.vanish.description
 msgid "Make yourself invisible to other players. Even ESP will not be able to see you."
-msgstr "Rendez-vous invisible aux yeux des autres joueurs. Même ESP ne pourra pas vous voir."
+msgstr "Devenez invisible aux autres joueurs. Même ESP ne pourra pas vous voir."
 
 #: command.vanish.success
 msgid "You have been vanished. Type this command again to make yourself visible again."
@@ -636,7 +632,7 @@ msgstr "Durée"
 
 #: command.moderation.duration.description
 msgid "The duration of the moderation action that you want to use this command on, in minutes. You leave it empty in order to set a permanent moderation action."
-msgstr "La durée de l'action de modération sur laquelle vous souhaitez utiliser cette commande, en minutes. Vous le laissez vide afin de paramétrer une action de modération permanente."
+msgstr "La durée de l'action de modération sur laquelle vous souhaitez utiliser cette commande, en minutes. Vous le laissez vide pour définir une action de modération permanente."
 
 #: command.moderation.admin
 msgid "Oops, you can not finish a moderation action to an administrator or yourself."
@@ -648,7 +644,7 @@ msgstr "%2 a effectué une action de modération sur %1"
 
 #: command.moderation.action
 msgid "§7>> §gModeration action: §e%s"
-msgstr "§7>> §gAction de modération: §e%s"
+msgstr "§7>> §gAction de modération : §e%s"
 
 #: command.moderation.removal.failed
 msgid "Before you use the moderation removal or any related moderation command, you need to make sure the target player has been moderated."
@@ -656,307 +652,307 @@ msgstr "Avant d'utiliser la suppression de la modération ou toute commande de m
 
 #: command.moderation.tempkick
 msgid "temp-kicked"
-msgstr ""
+msgstr "banni temporairement"
 
 #: command.moderation.kick
 msgid "kicked"
-msgstr ""
+msgstr "banni"
 
 #: command.moderation.ban
 msgid "banned"
-msgstr ""
+msgstr "banni"
 
 #: command.moderation.unban
 msgid "unbanned"
-msgstr ""
+msgstr "dé-banni"
 
 #: command.moderation.softban
 msgid "soft-banned"
-msgstr ""
+msgstr "banni temporairement"
 
 #: command.moderation.unsoftban
 msgid "unsoft-banned"
-msgstr ""
+msgstr "dé-banni temporairement"
 
 #: command.moderation.mute
 msgid "muted"
-msgstr ""
+msgstr "muté"
 
 #: command.moderation.unmute
 msgid "unmuted"
-msgstr ""
+msgstr "démuté"
 
 #: command.moderation.freeze
 msgid "frozen"
-msgstr ""
+msgstr "gelé"
 
 #: command.moderation.unfreeze
 msgid "unfrozen"
-msgstr ""
+msgstr "dégelé"
 
 #: command.moderation.warn
 msgid "warned"
-msgstr ""
+msgstr "averti"
 
 #: command.moderation.clearwarn
 msgid "cleared all warnings"
-msgstr ""
+msgstr "toutes les avertissements ont été supprimés"
 
 #: command.moderation.warn.amount
 msgid "§7>> §g Amount of warnings: %s"
-msgstr ""
+msgstr "§7>> §gNombre d'avertissements : %s"
 
 #: command.tempkick.description
 msgid "Temporarily kick a player."
-msgstr ""
+msgstr "Bannir temporairement un joueur."
 
 #: command.kick.description
 msgid "Kick a player."
-msgstr ""
+msgstr "Bannir un joueur."
 
 #: command.ban.description
 msgid "Ban a player."
-msgstr ""
+msgstr "Bannir un joueur."
 
 #: command.unban.description
 msgid "Unban a player."
-msgstr ""
+msgstr "Débannir un joueur."
 
 #: command.softban.description
 msgid "Soft-ban a player."
-msgstr ""
+msgstr "Bannir temporairement un joueur."
 
 #: command.unsoftban.description
 msgid "Unsoft-ban a player."
-msgstr ""
+msgstr "Débannir temporairement un joueur."
 
 #: command.mute.description
 msgid "Mute a player."
-msgstr ""
+msgstr "Muter un joueur."
 
 #: command.unmute.description
 msgid "Unmute a player."
-msgstr ""
+msgstr "Démuter un joueur."
 
 #: command.freeze.description
 msgid "Freeze a player."
-msgstr ""
+msgstr "Geler un joueur."
 
 #: command.unfreeze.description
 msgid "Unfreeze a player."
-msgstr ""
+msgstr "Dégeler un joueur."
 
 #: command.warn.description
 msgid "Warn a player."
-msgstr ""
+msgstr "Avertir un joueur."
 
 #: command.banlist.empty
 msgid "Hopefully, there is no banned player right now."
-msgstr ""
+msgstr "Espérons qu'il n'y ait actuellement aucun joueur banni."
 
 #: command.banlist.banned
 msgid "There is %1 banned player(s) on this server: §e%s"
-msgstr ""
+msgstr "Il y a %1 joueur(s) banni(s) sur ce serveur : §e%s"
 
 #: command.banlist.description
 msgid "Show the list of banned players."
-msgstr ""
+msgstr "Afficher la liste des joueurs bannis."
 
 #: command.clearwarn.description
 msgid "Clear all warnings of a player."
-msgstr ""
+msgstr "Effacer tous les avertissements d'un joueur."
 
 #: command.invsee.description
 msgid "See the inventory of a player."
-msgstr ""
+msgstr "Voir l'inventaire d'un joueur."
 
 #: command.invsee.notice
 msgid "You can open the inventory ui by opening your inventory."
-msgstr ""
+msgstr "Vous pouvez ouvrir l'interface utilisateur d'inventaire en ouvrant votre inventaire."
 
 #: command.invsee.self
 msgid "You can not see your own inventory, this might cause some issues."
-msgstr ""
+msgstr "Vous ne pouvez pas voir votre propre inventaire, cela pourrait causer des problèmes."
 
 #: command.setpassword.description
 msgid "Set a password for getting operator permissions."
-msgstr ""
+msgstr "Définir un mot de passe pour obtenir les permissions d'opérateur."
 
 #: command.setpassword.password
 msgid "New password"
-msgstr ""
+msgstr "Nouveau mot de passe"
 
 #: command.setpassword.password.description
 msgid "The password that you want to set."
-msgstr ""
+msgstr "Le mot de passe que vous souhaitez définir."
 
 #: command.setpassword.success
 msgid "The password has been set."
-msgstr ""
+msgstr "Le mot de passe a été défini."
 
 #: command.setpassword.strength
 msgid "Your password should include lowerCase, upperCase, numbers and special characters."
-msgstr ""
+msgstr "Votre mot de passe doit inclure des lettres minuscules, des lettres majuscules, des chiffres et des caractères spéciaux."
 
 #: command.clearpassword.description
 msgid "Clear the password."
-msgstr ""
+msgstr "Effacer le mot de passe."
 
 #: command.clearpassword.success
 msgid "The password has been cleared."
-msgstr ""
+msgstr "Le mot de passe a été effacé."
 
 #: command.clearpassword.already
 msgid "There is no password set."
-msgstr ""
+msgstr "Aucun mot de passe n'est défini."
 
 #: command.configui.description
 msgid "Configure the settings of Matrix anticheat by a user interface."
-msgstr ""
+msgstr "Configurer les paramètres de Matrix anticheat via une interface utilisateur."
 
 #: command.setadmin.description
 msgid "Set a player as an administrator."
-msgstr ""
+msgstr "Définir un joueur comme administrateur."
 
 #: command.setadmin.level
 msgid "Administrator level"
-msgstr ""
+msgstr "Niveau d'administrateur"
 
 #: command.setadmin.level.description
 msgid "The level of the administrator that you want to set. (Set to 0 in order to remove the player as an administrator)"
-msgstr ""
+msgstr "Le niveau de l'administrateur que vous souhaitez définir. (Définissez à 0 pour retirer le joueur de l'administration)"
 
 #: command.setadmin.failed
 msgid "Failed to change the player's administrator level."
-msgstr ""
+msgstr "Échec du changement du niveau d'administrateur du joueur."
 
 #: command.setadmin.level.display
 msgid "§7>> §gAdministrator level: §eLevel %s"
-msgstr ""
+msgstr "§7>> §gNiveau d'administrateur : §eNiveau %s"
 
 #: command.setrank.description
 msgid "Set a player's rank."
-msgstr ""
+msgstr "Définir le rang d'un joueur."
 
 #: command.setrank.rank
 msgid "Ranks"
-msgstr ""
+msgstr "Rangs"
 
 #: command.setrank.rank.description
 msgid "The rank of the player that you want to set. Use comma (,) to separate multiple ranks."
-msgstr ""
+msgstr "Le rang du joueur que vous souhaitez définir. Utilisez une virgule (,) pour séparer plusieurs rangs."
 
 #: command.setrank.success
 msgid "%1's rank has been set to %2."
-msgstr "Bienvenue! §e%s§r§g a rejoint le serveur!"
+msgstr "Le rang de %1 a été défini sur %2."
 
 #: action.hint.exit.matrix:inv_container
 msgid "Tap the §lInventory button§r to open their Inventory."
-msgstr "§7>> §gAppareil: §e%s"
+msgstr "Appuyez sur le bouton §lInventaire§r pour ouvrir leur inventaire."
 
 #: action.hint.exit.console.matrix:inv_container
 msgid "Press §l:_input_key.inventory:§r to open their Inventory"
-msgstr "Console"
+msgstr "Appuyez sur §l:_input_key.inventory:§r pour ouvrir leur inventaire."
 
 #: module.welcomer.message
 msgid "Welcome! §e%s§r§g has joined the server!"
-msgstr "PC"
+msgstr "Bienvenue ! §e%s§r§g a rejoint le serveur !"
 
 #: module.welcomer.device
 msgid "§7>> §gDevice: §e%s"
-msgstr "Mobile"
+msgstr "§7>> §gAppareil : §e%s"
 
 #: module.welcomer.device.console
 msgid "gaming console"
-msgstr "Inconnu"
+msgstr "console de jeu"
 
 #: module.welcomer.device.pc
 msgid "computer"
-msgstr ""
+msgstr "ordinateur"
 
 #: module.welcomer.device.mobile
 msgid "mobile phone"
-msgstr ""
+msgstr "téléphone mobile"
 
 #: module.welcomer.device.unknown
 msgid "unknown"
-msgstr ""
+msgstr "inconnu"
 
 #: module.welcomer.name
 msgid "Welcomer"
-msgstr ""
+msgstr "Accueillant"
 
 #: module.welcomer.description
 msgid "Send a welcome message when a player joins the server."
-msgstr ""
+msgstr "Envoyer un message de bienvenue lorsqu'un joueur rejoint le serveur."
 
 #: module.worldborder.name
 msgid "World Border"
-msgstr ""
+msgstr "Bord du Monde"
 
 #: module.worldborder.description
 msgid "Generate a border to block the players from going out of the world."
-msgstr ""
+msgstr "Générer une bordure pour empêcher les joueurs de sortir du monde."
 
 #: module.worldborder.danger
 msgid "Stop moving, you have arrived the boundary of the world!"
-msgstr ""
+msgstr "Arrêtez de bouger, vous avez atteint la limite du monde !"
 
 #: module.worldborder.title
 msgid "§c§lStopped!§r"
-msgstr ""
+msgstr "§c§lArrêté !§r"
 
 #: module.worldborder.subtitle
 msgid "§eYou will be auto teleported to the spawn in %s seconds."
-msgstr ""
+msgstr "§eVous serez téléporté automatiquement au spawn dans %s secondes."
 
 #: module.chatrank.name
 msgid "Chat Rank & Anti Spam"
-msgstr ""
+msgstr "Rang de Chat & Anti Spam"
 
 #: module.chatrank.description
 msgid "Prevent the spamming on your server and provide a chat rank system."
-msgstr "Empêche le spam sur votre serveur et fournissez un système de chat rank."
+msgstr "Empêche le spam sur votre serveur et fournit un système de rang de chat."
 
 #: module.chatrank.bad
 msgid "Your message contains some sensitive word(s) which is not allowed."
-msgstr "Votre message contient des mots sensibles qui ne sont pas autorisés."
+msgstr "Votre message contient des mot(s) sensible(s) qui ne sont pas autorisés."
 
 #: module.chatrank.slow
 msgid "Slow mode enabled! Please enter your message %s second(s) later."
-msgstr "Mode lent activé! Veuillez saisir votre message %s seconde(s) plus tard."
+msgstr "Mode lent activé ! Veuillez saisir votre message dans %s seconde(s)."
 
 #: module.chatrank.repeated
 msgid "Please don't spam messages."
-msgstr "S'il vous plaît, ne spammez pas les messages."
+msgstr "Veuillez ne pas spammer les messages."
 
 #: module.afk.name
 msgid "Anti AFK"
-msgstr ""
+msgstr "Anti AFK"
 
 #: module.afk.description
 msgid "Disconnect the player if they are not active for a long time."
-msgstr "Déconnecte le joueur s'il n'est pas actif pendant une longue période."
+msgstr "Déconnecter le joueur s'il n'est pas actif pendant longtemps."
 
 #: module.afk.disconnect
 msgid "%s has been disconnected due to AFK on this server for a long time."
-msgstr "%s a été déconnecté depuis longtemps en raison d'AFK sur ce serveur."
+msgstr "%s a été déconnecté en raison d'AFK sur ce serveur pendant longtemps."
 
 #: module.clog.name
 msgid "Anti Combat Log"
-msgstr ""
+msgstr "Anti Combat Log"
 
 #: module.clog.description
 msgid "Prevent someone leaves the combat log. Very basic so use others for your own anti combat log."
-msgstr "Empêche quelqu'un de quitter pendant un combat. Très basique, alors utilisez-en d'autres pour votre propre anti-déconnexion en combat."
+msgstr "Empêche quelqu'un de quitter le combat. Très basique, donc utilisez d'autres pour votre propre anti combat log."
 
 #: module.clog.in.combat
 msgid "§gYou are in combat. §7§l(§r§e%s second(s) left§7§l)§r"
-msgstr "§gVous êtes en combat. §7§l(§r§e%s seconde(s) restante§7§l)§r"
+msgstr "§gVous êtes en combat. §7§l(§r§e%s seconde(s) restante(s)§7§l)§r"
 
 #: module.clog.face.combat
 msgid "You are now in combat with §e%s§g."
-msgstr "Vous êtes en combat avec §e%s§g."
+msgstr "Vous êtes maintenant en combat avec §e%s§g."
 
 #: module.clog.leave.combat
 msgid "You are no longer in combat with %s."
@@ -964,83 +960,83 @@ msgstr "Vous n'êtes plus en combat avec %s."
 
 #: module.clog.killed
 msgid "§c§lCombat log detected!§r§7 %1 has left the game during combat with %2."
-msgstr "§c§lDéconnexion en combat détecté!§r§7 %1 a quitté le jeu pendant le combat avec %2."
+msgstr "§c§lDéconnexion en combat détectée !§r§7 %1 a quitté le jeu pendant le combat avec %2."
 
 #: module.captcha.name
 msgid "Captcha against bots"
-msgstr ""
+msgstr "Captcha contre les bots"
 
 #: module.captcha.description
 msgid "Prevent the spamming bot from attacking the current server."
-msgstr "Empêche les robots spammeur d'attaquer le serveur."
+msgstr "Empêche le bot de spam d'attaquer le serveur actuel."
 
 #: module.captcha.detected
 msgid "§c§lSuspicious client detected!§r§7 %s has been disconnected due to using a suspicious client."
-msgstr ""
+msgstr "§c§lClient suspect détecté !§r§7 %s a été déconnecté pour avoir utilisé un client suspect."
 
 #: module.captcha.keepmove
 msgid "§bMatrix§a+ §7> §gContinue your rotation movement for %s seconds more."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §gContinuez votre mouvement de rotation pendant %s secondes de plus."
 
 #: module.captcha.checking
 msgid "§bMatrix§a+ §7> §gChecking your client... Please wait."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §gVérification de votre client... Veuillez patienter."
 
 #: module.captcha.continue
 msgid "§bMatrix§a+ §7> §gPlease §e§lMOVE YOUR ROTATION§r§g to continue the check process."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §gVeuillez §e§lDÉPLACER VOTRE ROTATION§r§g pour continuer le processus de vérification."
 
 #: module.captcha.title
 msgid "Captcha GUI | Matrix Anticheat"
-msgstr ""
+msgstr "GUI Captcha | Matrix Anticheat"
 
 #: module.captcha.submit
 msgid "I have finished the question!"
-msgstr ""
+msgstr "J'ai terminé la question !"
 
 #: module.captcha.selectui
 msgid "§bPlease answer the question below correctly to verify you're a human."
-msgstr ""
+msgstr "§bVeuillez répondre correctement à la question ci-dessous pour vérifier que vous êtes un humain."
 
 #: module.captcha.why
 msgid "§aWhy do you need to verify? Because we want to prevent the spamming bot from attacking the current server."
-msgstr ""
+msgstr "§aPourquoi devez-vous vérifier ? Parce que nous voulons empêcher le bot de spam d'attaquer le serveur actuel."
 
 #: module.captcha.question
 msgid "§gQuestion: §eWhat is the correct answer of %1 plus %2?"
-msgstr ""
+msgstr "§gQuestion : §eQuelle est la bonne réponse de %1 plus %2 ?"
 
 #: module.captcha.youranswer
 msgid "§gSelect the correct answer in below slider"
-msgstr ""
+msgstr "§gSélectionnez la bonne réponse dans le curseur ci-dessous"
 
 #: module.captcha.recontinue
 msgid "§bMatrix§a+ §7> §gYou make it wrong, please try again."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §gVous vous êtes trompé, veuillez réessayer."
 
 #: module.captcha.verified
 msgid "§bMatrix§a+ §7> §gYou have been verified as a human, and you can now use the server."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §gVous avez été vérifié comme un humain, et vous pouvez maintenant utiliser le serveur."
 
 #: module.autoclicker.name
 msgid "Anti Auto Clicker"
-msgstr ""
+msgstr "Anti Auto Clicker"
 
 #: module.autoclicker.description
 msgid "Prevent the high cps auto clicker from working."
-msgstr "Empêche les auto click à cps élevés de fonctionner."
+msgstr "Empêche les auto-clickers à CPS élevés de fonctionner."
 
 #: module.autoclicker.reach
 msgid "§c§lHey! §7Auto clicker is not allowed on this server. You have %2 out of %1 clicks per second now."
-msgstr "§c§lHé! §7L'Auto clicker n'est pas autorisé sur ce serveur. Vous avez maintenant %2 clics sur %1 par seconde."
+msgstr "§c§lHé ! §7L'auto-clicker n'est pas autorisé sur ce serveur. Vous avez maintenant %2 clics sur %1 par seconde."
 
 #: item.matrix.itemui
 msgid "§r§l§bMatrix §gAnticheat §eUI§a panel§r"
-msgstr ""
+msgstr "§r§l§bMatrix §gAnticheat §eUI§a panneau§r"
 
 #: directpanel.title
 msgid "Tell me, what do you want to do?"
-msgstr "Dis-moi, que veux-tu faire ?"
+msgstr "Dites-moi, que voulez-vous faire ?"
 
 #: directpanel.body
 msgid "Select an action from below buttons. I can generate the command string for you."
@@ -1056,197 +1052,389 @@ msgstr "Entrez la chaîne de commande"
 
 #: directpanel.build
 msgid "Let build and run your command together."
-msgstr "Laissez construire et exécuter votre commande ensemble."
+msgstr "Construisons et exécutons votre commande ensemble."
 
 #: module.prediction.name
 msgid "Prediction Module"
-msgstr ""
+msgstr "Module de Prédiction"
 
 #: module.prediction.description
 msgid "An advanced check that can detect more fly hacker."
-msgstr ""
+msgstr "Un contrôle avancé qui peut détecter plus de hackers de vol."
 
 #: flag.detected.title
 msgid "§bMatrix§i│ §eSuspicious client detected"
-msgstr ""
+msgstr "§bMatrix§i│ §eClient suspect détecté"
 
 #: flag.detected.player
 msgid "   §fPlayer§r§i│ §f%s"
-msgstr ""
+msgstr "   §fJoueur§r§i│ §f%s"
 
 #: flag.detected.module
 msgid "   §fModule§r§i│ §f%s"
-msgstr ""
+msgstr "   §fModule§r§i│ §f%s"
 
 #: flag.detected.object
 msgid "   §fobject§r§i│ §ftype §i[§f%s§i] §f¬"
-msgstr ""
+msgstr "   §fobjet§r§i│ §ftype §i[§f%s§i] §f¬"
 
 #: flag.detected.none
 msgid "         §cNo data is given by the module."
-msgstr ""
+msgstr "         §cAucune donnée fournie par le module."
 
 #: flag.detected.punishment
 msgid "   §fPunishment§r§i│ §f%s"
-msgstr ""
+msgstr "   §fPunition§r§i│ §f%s"
 
 #: flag.detected.false
 msgid "   §7[?] Is it a §cfalse flag§7? Please report it to the developer when you have time."
-msgstr ""
+msgstr "   §7[?] Est-ce un §cfaux positif§7 ? Veuillez le signaler au développeur lorsque vous avez le temps."
 
 #: command.moderation.reason.description
 msgid "The reason for the moderation action."
-msgstr ""
+msgstr "La raison de l'action de modération."
 
 #: command.moderation.reason
 msgid "Reason"
-msgstr ""
+msgstr "Raison"
 
 #: module.entityFly.name
 msgid "Anti Entity Fly"
-msgstr ""
+msgstr "Anti Entity Fly"
 
 #: module.entityFly.description
 msgid "Prevent the entity fly from working."
-msgstr ""
+msgstr "Empêche le vol des entités de fonctionner."
 
 #: command.echestwipe.success
 msgid "The echest of %s has been wiped successfully."
-msgstr ""
+msgstr "Le coffre de fin de %s a été vidé avec succès."
 
 #: command.echestwipe.description
 msgid "Wipe the ender chest of a player."
-msgstr ""
+msgstr "Vider le coffre de fin d'un joueur."
 
 #: command.fastlog.description
 msgid "Get the log in today, yesterday or the day before yesterday"
-msgstr ""
+msgstr "Obtenez le journal d'aujourd'hui, d'hier ou d'avant-hier."
 
 #: command.log.day
 msgid "Day"
-msgstr ""
+msgstr "Jour"
 
 #: command.log.day.description
 msgid "The day of the logs(s)"
-msgstr ""
+msgstr "Le jour des journaux"
 
 #: command.log.nodata
 msgid "No data. Unable to get the log that you want in the database."
-msgstr ""
+msgstr "Aucune donnée. Impossible d'obtenir le journal que vous souhaitez dans la base de données."
 
 #: command.log.description
 msgid "View the recent logs in the database"
-msgstr ""
+msgstr "Voir les journaux récents dans la base de données."
 
 #: command.log.amount
 msgid "Amount"
-msgstr ""
+msgstr "Montant"
 
 #: command.log.amount.description
 msgid "The amount of the latest logs that you what to view."
-msgstr ""
+msgstr "Le montant des derniers journaux que vous souhaitez voir."
 
 #: command.daylog.description
 msgid "View all of the logs in a specific day."
-msgstr ""
+msgstr "Voir tous les journaux d'un jour spécifique."
 
 #: command.log.month
 msgid "The month of the log(s)."
-msgstr ""
+msgstr "Le mois des journaux."
 
 #: command.log.years
 msgid "The years of the log(s)."
-msgstr ""
+msgstr "Les années des journaux."
 
 #: command.log.invalid
 msgid "Invalid time: You should not select a time that is in the future."
-msgstr ""
+msgstr "Temps invalide : Vous ne devez pas sélectionner un temps dans le futur."
 
 #: command.logui.description
 msgid "Select one of the the restart point and view all of the log(s) during the restart point to the next restart point."
-msgstr ""
+msgstr "Sélectionnez l'un des points de redémarrage et voyez tous les journaux pendant le point de redémarrage jusqu'au prochain point de redémarrage."
 
 #: command.logui.title
 msgid "Select one of the restart point in below"
-msgstr ""
+msgstr "Sélectionnez un des points de redémarrage ci-dessous"
 
 #: command.logui.button
 msgid "Server initialization #%s"
-msgstr ""
+msgstr "Initialisation du serveur #%s"
 
 #: ui.log.title
 msgid "Log record | Timezone: %s"
-msgstr ""
+msgstr "Enregistrement des journaux | Fuseau horaire : %s"
 
 #: ui.log.body
 msgid "Click into the §gbutton§f of the log can see the §adetail information§f of the selected log. If you want to exit this ui, you can click the 'X' in the corner."
-msgstr ""
+msgstr "Cliquez sur le §gbutton§f du journal pour voir les §adetails§f du journal sélectionné. Si vous souhaitez quitter cette interface, vous pouvez cliquer sur 'X' dans le coin."
 
 #: ui.log.detail
 msgid "Detail information"
-msgstr ""
+msgstr "Informations détaillées"
 
 #: command.echestwipe.description
 msgid "Clear a player's ender chest"
-msgstr ""
+msgstr "Vider le coffre de fin d'un joueur."
 
 #: command.help.sd
 msgid "Get the command list"
-msgstr ""
+msgstr "Obtenez la liste des commandes"
 
 #: command.logui.sd
 msgid "View logs by restart time"
-msgstr ""
+msgstr "Voir les journaux par temps de redémarrage"
 
 #: command.daylog.sd
 msgid "View logs by date"
-msgstr ""
+msgstr "Voir les journaux par date"
 
 #: command.fastlog.ad
 msgid "View logs in past few days"
-msgstr ""
+msgstr "Voir les journaux des derniers jours"
 
 #: command.setpassword.sd
 msgid "Change password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #: command.configui.sd
 msgid "Edit config"
-msgstr ""
+msgstr "Éditer la configuration"
 
 #: command.op.sd
 msgid "Gain matrix admin"
-msgstr ""
+msgstr "Devenir administrateur de Matrix"
 
 #: command.deop.sd
 msgid "Remove your admin perm"
-msgstr ""
+msgstr "Retirer votre permission d'administrateur"
 
 #: command.vanish.sd
 msgid "(Un)vanish yourself"
-msgstr ""
+msgstr "(Se) rendre invisible"
 
 #: command.about.sd
 msgid "Get info of Matrix-anti"
-msgstr ""
+msgstr "Obtenez des informations sur Matrix-anti"
 
 #: command.crash.description
 msgid "Crash a player."
-msgstr ""
+msgstr "Faire planter un joueur."
 
 #: module.mobaura.name
 msgid "Anti Mob Aura"
-msgstr ""
+msgstr "Anti Mob Aura"
 
 #: module.mobaura.description
 msgid "Spawn dummy when player attack a mob, checks if the player is attacking the dummy."
-msgstr ""
+msgstr "Générer un faux personnage lorsque le joueur attaque un mob, vérifie si le joueur attaque le faux personnage."
 
 #: module.elytraFly.name
 msgid "Anti Elytra Fly"
-msgstr ""
+msgstr "Anti Elytra Fly"
 
 #: module.elytraFly.description
 msgid "Prevent the player from using the illegal elytra flying."
-msgstr ""
+msgstr "Empêcher le joueur d'utiliser le vol d'elytra illégal."
+
+#: module.prediction.name
+msgid "Prediction Module"
+msgstr "Module de Prédiction"
+
+#: module.prediction.description
+msgid "An advanced check that can detect more fly hacker."
+msgstr "Un contrôle avancé qui peut détecter plus de hacks de vol."
+
+#: flag.detected.title
+msgid "§bMatrix§i│ §eSuspicious client detected"
+msgstr "§bMatrix§i│ §eClient suspect détecté"
+
+#: flag.detected.player
+msgid "   §fPlayer§r§i│ §f%s"
+msgstr "   §fJoueur§r§i│ §f%s"
+
+#: flag.detected.module
+msgid "   §fModule§r§i│ §f%s"
+msgstr "   §fModule§r§i│ §f%s"
+
+#: flag.detected.object
+msgid "   §fobject§r§i│ §ftype §i[§f%s§i] §f¬"
+msgstr "   §fobjet§r§i│ §ftype §i[§f%s§i] §f¬"
+
+#: flag.detected.none
+msgid "         §cNo data is given by the module."
+msgstr "         §cAucune donnée fournie par le module."
+
+#: flag.detected.punishment
+msgid "   §fPunishment§r§i│ §f%s"
+msgstr "   §fPunition§r§i│ §f%s"
+
+#: flag.detected.false
+msgid "   §7[?] Is it a §cfalse flag§7? Please report it to the developer when you have time."
+msgstr "   §7[?] Est-ce un §cfaux positif§7 ? Veuillez le signaler au développeur lorsque vous avez le temps."
+
+#: command.moderation.reason.description
+msgid "The reason for the moderation action."
+msgstr "La raison de l'action de modération."
+
+#: command.moderation.reason
+msgid "Reason"
+msgstr "Raison"
+
+#: module.entityFly.name
+msgid "Anti Entity Fly"
+msgstr "Anti Entity Fly"
+
+#: module.entityFly.description
+msgid "Prevent the entity fly from working."
+msgstr "Empêcher le vol d'entités de fonctionner."
+
+#: command.echestwipe.success
+msgid "The echest of %s has been wiped successfully."
+msgstr "Le coffre de fin de %s a été vidé avec succès."
+
+#: command.echestwipe.description
+msgid "Wipe the ender chest of a player."
+msgstr "Vider le coffre de fin d'un joueur."
+
+#: command.fastlog.description
+msgid "Get the log in today, yesterday or the day before yesterday"
+msgstr "Obtenez le journal d'aujourd'hui, d'hier ou d'avant-hier."
+
+#: command.log.day
+msgid "Day"
+msgstr "Jour"
+
+#: command.log.day.description
+msgid "The day of the logs(s)"
+msgstr "Le jour des journaux"
+
+#: command.log.nodata
+msgid "No data. Unable to get the log that you want in the database."
+msgstr "Aucune donnée. Impossible d'obtenir le journal que vous souhaitez dans la base de données."
+
+#: command.log.description
+msgid "View the recent logs in the database"
+msgstr "Voir les journaux récents dans la base de données."
+
+#: command.log.amount
+msgid "Amount"
+msgstr "Montant"
+
+#: command.log.amount.description
+msgid "The amount of the latest logs that you what to view."
+msgstr "Le montant des derniers journaux que vous souhaitez voir."
+
+#: command.daylog.description
+msgid "View all of the logs in a specific day."
+msgstr "Voir tous les journaux d'un jour spécifique."
+
+#: command.log.month
+msgid "The month of the log(s)."
+msgstr "Le mois des journaux."
+
+#: command.log.years
+msgid "The years of the log(s)."
+msgstr "Les années des journaux."
+
+#: command.log.invalid
+msgid "Invalid time: You should not select a time that is in the future."
+msgstr "Temps invalide : Vous ne devez pas sélectionner un temps dans le futur."
+
+#: command.logui.description
+msgid "Select one of the the restart point and view all of the log(s) during the restart point to the next restart point."
+msgstr "Sélectionnez un des points de redémarrage et voyez tous les journaux pendant le point de redémarrage jusqu'au prochain point de redémarrage."
+
+#: command.logui.title
+msgid "Select one of the restart point in below"
+msgstr "Sélectionnez un des points de redémarrage ci-dessous"
+
+#: command.logui.button
+msgid "Server initialization #%s"
+msgstr "Initialisation du serveur #%s"
+
+#: ui.log.title
+msgid "Log record | Timezone: %s"
+msgstr "Enregistrement des journaux | Fuseau horaire : %s"
+
+#: ui.log.body
+msgid "Click into the §gbutton§f of the log can see the §adetail information§f of the selected log. If you want to exit this ui, you can click the 'X' in the corner."
+msgstr "Cliquez sur le §gbutton§f du journal pour voir les §adétails§f du journal sélectionné. Si vous souhaitez quitter cette interface, cliquez sur 'X' dans le coin."
+
+#: ui.log.detail
+msgid "Detail information"
+msgstr "Informations détaillées"
+
+#: command.echestwipe.description
+msgid "Clear a player's ender chest"
+msgstr "Vider le coffre de fin d'un joueur."
+
+#: command.help.sd
+msgid "Get the command list"
+msgstr "Obtenez la liste des commandes"
+
+#: command.logui.sd
+msgid "View logs by restart time"
+msgstr "Voir les journaux par temps de redémarrage"
+
+#: command.daylog.sd
+msgid "View logs by date"
+msgstr "Voir les journaux par date"
+
+#: command.fastlog.ad
+msgid "View logs in past few days"
+msgstr "Voir les journaux des derniers jours"
+
+#: command.setpassword.sd
+msgid "Change password"
+msgstr "Changer le mot de passe"
+
+#: command.configui.sd
+msgid "Edit config"
+msgstr "Éditer la configuration"
+
+#: command.op.sd
+msgid "Gain matrix admin"
+msgstr "Devenir administrateur de Matrix"
+
+#: command.deop.sd
+msgid "Remove your admin perm"
+msgstr "Retirer votre permission d'administrateur"
+
+#: command.vanish.sd
+msgid "(Un)vanish yourself"
+msgstr "(Se) rendre invisible"
+
+#: command.about.sd
+msgid "Get info of Matrix-anti"
+msgstr "Obtenez des informations sur Matrix-anti"
+
+#: command.crash.description
+msgid "Crash a player."
+msgstr "Faire planter un joueur."
+
+#: module.mobaura.name
+msgid "Anti Mob Aura"
+msgstr "Anti Mob Aura"
+
+#: module.mobaura.description
+msgid "Spawn dummy when player attack a mob, checks if the player is attacking the dummy."
+msgstr "Générer un faux personnage lorsque le joueur attaque un mob, vérifie si le joueur attaque le faux personnage."
+
+#: module.elytraFly.name
+msgid "Anti Elytra Fly"
+msgstr "Anti Elytra Fly"
+
+#: module.elytraFly.description
+msgid "Prevent the player from using the illegal elytra flying."
+msgstr "Empêcher le joueur d'utiliser le vol d'elytra illégal."
 
