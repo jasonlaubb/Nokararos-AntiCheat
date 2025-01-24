@@ -90,38 +90,34 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
     if (data.entityHurtList.length >= 3) {
         player.flag(killaura, { t: "4" });
     }
-    // Checks if the player has integer pitch or yaw.
-    const isNotTeleportYaw = yaw != 0;
-    const isNotTeleportPitch = pitch != 0;
-    if ((!notKillAuraTag && Number.isInteger(pitch) && isNotTeleportPitch) || (Number.isInteger(yaw) && isNotTeleportYaw && (data.lastAttackRot.x != pitch || data.lastAttackRot.y != yaw))) {
+    if (pitch % 1 === 0 && fastAbs(yaw - data.lastAttackRot.y) > 0) {
         const now = Date.now();
-        if (now - data.lastIntegerTimestamp > 3000) {
+        if (now - data.lastIntegerTimestamp > 7000) {
             data.integerFlagAmount = 0;
         }
         data.integerFlagAmount++;
-        data.lastIntegerTimestamp = now;
-        if (data.integerFlagAmount >= 3) {
-            player.flag(killaura, { t: "5", pitch, yaw });
+        if (data.integerFlagAmount > 3) {
+            player.flag(killaura, { t: "5" });
         }
-    } else {
-        const { x, z } = target.getVelocity();
-        const targetSpeed = pythag(x, z);
-        const { x: x2, z: z2 } = player.getVelocity();
-        if (targetSpeed > 0.01 || (isPvp && (x2 !== 0 || z2 !== 0) && getTotalAbsMovementVector(player) > 0)) {
-            const intRot = fastRound(yaw);
-            const intPitch = fastRound(pitch);
-            const yawDifferent = fastAbs(yaw - intRot);
-            const pitchDifferent = fastAbs(pitch - intPitch);
-            if (((data.lastAttackRot.x !== pitch || data.lastAttackRot.y !== yaw) && yawDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportYaw) || (pitchDifferent < MIN_ROUND_DIFFERENCE && isNotTeleportPitch)) {
-                const now = Date.now();
-                if (now - data.lastRoundTimestamp > 2000) {
-                    data.roundFlagAmount = 0;
-                }
-                data.roundFlagAmount++;
-                data.lastRoundTimestamp = now;
-                if (data.roundFlagAmount >= 8) {
-                    player.flag(killaura, { t: "6", yawDifferent, pitchDifferent });
-                }
+        data.lastIntegerTimestamp = now;
+    }
+    const { x, z } = target.getVelocity();
+    const targetSpeed = pythag(x, z);
+    const { x: x2, z: z2 } = player.getVelocity();
+    if (targetSpeed > 0.01 || (isPvp && (x2 !== 0 || z2 !== 0) && getTotalAbsMovementVector(player) > 0)) {
+        const intRot = fastRound(yaw);
+        const intPitch = fastRound(pitch);
+        const deltaIntYaw = fastAbs(yaw - intRot);
+        const deltaIntPitch = fastAbs(pitch - intPitch);
+        if (((data.lastAttackRot.x !== pitch || data.lastAttackRot.y !== yaw) && deltaIntYaw < MIN_ROUND_DIFFERENCE && yaw !== 0) || (deltaIntPitch < MIN_ROUND_DIFFERENCE && pitch !== 0)) {
+            const now = Date.now();
+            if (now - data.lastRoundTimestamp > 2000) {
+                data.roundFlagAmount = 0;
+            }
+            data.roundFlagAmount++;
+            data.lastRoundTimestamp = now;
+            if (data.roundFlagAmount >= 8) {
+                player.flag(killaura, { t: "6", deltaIntYaw, deltaIntPitch });
             }
         }
     }
