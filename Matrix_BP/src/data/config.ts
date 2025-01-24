@@ -71,6 +71,7 @@ export default {
     sensitivity: {
         antiBlink: false, // Stop blink movement (antiTimer), more lagback will be given.
         strengthenAntiSpeed: false, // Stronger anti speed, reverses the location instantly.
+        maxVelocityExaggeration: 0.5, // Higher the value will allow higher sensitivity for fighting against anti timer, should not be too high.
     },
     flag: {
         banDuration: 604800,

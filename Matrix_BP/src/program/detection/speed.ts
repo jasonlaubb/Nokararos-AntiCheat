@@ -11,6 +11,8 @@ interface SpeedData {
     lastStopLocation: Vector3;
     lastSleep: number;
     lastVelocity: Vector3;
+    previousSpeed: number[];
+    lastLocation: Vector3;
 }
 let eventId: IntegratedSystemEvent;
 const speed = new Module()
@@ -38,6 +40,8 @@ const speed = new Module()
             lastStopLocation: player.location,
             lastSleep: 0,
             lastVelocity: player.getVelocity(),
+            previousSpeed: new Array(20).fill(0),
+            lastLocation: player.location,
         });
     })
     .initClear((playerId) => {
@@ -46,7 +50,7 @@ const speed = new Module()
 speed.register();
 const speedData = new Map<string, SpeedData>();
 const VELOCITY_DELTA_THRESHOLD = 0.7;
-const FLAG_TIMESTAMP_THRESHOLD = 5000;
+const FLAG_TIMESTAMP_THRESHOLD = 8000;
 const MIN_FLAG_TIME_INTERVAL = 400;
 /**
  * @author jasonlaubb, RamiGamerDev
@@ -63,21 +67,21 @@ function tickEvent(player: Player) {
     if (player.isSleeping || player.isFlying || player.isGliding || player.isRiding()) {
         data.lastSleep = now;
     }
-    if (
-        !player.isFlying &&
-        now - data.lastFlagTimestamp > MIN_FLAG_TIME_INTERVAL &&
-        now - player.timeStamp.knockBack > 1500 &&
-        now - player.timeStamp.riptide > 5000 &&
-        now - data.lastAttackTimestamp > 1000 &&
-        now - data.lastRidingEndTimestamp > 500 &&
-        now - data.lastFlagTimestamp > 250 &&
-        player.getGameMode() !== GameMode.creative &&
-        !player.isSleeping &&
-        now - data.lastSleep > 1000 &&
-        !player.isRiding() &&
-        (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) <= 2 &&
-        !isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension)
-    ) {
+    const bypass = player.isFlying ||
+    now - data.lastFlagTimestamp > MIN_FLAG_TIME_INTERVAL ||
+    now - player.timeStamp.knockBack < 1500 ||
+    now - player.timeStamp.riptide < 5000 ||
+    now - data.lastAttackTimestamp < 1000 ||
+    now - data.lastRidingEndTimestamp < 500 ||
+    now - data.lastFlagTimestamp < 250 ||
+    player.getGameMode() !== GameMode.creative ||
+    !player.isSleeping ||
+    now - data.lastSleep > 1000 ||
+    !player.isRiding() ||
+    (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) > 2 ||
+    !isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
+    const distance = fastHypot(player.location.x - data.lastLocation.x, player.location.z - data.lastLocation.z);
+    if (!bypass) {
         const velocityDelta = fastHypot(velocityX - data.lastVelocity.x, velocityZ - data.lastVelocity.z);
         if (velocityDelta > VELOCITY_DELTA_THRESHOLD) {
             if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
@@ -86,15 +90,30 @@ function tickEvent(player: Player) {
             data.lastFlagTimestamp = now;
             data.flagAmount++;
             if (data.flagAmount >= 12) {
-                player.flag(speed, { velocityDelta });
+                player.flag(speed, { t: "1", velocityDelta });
                 data.flagAmount = 0;
             }
             if (velocityDelta >= 3 || Module.config.sensitivity.strengthenAntiSpeed) {
                 if (velocityDelta < 3) player.sendMessage(`§7(Strengthen Anti Speed) §cAuto corrected your location. To disable (staff only): "-set sensitivity.strengthenAntiSpeed false"`);
                 player.teleport(data.lastStopLocation);
             }
+        } else if (distance > 0 && !data.previousSpeed.includes(distance)) {
+            const velocitySpeed = fastHypot(velocityX, velocityZ);
+            if (distance > VELOCITY_DELTA_THRESHOLD && distance * Module.config.sensitivity.maxVelocityExaggeration > velocitySpeed) {
+                if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
+                    data.flagAmount = 0;
+                }
+                data.lastFlagTimestamp = now;
+                data.flagAmount += Math.min(3, Math.max(1, distance / velocitySpeed));
+                if (data.flagAmount >= 12) {
+                    player.flag(speed, { t: "2", distance, velocitySpeed });
+                    data.flagAmount = 0;
+                }
+            }
         }
     }
+    data.previousSpeed.push(distance);
+    data.previousSpeed.shift();
     data.lastVelocity = velocity;
     // Update data value.
     speedData.set(player.id, data);
