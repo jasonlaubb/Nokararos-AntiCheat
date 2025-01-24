@@ -927,3 +927,6 @@ msgstr "(Un)vanish yourself"
 
 msgid "command.about.sd"
 msgstr "Get info of Matrix-anti"
+
+msgid "command.crash.description"
+msgstr "Crash a player."
