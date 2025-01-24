@@ -14,7 +14,7 @@ export function registerModeration() {
         })
         .register();
 }
-export type Punishment = "crash" | "kick" | "softBan" | "ban" | "freeze" | "mute";
+export type Punishment = "none" | "crash" | "kick" | "softBan" | "ban" | "freeze" | "mute";
 function meaninglessCode () {
     const includeString = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
     let str = "";

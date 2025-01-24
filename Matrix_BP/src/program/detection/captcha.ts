@@ -1,8 +1,8 @@
 import { PlayerInteractWithBlockBeforeEvent, PlayerInteractWithEntityBeforeEvent, PlayerLeaveAfterEvent, PlayerSpawnAfterEvent, system, world } from "@minecraft/server";
 import { fastText, rawtextTranslate } from "../../util/rawtext";
 import { ModalFormData } from "@minecraft/server-ui";
-import { tempKick } from "../system/moderation";
 import { Module } from "../../matrixAPI";
+import { strengthenKick } from "../system/moderation";
 const defenderNotBlockingData: string[] = [];
 async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
     if (!event.initialSpawn || event.player.isAdmin()) return;
@@ -11,13 +11,13 @@ async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
     if (player.name.match(/^.{3,16}\s\([0-9]{1,2}\)$/)) {
         const rawName = player.name.replace(/^(.{3,16})\s\([0-9]{1,2}\)$/, "$1");
         const currentServerOnline = world.getAllPlayers();
-        tempKick(player);
+        strengthenKick(player);
         world.sendMessage(rawtextTranslate("module.captcha.detected", player.name));
         const susPlayer = currentServerOnline.find(({ name }) => {
             return rawName == name;
         });
         if (!susPlayer) return;
-        tempKick(susPlayer);
+        strengthenKick(player);
         world.sendMessage(rawtextTranslate("module.captcha.detected", susPlayer.name));
         return;
     }
@@ -64,7 +64,7 @@ async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
         }, 1);
     });
     if (isCameraMoved === false) {
-        tempKick(player);
+        strengthenKick(player);
         world.sendMessage(rawtextTranslate("module.captcha.detected", player.name));
         return;
     }
@@ -123,7 +123,7 @@ async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
             console.warn("Module :: Captcha :: Minecraft EDU is required to use defender without bypass!");
         }
     } else {
-        tempKick(player);
+        strengthenKick(player);
         world.sendMessage(rawtextTranslate("module.captcha.detected", player.id));
     }
 }

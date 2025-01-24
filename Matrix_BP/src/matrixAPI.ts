@@ -711,7 +711,7 @@ function* loadModuleRegistry (): Generator<void, void, void> {
             }, 200);
         });
         for (const module of Module.moduleList) {
-            if (module.locked || Module.config.modules[module.toggleId] === true) {
+            if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
                 module.onEnable();
                 module.enabled = true;
                 yield;

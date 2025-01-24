@@ -19,7 +19,6 @@ export default [
 	"./detection/reach",
 	"./detection/invalidSprint",
 	"./detection/captcha",
-	"./detection/hop",
 	"./detection/entityFly",
 	"./detection/elytraFly",
 	"./utility/welcomer",

@@ -1,3 +1,5 @@
+import { Punishment } from "../program/system/moderation";
+
 export default {
     disableConsoleOutput: false,
     security: {
@@ -5,31 +7,31 @@ export default {
         passwordHash: "",
     },
     modules: {
-        antiSpeed: true,
-        predictionModule: true,
-        antiFly: true,
-        antiTimer: true,
-        firewall: false, // Not tested :(
-        antiNamespoof: true,
-        antiKillAura: true,
-        antiMobAura: true,
-        antiScaffold: true,
-        antiInsteaBreak: false,
-        antiReach: true,
-        antiPhase: true,
-        antiInvalidSprint: true,
-        itemCheck: false,
-        aimCheck: true,
-        antiHop: false, // Beta don't touch that.
-        welcomer: true,
-        worldBorder: false,
-        chatRank: false,
-        antiAfk: false,
-        antiCombatLog: false,
-        captcha: false,
-        antiEntityFly: true,
-        antiElytraFly: true,
-    } as { [key: string]: boolean },
+        antiSpeed: {state: true, punishment: "default"}, // Not suggesting to set this to false
+        predictionModule: {state: true, punishment: "default"},
+        antiFly: {state: true, punishment: "default"}, // Not suggesting to set this to false
+        antiTimer: {state: false, punishment: "default"}, // Eliminated detection
+        velocityMagnitudeModule: {state: true, punishment: "default"}, // New version of antiTimer
+        firewall: {state: false, punishment: "default"},
+        antiNamespoof: {state: true, punishment: "default"},
+        antiKillAura: {state: true, punishment: "default"},
+        antiMobAura: {state: true, punishment: "default"},
+        antiScaffold: {state: true, punishment: "default"},
+        antiInsteaBreak: {state: false, punishment: "default"},
+        antiReach: {state: true, punishment: "default"},
+        antiPhase: {state: true, punishment: "default"},
+        antiInvalidSprint: {state: true, punishment: "default"},
+        itemCheck: {state: false, punishment: "default"},
+        aimCheck: {state: true, punishment: "default"},
+        welcomer: {state: true, punishment: "none"},
+        worldBorder: {state: false, punishment: "none"},
+        chatRank: {state: false, punishment: "none"},
+        antiAfk: {state: false, punishment: "none"},
+        antiCombatLog: {state: false, punishment: "none"},
+        captcha: {state: false, punishment: "none"},
+        antiEntityFly: {state: true, punishment: "default"},
+        antiElytraFly: {state: true, punishment: "default"},
+    } as { [key: string]: { state: boolean, punishment: Punishment | "default" } },
     command: {
         about: true,
         help: true,
@@ -67,7 +69,7 @@ export default {
         logPlayerJoinLeave: true,
     },
     sensitivity: {
-        antiBlink: true, // Stop blink movement (antiTimer), more lagback will be given.
+        antiBlink: false, // Stop blink movement (antiTimer), more lagback will be given.
         strengthenAntiSpeed: false, // Stronger anti speed, reverses the location instantly.
     },
     flag: {

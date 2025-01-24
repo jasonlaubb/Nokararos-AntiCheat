@@ -5,9 +5,10 @@ import { ban, freeze, mute, softBan, strengthenKick, crashPlayer } from "../prog
 import { write } from "../assets/logSystem";
 export function setupFlagFunction() {
     Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number | (string | number)[] }) {
-        const punishment = detected.modulePunishment;
-        if (!punishment || this.isAdmin()) return;
+        if (this.isAdmin()) return;
         const config = Module.config;
+        const configPunishment = config.modules[detected.getToggleId()!]?.punishment;
+        const punishment = configPunishment === "default" ? detected?.punishment ?? "kick" : configPunishment;
         const flagMessage = fastText()
             .addTran("flag.detected.title")
             .endline()

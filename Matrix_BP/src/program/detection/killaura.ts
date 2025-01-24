@@ -15,7 +15,7 @@ const killaura = new Module()
     .setName(rawtextTranslate("module.killaura.name"))
     .setDescription(rawtextTranslate("module.killaura.description"))
     .setToggleId("antiKillAura")
-    .setPunishment("tempKick")
+    .setPunishment("crash")
     .onModuleEnable(() => {
         world.afterEvents.entityHitEntity.subscribe(entityHitEntity);
         eventId = Module.subscribePlayerTickEvent(tickEvent);
