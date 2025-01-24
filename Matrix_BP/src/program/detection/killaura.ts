@@ -57,7 +57,7 @@ const killauraData = new Map<string, killAuraData>();
 function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHitEntityAfterEvent) {
     if (!(player instanceof Player) || player.isAdmin()) return;
     if (target.id === player.id) {
-        player.flag(killaura, { t: "1" });
+        player.flag(killaura, { t: "1", playerId: player.id });
         return;
     }
 
@@ -97,7 +97,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
         }
         data.integerFlagAmount++;
         if (data.integerFlagAmount > 3) {
-            player.flag(killaura, { t: "5" });
+            player.flag(killaura, { t: "5", yaw, pitch });
         }
         data.lastIntegerTimestamp = now;
     }
