@@ -1,6 +1,6 @@
 import { Dimension, EntityHitEntityAfterEvent, GameMode, Player, ScriptEventCommandMessageAfterEvent, system, Vector3, world } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
-import { fastHypot } from "../../util/fastmath";
+import { pythag } from "../../util/fastmath";
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { rawtextTranslate } from "../../util/rawtext";
 interface SpeedData {
@@ -80,9 +80,9 @@ function tickEvent(player: Player) {
     !player.isRiding() ||
     (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) > 2 ||
     !isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
-    const distance = fastHypot(player.location.x - data.lastLocation.x, player.location.z - data.lastLocation.z);
+    const distance = pythag(player.location.x - data.lastLocation.x, player.location.z - data.lastLocation.z);
     if (!bypass) {
-        const velocityDelta = fastHypot(velocityX - data.lastVelocity.x, velocityZ - data.lastVelocity.z);
+        const velocityDelta = pythag(velocityX - data.lastVelocity.x, velocityZ - data.lastVelocity.z);
         if (velocityDelta > VELOCITY_DELTA_THRESHOLD) {
             if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
                 data.flagAmount = 0;
@@ -98,7 +98,7 @@ function tickEvent(player: Player) {
                 player.teleport(data.lastStopLocation);
             }
         } else if (distance > 0 && !data.previousSpeed.includes(distance)) {
-            const velocitySpeed = fastHypot(velocityX, velocityZ);
+            const velocitySpeed = pythag(velocityX, velocityZ);
             if (distance > VELOCITY_DELTA_THRESHOLD && distance * Module.config.sensitivity.maxVelocityExaggeration > velocitySpeed) {
                 if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
                     data.flagAmount = 0;
