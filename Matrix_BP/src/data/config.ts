@@ -8,10 +8,9 @@ export default {
     },
     modules: {
         antiSpeed: {state: true, punishment: "default"}, // Not suggesting to set this to false
-        predictionModule: {state: true, punishment: "default"},
+        predictionModule: {state: false, punishment: "default"},
         antiFly: {state: true, punishment: "default"}, // Not suggesting to set this to false
         antiTimer: {state: false, punishment: "default"}, // Eliminated detection
-        velocityMagnitudeModule: {state: true, punishment: "default"}, // New version of antiTimer
         firewall: {state: false, punishment: "default"},
         antiNamespoof: {state: true, punishment: "default"},
         antiKillAura: {state: true, punishment: "default"},
@@ -22,7 +21,7 @@ export default {
         antiPhase: {state: true, punishment: "default"},
         antiInvalidSprint: {state: true, punishment: "default"},
         itemCheck: {state: false, punishment: "default"},
-        aimCheck: {state: true, punishment: "default"},
+        aimCheck: {state: false, punishment: "default"},
         welcomer: {state: true, punishment: "none"},
         worldBorder: {state: false, punishment: "none"},
         chatRank: {state: false, punishment: "none"},
