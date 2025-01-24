@@ -78,7 +78,7 @@ export default {
     },
     antiAutoClicker: {
         maxCps: 24,
-        maxFlag: 5,
+        maxFlag: 3,
         minFlagIntervalMs: 10000,
     },
     worldBorder: {
