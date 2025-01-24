@@ -1,10 +1,11 @@
 import { EntityHitEntityAfterEvent, Player, system, world } from "@minecraft/server";
 import { Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
+import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 let playerCPS: { [key: string]: number[] } = {};
 const CLICK_DURATION = 1500;
 let runId: number;
-new Module()
+const autoClicker = new Module()
     .setName(rawtextTranslate("module.autoclicker.name"))
     .setDescription(rawtextTranslate("module.autoclicker.description"))
     .setToggleId("antiAutoClicker")
@@ -17,26 +18,39 @@ new Module()
         system.clearRun(runId);
         world.afterEvents.entityHitEntity.unsubscribe(entityHit);
     })
-    .initPlayer((playerId) => {
+    .initPlayer((playerId, player) => {
         playerCPS[playerId] = [];
+        player.autoClickFlag = {
+            amount: 0,
+            lastFlagTimestamp: 0,
+        };
     })
     .initClear((playerId) => {
         delete playerCPS[playerId];
     })
-    .register();
+autoClicker.register();
 function tickEvent() {
     const allPlayers = Module.allNonAdminPlayers;
-    const maxCps = Module.config.antiAutoClicker.maxCps;
+    const config = Module.config;
+    const maxCps = config.antiAutoClicker.maxCps;
     for (const player of allPlayers) {
         playerCPS[player.id] = playerCPS[player.id].filter((arr) => Date.now() - arr < CLICK_DURATION);
         const cps = playerCPS[player.id].length;
-        if (cps > maxCps) {
-            player.sendMessage(rawtextTranslate("module.autoclicker.reach", maxCps.toString(), cps.toString()));
-            player.addTag("matrix:cps-limited");
-            player.addTag("matrix:pvp-disabled");
-        } else if (player.hasTag("matrix:cps-limited")) {
-            player.removeTag("matrix:cps-limited");
-            player.removeTag("matrix:pvp-disabled");
+        const hasWeaknessEffect = player.getEffect(MinecraftEffectTypes.Weakness);
+        if (!hasWeaknessEffect) {
+            if (cps > maxCps) {
+                player.sendMessage(rawtextTranslate("module.autoclicker.reach", maxCps.toString(), cps.toString()));
+                player.addEffect(MinecraftEffectTypes.Weakness, 200, { showParticles: false });
+                const now = Date.now();
+                if (now - player.autoClickFlag.lastFlagTimestamp > config.antiAutoClicker.minFlagIntervalMs) player.autoClickFlag.amount = 0;
+                player.autoClickFlag.lastFlagTimestamp = now;
+                player.autoClickFlag.amount++;
+                if (player.autoClickFlag.amount > config.antiAutoClicker.minFlagIntervalMs) {
+                    player.flag(autoClicker, { cps, maxCps });
+                }
+            }
+        } else {
+            player.removeEffect(MinecraftEffectTypes.Weakness);
         }
     }
 }

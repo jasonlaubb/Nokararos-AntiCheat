@@ -30,6 +30,7 @@ export default {
         captcha: {state: false, punishment: "none"},
         antiEntityFly: {state: true, punishment: "default"},
         antiElytraFly: {state: true, punishment: "default"},
+        antiAutoClicker: {state: true, punishment: "default"},
     } as { [key: string]: { state: boolean, punishment: Punishment | "default" } },
     command: {
         about: true,
@@ -77,6 +78,8 @@ export default {
     },
     antiAutoClicker: {
         maxCps: 24,
+        maxFlag: 5,
+        minFlagIntervalMs: 10000,
     },
     worldBorder: {
         borderLength: 1000,
