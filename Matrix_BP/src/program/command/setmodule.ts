@@ -15,7 +15,7 @@ new Command()
             return;
         }
         const toggleId = searchModule.getToggleId()!;
-        const isEnabled = Module.config.modules[toggleId];
+        const isEnabled = Module.config.modules[toggleId]?.state;
         if (isEnabled === (state as boolean)) {
             if (isEnabled) {
                 player.sendMessage(fastText().addText("§bMatrix§a+ §7> §c").addTran("command.setmodule.already").build());
