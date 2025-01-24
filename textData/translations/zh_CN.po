@@ -1,538 +1,534 @@
 #: pack.description
 msgid "§7§¶The Supreme Anti-Cheat Solution for Minecraft Bedrock. Required Beta API to work."
-msgstr ""
+msgstr "§7§¶我的世界基岩版最佳的反外挂解决方案，需要实验性API。"
 
 #: permissions.chatmute
 msgid "§bMatrix§a+ §7> §cYou have been muted from the server!"
-msgstr ""
+msgstr "§bMatrix§a+ §7> §c你已被服务器禁言！"
 
 #: disconnectionScreen.unexpectedPacket
 msgid "Oops, something went wrong."
-msgstr ""
+msgstr "哎呀，出现了问题。"
 
 #: menu.loadingLevel
 msgid "Protected by Matrix AntiCheat"
-msgstr ""
+msgstr "受到Matrix反外挂保护"
 
 #: json.packet
 msgid "§bMatrix§a+ §7> §e%1 §g packet§7(%2)§g received from %3"
-msgstr ""
+msgstr "§bMatrix§a+ §7> §e%1 §g数据包§7(%2)§g 从 %3 接收"
 
 #: error.happened
 msgid "§bMatrix§a+ §7> §gThere is some error from the script, please report it to the developer when you have time."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g脚本出现了一些错误，请有时间时向开发者报告。"
 
 #: error.name
 msgid "§7- Error: §e%s"
-msgstr ""
+msgstr "§7- 错误: §e%s"
 
 #: error.description
 msgid "§7- Description: §e%s"
-msgstr ""
+msgstr "§7- 描述: §e%s"
 
 #: error.stack
 msgid "§7- Stack: §e%s"
-msgstr ""
+msgstr "§7- 堆栈: §e%s"
 
 #: util.flag.alert
 msgid "§c§lCheat Alert! §r§7A cheater (%1§r§7) has been detected automatically by Matrix AntiCheat! We have automatically blocked it. §3(moduleId: %2, punishment: %3)§r"
-msgstr ""
+msgstr "§c§l作弊警报！§r§7检测到一个作弊者 (%1§r§7)，已被Matrix反外挂自动阻止。§3(moduleId: %2, 惩罚: %3)§r"
 
 #: function.help
 msgid "§bMatrix§a+ §7> §gAre you looking for help? Join our Discord Server: https://discord.gg/%1. Feel free to ask there. You are currently on Matrix anticheat version %2. You can use -op to gain matrix administrator permission and use -help to get help for the commands."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g你在寻找帮助吗？加入我们的Discord服务器: https://discord.gg/%1。可以随时在那里询问。你当前使用的是Matrix反外挂版本 %2。你可以使用 -op 获得Matrix管理员权限，并使用 -help 获取命令帮助。"
 
 #: function.help.typeA
 msgid "§7>> §gIs the chat command not working? Try to disable or place Matrix Anticheat above any-type of the chat rank addon."
-msgstr ""
+msgstr "§7>> §g聊天命令无法使用吗？请尝试禁用或将Matrix反外挂放在任何聊天等级插件之上。"
 
 #: function.help.typeB
 msgid "§7>> §gIs that nothing working? Don't forget to enable Beta API and update our Matrix anticheat to the latest"
-msgstr ""
+msgstr "§7>> §g没有任何功能工作吗？别忘了启用实验性API并将我们的Matrix反外挂更新到最新版本。"
 
 #: function.script.online
 msgid "§7>> §aScript is active! It is so nice to have you here."
-msgstr ""
+msgstr "§7>> §a脚本已激活！很高兴你在这里。"
 
 #: function.script.offline
 msgid "§7>> §cScript is inactive! Please check if you have Beta-API enabled."
-msgstr ""
+msgstr "§7>> §c脚本未激活！请检查是否启用了实验性API。"
 
 #: moderation.permanent
 msgid "permanent"
-msgstr ""
+msgstr "永久"
 
 #: moderation.softban.banned
 msgid "§cYou have been soft-banned§r"
-msgstr ""
+msgstr "§c你已被软禁§r"
 
 #: moderation.softban.until
 msgid "Until %s"
-msgstr ""
+msgstr "直到 %s"
 
 #: ui.runcommand
 msgid "Run Command!"
-msgstr ""
+msgstr "运行命令！"
 
 #: ui.exit
 msgid "Exit"
-msgstr ""
+msgstr "退出"
 
 #: ui.closechat
 msgid "§7>> §gPlease close the chat to receive your user interface (UI)."
-msgstr ""
+msgstr "§7>> §g请关闭聊天以接收用户界面（UI）。"
 
 #: ui.config.title
 msgid "Press the button to continue"
-msgstr ""
+msgstr "按下按钮以继续"
 
 #: ui.config.button
 msgid "Continue >w<"
-msgstr ""
+msgstr "继续 >w<"
 
 #: ui.config.body
 msgid "You can change the config in the config file. You can also use the command -set <path> <value> to change a config value."
-msgstr ""
+msgstr "您可以在配置文件中更改配置。您还可以使用命令 -set <路径> <值> 来更改配置值。"
 
 #: ui.config.selector
 msgid "Config Selector | Matrix AntiCheat"
-msgstr ""
+msgstr "配置选择器 | Matrix反外挂"
 
 #: ui.config.editor
 msgid "Config Editor | Matrix AntiCheat"
-msgstr ""
+msgstr "配置编辑器 | Matrix反外挂"
 
 #: ui.config.value
 msgid "New value you want to set"
-msgstr ""
+msgstr "您想设置的新值"
 
 #: ui.config.loc
 msgid "§gCurrent path of the config: §e%s"
-msgstr ""
+msgstr "§g当前配置路径: §e%s"
 
 #: commandsynax.unknown
 msgid "Unknown command: %s, you can type -help to get some useful information about the commands."
-msgstr ""
+msgstr "未知命令: %s，您可以输入 -help 获取有关命令的一些有用信息。"
 
 #: commandsynax.permission
 msgid "No permission to use this command. The minimum permission required is 'level %s'"
-msgstr ""
+msgstr "没有权限使用此命令。所需的最低权限是 'level %s'"
 
 #: commandsystem.disabled
 msgid "Oops, this command has been disabled."
-msgstr ""
+msgstr "哎呀，命令已被禁用。"
 
 #: commandsynax.unknownsubcommand
 msgid "Unknown subcommand: %s, you can use -help <command> to know what subcommand you can use."
-msgstr ""
+msgstr "未知子命令: %s，您可以使用 -help <命令> 来了解可以使用的子命令。"
 
 #: commandsynax.empty
 msgid "Oops, you have to type something if you want to use some commands."
-msgstr ""
+msgstr "哎呀，如果您想使用某些命令，必须输入一些内容。"
 
 #: commandsynax.tips
 msgid "§7>> §gUse -help <command> to get some useful information about the commands."
-msgstr ""
+msgstr "§7>> §g使用 -help <命令> 获取有关命令的一些有用信息。"
 
 #: commandsynax.missing
 msgid "You missed a parameter '%s' which is required."
-msgstr ""
+msgstr "您缺少一个必需的参数 '%s'。"
 
 #: commandsynax.missing.subcommand
 msgid "This is a subcommand! You have to type -help <command> to know what subcommand you can use."
-msgstr ""
+msgstr "这是一个子命令！您必须输入 -help <命令> 来了解可以使用的子命令。"
 
 #: commandsynax.syntax.boolean
 msgid "Syntax error: The parameter '%1' is a boolean value, but you have typed '%2 >>%3<< %4'. Only 'true' or 'false' are allowed'."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 是布尔值，但您输入的是 '%2 >>%3<< %4'。仅允许 'true' 或 'false'。"
 
 #: commandsynax.syntax.string.low
 msgid "Syntax error: The parameter '%1' required a string that contains at least %5 characters, but you have typed '%2 >>%3<< %4'."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个包含至少 %5 个字符的字符串，但您输入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.string.high
 msgid "Syntax error: The parameter '%1' required a string that contains at most %5 characters, but you have typed '%2 >>%3<< %4'."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个包含最多 %5 个字符的字符串，但您输入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.integer.nan
 msgid "Syntax error: The parameter '%1' required a integer, but you have typed '%2 >>%3<< %4'."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个整数，但您输入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.number.nan
 msgid "Syntax error: The parameter '%1' required a valid number, but you have typed '%2 >>%3<< %4'."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个有效的数字，但您输入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.number.low
 msgid "Syntax error: The parameter '%1' required a number that is larger than %5, but you have typed '%2 >>%3<< %4' which is out of range."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个大于 %5 的数字，但您输入的是 '%2 >>%3<< %4'，超出了范围。"
 
 #: commandsynax.syntax.number.high
 msgid "Syntax error: The parameter '%1' required a number that is smaller than %5, but you have typed '%2 >>%3<< %4' which is out of range."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个小于 %5 的数字，但您输入的是 '%2 >>%3<< %4'，超出了范围。"
 
 #: commandsynax.syntax.code
 msgid "Syntax error: The parameter '%1' required a code with length that is equal to %5, but you have typed '%2 >>%3<< %4', which is out of range."
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个长度等于 %5 的代码，但您输入的是 '%2 >>%3<< %4'，超出了范围。"
 
 #: commandsynax.syntax.purecode
 msgid "Syntax error: The parameter '%1' required a purecode that only formed by number (0-9), upper and lower case letters (a-z or A-Z), but you have typed '%2 >>%3<< %4'"
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个仅由数字 (0-9)、大小写字母 (a-z 或 A-Z) 组成的纯代码，但您输入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.choice
 msgid "Syntax error: The parameter '%1' required a choice between %5, but you have typed '%2 >>%3<< %4'"
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要在 %5 之间进行选择，但您输入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.player
 msgid "Syntax error: The parameter '%1' required a player which is online, but you have typed '%2 >>%3<< %4'"
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个在线玩家，但您输入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.target
 msgid "Syntax error: The parameter '%1' required a target which is online and not an administrator, but you have typed '%2 >>%3<< %4'"
-msgstr ""
+msgstr "语法错误: 参数 '%1' 需要一个在线且不是管理员的目标，但您输入的是 '%2 >>%3<< %4'。"
 
 #: module.phase.name
 msgid "Anti Phase"
-msgstr ""
+msgstr "反相位"
 
 #: module.phase.description
 msgid "Prevent the player from passing through the walls with the illegal movement packet."
-msgstr ""
+msgstr "防止玩家通过非法移动数据包穿过墙壁。"
 
 #: module.firewall.name
 msgid "Firewall"
-msgstr ""
+msgstr "防火墙"
 
 #: module.firewall.description
 msgid "Prevent the player who contains bad packets from accessing the server. For example, spam bot."
-msgstr ""
+msgstr "防止包含恶意数据包的玩家访问服务器。例如，垃圾邮件机器人。"
 
 #: module.namespoof.name
 msgid "Anti Name Spoofer"
-msgstr ""
+msgstr "反名字欺骗"
 
 #: module.namespoof.description
 msgid "Prevent the player from changing their name to a invalid name and join the server."
-msgstr ""
+msgstr "防止玩家将名字更改为无效名称并加入服务器。"
 
 #: module.killaura.name
 msgid "Anti KillAura"
-msgstr ""
+msgstr "反KillAura"
 
 #: module.killaura.description
 msgid "Prevent the player from hitting other players with the illegal kill packet."
-msgstr ""
+msgstr "防止玩家使用非法击杀数据包攻击其他玩家。"
 
 #: module.scaffold.name
 msgid "Anti Scaffold"
-msgstr ""
+msgstr "反脚手架"
 
 #: module.scaffold.description
 msgid "Prevent the player from using the auto-brige hack to gain unfair advantage."
-msgstr ""
+msgstr "防止玩家使用自动搭桥外挂以获得不公平的优势。"
 
 #: module.insteabreak.name
 msgid "Anti Insteabreak"
-msgstr ""
+msgstr "反瞬间破坏"
 
 #: module.insteabreak.description
 msgid "Prevent the player from breaking the block without breaking time. These type of hack is not working on realm or a BDS server that is configured correctly."
-msgstr ""
+msgstr "防止玩家在没有破坏时间的情况下破坏方块。这类外挂在Realm或正确配置的BDS服务器上无法生效。"
 
 #: module.reach.name
 msgid "Anti Reach"
-msgstr ""
+msgstr "反远程攻击"
 
 #: module.reach.description
 msgid "An advanced anti reach solution that provided reach detection up to 4.5 blocks."
-msgstr ""
+msgstr "一种先进的反远程攻击解决方案，检测范围可达4.5个方块。"
 
 #: module.speed.name
 msgid "Anti Speed"
-msgstr ""
+msgstr "反速度"
 
 #: module.speed.description
 msgid "The latest and strongest anti speed engine. Used the property of 'bds prediction' phenomenon to indentify the illegal movement from the players."
-msgstr ""
+msgstr "最新最强的反速度引擎。利用'bds预测'现象的特性来识别玩家的非法移动。"
 
 #: module.fly.name
 msgid "Anti Fly"
-msgstr ""
+msgstr "反飞行"
 
 #: module.fly.description
 msgid "Prevent most of the fly hacks from working. There is a small probability of false positive."
-msgstr ""
+msgstr "防止大部分飞行外挂生效。存在小概率的误报。"
 
 #: module.timer.name
 msgid "Anti Timer"
-msgstr ""
+msgstr "反计时器"
 
 #: module.timer.description
 msgid "Prevent someone speed up their game speed to get an unfair advantage."
-msgstr ""
+msgstr "防止某人加快游戏速度以获得不公平的优势。"
 
 #: module.itemcheck.name
 msgid "Item check"
-msgstr ""
+msgstr "物品检查"
 
 #: module.itemcheck.description
 msgid "Prevent the player from using the illegal item from the server."
-msgstr ""
+msgstr "防止玩家使用服务器上的非法物品。"
 
 #: module.hop.name
 msgid "Anti Hop"
-msgstr ""
+msgstr "反跳跃"
 
 #: module.hop.description
 msgid "An extra checks against the illegal movement motion, to prevent a silent bypass."
-msgstr ""
+msgstr "额外检查非法移动动作，以防止静默绕过。"
 
 #: module.aim.name
 msgid "Aim check"
-msgstr ""
+msgstr "瞄准检查"
 
 #: module.aim.description
 msgid "An extra checks against the illegal aim, to prevent the killaura or aim assist, credit to 4urxa."
-msgstr ""
+msgstr "额外检查非法瞄准，以防止KillAura或瞄准辅助，感谢4urxa。"
 
 #: module.invalidSprint.name
 msgid "Anti invalid sprint"
-msgstr ""
+msgstr "反无效冲刺"
 
 #: module.invalidSprint.description
 msgid "Prevent the player from using the illegal sprint packet client."
-msgstr ""
+msgstr "防止玩家使用非法冲刺数据包客户端。"
 
 #: command.about.description
 msgid "Show some basic information about Matrix AntiCheat."
-msgstr ""
+msgstr "显示有关Matrix反外挂的一些基本信息。"
 
 #: command.about.title
 msgid "§bMatrix§a+ §7> §gAbout Matrix AntiCheat <3"
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g关于Matrix反外挂 <3"
 
 #: command.about.author
 msgid "Author: jasonlaubb (Discord: @uwu_the_great)"
-msgstr ""
+msgstr "作者: jasonlaubb (Discord: @uwu_the_great)"
 
 #: command.about.github
 msgid "Github: %s"
-msgstr ""
+msgstr "Github: %s"
 
 #: command.about.version
 msgid "Current version: %s"
-msgstr ""
+msgstr "当前版本: %s"
 
 #: command.about.joindc
 msgid "Want to download? Join our Discord Server: https://discord.gg/%s"
-msgstr ""
+msgstr "想要下载吗？加入我们的Discord服务器: https://discord.gg/%s"
 
 #: ad.running
 msgid "§bMatrix§a+ §7> §gMatrix Anticheat is protecting your game experience. Discord server: https://discord.gg/%s"
-msgstr ""
+msgstr "§bMatrix§a+ §7> §gMatrix反外挂正在保护您的游戏体验。Discord服务器: https://discord.gg/%s"
 
 #: command.help.description
 msgid "Get the useful information about the commands."
-msgstr ""
+msgstr "获取有关命令的有用信息。"
 
 #: command.help.command.name
 msgid "Command's name"
-msgstr ""
+msgstr "命令名称"
 
 #: command.help.command.name.description
 msgid "The name of the command that you need help."
-msgstr ""
+msgstr "您需要帮助的命令名称。"
 
 #: command.help.title
 msgid "The command list of Matrix AntiCheat:"
-msgstr ""
+msgstr "Matrix反外挂的命令列表："
 
 #: command.help.target.title
 msgid "Showing the usage of the selected command: %s"
-msgstr ""
+msgstr "显示所选命令的用法: %s"
 
 #: command.help.target.notfound
 msgid "Not able to find the command, make sure you type a valid command so that we can show you the correct information."
-msgstr ""
+msgstr "无法找到命令，请确保您输入有效的命令，以便我们能为您提供正确的信息。"
 
 #: command.help.m.description
 msgid "§gDescription of the command: §e%s§g"
-msgstr ""
+msgstr "§g命令描述: §e%s§g"
 
 #: command.help.m.usage
 msgid "§gUsage of the command: §e"
-msgstr ""
+msgstr "§g命令用法: §e"
 
 #: command.help.m.usage.empty
 msgid "§gUsage of the command: §eJust type the command name!"
-msgstr ""
+msgstr "§g命令用法: §e只需输入命令名称！"
 
 #: command.help.option.string
 msgid "string (A string that formed with any characters)"
-msgstr ""
+msgstr "字符串（由任何字符组成的字符串）"
 
 #: command.help.option.number
 msgid "number (A float number or a integer)"
-msgstr ""
+msgstr "数字（浮点数或整数）"
 
 #: command.help.option.integer
 msgid "number (Integer only, including negative)"
-msgstr ""
+msgstr "数字（仅限整数，包括负数）"
 
 #: command.help.option.boolean
 msgid "boolean (A boolean value, true or false)"
-msgstr ""
+msgstr "布尔值（布尔值，真或假）"
 
 #: command.help.option.code
 msgid "code (A code with length that is equal to a specific number)"
-msgstr ""
+msgstr "代码（长度等于特定数字的代码）"
 
 #: command.help.option.purecode
 msgid "purecode (A purecode that only formed by number (0-9), upper and lower case letters (a-z or A-Z))"
-msgstr ""
+msgstr "纯代码（仅由数字（0-9）、大小写字母（a-z 或 A-Z）组成的纯代码）"
 
 #: command.help.option.choice
 msgid "choice (A choice between a list of options)"
-msgstr ""
+msgstr "选择（在选项列表之间进行选择）"
 
 #: command.help.option.player
 msgid "player (A player name of a player that is online)"
-msgstr ""
+msgstr "玩家（在线玩家的名称）"
 
 #: command.help.option.target
 msgid "target (A player name of a player that is online but not an administrator of the server)"
-msgstr ""
+msgstr "目标（在线但不是服务器管理员的玩家名称）"
 
 #: command.help.target.type
 msgid "§gType: §e%s"
-msgstr ""
+msgstr "§g类型: §e%s"
 
 #: command.help.target.description
 msgid "§gDescription: §e%s"
-msgstr ""
-
-#: command.help.target.type
-msgid "§gType: §e%s"
-msgstr ""
+msgstr "§g描述: §e%s"
 
 #: command.help.target.optional
 msgid " (optional)"
-msgstr ""
+msgstr "（可选）"
 
 #: command.op.description
 msgid "Make yourself to be an administrator of the server, just by a command."
-msgstr ""
+msgstr "通过一个命令将自己设为服务器管理员。"
 
 #: command.op.password
 msgid "admin password"
-msgstr ""
+msgstr "管理员密码"
 
 #: command.op.password.description
 msgid "The password that you have been set as the password for the command. If you have not set a password, just don't type anything here."
-msgstr ""
+msgstr "您为命令设置的密码。如果您没有设置密码，请在此处保持空白。"
 
 #: command.op.statement.mismatch
 msgid "You have not set a password yet, you can just keep it empty."
-msgstr ""
+msgstr "您尚未设置密码，可以保持为空。"
 
 #: command.op.statement.missing
 msgid "You should type the password as the password has been set."
-msgstr ""
+msgstr "您应该输入已设置的密码。"
 
 #: command.op.statement.already
 msgid "You have the administrator permission already. What do you want anymore by using me?"
-msgstr ""
+msgstr "您已经拥有管理员权限。您还想要什么？"
 
 #: command.op.overheat.password
 msgid "Huh, just try later, I have almost overheated myself."
-msgstr ""
+msgstr "呃，稍后再试，我快要过热了。"
 
 #: command.op.overheat.normal
 msgid "You should finish the verification first!"
-msgstr ""
+msgstr "您应该先完成验证！"
 
 #: command.op.success
 msgid "You have been set as an administrator of the server."
-msgstr ""
+msgstr "您已被设为服务器管理员。"
 
 #: command.op.start
 msgid "Seems like the server has no password yet, let's start a simple verification to verify about you're an administrator of the server or not."
-msgstr ""
+msgstr "看起来服务器还没有密码，让我们开始一个简单的验证，以确认您是否是服务器管理员。"
 
 #: command.op.success.fast
 msgid "Success! We are able to verify you're an administrator of the server, you have been set as an administrator of the server."
-msgstr ""
+msgstr "成功！我们已验证您是服务器管理员，您已被设为服务器管理员。"
 
 #: command.op.require
 msgid "Please type the following slash command (/) in the chat: '%s'."
-msgstr ""
+msgstr "请在聊天中输入以下斜杠命令（/）: '%s'。"
 
 #: command.op.require.cancel
 msgid "If you want to cancel the verification, just type the slash command (/) in chat: '%s'."
-msgstr ""
+msgstr "如果您想取消验证，请在聊天中输入斜杠命令（/）: '%s'。"
 
 #: command.op.verify.failed
 msgid "Sorry, but you have typed a wrong command, please try again."
-msgstr ""
+msgstr "抱歉，您输入了错误的命令，请再试一次。"
 
 #: command.op.verify.success
 msgid "Success! You have been set as an administrator of the server."
-msgstr ""
+msgstr "成功！您已被设为服务器管理员。"
 
 #: command.op.verify.cancel
 msgid "You have canceled the verification."
-msgstr ""
+msgstr "您已取消验证。"
 
 #: command.op.incorrect
 msgid "You have typed the incorrect password, please try again later."
-msgstr ""
+msgstr "您输入了错误的密码，请稍后再试。"
 
 #: command.deop.description
 msgid "Remove yourself from the administrators of the server."
-msgstr ""
+msgstr "将自己从服务器管理员中移除。"
 
 #: command.deop.success
 msgid "You have been removed from the administrators of the server."
-msgstr ""
+msgstr "您已从服务器管理员中移除。"
 
 #: command.setmodule.description
 msgid "Toggle a module on or off."
-msgstr ""
+msgstr "开启或关闭模块。"
 
 #: command.setmodule.module
 msgid "module's id"
-msgstr ""
+msgstr "模块ID"
 
 #: command.setmodule.module.description
 msgid "The id of the module that you want to toggle on or off."
-msgstr ""
+msgstr "您要开启或关闭的模块的ID。"
 
 #: command.setmodule.state
 msgid "target state"
-msgstr ""
+msgstr "目标状态"
 
 #: command.setmodule.state.description
 msgid "State that you want to switch on or off for the module."
-msgstr ""
+msgstr "您想为模块切换的状态。"
 
 #: command.setmodule.success.enabled
 msgid "Success! The module has been enabled by yourself."
-msgstr ""
+msgstr "成功！您已启用该模块。"
 
 #: command.setmodule.success.disabled
 msgid "Success! The module has been disabled by yourself."
-msgstr ""
+msgstr "成功！您已禁用该模块。"
 
 #: command.setmodule.notfound
 msgid "Not able to find the module, make sure you type a valid module. You can use '-listmodules' to see the list of modules."
-msgstr ""
+msgstr "无法找到模块，请确保您输入有效的模块。您可以使用 '-listmodules' 查看模块列表。"
 
 #: command.setmodule.already.enabled
 msgid "The module has already been enabled. Do you want to disable it?"
-msgstr ""
+msgstr "该模块已经启用。您要禁用它吗？"
 
 #: command.setmodule.already.disabled
 msgid "The module has already been disabled. Do you mean to enable it?"
-msgstr ""
+msgstr "该模块已经禁用。您是想启用它吗？"
 
 #: command.listmodule.description
 msgid "Show the list of modules."
@@ -1068,185 +1064,185 @@ msgstr ""
 
 #: flag.detected.title
 msgid "§bMatrix§i│ §eSuspicious client detected"
-msgstr ""
+msgstr "§bMatrix§i│ §e偵測到可疑客戶"
 
 #: flag.detected.player
 msgid "   §fPlayer§r§i│ §f%s"
-msgstr ""
+msgstr "   §f玩家§r§i│ §f%s"
 
 #: flag.detected.module
 msgid "   §fModule§r§i│ §f%s"
-msgstr ""
+msgstr "   §f模組§r§i│ §f%s"
 
 #: flag.detected.object
 msgid "   §fobject§r§i│ §ftype §i[§f%s§i] §f¬"
-msgstr ""
+msgstr "   §f對向§r§i│ §f類型 §i[§f%s§i] §f¬"
 
 #: flag.detected.none
 msgid "         §cNo data is given by the module."
-msgstr ""
+msgstr "         §c模組沒有給出任何數據"
 
 #: flag.detected.punishment
 msgid "   §fPunishment§r§i│ §f%s"
-msgstr ""
+msgstr "   §f懲罰§r§i│ §f%s"
 
 #: flag.detected.false
 msgid "   §7[?] Is it a §cfalse flag§7? Please report it to the developer when you have time."
-msgstr ""
+msgstr "   §7[?] 這是§c誤報§7嗎？請您有空時向開發人員回報。"
 
 #: command.moderation.reason.description
 msgid "The reason for the moderation action."
-msgstr ""
+msgstr "进行管理操作的原因。"
 
 #: command.moderation.reason
 msgid "Reason"
-msgstr ""
+msgstr "原因"
 
 #: module.entityFly.name
 msgid "Anti Entity Fly"
-msgstr ""
+msgstr "反实体飞行"
 
 #: module.entityFly.description
 msgid "Prevent the entity fly from working."
-msgstr ""
+msgstr "防止实体飞行生效。"
 
 #: command.echestwipe.success
 msgid "The echest of %s has been wiped successfully."
-msgstr ""
+msgstr "%s 的末影箱已成功清空。"
 
 #: command.echestwipe.description
 msgid "Wipe the ender chest of a player."
-msgstr ""
+msgstr "清空玩家的末影箱。"
 
 #: command.fastlog.description
 msgid "Get the log in today, yesterday or the day before yesterday"
-msgstr ""
+msgstr "获取今天、昨天或前天的日志。"
 
 #: command.log.day
 msgid "Day"
-msgstr ""
+msgstr "天"
 
 #: command.log.day.description
 msgid "The day of the logs(s)"
-msgstr ""
+msgstr "日志的日期"
 
 #: command.log.nodata
 msgid "No data. Unable to get the log that you want in the database."
-msgstr ""
+msgstr "没有数据。无法在数据库中获取您想要的日志。"
 
 #: command.log.description
 msgid "View the recent logs in the database"
-msgstr ""
+msgstr "查看数据库中的最近日志。"
 
 #: command.log.amount
 msgid "Amount"
-msgstr ""
+msgstr "数量"
 
 #: command.log.amount.description
 msgid "The amount of the latest logs that you what to view."
-msgstr ""
+msgstr "您想查看的最新日志的数量。"
 
 #: command.daylog.description
 msgid "View all of the logs in a specific day."
-msgstr ""
+msgstr "查看特定日期的所有日志。"
 
 #: command.log.month
 msgid "The month of the log(s)."
-msgstr ""
+msgstr "日志的月份。"
 
 #: command.log.years
 msgid "The years of the log(s)."
-msgstr ""
+msgstr "日志的年份。"
 
 #: command.log.invalid
 msgid "Invalid time: You should not select a time that is in the future."
-msgstr ""
+msgstr "无效时间：您不应选择未来的时间。"
 
 #: command.logui.description
 msgid "Select one of the the restart point and view all of the log(s) during the restart point to the next restart point."
-msgstr ""
+msgstr "选择一个重启点，查看该重启点到下一个重启点期间的所有日志。"
 
 #: command.logui.title
 msgid "Select one of the restart point in below"
-msgstr ""
+msgstr "在下面选择一个重启点"
 
 #: command.logui.button
 msgid "Server initialization #%s"
-msgstr ""
+msgstr "服务器初始化 #%s"
 
 #: ui.log.title
 msgid "Log record | Timezone: %s"
-msgstr ""
+msgstr "日志记录 | 时区: %s"
 
 #: ui.log.body
 msgid "Click into the §gbutton§f of the log can see the §adetail information§f of the selected log. If you want to exit this ui, you can click the 'X' in the corner."
-msgstr ""
+msgstr "点击日志的 §g按钮§f 可以查看所选日志的 §a详细信息§f。要退出此界面，请点击角落中的 'X'。"
 
 #: ui.log.detail
 msgid "Detail information"
-msgstr ""
+msgstr "详细信息"
 
 #: command.echestwipe.description
 msgid "Clear a player's ender chest"
-msgstr ""
+msgstr "清空玩家的末影箱。"
 
 #: command.help.sd
 msgid "Get the command list"
-msgstr ""
+msgstr "获取命令列表"
 
 #: command.logui.sd
 msgid "View logs by restart time"
-msgstr ""
+msgstr "按重启时间查看日志"
 
 #: command.daylog.sd
 msgid "View logs by date"
-msgstr ""
+msgstr "按日期查看日志"
 
 #: command.fastlog.ad
 msgid "View logs in past few days"
-msgstr ""
+msgstr "查看过去几天的日志"
 
 #: command.setpassword.sd
 msgid "Change password"
-msgstr ""
+msgstr "更改密码"
 
 #: command.configui.sd
 msgid "Edit config"
-msgstr ""
+msgstr "编辑配置"
 
 #: command.op.sd
 msgid "Gain matrix admin"
-msgstr ""
+msgstr "获得Matrix管理员权限"
 
 #: command.deop.sd
 msgid "Remove your admin perm"
-msgstr ""
+msgstr "移除您的管理员权限"
 
 #: command.vanish.sd
 msgid "(Un)vanish yourself"
-msgstr ""
+msgstr "（隐身/显现）"
 
 #: command.about.sd
 msgid "Get info of Matrix-anti"
-msgstr ""
+msgstr "获取Matrix反外挂的信息"
 
 #: command.crash.description
 msgid "Crash a player."
-msgstr ""
+msgstr "使玩家崩溃。"
 
 #: module.mobaura.name
 msgid "Anti Mob Aura"
-msgstr ""
+msgstr "反生物光环"
 
 #: module.mobaura.description
 msgid "Spawn dummy when player attack a mob, checks if the player is attacking the dummy."
-msgstr ""
+msgstr "玩家攻击生物时生成虚拟目标，检查玩家是否在攻击虚拟目标。"
 
 #: module.elytraFly.name
 msgid "Anti Elytra Fly"
-msgstr ""
+msgstr "反翅膀飞行"
 
 #: module.elytraFly.description
 msgid "Prevent the player from using the illegal elytra flying."
-msgstr ""
+msgstr "防止玩家使用非法的翅膀飞行。"
 
