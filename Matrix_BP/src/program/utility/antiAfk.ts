@@ -1,6 +1,7 @@
 import { Player, world } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { fastText, rawtextTranslate } from "../../util/rawtext";
+import { strengthenKick } from "../system/moderation";
 const afkData = new Map<string, number>();
 let eventId: IntegratedSystemEvent;
 new Module()
@@ -26,12 +27,10 @@ const MAX_AFK_TIME_ALLOWED = 480000;
 function tickEvent(player: Player) {
     const data = afkData.get(player.id)!;
     const now = Date.now();
-    const isMoving = player.hasTag("moving");
-    const handMoving = player.hasTag("attackTime");
-    if (isMoving || handMoving) {
+    if (player.isMoving()) {
         afkData.set(player.id, now);
     } else if (now - data > MAX_AFK_TIME_ALLOWED) {
-        player.triggerEvent("matrix:tempkick");
+        strengthenKick(player, "Afk is not allowed");
         world.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("module.afk.kicked", player.name).build());
     }
 }
