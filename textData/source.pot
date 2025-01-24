@@ -930,3 +930,15 @@ msgstr "Get info of Matrix-anti"
 
 msgid "command.crash.description"
 msgstr "Crash a player."
+
+msgid "module.mobaura.name"
+msgstr "Anti Mob Aura"
+
+msgid "module.mobaura.description"
+msgstr "Spawn dummy when player attack a mob, checks if the player is attacking the dummy."
+
+msgid "module.elytraFly.name"
+msgstr "Anti Elytra Fly"
+
+msgid "module.elytraFly.description"
+msgstr "Prevent the player from using the illegal elytra flying."
