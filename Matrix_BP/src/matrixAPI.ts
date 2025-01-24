@@ -536,7 +536,14 @@ export class DirectPanel {
                 .addText("§bMatrix§a+ §7> §g")
                 .addTran("directpanel.enter")
                 .build();
-            const ui = new ModalFormData().title(rawtextTranslate("directpanel.build")).textField(body, 'Type it here. No need to add ""');
+                const ui = new ModalFormData().title(rawtextTranslate("directpanel.build"))
+                const playerNameArray = world.getAllPlayers().map(({ name }) => name);
+                const notPlayerTarget = requiredOption.type !== "player" && requiredOption.type !== "target";
+                if (notPlayerTarget) {
+                    ui.textField(body, "Type here...");
+                } else {
+                    ui.dropdown(body, playerNameArray, 0);
+                }
             //@ts-expect-error
             const result = await ui.show(player);
             if (result.canceled || (result.formValues![0] as string).length == 0) return;
@@ -551,14 +558,21 @@ export class DirectPanel {
                 .addText("§bMatrix§a+ §7> §g")
                 .addTran("directpanel.enter")
                 .build();
-            const ui = new ModalFormData().title(rawtextTranslate("directpanel.build")).textField(body, "Keep this empty to skip (optional)");
+            const ui = new ModalFormData().title(rawtextTranslate("directpanel.build"))
+            const playerNameArray = world.getAllPlayers().map(({ name }) => name);
+            const notPlayerTarget = optionalOption.type !== "player" && optionalOption.type !== "target";
+            if (notPlayerTarget) {
+                ui.textField(body, "Keep this empty to skip (optional)");
+            } else {
+                ui.dropdown(body, playerNameArray, 0);
+            }
             //@ts-expect-error
             const result = await ui.show(player);
             if (result.canceled) return;
             if ((result.formValues![0] as string).length == 0) {
                 break;
             }
-            currentString += " " + result.formValues![0];
+            currentString += " " + notPlayerTarget ? result.formValues![0] : '"' + playerNameArray[result.formValues![0] as number] + '"';
         }
         // Run the command for it.
         player.runChatCommand(currentString);
