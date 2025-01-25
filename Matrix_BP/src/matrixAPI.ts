@@ -703,13 +703,23 @@ function* loadModuleRegistry(): Generator<void, void, void> {
     try {
         const items = program;
         let importedAmount = 0;
+        world.sendMessage(`(Reload) Waiting for import`);
         for (const item of items) {
-            import(item).then(() => importedAmount++).catch((error) => console.warn(`loadModuleRegistry :: ${item} :: (${error.name}) ${error.message}`));
+            import(item).finally(() => importedAmount++).catch((error) => console.warn(`loadModuleRegistry :: ${item} :: (${error.name}) ${error.message}`));
             yield;
         }
         yield Config.loadData();
         // Initialize the command system
         yield Command.initialize();
+        new Promise<void>((resolve) => {
+            const id = system.runInterval(() => {
+                if (importedAmount === items.length) {
+                    world.sendMessage(`(Reload) Import ended`);
+                    resolve();
+                    system.clearRun(id);
+                }
+            })
+        }).then(() => {
         world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
             if (!initialSpawn) return;
             Module.currentPlayers.push(player);
@@ -742,7 +752,6 @@ function* loadModuleRegistry(): Generator<void, void, void> {
             if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
                 module?.onEnable();
                 module.enabled = true;
-                yield;
             }
         }
         if (world.getAllPlayers().length > 0) {
@@ -756,7 +765,6 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                         Module.sendError(error as Error);
                     }
                 }
-                yield;
             }
         }
         world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
@@ -804,11 +812,11 @@ function* loadModuleRegistry(): Generator<void, void, void> {
             });
         });
         world.sendMessage("(Reload) Imported sucess amount: " + importedAmount + "/" + items.length);
+    });
     } catch (error) {
         Module.sendError(error as Error);
     } finally {
         Module.isInitialized = true;
-        yield;
     }
 }
 export { Module, Command, Config };

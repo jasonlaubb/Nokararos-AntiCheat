@@ -61,6 +61,7 @@ function tickEvent(player: Player) {
     const now = Date.now();
     const velocity = player.getVelocity();
     const { x: velocityX, y: velocityY, z: velocityZ } = velocity;
+    player.sendMessage("running");
     if (velocityX === 0 && velocityY === 0 && velocityZ === 0) {
         data.lastStopLocation = player.location;
     }
