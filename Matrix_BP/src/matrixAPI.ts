@@ -711,15 +711,16 @@ function* loadModuleRegistry(): Generator<void, void, void> {
         yield Config.loadData();
         // Initialize the command system
         yield Command.initialize();
-        new Promise<void>((resolve) => {
+        yield new Promise<void>((resolve) => {
             const id = system.runInterval(() => {
                 if (importedAmount === items.length) {
-                    world.sendMessage(`(Reload) Import ended`);
                     resolve();
                     system.clearRun(id);
                 }
             })
         }).then(() => {
+            world.sendMessage(`(Reload) Import ended`);
+            system.runJob(loadModuleList());
         world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
             if (!initialSpawn) return;
             Module.currentPlayers.push(player);
@@ -748,11 +749,15 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                 }
             }, 200);
         });
-        for (const module of Module.moduleList) {
-            if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
-                module?.onEnable();
-                module.enabled = true;
+        function* loadModuleList () {
+            for (const module of Module.moduleList) {
+                if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
+                    yield module?.onEnable();
+                    module.enabled = true;
+                }
             }
+            world.sendMessage("(Reload) Imported sucess amount: " + importedAmount + "/" + items.length)l
+            yield;
         }
         if (world.getAllPlayers().length > 0) {
             for (const player of world.getAllPlayers()) {
@@ -811,7 +816,6 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                 }
             });
         });
-        world.sendMessage("(Reload) Imported sucess amount: " + importedAmount + "/" + items.length);
     });
     } catch (error) {
         Module.sendError(error as Error);
