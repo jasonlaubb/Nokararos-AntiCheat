@@ -28,7 +28,10 @@ const MAX_FLAG_AMOUNT = 7;
 const MIN_FLAG_INTERVAL = 4000;
 function entityHitEntity({ damagingEntity, hitEntity }: EntityHitEntityAfterEvent) {
     if (!(damagingEntity instanceof Player) || damagingEntity.isAdmin()) return;
-    const isDummyHit = hitEntity.typeId === TEST_ENTITY && hitEntity.hasTag("matrix:dummy::" + damagingEntity.id);
+    let isDummyHit = false;
+    try {
+        isDummyHit = hitEntity.typeId === TEST_ENTITY && hitEntity?.hasTag("matrix:dummy::" + damagingEntity.id);
+    } catch { }
     const location = damagingEntity.location;
     if (isDummyHit) {
         // Prevent spamming
