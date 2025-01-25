@@ -28,7 +28,8 @@ const MAX_FLAG_AMOUNT = 7;
 const MIN_FLAG_INTERVAL = 4000;
 function entityHitEntity({ damagingEntity, hitEntity }: EntityHitEntityAfterEvent) {
     if (!(damagingEntity instanceof Player) || damagingEntity.isAdmin()) return;
-    const isDummyHit = hitEntity.typeId === "minecraft:player" && hitEntity.hasTag("matrix:dummy::" + damagingEntity.id);
+    const isDummyHit = hitEntity.typeId === TEST_ENTITY && hitEntity.hasTag("matrix:dummy::" + damagingEntity.id);
+    const location = damagingEntity.location;
     if (isDummyHit) {
         // Prevent spamming
         if (
@@ -36,7 +37,7 @@ function entityHitEntity({ damagingEntity, hitEntity }: EntityHitEntityAfterEven
                 tags: ["matrix:dummy::" + damagingEntity.id],
             }).length <= 1
         )
-            spawnDummy(damagingEntity.location, damagingEntity.getRotation().y, damagingEntity.id, damagingEntity.dimension);
+            spawnDummy(location, damagingEntity.getRotation().y, damagingEntity.id, damagingEntity.dimension);
         const now = Date.now();
         if (damagingEntity.mobAuraFlag > 0 && now - damagingEntity.mobAuraLastFlagTimestamp > MIN_FLAG_INTERVAL) {
             damagingEntity.mobAuraFlag = 0;
@@ -52,7 +53,7 @@ function entityHitEntity({ damagingEntity, hitEntity }: EntityHitEntityAfterEven
             tags: ["matrix:dummy::" + damagingEntity.id],
         }).length === 0
     ) {
-        spawnDummy(damagingEntity.location, damagingEntity.getRotation().y, damagingEntity.id, damagingEntity.dimension);
+        spawnDummy(location, damagingEntity.getRotation().y, damagingEntity.id, damagingEntity.dimension);
     }
 }
 function spawnDummy(centerLocation: Vector3, pitch: number, playerId: string, dimension: Dimension) {

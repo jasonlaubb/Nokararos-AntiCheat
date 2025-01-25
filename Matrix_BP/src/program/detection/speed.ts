@@ -107,7 +107,7 @@ function tickEvent(player: Player) {
             if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
                 data.timerFlagAmount += 1;
                 if (debugTag) player.sendMessage(`<speedDebug> §a(+) increased to ${data.timerFlagAmount}, distance: ${normalDistance.toFixed(6)}, velocitySpeed: ${velocitySpeed.toFixed(6)}`);
-                if (data.timerFlagAmount >= 12) {
+                if (data.timerFlagAmount >= 16) {
                     player.flag(speed, { t: "2", normalDistance, velocitySpeed });
                     data.timerFlagAmount = 0;
                 }

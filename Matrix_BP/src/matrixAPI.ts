@@ -727,7 +727,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                 const module = Module.moduleList[i - 1];
                 try {
                 if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
-                    if (module?.onEnable) module?.onEnable();
+                    if (module?.onEnable) module.onEnable();
                     module.enabled = true;
                     yield world.sendMessage(`(Reload) §aEnabling§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
                 } else {
