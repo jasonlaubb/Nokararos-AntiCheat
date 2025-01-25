@@ -81,7 +81,7 @@ function generatePoFile(sourcePot, poFile, lang) {
         const msgstr = msgstrMatch !== null && msgstrMatch[1] !== '' ? msgstrMatch[1] : '';
         poContent += `#: ${msgid}\nmsgid "${msgstr}"\nmsgstr "${dataData ? dataData.slice(0, -1).slice(8) : ''}"\n\n`;
         if (msgid === "pack.description") {
-            fs.writeFileSync(`./Matrix_BP/texts/${lang}.lang`, `pack.description=${dataData?.slice(0, -1)?.slice(8) ? (dataData.length > 0 ? dataData : msgstr) : msgstr}`);
+            fs.writeFileSync(`./Matrix_BP/texts/${lang}.lang`, `pack.description=${dataData?.slice(0, -1)?.slice(8) ? (dataData?.slice(0, -1)?.slice(8) > 0 ? dataData?.slice(0, -1)?.slice(8) : msgstr) : msgstr}`);
         }
     }
     return poContent;
