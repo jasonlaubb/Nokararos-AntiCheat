@@ -86,6 +86,7 @@ function tickEvent(player: Player) {
     const distance = pythag(player.location.x - data.lastLocation.x, player.location.z - data.lastLocation.z);
     if (!bypass) {
         const velocityDelta = pythag(velocityX - data.lastVelocity.x, velocityZ - data.lastVelocity.z);
+        const debugTag = player.hasTag("matrix:speed-debug");
         if (velocityDelta > VELOCITY_DELTA_THRESHOLD) {
             if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
                 data.flagAmount = 0;
@@ -100,8 +101,7 @@ function tickEvent(player: Player) {
                 if (velocityDelta < 3) player.sendMessage(`§7(Strengthen Anti Speed) §cAuto corrected your location. To disable (staff only): "-set sensitivity.strengthenAntiSpeed false"`);
                 player.teleport(data.lastStopLocation);
             }
-        } else if (distance > 0.2 && !data.previousSpeed.includes(distance)) {
-            const debugTag = player.hasTag("matrix:speed-debug");
+        } else if (distance > 0.2 && !player.isSwimming && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = pythag(data.lastVelocity.x, data.lastVelocity.z);
             const normalDistance = distance * Module.config.sensitivity.maxVelocityExaggeration;
             if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
@@ -111,13 +111,13 @@ function tickEvent(player: Player) {
                     player.flag(speed, { t: "2", normalDistance, velocitySpeed });
                     data.timerFlagAmount = 0;
                 }
-            } else if (data.timerFlagAmount >= 0.06) {
+            } else if (data.timerFlagAmount >= 0.15) {
                 if (debugTag) player.sendMessage(`<speedDebug> §c(-) decreased to ${data.timerFlagAmount}`);
-                data.timerFlagAmount -= 0.06;
+                data.timerFlagAmount -= 0.15;
             }
-        } else if (data.timerFlagAmount >= 0.06) {
+        } else if (data.timerFlagAmount >= 0.1) {
             if (debugTag) player.sendMessage(`<speedDebug> §c(-) decreased to ${data.timerFlagAmount}`);
-            data.timerFlagAmount -= 0.06;
+            data.timerFlagAmount -= player.isInWater ? 0.3 : 0.1;
         }
     }
     data.previousSpeed.push(distance);
