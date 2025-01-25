@@ -27,7 +27,7 @@ const autoClicker = new Module()
     })
     .initClear((playerId) => {
         delete playerCPS[playerId];
-    })
+    });
 autoClicker.register();
 function tickEvent() {
     const allPlayers = Module.allNonAdminPlayers;

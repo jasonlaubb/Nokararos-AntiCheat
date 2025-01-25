@@ -26,17 +26,7 @@ new Command()
         } else {
             target.setPermissionLevel(targetLevel);
             world.sendMessage(
-                fastText()
-                    .addText("§bMatrix§a+ §7> §g")
-                    .addTranRawText(
-                        "command.setadmin.success",
-                        fastText()
-                            .addText(target.name)
-                            .addText(player.name)
-                            .addTran("command.setadmin.level.display", targetLevel.toString())
-                            .build()
-                    )
-                    .build()
+                fastText().addText("§bMatrix§a+ §7> §g").addTranRawText("command.setadmin.success", fastText().addText(target.name).addText(player.name).addTran("command.setadmin.level.display", targetLevel.toString()).build()).build()
             );
         }
     })

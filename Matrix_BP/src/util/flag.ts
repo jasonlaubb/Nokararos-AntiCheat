@@ -36,7 +36,7 @@ export function setupFlagFunction() {
             const build = flagMessage.build();
             world.getPlayers({ excludeNames: [this.name] }).forEach((p) => {
                 p.sendMessage(build);
-            })
+            });
         }
         if (bypass) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {

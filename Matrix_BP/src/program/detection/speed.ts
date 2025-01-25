@@ -67,19 +67,20 @@ function tickEvent(player: Player) {
     if (player.isSleeping || player.isFlying || player.isGliding || player.isRiding()) {
         data.lastSleep = now;
     }
-    const bypass = player.isFlying ||
-    now - data.lastFlagTimestamp > MIN_FLAG_TIME_INTERVAL ||
-    now - player.timeStamp.knockBack < 1500 ||
-    now - player.timeStamp.riptide < 5000 ||
-    now - data.lastAttackTimestamp < 1000 ||
-    now - data.lastRidingEndTimestamp < 500 ||
-    now - data.lastFlagTimestamp < 250 ||
-    player.getGameMode() !== GameMode.creative ||
-    !player.isSleeping ||
-    now - data.lastSleep > 1000 ||
-    !player.isRiding() ||
-    (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) > 2 ||
-    !isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
+    const bypass =
+        player.isFlying ||
+        now - data.lastFlagTimestamp > MIN_FLAG_TIME_INTERVAL ||
+        now - player.timeStamp.knockBack < 1500 ||
+        now - player.timeStamp.riptide < 5000 ||
+        now - data.lastAttackTimestamp < 1000 ||
+        now - data.lastRidingEndTimestamp < 500 ||
+        now - data.lastFlagTimestamp < 250 ||
+        player.getGameMode() !== GameMode.creative ||
+        !player.isSleeping ||
+        now - data.lastSleep > 1000 ||
+        !player.isRiding() ||
+        (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) > 2 ||
+        !isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
     const distance = pythag(player.location.x - data.lastLocation.x, player.location.z - data.lastLocation.z);
     if (!bypass) {
         const velocityDelta = pythag(velocityX - data.lastVelocity.x, velocityZ - data.lastVelocity.z);

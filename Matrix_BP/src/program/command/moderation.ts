@@ -225,4 +225,4 @@ new Command()
         world.getPlayers({ excludeNames: [targetPlayer.name] }).forEach((p) => {
             p.sendMessage(msg);
         });
-    })
+    });

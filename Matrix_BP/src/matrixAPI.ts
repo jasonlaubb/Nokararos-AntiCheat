@@ -363,7 +363,7 @@ class Command {
                         if (player.isMoving()) {
                             strengthenKick(player, "Spammer is not allowed");
                         }
-                    })
+                    });
                 }
             }
         });
@@ -549,14 +549,14 @@ export class DirectPanel {
                 .addText("§bMatrix§a+ §7> §g")
                 .addTran("directpanel.enter")
                 .build();
-                const ui = new ModalFormData().title(rawtextTranslate("directpanel.build"))
-                const playerNameArray = world.getAllPlayers().map(({ name }) => name);
-                const notPlayerTarget = requiredOption.type !== "player" && requiredOption.type !== "target";
-                if (notPlayerTarget) {
-                    ui.textField(body, "Type here...");
-                } else {
-                    ui.dropdown(body, playerNameArray, 0);
-                }
+            const ui = new ModalFormData().title(rawtextTranslate("directpanel.build"));
+            const playerNameArray = world.getAllPlayers().map(({ name }) => name);
+            const notPlayerTarget = requiredOption.type !== "player" && requiredOption.type !== "target";
+            if (notPlayerTarget) {
+                ui.textField(body, "Type here...");
+            } else {
+                ui.dropdown(body, playerNameArray, 0);
+            }
             //@ts-expect-error
             const result = await ui.show(player);
             if (result.canceled || (result.formValues![0] as string).length == 0) return;
@@ -571,7 +571,7 @@ export class DirectPanel {
                 .addText("§bMatrix§a+ §7> §g")
                 .addTran("directpanel.enter")
                 .build();
-            const ui = new ModalFormData().title(rawtextTranslate("directpanel.build"))
+            const ui = new ModalFormData().title(rawtextTranslate("directpanel.build"));
             const playerNameArray = world.getAllPlayers().map(({ name }) => name);
             const notPlayerTarget = optionalOption.type !== "player" && optionalOption.type !== "target";
             if (notPlayerTarget) {
@@ -690,22 +690,22 @@ Player.prototype.setPermissionLevel = function (level: number) {
 };
 Player.prototype.isRiding = function () {
     return !!this.getComponent("riding")?.entityRidingOn;
-}
+};
 Player.prototype.isAlive = function () {
     return this.getComponent("health")!.currentValue <= 0;
-}
+};
 Player.prototype.isMoving = function () {
     const { x: iX, y: iY } = this.inputInfo.getMovementVector();
     const { x: vX, z: vZ } = this.getVelocity();
     return (iX !== 0 && vX !== 0) || (iY !== 0 && vZ !== 0);
-}
-function* loadModuleRegistry (): Generator<void, void, void> {
+};
+function* loadModuleRegistry(): Generator<void, void, void> {
     try {
-    const items = program;
-    for (const item of items) {
-        import(item).catch((error) => console.warn(`loadModuleRegistry :: ${item} :: (${error.name}) ${error.message}`));
-        yield;
-    }
+        const items = program;
+        for (const item of items) {
+            import(item).catch((error) => console.warn(`loadModuleRegistry :: ${item} :: (${error.name}) ${error.message}`));
+            yield;
+        }
         yield Config.loadData();
         // Initialize the command system
         yield Command.initialize();
@@ -768,17 +768,17 @@ function* loadModuleRegistry (): Generator<void, void, void> {
                 });
             }
             Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
-                for (const module of Module.moduleList) {
-                    if (!module.enabled || !module?.playerLeave) continue;
-                    try {
-                        system.run(() => {
-                            if (!module?.playerLeave) return;
-                            module?.playerLeave(playerId);
-                        });
-                    } catch (error) {
-                        Module.sendError(error as Error);
-                    }
+            for (const module of Module.moduleList) {
+                if (!module.enabled || !module?.playerLeave) continue;
+                try {
+                    system.run(() => {
+                        if (!module?.playerLeave) return;
+                        module?.playerLeave(playerId);
+                    });
+                } catch (error) {
+                    Module.sendError(error as Error);
                 }
+            }
         });
         system.runInterval(() => {
             const allPlayers = Module.allWorldPlayers;
