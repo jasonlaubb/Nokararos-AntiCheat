@@ -59,6 +59,7 @@ export default {
         reset: true,
         unblink: true,
     } as { [key: string]: boolean },
+    extraBlockOnSpammer: true,
     customize: {
         dataValueToPrecision: 4,
         askWetherFalseFlag: true,
