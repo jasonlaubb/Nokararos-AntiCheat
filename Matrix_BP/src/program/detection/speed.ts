@@ -51,7 +51,7 @@ speed.register();
 const speedData = new Map<string, SpeedData>();
 const VELOCITY_DELTA_THRESHOLD = 0.7;
 const FLAG_TIMESTAMP_THRESHOLD = 8000;
-const MIN_FLAG_TIME_INTERVAL = 400;
+const MIN_FLAG_TIME_INTERVAL = 250;
 /**
  * @author jasonlaubb, RamiGamerDev
  * @description A very simple but strong system against all speed hacks.
@@ -69,18 +69,18 @@ function tickEvent(player: Player) {
     }
     const bypass =
         player.isFlying ||
-        now - data.lastFlagTimestamp > MIN_FLAG_TIME_INTERVAL ||
+        now - data.lastFlagTimestamp < MIN_FLAG_TIME_INTERVAL ||
         now - player.timeStamp.knockBack < 1500 ||
         now - player.timeStamp.riptide < 5000 ||
         now - data.lastAttackTimestamp < 1000 ||
         now - data.lastRidingEndTimestamp < 500 ||
         now - data.lastFlagTimestamp < 250 ||
-        player.getGameMode() !== GameMode.creative ||
-        !player.isSleeping ||
-        now - data.lastSleep > 1000 ||
-        !player.isRiding() ||
+        player.getGameMode() === GameMode.creative ||
+        player.isSleeping ||
+        now - data.lastSleep < 1000 ||
+        player.isRiding() ||
         (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) > 2 ||
-        !isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
+        isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
     const distance = pythag(player.location.x - data.lastLocation.x, player.location.z - data.lastLocation.z);
     if (!bypass) {
         const velocityDelta = pythag(velocityX - data.lastVelocity.x, velocityZ - data.lastVelocity.z);

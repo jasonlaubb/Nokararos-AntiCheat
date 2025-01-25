@@ -803,7 +803,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                 }
             });
         });
-        console.log("Imported sucess amount: " + importedAmount + "/" + items.length);
+        world.sendMessage("(Reload) Imported sucess amount: " + importedAmount + "/" + items.length);
     } catch (error) {
         Module.sendError(error as Error);
     } finally {
