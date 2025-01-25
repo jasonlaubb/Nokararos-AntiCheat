@@ -46,7 +46,6 @@ const speed = new Module()
             previousSpeed: new Array(20).fill(0),
             lastLocation: player.location,
             timerFlagAmount: 0,
-            timerFirstFlag: 0,
         });
     })
     .initClear((playerId) => {
@@ -56,7 +55,6 @@ speed.register();
 const speedData = new Map<string, SpeedData>();
 const VELOCITY_DELTA_THRESHOLD = 0.7;
 const FLAG_TIMESTAMP_THRESHOLD = 8000;
-const MIN_TIMER_INTERVAL = 2000;
 /**
  * @author jasonlaubb, RamiGamerDev
  * @description A very simple but strong system against all speed hacks.
@@ -108,19 +106,16 @@ function tickEvent(player: Player) {
             const debugTag = player.hasTag("matrix:speed-debug");
             const velocitySpeed = pythag(data.lastVelocity.x, data.lastVelocity.z);
             const normalDistance = distance * Module.config.sensitivity.maxVelocityExaggeration;
-            if (distance > VELOCITY_DELTA_THRESHOLD && now - data.lastTimerFlag > 250 && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
-                if (now - data.timerFirstFlag > MIN_TIMER_INTERVAL) {
-                    data.timerFlagAmount = 0;
-                }
-                if (data.timerFlagAmount === 0) {
-                    data.timerFirstFlag = now;
-                }
-                data.timerFlagAmount += Math.min(3, Math.max(1, normalDistance / velocitySpeed));
+            if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
+                data.timerFlagAmount += 1;
                 if (debugTag) player.sendMessage(`<speedDebug> §a(+) increased to ${data.timerFlagAmount}, distance: ${normalDistance.toFixed(6)}, velocitySpeed: ${velocitySpeed.toFixed(6)}`);
                 if (data.timerFlagAmount >= 12) {
                     player.flag(speed, { t: "2", normalDistance, velocitySpeed });
                     data.timerFlagAmount = 0;
                 }
+            } else if (data.timerFlagAmount >= 0.06) {
+                if (debugTag) player.sendMessage(`<speedDebug> §c(-) decreased to ${data.timerFlagAmount}`);
+                data.timerFlagAmount -= 0.06;
             }
         }
     }
