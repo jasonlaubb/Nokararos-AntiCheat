@@ -1139,7 +1139,7 @@ msgid "Amount"
 msgstr "Importo"
 
 #: command.log.amount.description
-msgid "The amount of the latest logs that you want to view."
+msgid "The amount of the latest logs that you what to view."
 msgstr "L'importo degli ultimi log che desideri visualizzare."
 
 #: command.daylog.description
@@ -1245,4 +1245,20 @@ msgstr "Anti Elytra Fly"
 #: module.elytraFly.description
 msgid "Prevent the player from using the illegal elytra flying."
 msgstr "Impedisci al giocatore di utilizzare il volo illegale con l'elytra."
+
+#: module.autotool.name
+msgid "Anti Auto Tool"
+msgstr ""
+
+#: module.autotool.description
+msgid "Checks if player is using autoTool hack to break blocks."
+msgstr ""
+
+#: module.deviceban.name
+msgid "Device Ban"
+msgstr ""
+
+#: module.deviceban.description
+msgid "Prevent the player from using a banned device to join the server."
+msgstr ""
 

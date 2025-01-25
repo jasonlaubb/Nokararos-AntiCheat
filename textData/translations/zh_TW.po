@@ -1246,3 +1246,19 @@ msgstr "反翅膀飞行"
 msgid "Prevent the player from using the illegal elytra flying."
 msgstr "防止玩家使用非法的翅膀飞行。"
 
+#: module.autotool.name
+msgid "Anti Auto Tool"
+msgstr ""
+
+#: module.autotool.description
+msgid "Checks if player is using autoTool hack to break blocks."
+msgstr ""
+
+#: module.deviceban.name
+msgid "Device Ban"
+msgstr ""
+
+#: module.deviceban.description
+msgid "Prevent the player from using a banned device to join the server."
+msgstr ""
+

@@ -410,10 +410,6 @@ msgstr "§g種類: §e%s"
 msgid "§gDescription: §e%s"
 msgstr "§g説明: §e%s"
 
-#: command.help.target.type
-msgid "§gType: §e%s"
-msgstr "§g種類: §e%s"
-
 #: command.help.target.optional
 msgid " (optional)"
 msgstr " (オプション)"

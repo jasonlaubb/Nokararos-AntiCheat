@@ -313,9 +313,6 @@ msgstr "§gType: §e%s"
 msgid "command.help.target.description"
 msgstr "§gDescription: §e%s"
 
-msgid "command.help.target.type"
-msgstr "§gType: §e%s"
-
 msgid "command.help.target.optional"
 msgstr " (optional)"
 

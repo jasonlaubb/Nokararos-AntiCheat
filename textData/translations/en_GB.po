@@ -410,10 +410,6 @@ msgstr ""
 msgid "§gDescription: §e%s"
 msgstr ""
 
-#: command.help.target.type
-msgid "§gType: §e%s"
-msgstr ""
-
 #: command.help.target.optional
 msgid " (optional)"
 msgstr ""
@@ -1248,5 +1244,21 @@ msgstr ""
 
 #: module.elytraFly.description
 msgid "Prevent the player from using the illegal elytra flying."
+msgstr ""
+
+#: module.autotool.name
+msgid "Anti Auto Tool"
+msgstr ""
+
+#: module.autotool.description
+msgid "Checks if player is using autoTool hack to break blocks."
+msgstr ""
+
+#: module.deviceban.name
+msgid "Device Ban"
+msgstr ""
+
+#: module.deviceban.description
+msgid "Prevent the player from using a banned device to join the server."
 msgstr ""
 
