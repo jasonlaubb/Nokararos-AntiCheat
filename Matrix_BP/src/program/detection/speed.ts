@@ -67,6 +67,7 @@ function tickEvent(player: Player) {
     if (player.isSleeping || player.isFlying || player.isGliding || player.isRiding()) {
         data.lastSleep = now;
     }
+    const speedLevel = (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? -1) + 1;
     const bypass =
         player.isFlying ||
         now - data.lastFlagTimestamp < MIN_FLAG_TIME_INTERVAL ||
@@ -79,7 +80,7 @@ function tickEvent(player: Player) {
         player.isSleeping ||
         now - data.lastSleep < 1000 ||
         player.isRiding() ||
-        (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? 0) > 2 ||
+        speedLevel > 3 ||
         isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
     const distance = pythag(player.location.x - data.lastLocation.x, player.location.z - data.lastLocation.z);
     if (!bypass) {
@@ -100,7 +101,7 @@ function tickEvent(player: Player) {
             }
         } else if (distance > 0 && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = pythag(velocityX, velocityZ);
-            if (distance > VELOCITY_DELTA_THRESHOLD && distance * Module.config.sensitivity.maxVelocityExaggeration > velocitySpeed) {
+            if (distance > VELOCITY_DELTA_THRESHOLD && distance * Module.config.sensitivity.maxVelocityExaggeration > velocitySpeed * 1.2 ** speedLevel) {
                 if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
                     data.flagAmount = 0;
                 }
@@ -115,6 +116,7 @@ function tickEvent(player: Player) {
     }
     data.previousSpeed.push(distance);
     data.previousSpeed.shift();
+    data.lastLocation = player.location;
     data.lastVelocity = velocity;
     // Update data value.
     speedData.set(player.id, data);

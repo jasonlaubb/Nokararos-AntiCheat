@@ -734,7 +734,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                     yield world.sendMessage(`(Reload) §gChecked§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
                 }
                 } catch (error) {
-                    console.error(Error);
+                    console.error(error as Error);
                     yield world.sendMessage(`(Reload) §cErrored§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
                 }
             }
