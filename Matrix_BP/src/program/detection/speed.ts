@@ -115,6 +115,9 @@ function tickEvent(player: Player) {
                 if (debugTag) player.sendMessage(`<speedDebug> §c(-) decreased to ${data.timerFlagAmount}`);
                 data.timerFlagAmount -= 0.06;
             }
+        } else if (data.timerFlagAmount >= 0.06) {
+            if (debugTag) player.sendMessage(`<speedDebug> §c(-) decreased to ${data.timerFlagAmount}`);
+            data.timerFlagAmount -= 0.06;
         }
     }
     data.previousSpeed.push(distance);
