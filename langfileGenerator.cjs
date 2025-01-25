@@ -34,7 +34,7 @@ function changePoFile() {
     const newSourcePot = fs.readFileSync(potFile, 'utf8');
     languages.forEach((language) => {
         const poFile = path.join(translationsDir, `${language}.po`);
-        const poContent = generatePoFile(newSourcePot, fs.readFileSync(poFile, 'utf8'));
+        const poContent = generatePoFile(newSourcePot, fs.readFileSync(poFile, 'utf8'), language);
         fs.writeFileSync(poFile, poContent);
     });
 }
@@ -55,15 +55,12 @@ languages.forEach((language) => {
         if (msgstrMatch !== null) {
             const msgstr = msgstrMatch[1];
             langContent += `${key}=${msgstr || msgid}\n`;
-            if (key == "pack.description") {
-                fs.writeFileSync(`./Matrix_BP/texts/${language}.lang`, `pack.description=${msgid}`);
-            }
         }
     }
     fs.writeFileSync(langFile, langContent);
 });
 
-function generatePoFile(sourcePot, poFile) {
+function generatePoFile(sourcePot, poFile, lang) {
     const msgidRegex = /msgid "(.*)"/g;
     const msgstrRegex = /msgstr "(.*)"/g;
     let msgidMatch;
@@ -83,6 +80,9 @@ function generatePoFile(sourcePot, poFile) {
         msgstrMatch = msgstrRegex.exec(sourcePot);
         const msgstr = msgstrMatch !== null && msgstrMatch[1] !== '' ? msgstrMatch[1] : '';
         poContent += `#: ${msgid}\nmsgid "${msgstr}"\nmsgstr "${dataData ? dataData.slice(0, -1).slice(8) : ''}"\n\n`;
+        if (msgid === "pack.description") {
+            fs.writeFileSync(`./Matrix_BP/texts/${lang}.lang`, `pack.description=${dataData?.slice(0, -1)?.slice(8) ? (dataData.length > 0 ? dataData : msgstr) : msgstr}`);
+        }
     }
     return poContent;
 }
