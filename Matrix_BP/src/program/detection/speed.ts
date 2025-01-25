@@ -101,14 +101,15 @@ function tickEvent(player: Player) {
             }
         } else if (distance > 0 && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = pythag(velocityX, velocityZ);
+            const normalDistance = distance * Module.config.sensitivity.maxVelocityExaggeration;
             if (distance > VELOCITY_DELTA_THRESHOLD && distance * Module.config.sensitivity.maxVelocityExaggeration > velocitySpeed * 1.2 ** speedLevel) {
                 if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
                     data.flagAmount = 0;
                 }
                 data.lastFlagTimestamp = now;
-                data.flagAmount += Math.min(3, Math.max(1, distance / velocitySpeed));
+                data.flagAmount += Math.min(3, Math.max(1, normalDistance / velocitySpeed));
                 if (data.flagAmount >= 12) {
-                    player.flag(speed, { t: "2", distance, velocitySpeed });
+                    player.flag(speed, { t: "2", normalDistance, velocitySpeed });
                     data.flagAmount = 0;
                 }
             }
