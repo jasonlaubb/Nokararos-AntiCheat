@@ -711,7 +711,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
         yield Config.loadData();
         // Initialize the command system
         yield Command.initialize();
-        yield new Promise<void>((resolve) => {
+        new Promise<void>((resolve) => {
             const id = system.runInterval(() => {
                 if (importedAmount === items.length) {
                     resolve();
@@ -719,49 +719,39 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                 }
             })
         }).then(() => {
-            world.sendMessage(`(Reload) Import ended`);
-            system.runJob(loadModuleList());
-        world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
-            if (!initialSpawn) return;
-            Module.currentPlayers.push(player);
-            if (Module.config.logSettings.logPlayerJoinLeave) {
-                write(false, "§aJoin §8(Connection)", player.name, {
-                    playerId: player.id,
-                    joinLocation: Object.values(player.location)
-                        .map((x) => Math.floor(x).toFixed(0))
-                        .join(" "),
-                });
-            }
-            for (const module of Module.moduleList) {
-                if (!module.enabled || !module.playerSpawn) continue;
-                try {
-                    module.playerSpawn(player.id, player);
-                } catch (error) {
-                    Module.sendError(error as Error);
-                }
-            }
-            system.runTimeout(() => {
-                if (player?.isValid() && Module.config.userRecruitmentFunction) player.sendMessage(rawtextTranslate("ad.running", Module.discordInviteLink));
-                let obj = world.scoreboard.getObjective("matrix:script-online");
-                if (!obj) {
-                    obj = world.scoreboard.addObjective("matrix:script-online", "Made by jasonlaubb");
-                    obj.setScore("is_enabled", -1);
-                }
-            }, 200);
-        });
+        system.runJob(loadModuleList());
         function* loadModuleList () {
-            for (const module of Module.moduleList) {
+            world.sendMessage(`(Reload) Import ended, starting initialization`);
+            try {
+            for (let i = 0; i < Module.moduleList.length; i++) {
+                const module = Module.moduleList[i];
+                try {
                 if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
-                    yield module?.onEnable();
+                    module?.onEnable();
                     module.enabled = true;
+                    yield world.sendMessage(`(Reload) Enabling module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                } else {
+                    yield world.sendMessage(`(Reload) Checked module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                }
+                } catch (error) {
+                    console.error(Error);
+                    yield world.sendMessage(`(Reload) Errored module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
                 }
             }
-            world.sendMessage("(Reload) Imported sucess amount: " + importedAmount + "/" + items.length)l
-            yield;
-        }
-        if (world.getAllPlayers().length > 0) {
-            for (const player of world.getAllPlayers()) {
+            } catch (error) {
+                console.error(error as Error);
+            } finally {
+            world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
+                if (!initialSpawn) return;
                 Module.currentPlayers.push(player);
+                if (Module.config.logSettings.logPlayerJoinLeave) {
+                    write(false, "§aJoin §8(Connection)", player.name, {
+                        playerId: player.id,
+                        joinLocation: Object.values(player.location)
+                            .map((x) => Math.floor(x).toFixed(0))
+                            .join(" "),
+                    });
+                }
                 for (const module of Module.moduleList) {
                     if (!module.enabled || !module.playerSpawn) continue;
                     try {
@@ -770,58 +760,88 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                         Module.sendError(error as Error);
                     }
                 }
-            }
-        }
-        world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
-            if (Module.config.logSettings.logPlayerJoinLeave) {
-                write(false, "§cLeave §8(Connection)", playerName, {
-                    playerId: playerId,
-                    leaveLocation: Object.values(location)
-                        .map((x) => Math.floor(x).toFixed(0))
-                        .join(" "),
-                });
-            }
-            Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
-            for (const module of Module.moduleList) {
-                if (!module.enabled || !module?.playerLeave) continue;
-                try {
-                    system.run(() => {
-                        if (!module?.playerLeave) return;
-                        module?.playerLeave(playerId);
-                    });
-                } catch (error) {
-                    Module.sendError(error as Error);
-                }
-            }
-        });
-        system.runInterval(() => {
-            const allPlayers = Module.allWorldPlayers;
-            for (const player of allPlayers) {
-                if (!player?.isValid()) continue;
-                Module.playerLoopRunTime.forEach((event) => {
-                    if (!(!event.booleanData && player.isAdmin())) {
+                system.runTimeout(() => {
+                    if (player?.isValid() && Module.config.userRecruitmentFunction) player.sendMessage(rawtextTranslate("ad.running", Module.discordInviteLink));
+                    let obj = world.scoreboard.getObjective("matrix:script-online");
+                    if (!obj) {
+                        obj = world.scoreboard.addObjective("matrix:script-online", "Made by jasonlaubb");
+                        obj.setScore("is_enabled", -1);
+                    }
+                }, 200);
+            });
+            yield;
+            if (world.getAllPlayers().length > 0) {
+                for (const player of world.getAllPlayers()) {
+                    Module.currentPlayers.push(player);
+                    for (const module of Module.moduleList) {
+                        if (!module.enabled || !module.playerSpawn) continue;
                         try {
-                            event.moduleFunction(player);
+                            module.playerSpawn(player.id, player);
                         } catch (error) {
                             Module.sendError(error as Error);
                         }
+                        yield;
                     }
-                });
+                    yield;
+                }
             }
-            Module.tickLoopRunTime.forEach((event) => {
-                try {
-                    event.moduleFunction();
-                } catch (error) {
-                    Module.sendError(error as Error);
+            yield;
+            world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
+                if (Module.config.logSettings.logPlayerJoinLeave) {
+                    write(false, "§cLeave §8(Connection)", playerName, {
+                        playerId: playerId,
+                        leaveLocation: Object.values(location)
+                            .map((x) => Math.floor(x).toFixed(0))
+                            .join(" "),
+                    });
+                }
+                Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
+                for (const module of Module.moduleList) {
+                    if (!module.enabled || !module?.playerLeave) continue;
+                    try {
+                        system.run(() => {
+                            if (!module?.playerLeave) return;
+                            module?.playerLeave(playerId);
+                        });
+                    } catch (error) {
+                        Module.sendError(error as Error);
+                    }
                 }
             });
-        });
+            yield;
+            system.runInterval(() => {
+                const allPlayers = Module.allWorldPlayers;
+                for (const player of allPlayers) {
+                    if (!player?.isValid()) continue;
+                    Module.playerLoopRunTime.forEach((event) => {
+                        if (!(!event.booleanData && player.isAdmin())) {
+                            try {
+                                event.moduleFunction(player);
+                            } catch (error) {
+                                Module.sendError(error as Error);
+                            }
+                        }
+                    });
+                }
+                Module.tickLoopRunTime.forEach((event) => {
+                    try {
+                        event.moduleFunction();
+                    } catch (error) {
+                        Module.sendError(error as Error);
+                    }
+                });
+            });
+            world.sendMessage("(Reload) Finish!");
+            yield;
+            }
+        }
     });
     } catch (error) {
         Module.sendError(error as Error);
     } finally {
         Module.isInitialized = true;
     }
+    yield;
 }
 export { Module, Command, Config };
 import { registerModeration } from "./program/system/moderation";
