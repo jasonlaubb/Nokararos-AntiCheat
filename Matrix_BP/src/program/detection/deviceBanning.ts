@@ -9,6 +9,7 @@ const deviceBan = new Module()
 	.setToggleId("deviceBan")
 	.setPunishment("kick")
 	.initPlayer((_playerId, player) => {
+		if (player.isAdmin() || player.hasTag("matrix-debug:ignoreDeviceBan")) return;
 		const playerDeviceType = player.clientSystemInfo.platformType;
 		const banConfig = Module.config.deviceBanManager;
 		let kickState: string = "none";
