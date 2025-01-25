@@ -18,6 +18,7 @@ export default [
     "./detection/entityFly",
     "./detection/elytraFly",
     "./detection/autoTool",
+	"./detection/deviceBanning",
     "./utility/welcomer",
     "./utility/worldBorder",
     "./utility/chatRankAndAntiSpam",
