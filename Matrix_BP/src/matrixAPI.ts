@@ -37,7 +37,7 @@ export class IntegratedSystemEvent {
  * @warn You are not allowed to copy or modify this system unless you have declared yours as a fork from us.
  */
 class Module {
-    public static readonly version: [number, number, number] = [6, 0, 30];
+    public static readonly version: [number, number, number] = [6, 0, 31];
     public static readonly discordInviteLink = "CqZGXeRKPJ";
     public static isInitialized: boolean = false;
     // The var of index runtime
