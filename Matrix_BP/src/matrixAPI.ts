@@ -723,8 +723,8 @@ function* loadModuleRegistry(): Generator<void, void, void> {
         function* loadModuleList () {
             world.sendMessage(`(Reload) Import ended, starting initialization`);
             try {
-            for (let i = 0; i < Module.moduleList.length; i++) {
-                const module = Module.moduleList[i];
+            for (let i = 1; i <= Module.moduleList.length; i++) {
+                const module = Module.moduleList[i - 1];
                 try {
                 if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
                     module?.onEnable();
