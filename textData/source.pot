@@ -942,3 +942,15 @@ msgstr "Anti Elytra Fly"
 
 msgid "module.elytraFly.description"
 msgstr "Prevent the player from using the illegal elytra flying."
+
+msgid "module.autotool.name"
+msgstr "Anti Auto Tool"
+
+msgid "module.autotool.description"
+msgstr "Checks if player is using autoTool hack to break blocks."
+
+msgid "module.deviceban.name"
+msgstr "Device Ban"
+
+msgid "module.deviceban.description"
+msgstr "Prevent the player from using a banned device to join the server."
