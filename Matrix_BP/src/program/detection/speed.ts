@@ -99,10 +99,10 @@ function tickEvent(player: Player) {
                 if (velocityDelta < 3) player.sendMessage(`§7(Strengthen Anti Speed) §cAuto corrected your location. To disable (staff only): "-set sensitivity.strengthenAntiSpeed false"`);
                 player.teleport(data.lastStopLocation);
             }
-        } else if (distance > 0 && !data.previousSpeed.includes(distance)) {
-            const velocitySpeed = pythag(velocityX, velocityZ);
+        } else if (distance > 0.2 && !data.previousSpeed.includes(distance)) {
+            const velocitySpeed = pythag(data.lastVelocity.x, data.lastVelocity.z);
             const normalDistance = distance * Module.config.sensitivity.maxVelocityExaggeration;
-            if (distance > VELOCITY_DELTA_THRESHOLD && distance * Module.config.sensitivity.maxVelocityExaggeration > velocitySpeed * 1.2 ** speedLevel) {
+            if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
                 if (now - data.lastFlagTimestamp > FLAG_TIMESTAMP_THRESHOLD) {
                     data.flagAmount = 0;
                 }
