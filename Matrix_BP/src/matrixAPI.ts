@@ -717,125 +717,125 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                     resolve();
                     system.clearRun(id);
                 }
-            })
+            });
         }).then(() => {
-        system.runJob(loadModuleList());
-        function* loadModuleList () {
-            world.sendMessage(`(Reload) Import ended, starting initialization`);
-            try {
-            for (let i = 1; i <= Module.moduleList.length; i++) {
-                const module = Module.moduleList[i - 1];
+            system.runJob(loadModuleList());
+            function* loadModuleList() {
+                world.sendMessage(`(Reload) Import ended, starting initialization`);
                 try {
-                if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
-                    if (module?.onEnable) module.onEnable();
-                    module.enabled = true;
-                    yield world.sendMessage(`(Reload) §aEnabling§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
-                } else {
-                    yield world.sendMessage(`(Reload) §gChecked§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
-                }
+                    for (let i = 1; i <= Module.moduleList.length; i++) {
+                        const module = Module.moduleList[i - 1];
+                        try {
+                            if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
+                                if (module?.onEnable) module.onEnable();
+                                module.enabled = true;
+                                yield world.sendMessage(`(Reload) §aEnabling§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                            } else {
+                                yield world.sendMessage(`(Reload) §gChecked§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                            }
+                        } catch (error) {
+                            console.error(error as Error);
+                            yield world.sendMessage(`(Reload) §cErrored§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                        }
+                    }
                 } catch (error) {
                     console.error(error as Error);
-                    yield world.sendMessage(`(Reload) §cErrored§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
-                }
-            }
-            } catch (error) {
-                console.error(error as Error);
-            } finally {
-            world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
-                if (!initialSpawn) return;
-                Module.currentPlayers.push(player);
-                if (Module.config.logSettings.logPlayerJoinLeave) {
-                    write(false, "§aJoin §8(Connection)", player.name, {
-                        playerId: player.id,
-                        joinLocation: Object.values(player.location)
-                            .map((x) => Math.floor(x).toFixed(0))
-                            .join(" "),
-                    });
-                }
-                for (const module of Module.moduleList) {
-                    if (!module.enabled || !module.playerSpawn) continue;
-                    try {
-                        module.playerSpawn(player.id, player);
-                    } catch (error) {
-                        Module.sendError(error as Error);
-                    }
-                }
-                system.runTimeout(() => {
-                    if (player?.isValid() && Module.config.userRecruitmentFunction) player.sendMessage(rawtextTranslate("ad.running", Module.discordInviteLink));
-                    let obj = world.scoreboard.getObjective("matrix:script-online");
-                    if (!obj) {
-                        obj = world.scoreboard.addObjective("matrix:script-online", "Made by jasonlaubb");
-                        obj.setScore("is_enabled", -1);
-                    }
-                }, 200);
-            });
-            yield;
-            if (world.getAllPlayers().length > 0) {
-                for (const player of world.getAllPlayers()) {
-                    Module.currentPlayers.push(player);
-                    for (const module of Module.moduleList) {
-                        if (!module.enabled || !module.playerSpawn) continue;
-                        try {
-                            module.playerSpawn(player.id, player);
-                        } catch (error) {
-                            Module.sendError(error as Error);
+                } finally {
+                    world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
+                        if (!initialSpawn) return;
+                        Module.currentPlayers.push(player);
+                        if (Module.config.logSettings.logPlayerJoinLeave) {
+                            write(false, "§aJoin §8(Connection)", player.name, {
+                                playerId: player.id,
+                                joinLocation: Object.values(player.location)
+                                    .map((x) => Math.floor(x).toFixed(0))
+                                    .join(" "),
+                            });
                         }
-                        yield;
+                        for (const module of Module.moduleList) {
+                            if (!module.enabled || !module.playerSpawn) continue;
+                            try {
+                                module.playerSpawn(player.id, player);
+                            } catch (error) {
+                                Module.sendError(error as Error);
+                            }
+                        }
+                        system.runTimeout(() => {
+                            if (player?.isValid() && Module.config.userRecruitmentFunction) player.sendMessage(rawtextTranslate("ad.running", Module.discordInviteLink));
+                            let obj = world.scoreboard.getObjective("matrix:script-online");
+                            if (!obj) {
+                                obj = world.scoreboard.addObjective("matrix:script-online", "Made by jasonlaubb");
+                                obj.setScore("is_enabled", -1);
+                            }
+                        }, 200);
+                    });
+                    yield;
+                    if (world.getAllPlayers().length > 0) {
+                        for (const player of world.getAllPlayers()) {
+                            Module.currentPlayers.push(player);
+                            for (const module of Module.moduleList) {
+                                if (!module.enabled || !module.playerSpawn) continue;
+                                try {
+                                    module.playerSpawn(player.id, player);
+                                } catch (error) {
+                                    Module.sendError(error as Error);
+                                }
+                                yield;
+                            }
+                            yield;
+                        }
                     }
                     yield;
-                }
-            }
-            yield;
-            world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
-                if (Module.config.logSettings.logPlayerJoinLeave) {
-                    write(false, "§cLeave §8(Connection)", playerName, {
-                        playerId: playerId,
-                        leaveLocation: Object.values(location)
-                            .map((x) => Math.floor(x).toFixed(0))
-                            .join(" "),
-                    });
-                }
-                Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
-                for (const module of Module.moduleList) {
-                    if (!module.enabled || !module?.playerLeave) continue;
-                    try {
-                        system.run(() => {
-                            if (!module?.playerLeave) return;
-                            module?.playerLeave(playerId);
-                        });
-                    } catch (error) {
-                        Module.sendError(error as Error);
-                    }
-                }
-            });
-            yield;
-            system.runInterval(() => {
-                const allPlayers = Module.allWorldPlayers;
-                for (const player of allPlayers) {
-                    if (!player?.isValid()) continue;
-                    Module.playerLoopRunTime.forEach((event) => {
-                        if (!(!event.booleanData && player.isAdmin())) {
+                    world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
+                        if (Module.config.logSettings.logPlayerJoinLeave) {
+                            write(false, "§cLeave §8(Connection)", playerName, {
+                                playerId: playerId,
+                                leaveLocation: Object.values(location)
+                                    .map((x) => Math.floor(x).toFixed(0))
+                                    .join(" "),
+                            });
+                        }
+                        Module.currentPlayers = Module.currentPlayers.filter(({ id }) => id !== playerId);
+                        for (const module of Module.moduleList) {
+                            if (!module.enabled || !module?.playerLeave) continue;
                             try {
-                                event.moduleFunction(player);
+                                system.run(() => {
+                                    if (!module?.playerLeave) return;
+                                    module?.playerLeave(playerId);
+                                });
                             } catch (error) {
                                 Module.sendError(error as Error);
                             }
                         }
                     });
+                    yield;
+                    system.runInterval(() => {
+                        const allPlayers = Module.allWorldPlayers;
+                        for (const player of allPlayers) {
+                            if (!player?.isValid()) continue;
+                            Module.playerLoopRunTime.forEach((event) => {
+                                if (!(!event.booleanData && player.isAdmin())) {
+                                    try {
+                                        event.moduleFunction(player);
+                                    } catch (error) {
+                                        Module.sendError(error as Error);
+                                    }
+                                }
+                            });
+                        }
+                        Module.tickLoopRunTime.forEach((event) => {
+                            try {
+                                event.moduleFunction();
+                            } catch (error) {
+                                Module.sendError(error as Error);
+                            }
+                        });
+                    });
+                    world.sendMessage("(Reload) Finish!");
+                    yield;
                 }
-                Module.tickLoopRunTime.forEach((event) => {
-                    try {
-                        event.moduleFunction();
-                    } catch (error) {
-                        Module.sendError(error as Error);
-                    }
-                });
-            });
-            world.sendMessage("(Reload) Finish!");
-            yield;
             }
-        }
-    });
+        });
     } catch (error) {
         Module.sendError(error as Error);
     } finally {

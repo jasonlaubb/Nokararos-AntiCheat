@@ -31,7 +31,7 @@ function entityHitEntity({ damagingEntity, hitEntity }: EntityHitEntityAfterEven
     let isDummyHit = false;
     try {
         isDummyHit = hitEntity.typeId === TEST_ENTITY && hitEntity?.hasTag("matrix:dummy::" + damagingEntity.id);
-    } catch { }
+    } catch {}
     const location = damagingEntity.location;
     if (isDummyHit) {
         // Prevent spamming

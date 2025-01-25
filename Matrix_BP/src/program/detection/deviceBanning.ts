@@ -29,4 +29,4 @@ new Module()
         if (kickState === "none") return;
         strengthenKick(player, `Banned device (${kickState})`);
     })
-	.register();
+    .register();
