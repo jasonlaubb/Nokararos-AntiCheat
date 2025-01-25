@@ -806,6 +806,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
         Module.sendError(error as Error);
     } finally {
         Module.isInitialized = true;
+        yield;
     }
 }
 export { Module, Command, Config };

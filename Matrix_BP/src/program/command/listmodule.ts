@@ -13,7 +13,7 @@ new Command()
         const allModules = Module.registeredModule;
         allModules.forEach((module) => {
             const toggleId = module.getToggleId()!;
-            const isEnabled = Module.config.modules[toggleId];
+            const isEnabled = Module.config.modules[toggleId]?.state;
             const buttonColour = isEnabled ? "§l§2" : "§l§c";
             listModule.button(fastText().addText(buttonColour).addRawText(module.getName()).endline().addText("§r§8").addTran(module.getToggleId()!).build());
         });
