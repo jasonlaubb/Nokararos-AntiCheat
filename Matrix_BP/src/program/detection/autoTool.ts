@@ -1,5 +1,5 @@
 import { EntityHitBlockAfterEvent, EquipmentSlot, Player, world } from "@minecraft/server";
-import { MinecraftBlockTypes } from "@minecraft/vanilla-data";
+import { MinecraftBlockTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 let id: IntegratedSystemEvent;
