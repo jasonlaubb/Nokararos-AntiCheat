@@ -55,7 +55,7 @@ const killauraData = new Map<string, killAuraData>();
  * @description The basic killaura detection module.
  */
 function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHitEntityAfterEvent) {
-    if (!(player instanceof Player) || player.isAdmin()) return;
+    if (!(player instanceof Player) || player.isAdmin() || !target?.isValid()) return;
     if (target.id === player.id) {
         player.flag(killaura, { t: "1", playerId: player.id });
         return;
