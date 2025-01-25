@@ -729,13 +729,13 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                 if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
                     module?.onEnable();
                     module.enabled = true;
-                    yield world.sendMessage(`(Reload) Enabling module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                    yield world.sendMessage(`(Reload) §aEnabling§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
                 } else {
-                    yield world.sendMessage(`(Reload) Checked module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                    yield world.sendMessage(`(Reload) §gChecked§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
                 }
                 } catch (error) {
                     console.error(Error);
-                    yield world.sendMessage(`(Reload) Errored module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
+                    yield world.sendMessage(`(Reload) §cErrored§f module [${module.getToggleId() ?? "Unknown"}]: ${i} / ${Module.moduleList.length}`);
                 }
             }
             } catch (error) {
