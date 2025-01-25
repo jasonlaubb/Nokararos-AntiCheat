@@ -101,7 +101,7 @@ function tickEvent(player: Player) {
                 if (velocityDelta < 3) player.sendMessage(`§7(Strengthen Anti Speed) §cAuto corrected your location. To disable (staff only): "-set sensitivity.strengthenAntiSpeed false"`);
                 player.teleport(data.lastStopLocation);
             }
-        } else if (distance > 0.2 && !player.isSwimming && !data.previousSpeed.includes(distance)) {
+        } else if (distance > 0.2 && !player.isInWater && !player.isSwimming && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = pythag(data.lastVelocity.x, data.lastVelocity.z);
             const normalDistance = distance * Module.config.sensitivity.maxVelocityExaggeration;
             if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
@@ -117,7 +117,7 @@ function tickEvent(player: Player) {
             }
         } else if (data.timerFlagAmount >= 0.1) {
             if (debugTag) player.sendMessage(`<speedDebug> §c(-) decreased to ${data.timerFlagAmount}`);
-            data.timerFlagAmount -= player.isInWater ? 0.3 : 0.1;
+            data.timerFlagAmount -= 0.1;
         }
     }
     data.previousSpeed.push(distance);
