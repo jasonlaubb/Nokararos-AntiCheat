@@ -702,8 +702,9 @@ Player.prototype.isMoving = function () {
 function* loadModuleRegistry(): Generator<void, void, void> {
     try {
         const items = program;
+        let importedAmount = 0;
         for (const item of items) {
-            import(item).catch((error) => console.warn(`loadModuleRegistry :: ${item} :: (${error.name}) ${error.message}`));
+            import(item).then(() => importedAmount++).catch((error) => console.warn(`loadModuleRegistry :: ${item} :: (${error.name}) ${error.message}`));
             yield;
         }
         yield Config.loadData();
@@ -739,7 +740,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
         });
         for (const module of Module.moduleList) {
             if (module.locked || Module.config.modules[module.toggleId]?.state === true) {
-                module.onEnable();
+                module?.onEnable();
                 module.enabled = true;
                 yield;
             }
@@ -802,6 +803,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                 }
             });
         });
+        console.log("Imported sucess amount: " + importedAmount + "/" + items.length);
     } catch (error) {
         Module.sendError(error as Error);
     } finally {
