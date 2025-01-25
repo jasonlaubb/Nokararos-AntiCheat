@@ -81,6 +81,11 @@ export default {
         maxFlag: 3,
         minFlagIntervalMs: 10000,
     },
+    deviceBanManager: {
+        banDesktop: false,
+        banMobile: false,
+        banConsoleDevice: false,
+    },
     worldBorder: {
         borderLength: 1000,
         useWorldSpawn: true,
