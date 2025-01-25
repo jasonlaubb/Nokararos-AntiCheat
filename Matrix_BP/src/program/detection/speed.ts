@@ -14,8 +14,6 @@ interface SpeedData {
     previousSpeed: number[];
     lastLocation: Vector3;
     timerFlagAmount: number;
-    lastTimerFlag: number;
-    timerFirstFlag: number;
 }
 let eventId: IntegratedSystemEvent;
 const speed = new Module()
@@ -73,7 +71,7 @@ function tickEvent(player: Player) {
     const speedLevel = (player.getEffect(MinecraftEffectTypes.Speed)?.amplifier ?? -1) + 1;
     const bypass =
         player.isFlying ||
-        now - data.lastFlagTimestamp < MIN_FLAG_TIME_INTERVAL ||
+        now - data.lastFlagTimestamp < 250 ||
         now - player.timeStamp.knockBack < 1500 ||
         now - player.timeStamp.riptide < 5000 ||
         now - data.lastAttackTimestamp < 1000 ||
