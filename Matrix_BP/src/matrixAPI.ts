@@ -809,6 +809,10 @@ function* loadModuleRegistry (): Generator<void, void, void> {
     }
 }
 export { Module, Command, Config };
+import { registerModeration } from "./program/system/moderation";
+registerModeration();
+import { registerTimeStampModule } from "./program/system/playerProperty";
+registerTimeStampModule();
 // Start the AntiCheat
 Module.ignite();
 import { setupFlagFunction } from "./util/flag";

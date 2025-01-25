@@ -27,6 +27,7 @@ const autoTool = new Module()
 	.initClear((playerId) => {
 		autoToolData.delete(playerId);
 	});
+autoTool.register();
 const TOOL_TYPE_SET = {
 	axe: [
 		MinecraftBlockTypes.OakLog,

@@ -1,7 +1,3 @@
-import { registerModeration } from "./system/moderation";
-registerModeration();
-import { registerTimeStampModule } from "./system/playerProperty";
-registerTimeStampModule();
 export default [
 	"./detection/firewall",
 	"./detection/speed",
@@ -21,6 +17,7 @@ export default [
 	"./detection/captcha",
 	"./detection/entityFly",
 	"./detection/elytraFly",
+	"./detection/autoTool",
 	"./utility/welcomer",
 	"./utility/worldBorder",
 	"./utility/chatRankAndAntiSpam",
