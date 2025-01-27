@@ -45,7 +45,7 @@ function tickEvent() {
                 if (now - player.autoClickFlag.lastFlagTimestamp > config.antiAutoClicker.minFlagIntervalMs) player.autoClickFlag.amount = 0;
                 player.autoClickFlag.lastFlagTimestamp = now;
                 player.autoClickFlag.amount++;
-                if (player.autoClickFlag.amount > config.antiAutoClicker.minFlagIntervalMs) {
+                if (player.autoClickFlag.amount > config.antiAutoClicker.maxFlag) {
                     player.flag(autoClicker, { cps, maxCps });
                 }
             }
