@@ -4,7 +4,7 @@ Matrix Anti Cheat is your solution for a cheat-free Minecraft experience, whethe
 
 We offer best cheat detection and automated punishment systems.
 
-The anticheat can work on V1.21.X Minecraft bedrock version.
+The anticheat can work on latest Minecraft bedrock version.
 
 # Developers of Matrix AntiCheat
 

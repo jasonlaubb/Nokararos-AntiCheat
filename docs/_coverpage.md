@@ -2,6 +2,6 @@
 
 ## Matrix AntiCheat - The best Minecraft bedrock AntiCheat solution
 
-[Get started](README.md)
+[FAQ](/misc/faq.md)
 [Discord](https://discord.gg/CqZGXeRKPJ)
 [Download (CF)](https://www.curseforge.com/minecraft-bedrock/addons/matrix-anti/files)
