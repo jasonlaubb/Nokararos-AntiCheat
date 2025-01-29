@@ -14,6 +14,7 @@ export default [
     "./program/detection/insteabreak",
     "./program/detection/reach",
     "./program/detection/invalidSprint",
+    "./program/detection/itemcheck",
     "./program/detection/captcha",
     "./program/detection/entityFly",
     "./program/detection/elytraFly",
