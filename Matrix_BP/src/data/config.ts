@@ -76,22 +76,34 @@ export default {
         logPlayerJoinLeave: true,
     },
     sensitivity: {
-        antiBlink: false, // Stop blink movement (antiTimer), more lagback will be given.
-        strengthenAntiSpeed: false, // Stronger anti speed (antiSpeed), reverses the location instantly.
-        maxVelocityExaggeration: 0.5, // (antiSpeed) Higher the value will allow higher sensitivity for fighting against anti timer, should not be too high.
+        antiSpeed: {
+            correctSpikeDelta: true,
+            maxVelocityExaggeration: 0.5, // (antiSpeed) Higher the value will allow higher sensitivity for fighting against anti timer, should not be too high.
+            type1MaxFlag: 12,
+            type2MaxFlag: 2,
+        },
+        antiAutoClicker: {
+            maxCps: 24,
+            maxFlag: 3,
+            minFlagIntervalMs: 10000,
+        },
+        deviceBan: {
+            banDesktop: false,
+            banMobile: false,
+            banConsoleDevice: false,
+        },
+        elytraFly: {
+            maxSpeedDeviation: 50,
+        },
+        antiFly: {
+            type1MaxFlag: 2,
+        },
+        antiInvalidSprint: {
+            maxFlag: 35,
+        }
     },
     flag: {
         banDuration: 604800,
-    },
-    antiAutoClicker: {
-        maxCps: 24,
-        maxFlag: 3,
-        minFlagIntervalMs: 10000,
-    },
-    deviceBanManager: {
-        banDesktop: false,
-        banMobile: false,
-        banConsoleDevice: false,
     },
     worldBorder: {
         borderLength: 1000,

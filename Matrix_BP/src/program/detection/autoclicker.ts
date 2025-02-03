@@ -32,7 +32,7 @@ autoClicker.register();
 function tickEvent() {
     const allPlayers = Module.allNonAdminPlayers;
     const config = Module.config;
-    const maxCps = config.antiAutoClicker.maxCps;
+    const maxCps = config.sensitivity.antiAutoClicker.maxCps;
     for (const player of allPlayers) {
         playerCPS[player.id] = playerCPS[player.id].filter((arr) => Date.now() - arr < CLICK_DURATION);
         const cps = playerCPS[player.id].length;
@@ -42,10 +42,10 @@ function tickEvent() {
                 player.sendMessage(rawtextTranslate("module.autoclicker.reach", maxCps.toString(), cps.toString()));
                 player.addEffect(MinecraftEffectTypes.Weakness, 200, { showParticles: false });
                 const now = Date.now();
-                if (now - player.autoClickFlag.lastFlagTimestamp > config.antiAutoClicker.minFlagIntervalMs) player.autoClickFlag.amount = 0;
+                if (now - player.autoClickFlag.lastFlagTimestamp > config.sensitivity.antiAutoClicker.minFlagIntervalMs) player.autoClickFlag.amount = 0;
                 player.autoClickFlag.lastFlagTimestamp = now;
                 player.autoClickFlag.amount++;
-                if (player.autoClickFlag.amount > config.antiAutoClicker.maxFlag) {
+                if (player.autoClickFlag.amount > config.sensitivity.antiAutoClicker.maxFlag) {
                     player.flag(autoClicker, { cps, maxCps });
                 }
             }

@@ -86,7 +86,7 @@ function tickEvent(player: Player) {
             }
             if (hasFlyDebugTag) player.sendMessage(`<flyDebug> §a(+) increased to ${data.flagAmount}`);
             data.lastFlagTimestamp = now;
-            if (data.flagAmount >= 3) {
+            if (data.flagAmount >= Module.config.sensitivity.antiFly.type1MaxFlag) {
                 data.flagAmount = 0;
                 player.teleport(data.lastOnGroundLocation);
                 player.flag(fly, { t: "1", lastVelocityY: data.lastVelocityY, velocityY });

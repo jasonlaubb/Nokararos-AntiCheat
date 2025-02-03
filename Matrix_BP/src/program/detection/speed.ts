@@ -14,6 +14,9 @@ interface SpeedData {
     previousSpeed: number[];
     lastLocation: Vector3;
     timerFlagAmount: number;
+    lastTriggerLocation: Vector3;
+    lastTimerFlagTimestamp: number;
+    timerMainFlagAmount: number;
 }
 let eventId: IntegratedSystemEvent;
 const speed = new Module()
@@ -44,6 +47,9 @@ const speed = new Module()
             previousSpeed: new Array(20).fill(0),
             lastLocation: player.location,
             timerFlagAmount: 0,
+            lastTriggerLocation: player.location,
+            lastTimerFlagTimestamp: 0,
+            timerMainFlagAmount: 0,
         });
     })
     .initClear((playerId) => {
@@ -53,6 +59,7 @@ speed.register();
 const speedData = new Map<string, SpeedData>();
 const VELOCITY_DELTA_THRESHOLD = 0.7;
 const FLAG_TIMESTAMP_THRESHOLD = 8000;
+const SMALL_MAX_FLAG = 15;
 /**
  * @author jasonlaubb, RamiGamerDev
  * @description A very simple but strong system against all speed hacks.
@@ -93,23 +100,32 @@ function tickEvent(player: Player) {
             }
             data.lastFlagTimestamp = now;
             data.flagAmount++;
-            if (data.flagAmount >= 12) {
+            if (data.flagAmount > Module.config.sensitivity.antiSpeed.type1MaxFlag) {
                 player.flag(speed, { t: "1", velocityDelta });
                 data.flagAmount = 0;
             }
-            if (velocityDelta >= 3 || Module.config.sensitivity.strengthenAntiSpeed) {
-                if (velocityDelta < 3) player.sendMessage(`§7(Strengthen Anti Speed) §cAuto corrected your location. To disable (staff only): "-set sensitivity.strengthenAntiSpeed false"`);
+            if (velocityDelta >= 3 && Module.config.sensitivity.antiSpeed.correctSpikeDelta) {
                 player.teleport(data.lastStopLocation);
             }
         } else if (distance > 0.2 && !player.isInWater && !player.isSwimming && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = pythag(data.lastVelocity.x, data.lastVelocity.z);
-            const normalDistance = distance * Module.config.sensitivity.maxVelocityExaggeration;
-            if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
+            const normalDistance = distance * Module.config.sensitivity.antiSpeed.maxVelocityExaggeration;
+            if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * (1.2 ** speedLevel)) {
+                if (data.timerFlagAmount < 1) {
+                    data.lastTriggerLocation = player.location;
+                }
                 data.timerFlagAmount += 1;
                 if (debugTag) player.sendMessage(`<speedDebug> §a(+) increased to ${data.timerFlagAmount}, distance: ${normalDistance.toFixed(6)}, velocitySpeed: ${velocitySpeed.toFixed(6)}`);
-                if (data.timerFlagAmount >= 16) {
-                    player.flag(speed, { t: "2", normalDistance, velocitySpeed });
+                if (data.timerFlagAmount > SMALL_MAX_FLAG) {
+                    player.teleport(data.lastTriggerLocation);
                     data.timerFlagAmount = 0;
+                    if (now - data.lastTimerFlagTimestamp > 12000) {
+                        data.timerMainFlagAmount = 0;
+                    }
+                    data.lastTimerFlagTimestamp = now;
+                    if (data.timerMainFlagAmount > Module.config.sensitivity.antiSpeed.type2MaxFlag) {
+                        player.flag(speed, { t: "2", normalDistance, velocitySpeed });
+                    }
                 }
             } else if (data.timerFlagAmount >= 0.15) {
                 if (debugTag) player.sendMessage(`<speedDebug> §c(-) decreased to ${data.timerFlagAmount}`);

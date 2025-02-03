@@ -10,7 +10,7 @@ new Module()
     .initPlayer((_playerId, player) => {
         if (player.isAdmin() || player.hasTag("matrix-debug:ignoreDeviceBan")) return;
         const playerDeviceType = player.clientSystemInfo.platformType;
-        const banConfig = Module.config.deviceBanManager;
+        const banConfig = Module.config.sensitivity.deviceBan;
         let kickState: string = "none";
         switch (playerDeviceType) {
             case PlatformType.Console: {

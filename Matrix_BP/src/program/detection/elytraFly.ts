@@ -61,7 +61,7 @@ function tickEvent(player: Player) {
         if (glidingSpeed > data.highestGlidingSpeed) {
             data.highestGlidingSpeed = glidingSpeed;
         } else if (glidingSpeed > 0) {
-            if (speedDeviation > 50) {
+            if (speedDeviation > Module.config.sensitivity.elytraFly.maxSpeedDeviation) {
                 dropElytra(player);
                 player.flag(elytraFly, { t: "1", speedDeviation });
             } else if (speedDeviation.toFixed(4) === data.lastSpeedDeviation.toFixed(4)) {

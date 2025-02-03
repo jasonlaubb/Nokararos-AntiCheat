@@ -4,7 +4,6 @@ import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 let runId: IntegratedSystemEvent;
 interface SprintData {
-    lastFlag: number;
     flagCount: number;
     nonBlindnessSprintState: boolean;
 }
@@ -24,7 +23,6 @@ const invalidSprint = new Module()
     })
     .initPlayer((playerId, player) => {
         sprintData.set(playerId, {
-            lastFlag: 0,
             flagCount: 0,
             nonBlindnessSprintState: player.isSprinting,
         });
@@ -38,20 +36,21 @@ function isMovementKeyPressed(player: Player) {
     return x !== 0 || y !== 0;
 }
 function tickEvent(player: Player) {
-    if (!player.isSprinting) return;
     const data = sprintData.get(player.id)!;
+    if (!player.isSprinting) {
+        if (data.flagCount > 0) {
+            data.flagCount--;
+            sprintData.set(player.id, data);
+        }
+        return;
+    };
     const hasEffect = player.getEffect(MinecraftEffectTypes.Blindness);
     if (player.isSneaking || !isMovementKeyPressed(player)) {
-        const now = Date.now();
-        if (now - data.lastFlag > 1000) {
-            data.flagCount = 0;
-        }
-        data.lastFlag = now;
         data.flagCount++;
-        if (data.flagCount > 10) {
+        if (data.flagCount > Module.config.sensitivity.antiInvalidSprint.maxFlag) {
             player.flag(invalidSprint, { t: "1" });
         }
-    }
+    } else if (data.flagCount > 0) data.flagCount--;
     if (hasEffect && player.isSprinting && !data.nonBlindnessSprintState) {
         player.flag(invalidSprint, { t: "2" });
     }
