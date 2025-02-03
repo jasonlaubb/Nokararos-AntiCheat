@@ -25,6 +25,12 @@ No complicated setup is required, here is the few step.
 
 5. Do `-help` to view what command can you use.
 
+## It show something like "level 1", it is not working!
+
+Do `-op`, thank you. Stop asking this question.
+
+If it is not working, please make sure Matrix is above any chatRank addon (but below addon with chat command).
+
 ## How to change the punishment of the modules?
 
 Method 1: configui command
@@ -42,6 +48,20 @@ Method 1: configui command
 Method 2: set command
 
 Run `-set modules/(module's toggle id)/punishment (punishment)` to set the punishment.
+
+## Why Matrix is not working
+
+Can you try:
+
+1. Deleting Matrix from your Realm's settings
+
+2. Downloading your realm's world to your device
+
+4. Removing Matrix from your world (if it exists)
+
+5. Adding latest Matrix version to your world
+
+6. Reuploading your world back to your realm
 
 ## How to select a player whose name contains whitespace(s)?
 
