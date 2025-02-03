@@ -43,8 +43,15 @@ interface BanInfo {
 }
 function matrixKick (player: Player, reason: string = "No reason provided", responser: string = "Unknown") {
     try {
-        world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" §cYou have been kicked. §7[§bMatrix§7]\n§bReason: §e${reason}§r\n§bResponser: §e${responser}§r`);
+        const { successCount} = world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" §cYou have been kicked. §7[§bMatrix§7]\n§bReason: §e${reason}§r\n§bResponser: §e${responser}§r`);
+        if (successCount !== 1) throw new Error("Failed to kick player");
     } catch {
+        try {
+            if (player.isOp()) {
+                player.sendMessage("<debug> We §ccannot kick§f you as you're the §ghost§f of the world");
+            }
+            return;
+        } catch {}
         crashPlayer(player);
     }
 }
@@ -74,8 +81,15 @@ const banHandler = {
         const detailInfo = `§bReason: §e${banInfo.reason}§r\n§bResponser: §e${banInfo.responser}§r\n§bDuration: §e${timerString}§r\n§bExpires: §e${banInfo.indefinitely ? "Indefinitely" : generateShortTimeStr(banInfo.dateEnd)}§r`;
         const message = `§cYou have been banned. §7[§bMatrix§7]\n${detailInfo}`;
         try {
-            world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" ${message}`);
+            const { successCount } = world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" ${message}`);
+            if (successCount !== 1) throw new Error("Failed to kick player");
         } catch {
+            try {
+                if (player.isOp()) {
+                    player.sendMessage("<debug> We §ccannot kick§f you as you're the §ghost§f of the world");
+                    return;
+                }
+            } catch {}
             crashPlayer(player);
         }
     },
