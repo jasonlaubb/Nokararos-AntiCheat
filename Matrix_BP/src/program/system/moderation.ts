@@ -114,7 +114,7 @@ const muteHandler = {
     },
     unmute: (player: Player) => {
         try {
-            player.runCommand(`ability @s mute true`);
+            player.runCommand(`ability @s mute false`);
         } catch {} finally {
             player.addTag("matrix:cancelChatMessage");
         }
