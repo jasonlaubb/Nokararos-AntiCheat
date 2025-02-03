@@ -100,7 +100,15 @@ export default {
         },
         antiInvalidSprint: {
             maxFlag: 35,
-        }
+        },
+        antiReach: {
+            maxReach: 4.5,
+            reachBuffer: 2,
+            maxFlag: 11,
+        },
+        antiScaffold: {
+            scaffoldBlockLimit: 4,
+        },
     },
     flag: {
         banDuration: 604800,

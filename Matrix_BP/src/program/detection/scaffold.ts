@@ -10,7 +10,6 @@ const FLAT_ROTATION_THRESHOLD = 69.5;
 const HIGH_ROTATION_THRESHOLD = 79;
 const NO_EXTENDER_ROTATION_THRESHOLD = 20;
 const COMMON_ROTATION_THRESHOLD = 30;
-const GOD_BRIDGE_AMOUNT_LIMIT = 5;
 const LOG_CLEAR_TIME = 750;
 const MAX_ROTATION_X_DIFFERENCE = 10;
 const MAX_LOW_EXTENDER_ROTATION_X = 50;
@@ -104,7 +103,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
     data.blockLogs = data.blockLogs.filter((time) => now - time < LOG_CLEAR_TIME);
     const noBypassEffect = !hasBypassEffect(player);
     if (lowExtenderScaffold) {
-        if (voidScaffold && data.blockLogs.length >= GOD_BRIDGE_AMOUNT_LIMIT && noBypassEffect) {
+        if (voidScaffold && data.blockLogs.length > Module.config.sensitivity.antiScaffold.scaffoldBlockLimit && noBypassEffect) {
             // Type 5
             player.flag(scaffold, { t: "5" });
         } else if (rotX < NO_EXTENDER_ROTATION_THRESHOLD) {
@@ -158,7 +157,7 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
         const { x, y } = player.inputInfo.getMovementVector();
         if (placeInterval < 200 && (voidScaffold || data.isVoidScaffold.includes(true)) && (y > 0 || fastAbs(x) === 1)) {
             data.godBridgeAmount++;
-            if (data.godBridgeAmount >= GOD_BRIDGE_AMOUNT_LIMIT) {
+            if (data.godBridgeAmount >= Module.config.sensitivity.antiScaffold.scaffoldBlockLimit) {
                 // Type 11
                 player.flag(scaffold, { t: "11" });
                 data.godBridgeAmount = 0;

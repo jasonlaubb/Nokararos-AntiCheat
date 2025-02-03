@@ -27,8 +27,6 @@ const reach = new Module()
         delete locationTrackData[playerId];
     });
 reach.register();
-const MAX_REACH = 4.5;
-const REACH_BUFFER = 2;
 const MAX_ROTATION = 79;
 const TRACK_DURATION = 5000;
 interface TrackData {
@@ -63,11 +61,11 @@ function onEntityAttack({ damagingEntity: player, hitEntity: target }: EntityHit
     if (fastAbs(pitch) < MAX_ROTATION && now - locationTrackData[player.id].lastFlag > 600) {
         const limit = calculateDistanceLimit(pitch);
         const distance = findMinimumDistance(playerLocationData.locationData, targetLocationData.locationData);
-        if (distance > limit + REACH_BUFFER && distance > 3.5) {
+        if (distance > limit + Module.config.sensitivity.antiReach.reachBuffer && distance > 3.5) {
             const buffer = ++locationTrackData[player.id].buffer;
-            if (buffer >= 12) {
+            if (buffer >= Module.config.sensitivity.antiReach.maxFlag) {
                 locationTrackData[player.id].lastValidTimeStamp = 0;
-                player.flag(reach, { distance, dynamicLimit: limit + REACH_BUFFER });
+                player.flag(reach, { distance, dynamicLimit: limit + Module.config.sensitivity.antiReach.reachBuffer });
             }
         }
     }
@@ -102,5 +100,5 @@ function findMinimumDistance(playerLoc: Vector3[], targetLoc: Vector3[]) {
     return fastHypot(Math.min(...xDifferences), Math.min(...zDifferences));
 }
 function calculateDistanceLimit(pitch: number) {
-    return fastCos(fastAbs(pitch)) * MAX_REACH;
+    return fastCos(fastAbs(pitch)) * Module.config.sensitivity.antiReach.maxReach;
 }

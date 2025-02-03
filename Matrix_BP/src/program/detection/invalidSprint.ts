@@ -45,7 +45,7 @@ function tickEvent(player: Player) {
         return;
     };
     const hasEffect = player.getEffect(MinecraftEffectTypes.Blindness);
-    if (player.isSneaking || !isMovementKeyPressed(player)) {
+    if ((player.isSneaking || !isMovementKeyPressed(player)) && !player.isSwimming) {
         data.flagCount++;
         if (data.flagCount > Module.config.sensitivity.antiInvalidSprint.maxFlag) {
             player.flag(invalidSprint, { t: "1" });
