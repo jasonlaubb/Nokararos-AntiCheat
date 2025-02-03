@@ -59,15 +59,15 @@ msgid "§7>> §cScript is inactive! Please check if you have Beta-API enabled."
 msgstr "§7>> §cスクリプトは無効です！ベータAPIが有効になっているか確認してください。"
 
 #: moderation.permanent
-msgid "permanent"
+msgid "UNUSED_STRING"
 msgstr "永久"
 
 #: moderation.softban.banned
-msgid "§cYou have been soft-banned§r"
+msgid "UNUSED_STRING"
 msgstr "あなたはソフト・バンされた"
 
 #: moderation.softban.until
-msgid "Until %s"
+msgid "UNUSED_STRING"
 msgstr "まで %s"
 
 #: ui.runcommand
@@ -623,7 +623,7 @@ msgid "Target player"
 msgstr "対象"
 
 #: command.moderation.target.description
-msgid "The target player that you want to use this command on."
+msgid "The player that you want to use this command on."
 msgstr "このコマンドを使用したい対象。"
 
 #: command.moderation.duration
@@ -635,75 +635,75 @@ msgid "The duration of the moderation action that you want to use this command o
 msgstr "このコマンドを使用して設定したいモデレーションアクションの期間、分単位。永久的なモデレーションアクションを設定するには空にしておきます。"
 
 #: command.moderation.admin
-msgid "Oops, you can not finish a moderation action to an administrator or yourself."
+msgid "UNUSED_STRING"
 msgstr "あら、管理者または自分自身にモデレーションアクションを完了することはできません。"
 
 #: command.moderation.success
-msgid "%2 has done a moderation action to %1"
+msgid "UNUSED_STRING"
 msgstr "%2 が %1 にモデレーションアクションを行いました"
 
 #: command.moderation.action
-msgid "§7>> §gModeration action: §e%s"
+msgid "UNUSED_STRING"
 msgstr "§7>> §gモデレーションアクション： §e%s"
 
 #: command.moderation.removal.failed
-msgid "Before you use the moderation removal or any related moderation command, you need to make sure the target player has been moderated."
+msgid "UNUSED_STRING"
 msgstr "モデレーションの削除または関連するモデレーションコマンドを使用する前に、対象プレイヤーがモデレートされていることを確認する必要があります。"
 
 #: command.moderation.tempkick
-msgid "temp-kicked"
+msgid "UNUSED_STRING"
 msgstr "一時的なキック"
 
 #: command.moderation.kick
-msgid "kicked"
+msgid "UNUSED_STRING"
 msgstr "追い出される"
 
 #: command.moderation.ban
-msgid "banned"
+msgid "UNUSED_STRING"
 msgstr "禁止"
 
 #: command.moderation.unban
-msgid "unbanned"
+msgid "UNUSED_STRING"
 msgstr "禁止解除"
 
 #: command.moderation.softban
-msgid "soft-banned"
+msgid "UNUSED_STRING"
 msgstr "ソフト禁止"
 
 #: command.moderation.unsoftban
-msgid "unsoft-banned"
+msgid "UNUSED_STRING"
 msgstr "ソフト禁止解除"
 
 #: command.moderation.mute
-msgid "muted"
+msgid "UNUSED_STRING"
 msgstr "ミュート"
 
 #: command.moderation.unmute
-msgid "unmuted"
+msgid "UNUSED_STRING"
 msgstr "ミュート解除"
 
 #: command.moderation.freeze
-msgid "frozen"
+msgid "UNUSED_STRING"
 msgstr "凍結"
 
 #: command.moderation.unfreeze
-msgid "unfrozen"
+msgid "UNUSED_STRING"
 msgstr "凍結解除"
 
 #: command.moderation.warn
-msgid "warned"
+msgid "UNUSED_STRING"
 msgstr "警告"
 
 #: command.moderation.clearwarn
-msgid "cleared all warnings"
+msgid "UNUSED_STRING"
 msgstr "すべての警告をクリア"
 
 #: command.moderation.warn.amount
-msgid "§7>> §g Amount of warnings: %s"
+msgid "UNUSED_STRING"
 msgstr "§7>> §g 警告の数: %s"
 
 #: command.tempkick.description
-msgid "Temporarily kick a player."
+msgid "UNUSED_STRING"
 msgstr "プレイヤーを一時的にサーバーからキックする。"
 
 #: command.kick.description
@@ -719,11 +719,11 @@ msgid "Unban a player."
 msgstr "ゲームプレーヤーの追放を取り消す。"
 
 #: command.softban.description
-msgid "Soft-ban a player."
+msgid "UNUSED_STRING"
 msgstr "ゲームプレーヤーをソフト禁止"
 
 #: command.unsoftban.description
-msgid "Unsoft-ban a player."
+msgid "UNUSED_STRING"
 msgstr "ゲームプレーヤーをソフト禁止解除"
 
 #: command.mute.description
@@ -735,11 +735,11 @@ msgid "Unmute a player."
 msgstr "ゲームプレーヤーのミュートを解除する。"
 
 #: command.freeze.description
-msgid "Freeze a player."
+msgid "UNUSED_STRING"
 msgstr "プレイヤーを凍結する。"
 
 #: command.unfreeze.description
-msgid "Unfreeze a player."
+msgid "UNUSED_STRING"
 msgstr "プレイヤーの凍結を解除する。"
 
 #: command.warn.description
@@ -1260,5 +1260,49 @@ msgstr ""
 
 #: module.deviceban.description
 msgid "Prevent the player from using a banned device to join the server."
+msgstr ""
+
+#: command.ban.finish
+msgid "§bMatrix §a+ §7> %1 has been banned by %2."
+msgstr ""
+
+#: command.unban.finish
+msgid "§bMatrix §a+ §7> %1 has been unbanned by %2."
+msgstr ""
+
+#: command.kick.finish
+msgid "§bMatrix §a+ §7> %1 has been kicked by %2."
+msgstr ""
+
+#: command.mute.finish
+msgid "§bMatrix §a+ §7> %1 has been muted by %2."
+msgstr ""
+
+#: command.unmute.finish
+msgid "§bMatrix §a+ §7> %1 has been unmuted by %2."
+msgstr ""
+
+#: command.warn.finish
+msgid "§bMatrix §a+ §7> %1 has been warned by %2. §7(Warns: %3)"
+msgstr ""
+
+#: command.clearwarn.finish
+msgid "§bMatrix §a+ §7> §gAll the warnings of %1 has been cleared by %2."
+msgstr ""
+
+#: command.unban.notfound
+msgid "§bMatrix §a+ §7> §cThe player %1 has not been banned yet. You can use -banlist to see the list of banned players."
+msgstr ""
+
+#: command.unmute.notfound
+msgid "§bMatrix §a+ §7> §cThe player %1 has not been muted yet."
+msgstr ""
+
+#: command.moderation.ban.expired
+msgid "§bMatrix §a+ §7> §aYou're ban has expired!"
+msgstr ""
+
+#: command.moderation.mute.expired
+msgid "§bMatrix §a+ §7> §aYou're no longer to be muted"
 msgstr ""
 

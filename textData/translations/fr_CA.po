@@ -59,15 +59,15 @@ msgid "§7>> §cScript is inactive! Please check if you have Beta-API enabled."
 msgstr "§7>> §cLe script est inactif ! Veuillez vérifier si l'API bêta est activée."
 
 #: moderation.permanent
-msgid "permanent"
+msgid "UNUSED_STRING"
 msgstr "permanent"
 
 #: moderation.softban.banned
-msgid "§cYou have been soft-banned§r"
+msgid "UNUSED_STRING"
 msgstr "§cVous avez été banni temporairement§r"
 
 #: moderation.softban.until
-msgid "Until %s"
+msgid "UNUSED_STRING"
 msgstr "Jusqu'à %s"
 
 #: ui.runcommand
@@ -623,7 +623,7 @@ msgid "Target player"
 msgstr "Joueur cible"
 
 #: command.moderation.target.description
-msgid "The target player that you want to use this command on."
+msgid "The player that you want to use this command on."
 msgstr "Le joueur cible sur lequel vous souhaitez utiliser cette commande."
 
 #: command.moderation.duration
@@ -635,75 +635,75 @@ msgid "The duration of the moderation action that you want to use this command o
 msgstr "La durée de l'action de modération sur laquelle vous souhaitez utiliser cette commande, en minutes. Vous le laissez vide pour définir une action de modération permanente."
 
 #: command.moderation.admin
-msgid "Oops, you can not finish a moderation action to an administrator or yourself."
+msgid "UNUSED_STRING"
 msgstr "Oups, vous ne pouvez pas terminer une action de modération auprès d'un administrateur ou de vous-même."
 
 #: command.moderation.success
-msgid "%2 has done a moderation action to %1"
+msgid "UNUSED_STRING"
 msgstr "%2 a effectué une action de modération sur %1"
 
 #: command.moderation.action
-msgid "§7>> §gModeration action: §e%s"
+msgid "UNUSED_STRING"
 msgstr "§7>> §gAction de modération : §e%s"
 
 #: command.moderation.removal.failed
-msgid "Before you use the moderation removal or any related moderation command, you need to make sure the target player has been moderated."
+msgid "UNUSED_STRING"
 msgstr "Avant d'utiliser la suppression de la modération ou toute commande de modération associée, vous devez vous assurer que le joueur cible a été modéré."
 
 #: command.moderation.tempkick
-msgid "temp-kicked"
+msgid "UNUSED_STRING"
 msgstr "banni temporairement"
 
 #: command.moderation.kick
-msgid "kicked"
+msgid "UNUSED_STRING"
 msgstr "banni"
 
 #: command.moderation.ban
-msgid "banned"
+msgid "UNUSED_STRING"
 msgstr "banni"
 
 #: command.moderation.unban
-msgid "unbanned"
+msgid "UNUSED_STRING"
 msgstr "dé-banni"
 
 #: command.moderation.softban
-msgid "soft-banned"
+msgid "UNUSED_STRING"
 msgstr "banni temporairement"
 
 #: command.moderation.unsoftban
-msgid "unsoft-banned"
+msgid "UNUSED_STRING"
 msgstr "dé-banni temporairement"
 
 #: command.moderation.mute
-msgid "muted"
+msgid "UNUSED_STRING"
 msgstr "muté"
 
 #: command.moderation.unmute
-msgid "unmuted"
+msgid "UNUSED_STRING"
 msgstr "démuté"
 
 #: command.moderation.freeze
-msgid "frozen"
+msgid "UNUSED_STRING"
 msgstr "gelé"
 
 #: command.moderation.unfreeze
-msgid "unfrozen"
+msgid "UNUSED_STRING"
 msgstr "dégelé"
 
 #: command.moderation.warn
-msgid "warned"
+msgid "UNUSED_STRING"
 msgstr "averti"
 
 #: command.moderation.clearwarn
-msgid "cleared all warnings"
+msgid "UNUSED_STRING"
 msgstr "toutes les avertissements ont été supprimés"
 
 #: command.moderation.warn.amount
-msgid "§7>> §g Amount of warnings: %s"
+msgid "UNUSED_STRING"
 msgstr "§7>> §gNombre d'avertissements : %s"
 
 #: command.tempkick.description
-msgid "Temporarily kick a player."
+msgid "UNUSED_STRING"
 msgstr "Bannir temporairement un joueur."
 
 #: command.kick.description
@@ -719,11 +719,11 @@ msgid "Unban a player."
 msgstr "Débannir un joueur."
 
 #: command.softban.description
-msgid "Soft-ban a player."
+msgid "UNUSED_STRING"
 msgstr "Bannir temporairement un joueur."
 
 #: command.unsoftban.description
-msgid "Unsoft-ban a player."
+msgid "UNUSED_STRING"
 msgstr "Débannir temporairement un joueur."
 
 #: command.mute.description
@@ -735,11 +735,11 @@ msgid "Unmute a player."
 msgstr "Démuter un joueur."
 
 #: command.freeze.description
-msgid "Freeze a player."
+msgid "UNUSED_STRING"
 msgstr "Geler un joueur."
 
 #: command.unfreeze.description
-msgid "Unfreeze a player."
+msgid "UNUSED_STRING"
 msgstr "Dégeler un joueur."
 
 #: command.warn.description
@@ -1261,4 +1261,48 @@ msgstr "§bMatrix§i│ §eClient suspect détecté"
 #: module.deviceban.description
 msgid "Prevent the player from using a banned device to join the server."
 msgstr "   §fJoueur§r§i│ §f%s"
+
+#: command.ban.finish
+msgid "§bMatrix §a+ §7> %1 has been banned by %2."
+msgstr ""
+
+#: command.unban.finish
+msgid "§bMatrix §a+ §7> %1 has been unbanned by %2."
+msgstr ""
+
+#: command.kick.finish
+msgid "§bMatrix §a+ §7> %1 has been kicked by %2."
+msgstr ""
+
+#: command.mute.finish
+msgid "§bMatrix §a+ §7> %1 has been muted by %2."
+msgstr ""
+
+#: command.unmute.finish
+msgid "§bMatrix §a+ §7> %1 has been unmuted by %2."
+msgstr ""
+
+#: command.warn.finish
+msgid "§bMatrix §a+ §7> %1 has been warned by %2. §7(Warns: %3)"
+msgstr ""
+
+#: command.clearwarn.finish
+msgid "§bMatrix §a+ §7> §gAll the warnings of %1 has been cleared by %2."
+msgstr ""
+
+#: command.unban.notfound
+msgid "§bMatrix §a+ §7> §cThe player %1 has not been banned yet. You can use -banlist to see the list of banned players."
+msgstr ""
+
+#: command.unmute.notfound
+msgid "§bMatrix §a+ §7> §cThe player %1 has not been muted yet."
+msgstr ""
+
+#: command.moderation.ban.expired
+msgid "§bMatrix §a+ §7> §aYou're ban has expired!"
+msgstr ""
+
+#: command.moderation.mute.expired
+msgid "§bMatrix §a+ §7> §aYou're no longer to be muted"
+msgstr ""
 
