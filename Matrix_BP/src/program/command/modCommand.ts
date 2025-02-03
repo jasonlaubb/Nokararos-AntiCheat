@@ -41,7 +41,7 @@ new Command()
 			player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.banlist.empty").build());
 			return;
 		};
-		player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.banlist.banned", bannedPlayer.length.toString(), bannedPlayer.join(", ")).build());
+		player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.banlist.banned", bannedPlayer.join(", "), bannedPlayer.length.toString()).build());
 	})
 	.register();
 new Command()
