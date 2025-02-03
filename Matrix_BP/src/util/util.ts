@@ -203,3 +203,19 @@ export function generateShortTimeStr(time: number, timezoneOffset = localTimezon
 export function localTimezoneOffset() {
     return new Date().getTimezoneOffset() * 60000;
 }
+export function getTimeFromTimeString(ms: number) {
+    let timerString = [];
+    const years = Math.floor(ms / day_ms / 365);
+    const days = Math.floor((ms - years * day_ms * 365) / day_ms);
+    const hours = Math.floor((ms - years * day_ms * 365 - days * day_ms) / 3600000);
+    const minutes = Math.floor((ms - years * day_ms * 365 - days * day_ms - hours * 3600000) / 60000);
+    const seconds = Math.floor((ms - years * day_ms * 365 - days * day_ms - hours * 3600000 - minutes * 60000) / 1000);
+    if (years > 0) timerString.push(years > 1 ? `${years} years` : `${years} year`);
+    if (days > 0) timerString.push(days > 1 ? `${days} days` : `${days} day`);
+    if (hours > 0) timerString.push(hours > 1 ? `${hours} hours` : `${hours} hour`);
+    if (minutes > 0) timerString.push(minutes > 1 ? `${minutes} minutes` : `${minutes} minute`);
+    if (seconds > 0) timerString.push(seconds > 1 ? `${seconds} seconds` : `${seconds} second`);
+    if (timerString.length < 2) return timerString.length > 0 ? timerString[0] : "0 second";
+    const lastTimer = timerString.pop();
+    return `${timerString.join(", ")} and ${lastTimer}`;
+}
