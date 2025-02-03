@@ -90,7 +90,7 @@ const banHandler = {
 }
 const muteHandler = {
     isMuted: (player: Player) => {
-        return world.getDynamicProperty(`isMuted::${player.id}`) ? world.getDynamicProperty(`isMuted::${player.id}`) as number : false;
+        return world.getDynamicProperty(`isMuted::${player.id}`) as number ?? false;
     },
     mute: (player: Player, time: number) => {
         world.setDynamicProperty(`isMuted::${player.id}`, Date.now() + time);
