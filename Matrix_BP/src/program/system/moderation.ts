@@ -50,7 +50,8 @@ function matrixKick (player: Player, reason: string = "No reason provided", resp
 }
 const banHandler = {
     isBanned: (player: Player) => {
-        return world.getDynamicProperty(player.getTags().find((tag) => tag.startsWith("matrix:isBanned::"))?.slice(7) ?? `isBanned::${player.name}`) ? JSON.parse(world.getDynamicProperty(`isBanned::${player.id}`) as string) as BanInfo : false;
+        const token = world.getDynamicProperty(player.getTags().find((tag) => tag.startsWith("matrix:isBanned::"))?.slice(7) ?? `isBanned::${player.name}`);
+        return token ? JSON.parse(token as string) as BanInfo : false;
     },
     ban: (player: Player, responser: string, indefinitely: boolean = true, time: number = 0, reason: string = "No reason provided") => {
         world.setDynamicProperty(`isBanned::${player.name}`, JSON.stringify({ responser, reason, dateEnd: Date.now() + time, indefinitely: indefinitely, time }));
