@@ -51,13 +51,13 @@ msgid "function.script.offline"
 msgstr "§7>> §cScript is inactive! Please check if you have Beta-API enabled."
 
 msgid "moderation.permanent"
-msgstr "permanent"
+msgstr "UNUSED_STRING"
 
 msgid "moderation.softban.banned"
-msgstr "§cYou have been soft-banned§r"
+msgstr "UNUSED_STRING"
 
 msgid "moderation.softban.until"
-msgstr "Until %s"
+msgstr "UNUSED_STRING"
 
 msgid "ui.runcommand"
 msgstr "Run Command!"
@@ -473,7 +473,7 @@ msgid "command.moderation.target"
 msgstr "Target player"
 
 msgid "command.moderation.target.description"
-msgstr "The target player that you want to use this command on."
+msgstr "The player that you want to use this command on."
 
 msgid "command.moderation.duration"
 msgstr "Duration"
@@ -482,58 +482,58 @@ msgid "command.moderation.duration.description"
 msgstr "The duration of the moderation action that you want to use this command on, in minutes. You leave it empty in order to set a permanent moderation action."
 
 msgid "command.moderation.admin"
-msgstr "Oops, you can not finish a moderation action to an administrator or yourself."
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.success"
-msgstr "%2 has done a moderation action to %1"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.action"
-msgstr "§7>> §gModeration action: §e%s"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.removal.failed"
-msgstr "Before you use the moderation removal or any related moderation command, you need to make sure the target player has been moderated."
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.tempkick"
-msgstr "temp-kicked"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.kick"
-msgstr "kicked"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.ban"
-msgstr "banned"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.unban"
-msgstr "unbanned"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.softban"
-msgstr "soft-banned"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.unsoftban"
-msgstr "unsoft-banned"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.mute"
-msgstr "muted"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.unmute"
-msgstr "unmuted"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.freeze"
-msgstr "frozen"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.unfreeze"
-msgstr "unfrozen"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.warn"
-msgstr "warned"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.clearwarn"
-msgstr "cleared all warnings"
+msgstr "UNUSED_STRING"
 
 msgid "command.moderation.warn.amount"
-msgstr "§7>> §g Amount of warnings: %s"
+msgstr "UNUSED_STRING"
 
 msgid "command.tempkick.description"
-msgstr "Temporarily kick a player."
+msgstr "UNUSED_STRING"
 
 msgid "command.kick.description"
 msgstr "Kick a player."
@@ -545,10 +545,10 @@ msgid "command.unban.description"
 msgstr "Unban a player."
 
 msgid "command.softban.description"
-msgstr "Soft-ban a player."
+msgstr "UNUSED_STRING"
 
 msgid "command.unsoftban.description"
-msgstr "Unsoft-ban a player."
+msgstr "UNUSED_STRING"
 
 msgid "command.mute.description"
 msgstr "Mute a player."
@@ -557,10 +557,10 @@ msgid "command.unmute.description"
 msgstr "Unmute a player."
 
 msgid "command.freeze.description"
-msgstr "Freeze a player."
+msgstr "UNUSED_STRING"
 
 msgid "command.unfreeze.description"
-msgstr "Unfreeze a player."
+msgstr "UNUSED_STRING"
 
 msgid "command.warn.description"
 msgstr "Warn a player."
@@ -951,3 +951,30 @@ msgstr "Device Ban"
 
 msgid "module.deviceban.description"
 msgstr "Prevent the player from using a banned device to join the server."
+
+msgid "command.ban.finish"
+msgstr "§bMatrix §a+ §7> %1 has been banned by %2."
+
+msgid "command.unban.finish"
+msgstr "§bMatrix §a+ §7> %1 has been unbanned by %2."
+
+msgid "command.kick.finish"
+msgstr "§bMatrix §a+ §7> %1 has been kicked by %2."
+
+msgid "command.mute.finish"
+msgstr "§bMatrix §a+ §7> %1 has been muted by %2."
+
+msgid "command.unmute.finish"
+msgstr "§bMatrix §a+ §7> %1 has been unmuted by %2."
+
+msgid "command.warn.finish"
+msgstr "§bMatrix §a+ §7> %1 has been warned by %2. §7(Warns: %3)"
+
+msgid "command.clearwarn.finish"
+msgstr "§bMatrix §a+ §7> §gAll the warnings of %1 has been cleared by %2."
+
+msgid "command.unban.notfound"
+msgstr "§bMatrix §a+ §7> §cThe player %1 has not been banned yet. You can use -banlist to see the list of banned players."
+
+msgid "command.unmute.notfound"
+msgstr "§bMatrix §a+ §7> §cThe player %1 has not been muted yet."

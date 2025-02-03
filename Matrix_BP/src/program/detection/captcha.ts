@@ -2,7 +2,7 @@ import { PlayerInteractWithBlockBeforeEvent, PlayerInteractWithEntityBeforeEvent
 import { fastText, rawtextTranslate } from "../../util/rawtext";
 import { ModalFormData } from "@minecraft/server-ui";
 import { Module } from "../../matrixAPI";
-import { strengthenKick } from "../system/moderation";
+import { matrixKick } from "../system/moderation";
 const defenderNotBlockingData: string[] = [];
 async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
     if (!event.initialSpawn || event.player.isAdmin()) return;
@@ -11,13 +11,13 @@ async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
     if (player.name.match(/^.{3,16}\s\([0-9]{1,2}\)$/)) {
         const rawName = player.name.replace(/^(.{3,16})\s\([0-9]{1,2}\)$/, "$1");
         const currentServerOnline = world.getAllPlayers();
-        strengthenKick(player);
+        matrixKick(player, `Captcha module`, `[Auto Moderation]`);
         world.sendMessage(rawtextTranslate("module.captcha.detected", player.name));
         const susPlayer = currentServerOnline.find(({ name }) => {
             return rawName == name;
         });
         if (!susPlayer) return;
-        strengthenKick(player);
+        matrixKick(player, `Captcha module`, `[Auto Moderation]`);
         world.sendMessage(rawtextTranslate("module.captcha.detected", susPlayer.name));
         return;
     }
@@ -64,7 +64,7 @@ async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
         }, 1);
     });
     if (isCameraMoved === false) {
-        strengthenKick(player);
+        matrixKick(player, `Please move your camera for captcha`, `[Auto Moderation]`);
         world.sendMessage(rawtextTranslate("module.captcha.detected", player.name));
         return;
     }
@@ -123,7 +123,7 @@ async function onPlayerSpawn(event: PlayerSpawnAfterEvent) {
             console.warn("Module :: Captcha :: Minecraft EDU is required to use defender without bypass!");
         }
     } else {
-        strengthenKick(player);
+        matrixKick(player, `Failed to verify`, "[Auto Moderation]");
         world.sendMessage(rawtextTranslate("module.captcha.detected", player.id));
     }
 }

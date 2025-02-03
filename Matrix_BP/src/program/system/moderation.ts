@@ -50,10 +50,11 @@ function matrixKick (player: Player, reason: string = "No reason provided", resp
 }
 const banHandler = {
     isBanned: (player: Player) => {
-        return world.getDynamicProperty(`isBanned::${player.id}`) ? JSON.parse(world.getDynamicProperty(`isBanned::${player.id}`) as string) as BanInfo : false;
+        return world.getDynamicProperty(player.getTags().find((tag) => tag.startsWith("matrix:isBanned::"))?.slice(7) ?? `isBanned::${player.name}`) ? JSON.parse(world.getDynamicProperty(`isBanned::${player.id}`) as string) as BanInfo : false;
     },
     ban: (player: Player, responser: string, indefinitely: boolean = true, time: number = 0, reason: string = "No reason provided") => {
-        world.setDynamicProperty(`isBanned::${player.id}`, JSON.stringify({ responser, reason, dateEnd: Date.now() + time, indefinitely: indefinitely, time }));
+        world.setDynamicProperty(`isBanned::${player.name}`, JSON.stringify({ responser, reason, dateEnd: Date.now() + time, indefinitely: indefinitely, time }));
+        player.addTag(`matrix:isBanned::${player.name}`);
         system.run(() => banHandler.kickAction(player));
     },
     kickAction: (player: Player) => {
@@ -61,7 +62,11 @@ const banHandler = {
         if (!banInfo) return;
         if (!banInfo.indefinitely && Date.now() > banInfo.dateEnd) {
             player.sendMessage(rawtextTranslate("command.moderation.ban.expired"));
-            banHandler.unban(player);
+            if (!banHandler.unban(player.name)) {
+                world.setDynamicProperty(player.getTags().find((tag) => tag.startsWith("matrix:isBanned::"))!);
+                console.log(`banHandler :: kickAction :: ${player.name} has changed the name after being banned`);
+            };
+            player.getTags().filter((tag) => tag.startsWith("matrix:isBanned::")).forEach((tag) => player.removeTag(tag));
             return;
         }
         const timerString = banInfo.indefinitely ? "Indefinitely" : getTimeFromTimeString(banInfo.time - Date.now());
@@ -73,10 +78,13 @@ const banHandler = {
             crashPlayer(player);
         }
     },
-    unban: (player: Player) => {
-        const state = world.getDynamicProperty(`isBanned::${player.id}`);
-        world.setDynamicProperty(`isBanned::${player.id}`);
+    unban: (playerName: string) => {
+        const state = world.getDynamicProperty(`isBanned::${playerName}`);
+        world.setDynamicProperty(`isBanned::${playerName}`);
         return state;
+    },
+    bannedList: () => {
+        return world.getDynamicPropertyIds().filter((x) => x.startsWith("isBanned::")).map((x) => x.slice(10));
     }
 }
 const muteHandler = {

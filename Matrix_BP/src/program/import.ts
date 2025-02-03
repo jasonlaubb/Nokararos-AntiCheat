@@ -35,7 +35,7 @@ export default [
     "./program/command/set",
     "./program/command/matrixui",
     "./program/command/vanish",
-    "./program/command/moderation",
+    "./program/command/modCommand",
     "./program/command/invsee",
     "./program/command/setpassword",
     "./program/command/configui",

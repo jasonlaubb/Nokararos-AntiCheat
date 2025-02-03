@@ -2,7 +2,7 @@ import { Player, RawText, system, world } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 import defaultConfig from "./data/config";
 import { fastText, rawtext, rawtextTranslate } from "./util/rawtext";
-import { Punishment, strengthenKick } from "./program/system/moderation";
+import { Punishment, matrixKick } from "./program/system/moderation";
 import { write } from "./assets/logSystem";
 import program from "./program/import";
 // The class that store the tick event that is handled by the Module class
@@ -361,7 +361,7 @@ class Command {
                         if (!player?.isValid()) return;
                         // This isMoving is better than animationController isMoving, no false positive on that .u.
                         if (player.isMoving()) {
-                            strengthenKick(player, "Spammer is not allowed");
+                            matrixKick(player, "Spammer is not allowed", `[Matrix API]`);
                         }
                     });
                 }
