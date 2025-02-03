@@ -93,11 +93,6 @@ function checkTimer() {
             data.negativeCombo++;
         } else data.negativeCombo = 0;
         const overSlow = data.negativeCombo >= 3;
-        if (actualDeviation > 3.5 && Module.config.sensitivity.antiBlink && now - data.lastReset > 2500) {
-            player.teleport(data.lastNoSpeedLocation);
-            data.lastReset = now;
-            player.sendMessage(`§7(Anti Blink) §cAuto corrected your location. To disable (staff only): "-set sensitivity.antiBlink false"`);
-        }
         if ((highDeviationState || absDeviation > maxDeviation * 0.31 || overSlow) && actualDeviation < 14) {
             if (now - data.lastFlagTimestamp > 3000) {
                 data.flagAmount = 0;
