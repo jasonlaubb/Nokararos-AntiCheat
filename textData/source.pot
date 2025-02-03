@@ -953,34 +953,34 @@ msgid "module.deviceban.description"
 msgstr "Prevent the player from using a banned device to join the server."
 
 msgid "command.ban.finish"
-msgstr "§bMatrix §a+ §7> %1 has been banned by %2."
+msgstr "§bMatrix§a+ §7>§g %1 has been banned by %2."
 
 msgid "command.unban.finish"
-msgstr "§bMatrix §a+ §7> %1 has been unbanned by %2."
+msgstr "§bMatrix§a+ §7>§g %1 has been unbanned by %2."
 
 msgid "command.kick.finish"
-msgstr "§bMatrix §a+ §7> %1 has been kicked by %2."
+msgstr "§bMatrix§a+ §7>§g %1 has been kicked by %2."
 
 msgid "command.mute.finish"
-msgstr "§bMatrix §a+ §7> %1 has been muted by %2."
+msgstr "§bMatrix§a+ §7>§g %1 has been muted by %2."
 
 msgid "command.unmute.finish"
-msgstr "§bMatrix §a+ §7> %1 has been unmuted by %2."
+msgstr "§bMatrix§a+ §7>§g %1 has been unmuted by %2."
 
 msgid "command.warn.finish"
-msgstr "§bMatrix §a+ §7> %1 has been warned by %2. §7(Warns: %3)"
+msgstr "§bMatrix§a+ §7>§g %1 has been warned by %2. §7(Warns: %3)"
 
 msgid "command.clearwarn.finish"
-msgstr "§bMatrix §a+ §7> §gAll the warnings of %1 has been cleared by %2."
+msgstr "§bMatrix§a+ §7> §gAll the warnings of %1 has been cleared by %2."
 
 msgid "command.unban.notfound"
-msgstr "§bMatrix §a+ §7> §cThe player %1 has not been banned yet. You can use -banlist to see the list of banned players."
+msgstr "§bMatrix§a+ §7> §cThe player %1 has not been banned yet. You can use -banlist to see the list of banned players."
 
 msgid "command.unmute.notfound"
-msgstr "§bMatrix §a+ §7> §cThe player %1 has not been muted yet."
+msgstr "§bMatrix§a+ §7> §cThe player %1 has not been muted yet."
 
 msgid "command.moderation.ban.expired"
-msgstr "§bMatrix §a+ §7> §aYou're ban has expired!"
+msgstr "§bMatrix§a+ §7> §aYour ban has expired!"
 
 msgid "command.moderation.mute.expired"
-msgstr "§bMatrix §a+ §7> §aYou're no longer to be muted"
+msgstr "§bMatrix§a+ §7> §aYou're no longer to be muted"

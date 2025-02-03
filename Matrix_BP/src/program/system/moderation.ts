@@ -48,7 +48,7 @@ function matrixKick (player: Player, reason: string = "No reason provided", resp
     } catch {
         try {
             if (player.isOp()) {
-                player.sendMessage("<debug> We §ccannot kick§f you as you're the §ghost§f of the world");
+                system.run(() => player.sendMessage("<debug> We §ccannot kick§f you as you're the §ghost§f of the world"));
             }
             return;
         } catch {}
@@ -86,7 +86,7 @@ const banHandler = {
         } catch {
             try {
                 if (player.isOp()) {
-                    player.sendMessage("<debug> We §ccannot kick§f you as you're the §ghost§f of the world");
+                    system.run(() => player.sendMessage("<debug> We §ccannot kick§f you as you're the §ghost§f of the world"));
                     return;
                 }
             } catch {}
