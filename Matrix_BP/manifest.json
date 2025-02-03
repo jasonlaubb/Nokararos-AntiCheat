@@ -1,10 +1,10 @@
 {
     "format_version": 2,
     "header": {
-        "name": "§bMatrix§a+ §gAnti-Cheat §7(BP§7) V6.0.31§r",
+        "name": "§bMatrix§a+ §gAnti-Cheat §7(BP§7) V6.0.32§r",
         "description": "pack.description",
         "uuid": "22cc8811-023a-42dc-9f1b-45065f9d33b2",
-        "version": [6, 0, 31],
+        "version": [6, 0, 32],
         "min_engine_version": [1, 21, 50]
     },
     "metadata": {
