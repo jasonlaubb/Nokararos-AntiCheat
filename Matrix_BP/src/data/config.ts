@@ -69,6 +69,8 @@ export default {
     customize: {
         dataValueToPrecision: 4,
         askWetherFalseFlag: true,
+        banMinute: 10080,
+        permanent: false,
     },
     logSettings: {
         logCommandUsage: true,

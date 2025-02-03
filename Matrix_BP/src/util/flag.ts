@@ -1,7 +1,7 @@
 import { Player, RawText, world } from "@minecraft/server";
 import { Module } from "../matrixAPI";
 import { fastText, rawtext, rawtextTranslate } from "./rawtext";
-import { ban, freeze, mute, softBan, strengthenKick, crashPlayer } from "../program/system/moderation";
+import { banHandler, matrixKick, crashPlayer } from "../program/system/moderation";
 import { write } from "../assets/logSystem";
 export function setupFlagFunction() {
     Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number | (string | number)[] }) {
@@ -41,24 +41,18 @@ export function setupFlagFunction() {
         if (bypass) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {
             switch (punishment) {
-                case "kick":
-                    strengthenKick(this);
+                case "kick": {
+                    matrixKick(this, `Unfair advantage, moduleId: ${detected.getToggleId()}`, "[Auto Moderation]");
                     break;
-                case "crash":
+                }
+                case "crash": {
                     crashPlayer(this);
                     break;
-                case "freeze":
-                    freeze(this, -1);
+                }
+                case "ban": {
+                    banHandler.ban(this, `Unfair advantage, moduleId: ${detected.getToggleId()}`, Module.config.customize.permanent, Module.config.customize.banMinute * 60000);
                     break;
-                case "mute":
-                    mute(this, -1);
-                    break;
-                case "softBan":
-                    softBan(this, -1);
-                    break;
-                case "ban":
-                    ban(this, Module.config.flag.banDuration, "[Auto Moderation]", "Using hack client, module: " + detected.getToggleId());
-                    break;
+                }
             }
         } catch (error) {
             Module.sendError(error as Error);

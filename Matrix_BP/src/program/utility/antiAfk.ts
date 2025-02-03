@@ -1,7 +1,7 @@
 import { Player, world } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { fastText, rawtextTranslate } from "../../util/rawtext";
-import { strengthenKick } from "../system/moderation";
+import { matrixKick } from "../system/moderation";
 const afkData = new Map<string, number>();
 let eventId: IntegratedSystemEvent;
 new Module()
@@ -30,7 +30,7 @@ function tickEvent(player: Player) {
     if (player.isMoving()) {
         afkData.set(player.id, now);
     } else if (now - data > MAX_AFK_TIME_ALLOWED) {
-        strengthenKick(player, "Afk is not allowed");
+        matrixKick(player, "Afk is not allowed", "[Auto Moderation]");
         world.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("module.afk.kicked", player.name).build());
     }
 }
