@@ -25,7 +25,7 @@ No complicated setup is required, here is the few step.
 
 5. Do `-help` to view what command can you use.
 
-## It show something like "level 1", it is not working!
+## When I type help command, it shows something like "level 1", it is not working!
 
 Do `-op`, thank you. Stop asking this question.
 
