@@ -978,3 +978,9 @@ msgstr "§bMatrix §a+ §7> §cThe player %1 has not been banned yet. You can us
 
 msgid "command.unmute.notfound"
 msgstr "§bMatrix §a+ §7> §cThe player %1 has not been muted yet."
+
+msgid "command.moderation.ban.expired"
+msgstr "§bMatrix §a+ §7> §aYou're ban has expired!"
+
+msgid "command.moderation.mute.expired"
+msgstr "§bMatrix §a+ §7> §aYou're no longer to be muted"

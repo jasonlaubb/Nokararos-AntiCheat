@@ -352,6 +352,9 @@ class Command {
                 event.cancel = true;
                 system.run(() => event.sender.runChatCommand(event.message.slice(1)));
                 return;
+            } else if (event.sender.hasTag("matrix:cancelChatMessage")) {
+                event.cancel = true;
+                return;
             } else if (!event.sender.isAdmin() && Module.config.extraBlockOnSpammer) {
                 if (event.message.match(/(\n)|(\r)/)) {
                     event.cancel = true;
