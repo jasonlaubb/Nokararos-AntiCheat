@@ -43,7 +43,7 @@ interface BanInfo {
 }
 function matrixKick (player: Player, reason: string = "No reason provided", responser: string = "Unknown") {
     try {
-        const { successCount} = world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" §cYou have been kicked. §7[§bMatrix§7]\n§bReason: §e${reason}§r\n§bResponser: §e${responser}§r`);
+        const { successCount } = world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" §cYou have been kicked. §7[§bMatrix§7]\n§bReason: §e${reason}§r\n§bResponser: §e${responser}§r`);
         if (successCount !== 1) throw new Error("Failed to kick player");
     } catch {
         try {
