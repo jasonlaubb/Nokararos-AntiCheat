@@ -1,20 +1,19 @@
-import { Player, PlayerSpawnAfterEvent, system, world } from "@minecraft/server";
-import { rawtext, rawtextTranslate, rawtextTranslateRawText } from "../../util/rawtext";
-import { MinecraftDimensionTypes, MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
+import { Player, system, world } from "@minecraft/server";
+import { rawtextTranslate } from "../../util/rawtext";
+import { MinecraftDimensionTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { Module } from "../../matrixAPI";
+import { generateShortTimeStr, getTimeFromTimeString } from "../../util/util";
 export function registerModeration() {
     new Module()
         .lockModule()
         .addCategory("system")
-        .onModuleEnable(() => {
-            world.afterEvents.playerSpawn.subscribe(onPlayerSpawn);
-        })
         .initPlayer((_playerId, player) => {
-            onPlayerSpawn({ player: player, initialSpawn: true });
+            onPlayerSpawn(player);
         })
         .register();
 }
-export type Punishment = "none" | "crash" | "kick" | "softBan" | "ban" | "freeze" | "mute";
+export { Punishment, crashPlayer, banHandler, muteHandler, matrixKick };
+type Punishment = "none" | "crash" | "kick" | "ban" | "mute";
 function meaninglessCode() {
     const includeString = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
     let str = "";
@@ -23,7 +22,7 @@ function meaninglessCode() {
     }
     return `title @s title §m§l§o§k${new Array(32).fill(includeString).join("\n")}`;
 }
-export function crashPlayer(player: Player, spam = meaninglessCode()) {
+function crashPlayer(player: Player, spam = meaninglessCode()) {
     if (!player?.isValid() || player.isAdmin()) return;
     // Punish player
     try {
@@ -36,29 +35,94 @@ export function crashPlayer(player: Player, spam = meaninglessCode()) {
     }
 }
 interface BanInfo {
-    reason?: string;
+    reason: string;
     dateEnd: number;
     indefinitely: boolean;
     time: number;
+    responser: string;
+}
+function matrixKick (player: Player, reason: string = "No reason provided", responser: string = "Unknown") {
+    try {
+        world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" §cYou have been kicked. §7[§bMatrix§7]\n§bReason: §e${reason}§r\n§bResponser: §e${responser}§r`);
+    } catch {
+        crashPlayer(player);
+    }
 }
 const banHandler = {
     isBanned: (player: Player) => {
         return world.getDynamicProperty(`isBanned::${player.id}`) ? JSON.parse(world.getDynamicProperty(`isBanned::${player.id}`) as string) as BanInfo : false;
     },
-    ban: (player: Player, reason: string, indefinitely: boolean, time: number) => {
-        world.setDynamicProperty(`isBanned::${player.id}`, JSON.stringify({ reason: reason, dateEnd: Date.now() + time, indefinitely: indefinitely, time: time }));
-        banHandler.kickAction(player);
+    ban: (player: Player, responser: string, indefinitely: boolean = true, time: number = 0, reason: string = "No reason provided") => {
+        world.setDynamicProperty(`isBanned::${player.id}`, JSON.stringify({ responser, reason, dateEnd: Date.now() + time, indefinitely: indefinitely, time }));
+        system.run(() => banHandler.kickAction(player));
     },
     kickAction: (player: Player) => {
         const banInfo = banHandler.isBanned(player);
         if (!banInfo) return;
-        const detailInfo = `Reason: ${banInfo.reason ?? "No reason provided."}\nDuration: ${banInfo.indefinitely ? "Indefinitely" : `${(banInfo.dateEnd - Date.now()) / 1000} seconds`}`;
-        try {
-            if (banInfo.indefinitely) {
-                world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" §aBan handled by Matrix AntiCheat\n§gYou have been banned indefinitely and your ban will not be lifted unless you are unbanned by an admin of the server.`);
-            }
-        } catch {
-
+        if (!banInfo.indefinitely && Date.now() > banInfo.dateEnd) {
+            player.sendMessage(rawtextTranslate("command.moderation.ban.expired"));
+            banHandler.unban(player);
+            return;
         }
+        const timerString = banInfo.indefinitely ? "Indefinitely" : getTimeFromTimeString(banInfo.time - Date.now());
+        const detailInfo = `§bReason: §e${banInfo.reason}§r\n§bResponser: §e${banInfo.responser}§r\n§bDuration: §e${timerString}§r\n§bExpires: §e${banInfo.indefinitely ? "Indefinitely" : generateShortTimeStr(banInfo.dateEnd)}§r`;
+        const message = `§cYou have been banned. §7[§bMatrix§7]\n${detailInfo}`;
+        try {
+            world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" ${message}`);
+        } catch {
+            crashPlayer(player);
+        }
+    },
+    unban: (player: Player) => {
+        const state = world.getDynamicProperty(`isBanned::${player.id}`);
+        world.setDynamicProperty(`isBanned::${player.id}`);
+        return state;
     }
+}
+const muteHandler = {
+    isMuted: (player: Player) => {
+        return world.getDynamicProperty(`isMuted::${player.id}`) ? world.getDynamicProperty(`isMuted::${player.id}`) as number : false;
+    },
+    mute: (player: Player, time: number) => {
+        world.setDynamicProperty(`isMuted::${player.id}`, Date.now() + time);
+        system.run(() => muteHandler.muteAction(player));
+    },
+    muteAction: (player: Player) => {
+        const muteTime = muteHandler.isMuted(player);
+        if (!muteTime) return;
+        if (muteTime > Date.now()) {
+            player.sendMessage(rawtextTranslate("command.moderation.mute.expired"));
+            try {
+                player.runCommand(`ability @s mute true`);
+            } catch {} finally {
+                player.addTag("matrix:cancelChatMessage");
+            }
+            world.setDynamicProperty(`isMuted::${player.id}`);
+        } else {
+            const id = system.runTimeout(() => muteHandler.muteAction(player), Math.ceil((Date.now() - muteTime) / 50));
+            const eventId = world.afterEvents.playerLeave.subscribe((event) => {
+                if (event.playerId !== player.id) return;
+                system.clearRun(id);
+                world.afterEvents.playerLeave.unsubscribe(eventId);
+            })
+        }
+        try {
+            player.runCommand(`ability @s mute true`);
+        } catch {
+            player.addTag("matrix:cancelChatMessage");
+        }
+    },
+    unmute: (player: Player) => {
+        try {
+            player.runCommand(`ability @s mute true`);
+        } catch {} finally {
+            player.addTag("matrix:cancelChatMessage");
+        }
+        world.setDynamicProperty(`isMuted::${player.id}`);
+    }
+}
+function onPlayerSpawn(player: Player) {
+    if (player.isAdmin()) return;
+    // Check if player is banned
+    banHandler.kickAction(player);
 }

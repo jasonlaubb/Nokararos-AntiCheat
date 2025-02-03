@@ -1,7 +1,7 @@
 import { PlatformType } from "@minecraft/server";
 import { Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
-import { strengthenKick } from "../system/moderation";
+import { matrixKick } from "../system/moderation";
 new Module()
     .setName(rawtextTranslate("module.deviceban.name"))
     .setDescription(rawtextTranslate("module.deviceban.description"))
@@ -27,6 +27,6 @@ new Module()
             }
         }
         if (kickState === "none") return;
-        strengthenKick(player, `Banned device (${kickState})`);
+        matrixKick(player, `Banned device (${kickState})`, `[Device Ban]`);
     })
     .register();
