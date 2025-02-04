@@ -50,7 +50,7 @@ export function setupFlagFunction() {
                     break;
                 }
                 case "ban": {
-                    banHandler.ban(this, `Unfair advantage, moduleId: ${detected.getToggleId()}`, Module.config.customize.permanent, Module.config.customize.banMinute * 60000);
+                    banHandler.ban(this, "[Auto Moderation]", Module.config.customize.permanent, Module.config.customize.banMinute * 60000, `Unfair advantage, moduleId: ${detected.getToggleId()}`);
                     break;
                 }
             }
