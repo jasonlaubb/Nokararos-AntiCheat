@@ -3,7 +3,7 @@
 window.$docsify = {
     el: "#app",
     repo: 'https://github.com/jasonlaubb/Matrix-AntiCheat',
-    logo: '/images/logo.png',
+    logo: '/images/matrix_icon_64x.png',
     loadSidebar: false,
     name: "Matrix AntiCheat",
     hideSidebar: true,
