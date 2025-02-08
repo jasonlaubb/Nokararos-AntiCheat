@@ -14,9 +14,10 @@ const mobAura = new Module()
     .onModuleDisable(() => {
         world.afterEvents.entityHitEntity.unsubscribe(entityHitEntity);
     })
-    .initPlayer((_playerId, player) => {
+    .initPlayer((tickData, _playerId, player) => {
         player.mobAuraFlag = 0;
         player.mobAuraLastFlagTimestamp = 0;
+        return tickData;
     });
 mobAura.register();
 const SUMMON_RANDOM_OFFSET = 1.3;

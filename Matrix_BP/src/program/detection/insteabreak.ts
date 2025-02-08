@@ -2,6 +2,7 @@ import { BlockPermutation, Dimension, EntityHitBlockAfterEvent, ItemStack, Playe
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { MinecraftBlockTypes, MinecraftEffectTypes, MinecraftEnchantmentTypes, MinecraftItemTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
+import { TickData } from "../import";
 type BrokenBlockList = { blockPermutation: BlockPermutation; blockPosition: Vector3 }[];
 interface BreakData {
     brokenBlocks: BrokenBlockList;
@@ -29,8 +30,9 @@ const insteabreak = new Module()
         Module.clearPlayerTickEvent(eventId);
         breakData = {};
     })
-    .initPlayer((playerId) => {
+    .initPlayer((tickData, playerId) => {
         breakData[playerId] = DEFAULT_BREAK_DATA;
+        return tickData;
     })
     .initClear((playerId) => {
         delete breakData[playerId];
@@ -57,14 +59,15 @@ function onPlayerHitBlock({ damagingEntity: player }: EntityHitBlockAfterEvent) 
         breakData[player.id].startBreakingTime = Date.now();
     }
 }
-function tickEvent(player: Player) {
-    if (breakData[player.id].brokenBlocks.length == 0) return;
+function tickEvent(tickData: TickData, player: Player) {
+    if (breakData[player.id].brokenBlocks.length == 0) return tickData;
     if (breakData[player.id].brokenAmount > MAX_BREAK_IN_TICK || breakData[player.id].flagInsteaBreak) {
         // Recover the blocks
         system.runJob(recoverBlocks(breakData[player.id].brokenBlocks, player.dimension));
         player.flag(insteabreak, { type: breakData[player.id].flagInsteaBreak ? "instabreak" : "nuking", breakAmount: breakData[player.id].brokenAmount });
     }
     breakData[player.id] = DEFAULT_BREAK_DATA;
+    return tickData;
 }
 function isTool(itemStack: ItemStack) {
     TOOL_SET.has(itemStack.type.id as MinecraftItemTypes);

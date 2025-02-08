@@ -51,6 +51,29 @@ export interface TickData {
         superCombo: number;
         illegalFactorAmount: number;
     };
+    fly: {
+        lastOnGroundLocation: Vector3;
+        lastFlaggedLocation: Vector3;
+        velocityYList: number[];
+        flagAmount: number;
+        lastFlagTimestamp: number;
+        hasStarted: number;
+    };
+    invalidSprint: {
+        flagCount: number;
+        nonBlindnessSprintState: boolean;
+    };
+    killaura: {
+        roundFlagAmount: number;
+        lastAttackRot: Vector2;
+        lastRoundTimestamp: number;
+        lastIntegerTimestamp: number;
+        integerFlagAmount: number;
+    };
+    phase: {
+        lastLocationList: Vector3[];
+        lastSpeedList: number[];
+    };
 }
 export default [
     "./program/detection/firewall",

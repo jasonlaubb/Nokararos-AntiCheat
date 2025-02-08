@@ -1,25 +1,15 @@
-import { EquipmentSlot, GameMode, Player, system, Vector3 } from "@minecraft/server";
+import { EquipmentSlot, GameMode, Player, system } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { isSurroundedByAir } from "../../util/util";
 import { MinecraftEffectTypes, MinecraftItemTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { fastAbs } from "../../util/fastmath";
+import { TickData } from "../import";
 const MAX_VELOCITY_Y = 0.7;
 const MIN_REQUIRED_REPEAT_AMOUNT = 6;
 const HIGH_VELOCITY_Y = 22;
 const MAX_BDS_PREDICTION = 20;
 const START_SKIP_CHECK = 6000;
-interface FlyData {
-    previousVelocityY: number;
-    lastVelocityY: number;
-    lastOnGroundLocation: Vector3;
-    lastFlaggedLocation: Vector3;
-    velocityYList: number[];
-    flagAmount: number;
-    lastFlagTimestamp: number;
-    hasStarted: number;
-}
-const flyData = new Map<string, FlyData>();
 let eventId: IntegratedSystemEvent;
 const fly = new Module()
     .addCategory("detection")
@@ -32,37 +22,33 @@ const fly = new Module()
     })
     .onModuleDisable(() => {
         Module.clearPlayerTickEvent(eventId);
-        flyData.clear();
     })
-    .initPlayer((playerId, player) => {
-        flyData.set(playerId, {
-            lastVelocityY: 0,
+    .initPlayer((tickData, _playerId, player) => {
+        tickData.fly = {
             lastOnGroundLocation: player.location,
-            velocityYList: [],
+            velocityYList: new Array(60).fill(0),
             lastFlaggedLocation: player.location,
             flagAmount: 0,
             lastFlagTimestamp: 0,
             hasStarted: Date.now(),
-            previousVelocityY: 0,
-        });
-    })
-    .initClear((playerId) => {
-        flyData.delete(playerId);
+        };
+        return tickData;
     });
 fly.register();
 /**
  * @author jasonlaubb
  * @description Anti Fly.
  */
-function tickEvent(player: Player) {
+function tickEvent(tickData: TickData, player: Player) {
     const hasFlyDebugTag = player.hasTag("matrix:flyDebug");
     const now = Date.now();
-    const data = flyData.get(player.id)!;
-    const { y: velocityY } = player.getVelocity();
+    const data = tickData.fly;
+    const { y: velocityY } = tickData.instant.velocity;
     const surroundAir = !player.isOnGround && isSurroundedByAir(player.location, player.dimension);
     const playerStarted = now - data.hasStarted > START_SKIP_CHECK;
     const isPlayerNotCreative = player.getGameMode() !== GameMode.creative;
     const pistonNotPushed = now - player.timeStamp.pistonPush > 4000;
+    const previousVelY = data.velocityYList[1];
     if (player.isOnGround && velocityY === 0) {
         data.lastOnGroundLocation = player.location;
     } else if (
@@ -70,7 +56,7 @@ function tickEvent(player: Player) {
         pistonNotPushed &&
         now - player.timeStamp.knockBack > 2000 &&
         now - player.timeStamp.riptide > 5000 &&
-        (data.lastVelocityY < 0 || (data.previousVelocityY < 0 && velocityY === 0) || (velocityY > 0 && data.previousVelocityY / velocityY > 4 && data.previousVelocityY > 2.5 && fastAbs(data.lastVelocityY - velocityY) < 0.5)) &&
+        (previousVelY < 0 || (previousVelY < 0 && velocityY === 0) || (velocityY > 0 && previousVelY / velocityY > 4 && previousVelY > 2.5 && fastAbs(tickData.global.lastVelocity.y- velocityY) < 0.5)) &&
         !player.isRiding() &&
         !player.isFlying &&
         !player.isGliding &&
@@ -89,7 +75,7 @@ function tickEvent(player: Player) {
             if (data.flagAmount >= Module.config.sensitivity.antiFly.type1MaxFlag) {
                 data.flagAmount = 0;
                 player.teleport(data.lastOnGroundLocation);
-                player.flag(fly, { t: "1", lastVelocityY: data.lastVelocityY, velocityY });
+                player.flag(fly, { t: "1", lastVelocityY: tickData.global.lastVelocity.y, velocityY });
             }
         }
     }
@@ -102,11 +88,11 @@ function tickEvent(player: Player) {
         player.flag(fly, { t: "2", velocityY });
     }
     if (player.isFlying) {
-        data.velocityYList.push(HIGH_VELOCITY_Y);
+        data.velocityYList.unshift(HIGH_VELOCITY_Y);
     } else {
-        data.velocityYList.push(velocityY);
+        data.velocityYList.unshift(velocityY);
     }
-    if (data.velocityYList.length > 60) data.velocityYList.shift();
+    data.velocityYList.pop();
     const minAmount = Math.min(...data.velocityYList);
     const maxAmount = Math.max(...data.velocityYList);
     const bdsPrediction = calculateBdsPrediction(data.velocityYList);
@@ -127,9 +113,8 @@ function tickEvent(player: Player) {
         });
         data.lastFlaggedLocation = player.location;
     }
-    data.previousVelocityY = data.lastVelocityY;
-    data.lastVelocityY = velocityY;
-    flyData.set(player.id, data);
+    tickData.fly = data;
+    return tickData;
 }
 
 function repeatChecks(list: number[]) {

@@ -1,41 +1,29 @@
 import { Player, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
-import { fastAbs, pythag } from "../../util/fastmath";
-
+import { fastAbs } from "../../util/fastmath";
+import { TickData } from "../import";
 const MIN_SPEED = 0.25;
 const MAX_SPEED = 0.7;
-
 let eventId: IntegratedSystemEvent;
-
-interface PhaseDataMap {
-    lastLocationList: Vector3[];
-    lastSpeedList: number[];
-}
-
-const phaseDataMap = new Map<string, PhaseDataMap>();
-
 const antiPhase = new Module()
     .addCategory("detection")
     .setName(rawtextTranslate("module.phase.name"))
     .setDescription(rawtextTranslate("module.phase.description"))
     .setToggleId("antiPhase")
     .setPunishment("ban")
-    .initPlayer((playerId, player) => {
-        phaseDataMap.set(playerId, {
+    .initPlayer((tickData, _playerId, player) => {
+        tickData.phase = {
             lastLocationList: [player.location, player.location, player.location],
             lastSpeedList: [0, 0, 0],
-        });
-    })
-    .initClear((playerId) => {
-        phaseDataMap.delete(playerId);
+        };
+        return tickData;
     })
     .onModuleEnable(() => {
         eventId = Module.subscribePlayerTickEvent(tickEvent, false);
     })
     .onModuleDisable(() => {
         Module.clearPlayerTickEvent(eventId);
-        phaseDataMap.clear();
     });
 
 antiPhase.register();
@@ -44,12 +32,12 @@ antiPhase.register();
  * @author jasonlaubb
  * @description The horizontal phase detection system, used the property of bds prediction to have the accurate flag.
  */
-function tickEvent(player: Player) {
-    const data = phaseDataMap.get(player.id)!;
-    const { x, y, z } = player.getVelocity();
-    const currentSpeed = pythag(x, z);
+function tickEvent(tickData: TickData, player: Player) {
+    const data = tickData.phase;
+    const { y } = tickData.instant.velocity;
+    const currentSpeed = tickData.instant.speedXZ;
 
-    const clipStartLocation = calculateClipStartLocation(data, currentSpeed);
+    const clipStartLocation = calculateClipStartLocation(data.lastSpeedList, data.lastLocationList, currentSpeed);
 
     if (clipStartLocation && Date.now() - player.timeStamp.knockBack > 3500 && !player.isFlying && Math.abs(y) < MAX_SPEED) {
         const blockLocations = straightLocations(clipStartLocation, player.location);
@@ -64,16 +52,20 @@ function tickEvent(player: Player) {
     }
 
     // Update data value.
-    data.lastLocationList = [player.location, ...data.lastLocationList.slice(0, 2)];
-    data.lastSpeedList = [currentSpeed, ...data.lastSpeedList.slice(0, 2)];
-    phaseDataMap.set(player.id, data);
+    data.lastLocationList.unshift(player.location);
+    data.lastLocationList.pop();
+    data.lastSpeedList.unshift(currentSpeed);
+    data.lastSpeedList.pop();
+    tickData.phase = data;
+    return tickData;
 }
 
-function calculateClipStartLocation(data: PhaseDataMap, currentSpeed: number): Vector3 | undefined {
-    if (data.lastSpeedList[1] < MIN_SPEED && data.lastSpeedList[0] > MAX_SPEED && currentSpeed < MIN_SPEED) {
-        return data.lastLocationList[1];
-    } else if (data.lastSpeedList[2] < MIN_SPEED && data.lastSpeedList[1] > MAX_SPEED && data.lastSpeedList[0] == data.lastSpeedList[1] && currentSpeed < MIN_SPEED) {
-        return data.lastLocationList[2];
+
+function calculateClipStartLocation(speed: number[], loc: Vector3[], currentSpeed: number): Vector3 | undefined {
+    if (speed[0] < MIN_SPEED && speed[0] > MAX_SPEED && currentSpeed < MIN_SPEED) {
+        return loc[1];
+    } else if (speed[2] < MIN_SPEED && speed[1] > MAX_SPEED && speed[0] === speed[1] && currentSpeed < MIN_SPEED) {
+        return loc[2];
     }
     return undefined;
 }

@@ -4,6 +4,7 @@ import { rawtextTranslate } from "../../util/rawtext";
 import { calculateAngleFromView, calculateDistance, fastAbs, fastRound, pythag } from "../../util/fastmath";
 import { getAngleLimit } from "../../util/util";
 import { getTotalAbsMovementVector } from "../../util/assets";
+import { TickData } from "../import";
 const KILLAURA_DISTANCE_THRESHOLD = 3.5;
 const KILLAURA_PVP_DISTANCE_THRESHOLD = 4.5;
 const KILLAURA_ROTATION_THRESHOLD = 89;
@@ -21,35 +22,21 @@ const killaura = new Module()
         eventId = Module.subscribePlayerTickEvent(tickEvent);
     })
     .onModuleDisable(() => {
-        killauraData.clear();
         world.afterEvents.entityHitEntity.unsubscribe(entityHitEntity);
         Module.clearPlayerTickEvent(eventId);
     })
-    .initPlayer((playerId, player) => {
-        killauraData.set(playerId, {
-            entityHurtList: [],
+    .initPlayer((tickData, _playerId, player) => {
+        tickData.killaura = {
             roundFlagAmount: 0,
             lastAttackRot: player.getRotation(),
             lastRoundTimestamp: 0,
             lastIntegerTimestamp: 0,
             integerFlagAmount: 0,
-        });
-    })
-    .initClear((playerId) => {
-        killauraData.delete(playerId);
+        };
+        return tickData;
     });
 
 killaura.register();
-interface killAuraData {
-    entityHurtList: string[];
-    roundFlagAmount: number;
-    lastAttackRot: Vector2;
-    lastRoundTimestamp: number;
-    lastIntegerTimestamp: number;
-    integerFlagAmount: number;
-}
-const killauraData = new Map<string, killAuraData>();
-
 /**
  * @author jasonlaubb
  * @description The basic killaura detection module.
@@ -70,7 +57,8 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
         player.flag(killaura, { t: "2", distance, pitch });
         return;
     }
-    const data = killauraData.get(player.id)!;
+    const tickData = Module.tickData.get(player.id)!;
+    const data = tickData.killaura!;
     const notKillAuraTag = inputMode === InputMode.Touch && pitch === data.lastAttackRot.x && yaw === data.lastAttackRot.y;
     if (!notKillAuraTag && distance > KILLAURA_DISTANCE_THRESHOLD && isPvp) {
         const angle = calculateAngleFromView(player.location, target.location, yaw);
@@ -86,8 +74,8 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
             }
         }
     }
-    if (!data.entityHurtList.includes(target.id)) data.entityHurtList.push(target.id);
-    if (data.entityHurtList.length >= 3) {
+    if (!player.killAuraIdList.includes(target.id)) player.killAuraIdList.push(target.id);
+    if (player.killAuraIdList.length >= 3) {
         player.flag(killaura, { t: "4" });
     }
     if (pitch % 1 === 0 && fastAbs(yaw - data.lastAttackRot.y) > 0) {
@@ -122,11 +110,11 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
         }
     }
     data.lastAttackRot = { x: pitch, y: yaw } as Vector2;
-    killauraData.set(player.id, data);
+    tickData.killaura = data;
+    Module.tickData.set(player.id, tickData);
 }
 
-function tickEvent(player: Player) {
-    const data = killauraData.get(player.id)!;
-    data.entityHurtList = [];
-    killauraData.set(player.id, data);
+function tickEvent(tickData: TickData,player: Player) {
+    player.killAuraIdList = [];
+    return tickData;
 }

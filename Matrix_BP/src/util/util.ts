@@ -1,4 +1,4 @@
-import { Dimension, MemoryTier, PlatformType, Player, system, Vector3 } from "@minecraft/server";
+import { Dimension, MemoryTier, PlatformType, Player, system, Vector3, VectorXZ } from "@minecraft/server";
 import { ActionFormData, ActionFormResponse, FormCancelationReason, ModalFormData, ModalFormResponse } from "@minecraft/server-ui";
 import { fastBelow, fastSurround } from "./fastmath";
 import { MinecraftBlockTypes } from "../node_modules/@minecraft/vanilla-data/lib/index";
@@ -221,4 +221,16 @@ export function getTimeFromTimeString(ms: number) {
     if (timerString.length < 2) return timerString.length > 0 ? timerString[0] : "0 second";
     const lastTimer = timerString.pop();
     return `${timerString.join(", ")} and ${lastTimer}`;
+}
+/**
+ * @description If the location is the same, return true.
+ */
+export function compareLoc (a: VectorXZ, b: VectorXZ) {
+    return a.x === b.x && a.z === b.z;
+}
+/**
+ * @description If the location is the same, return true.
+ */
+export function compareLoc3d (a: Vector3, b: Vector3) {
+    return a.x === b.x && a.y === b.y && a.z === b.z;
 }

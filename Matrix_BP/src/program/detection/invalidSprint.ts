@@ -2,12 +2,9 @@ import { Player } from "@minecraft/server";
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
+import { TickData } from "../import";
+import { compareLoc } from "../../util/util";
 let runId: IntegratedSystemEvent;
-interface SprintData {
-    flagCount: number;
-    nonBlindnessSprintState: boolean;
-}
-const sprintData = new Map<string, SprintData>();
 const invalidSprint = new Module()
     .setName(rawtextTranslate("module.invalidSprint.name"))
     .setDescription(rawtextTranslate("module.invalidSprint.description"))
@@ -18,44 +15,40 @@ const invalidSprint = new Module()
         runId = Module.subscribePlayerTickEvent(tickEvent, false);
     })
     .onModuleDisable(() => {
-        sprintData.clear();
         Module.clearPlayerTickEvent(runId);
     })
-    .initPlayer((playerId, player) => {
-        sprintData.set(playerId, {
+    .initPlayer((tickData, _playerId, player) => {
+        tickData.invalidSprint ={
             flagCount: 0,
             nonBlindnessSprintState: player.isSprinting,
-        });
-    })
-    .initClear((playerId) => {
-        sprintData.delete(playerId);
+        };
+        return tickData;
     });
 invalidSprint.register();
 function isMovementKeyPressed(player: Player) {
     const { x, y } = player.inputInfo.getMovementVector();
     return x !== 0 || y !== 0;
 }
-function tickEvent(player: Player) {
-    const data = sprintData.get(player.id)!;
+function tickEvent(tickData: TickData, player: Player) {
     if (!player.isSprinting) {
-        if (data.flagCount > 0) {
-            data.flagCount--;
-            sprintData.set(player.id, data);
+        if (tickData.invalidSprint.flagCount > 0) {
+            tickData.invalidSprint.flagCount--;
+            return tickData;
         }
-        return;
+        return tickData;
     };
     const hasEffect = player.getEffect(MinecraftEffectTypes.Blindness);
-    if ((player.isSneaking || !isMovementKeyPressed(player)) && !player.isSwimming) {
-        data.flagCount++;
-        if (data.flagCount > Module.config.sensitivity.antiInvalidSprint.maxFlag) {
+    if ((player.isSneaking || !isMovementKeyPressed(player)) && !player.isSwimming && !compareLoc(player.location, tickData.global.lastLocation)) {
+        tickData.invalidSprint.flagCount++;
+        if (tickData.invalidSprint.flagCount > Module.config.sensitivity.antiInvalidSprint.maxFlag) {
             player.flag(invalidSprint, { t: "1" });
         }
-    } else if (data.flagCount > 0) data.flagCount = 0;
-    if (hasEffect && player.isSprinting && !data.nonBlindnessSprintState) {
+    } else if (tickData.invalidSprint.flagCount > 0) tickData.invalidSprint.flagCount = 0;
+    if (hasEffect && player.isSprinting && !tickData.invalidSprint.nonBlindnessSprintState) {
         player.flag(invalidSprint, { t: "2" });
     }
     if (!hasEffect || !player.isSprinting) {
-        data.nonBlindnessSprintState = player.isSprinting;
+        tickData.invalidSprint.nonBlindnessSprintState = player.isSprinting;
     }
-    sprintData.set(player.id, data);
+    return tickData;
 }

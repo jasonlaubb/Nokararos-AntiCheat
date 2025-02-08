@@ -13,15 +13,12 @@ declare module "@minecraft/server" {
 		isRiding: () => boolean;
 		isAlive: () => boolean;
 		isMoving: () => boolean;
-		autoClickFlag: {
-			amount: number;
-			lastFlagTimestamp: number;
-		};
 		timeStamp: PlayerTimeStamp;
 		opCommandUsageTimestamp: number;
 		opCommandIsVerifying: boolean;
 		mobAuraFlag: number;
 		mobAuraLastFlagTimestamp: number;
+		killAuraIdList: string[];
 	}
 }
 interface Console {

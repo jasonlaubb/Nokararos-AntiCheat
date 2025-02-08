@@ -40,7 +40,7 @@ const FACTOR = 100;
 function tickEvent(tickData: TickData, player: Player) {
     const isRiding = player.getComponent("riding")?.entityRidingOn;
     const data = tickData.entityFly;
-    const { x, y: velocityY, z } = player.getVelocity();
+    const { y: velocityY } = tickData.instant.velocity;
     data.pastVelocityY.push(velocityY);
     data.pastVelocityY.shift();
     if (!isRiding) {
@@ -55,7 +55,7 @@ function tickEvent(tickData: TickData, player: Player) {
                 data.pastVelocityY = new Array(10).fill(0);
             }
         }
-        const horizontalSpeed = Math.sqrt(x ** 2 + z ** 2);
+        const horizontalSpeed = tickData.instant.speedXZ;
         if (velocityY === 0 && horizontalSpeed > SPEED_THRESHOLD && !isRiding.isOnGround && player.isOnGround) {
             data.prefectCombo++;
             if (data.prefectCombo >= MIN_COMBO_BEFORE_FLAG) {
