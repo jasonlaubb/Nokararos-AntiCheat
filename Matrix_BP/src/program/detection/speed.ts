@@ -33,6 +33,7 @@ const speed = new Module()
             lastTriggerLocation: player.location,
             lastTimerFlagTimestamp: 0,
             timerMainFlagAmount: 0,
+            lastSprint: player.isSprinting,
         };
         return tickData;
     });
@@ -90,7 +91,7 @@ function tickEvent(tickData: TickData, player: Player) {
         } else if (distance > 0.2 && !player.isInWater && !player.isSwimming && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = tickData.global.lastSpeedXZ;
             const normalDistance = distance * Module.config.sensitivity.antiSpeed.maxVelocityExaggeration;
-            if (distance > VELOCITY_DELTA_THRESHOLD && !isSwiftSneak(player) && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
+            if (distance > VELOCITY_DELTA_THRESHOLD && data.lastSprint === player.isSprinting && !isSwiftSneak(player) && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
                 if (data.timerFlagAmount < 1) {
                     data.lastTriggerLocation = player.location;
                 }
@@ -118,6 +119,7 @@ function tickEvent(tickData: TickData, player: Player) {
     }
     data.previousSpeed.push(distance);
     data.previousSpeed.shift();
+    data.lastSprint = player.isSprinting;
     // Update data value.
     tickData.speed = data;
     return tickData;

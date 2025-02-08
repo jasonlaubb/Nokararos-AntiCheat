@@ -101,6 +101,7 @@ export interface TickData {
         lastTriggerLocation: Vector3;
         lastTimerFlagTimestamp: number;
         timerMainFlagAmount: number;
+        lastSprint: boolean;
     };
 }
 export default [
