@@ -2,6 +2,7 @@ import { EntityHitBlockAfterEvent, EquipmentSlot, Player, world } from "@minecra
 import { MinecraftBlockTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
+import { TickData } from "../import";
 let id: IntegratedSystemEvent;
 const autoTool = new Module()
     .setName(rawtextTranslate("module.autoTool.name"))
@@ -15,17 +16,14 @@ const autoTool = new Module()
     .onModuleDisable(() => {
         world.afterEvents.entityHitBlock.unsubscribe(blockHit);
         Module.clearPlayerTickEvent(id);
-        autoToolData.clear();
     })
-    .initPlayer((playerId) => {
-        autoToolData.set(playerId, {
+    .initPlayer((tickData) => {
+        tickData.autoTool = {
             startBreak: 0,
             breakType: "",
             lastSelectedSlot: 0,
-        });
-    })
-    .initClear((playerId) => {
-        autoToolData.delete(playerId);
+        }
+        return tickData;
     });
 autoTool.register();
 const TOOL_TYPE_SET = {
@@ -113,14 +111,8 @@ function matchTool(toolTypeId: string, blockTypeId: string) {
     }
     return false;
 }
-interface AutoToolData {
-    startBreak: number;
-    lastSelectedSlot: number;
-    breakType: string;
-}
-const autoToolData = new Map<string, AutoToolData>();
-function tickEvent(player: Player) {
-    const data = autoToolData.get(player.id)!;
+function tickEvent(tickData: TickData, player: Player) {
+    const data = tickData.autoTool!;
     const now = Date.now();
     if (data.startBreak !== 0 && now - data.startBreak < 250 && player.selectedSlotIndex !== data.lastSelectedSlot) {
         data.startBreak = 0;
@@ -131,15 +123,18 @@ function tickEvent(player: Player) {
         }
     }
     data.lastSelectedSlot = player.selectedSlotIndex;
-    autoToolData.set(player.id, data);
+    tickData.autoTool = data;
+    return tickData;
 }
 function blockHit({ damagingEntity, hitBlock }: EntityHitBlockAfterEvent) {
     if (!(damagingEntity instanceof Player) || damagingEntity.isAdmin()) return;
-    const data = autoToolData.get(damagingEntity.id)!;
+    const tickData = Module.tickData.get(damagingEntity.id)!;
+    const data = tickData.autoTool!;
     const now = Date.now();
     if (!matchTool(damagingEntity.getComponent("equippable")!.getEquipment(EquipmentSlot.Mainhand)?.typeId ?? "air", hitBlock.typeId)) {
         data.startBreak = now;
         data.breakType = hitBlock.typeId;
-        autoToolData.set(damagingEntity.id, data);
+        tickData.autoTool = data;
+        Module.tickData.set(damagingEntity.id, tickData);
     }
 }

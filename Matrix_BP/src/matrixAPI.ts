@@ -4,13 +4,14 @@ import defaultConfig from "./data/config";
 import { fastText, rawtext, rawtextTranslate } from "./util/rawtext";
 import { Punishment, matrixKick } from "./program/system/moderation";
 import { write } from "./assets/logSystem";
-import program from "./program/import";
+import program, { TickData } from "./program/import";
 // The class that store the tick event that is handled by the Module class
+type IntegratedPlayerCallback = (tickData: TickData, player: Player) => TickData;
 export class IntegratedSystemEvent {
-    private func: Function;
+    private func: (() => void) | IntegratedPlayerCallback;
     // For state wether include admin or not.
     public booleanData?: boolean;
-    public constructor(func: Function) {
+    public constructor(func: (() => void) | IntegratedPlayerCallback) {
         this.func = func;
     }
     public removeFromList(list: IntegratedSystemEvent[]) {
@@ -39,6 +40,7 @@ export class IntegratedSystemEvent {
 class Module {
     public static readonly version: [number, number, number] = [6, 0, 32];
     public static readonly discordInviteLink = "CqZGXeRKPJ";
+    public static readonly tickData = new Map<string, TickData>();
     public static isInitialized: boolean = false;
     // The var of index runtime
     public static moduleList: Module[] = [];
@@ -54,7 +56,7 @@ class Module {
     public locked: boolean = false;
     public onEnable!: () => void;
     public onDisable!: () => void;
-    public playerSpawn?: (playerId: string, player: Player) => void;
+    public playerSpawn?: (tickData: TickData, playerId: string, player: Player) => TickData;
     public playerLeave?: (playerId: string) => void;
     public enabled: boolean = false;
     public punishment?: Punishment;
@@ -98,7 +100,7 @@ class Module {
         this.onEnable = func;
         return this;
     }
-    public initPlayer(func: (playerId: string, player: Player) => void) {
+    public initPlayer(func: (tickData: TickData, playerId: string, player: Player) => TickData) {
         this.playerSpawn = func;
         return this;
     }
@@ -122,7 +124,9 @@ class Module {
         this.enabled = true;
         if (this.playerSpawn) {
             for (const player of Module.allWorldPlayers) {
-                this.playerSpawn(player.id, player);
+                const data = Module.tickData.get(player.id)!;
+                const newData = this.playerSpawn(data, player.id, player);
+                if (newData) Module.tickData.set(player.id, newData);
             }
         }
         this.onEnable();
@@ -135,7 +139,7 @@ class Module {
     public get modulePunishment() {
         return this.punishment;
     }
-    public static subscribePlayerTickEvent(func: (player: Player) => void, includeAdmin: boolean = true) {
+    public static subscribePlayerTickEvent(func: IntegratedPlayerCallback, includeAdmin: boolean = true) {
         const event = new IntegratedSystemEvent(func);
         event.booleanData = includeAdmin;
         Module.playerLoopRunTime = event.pushToList(Module.playerLoopRunTime);
@@ -755,14 +759,19 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                                     .join(" "),
                             });
                         }
+                        let playerInitData = {} as unknown as TickData;
                         for (const module of Module.moduleList) {
                             if (!module.enabled || !module.playerSpawn) continue;
                             try {
-                                module.playerSpawn(player.id, player);
+                                const data = module.playerSpawn(playerInitData, player.id, player);
+                                if (data) {
+                                    playerInitData = data;
+                                }
                             } catch (error) {
                                 Module.sendError(error as Error);
                             }
                         }
+                        Module.tickData.set(player.id, playerInitData);
                         system.runTimeout(() => {
                             if (player?.isValid() && Module.config.userRecruitmentFunction) player.sendMessage(rawtextTranslate("ad.running", Module.discordInviteLink));
                             let obj = world.scoreboard.getObjective("matrix:script-online");
@@ -776,20 +785,26 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                     if (world.getAllPlayers().length > 0) {
                         for (const player of world.getAllPlayers()) {
                             Module.currentPlayers.push(player);
+                            let playerInitData = {} as unknown as TickData;
                             for (const module of Module.moduleList) {
                                 if (!module.enabled || !module.playerSpawn) continue;
                                 try {
-                                    module.playerSpawn(player.id, player);
+                                    const data = module.playerSpawn(playerInitData, player.id, player);
+                                    if (data) {
+                                        playerInitData = data;
+                                    }
                                 } catch (error) {
                                     Module.sendError(error as Error);
                                 }
                                 yield;
                             }
+                            Module.tickData.set(player.id, playerInitData);
                             yield;
                         }
                     }
                     yield;
                     world.beforeEvents.playerLeave.subscribe(({ player: { location, id: playerId, name: playerName } }) => {
+                        Module.tickData.delete(playerId);
                         if (Module.config.logSettings.logPlayerJoinLeave) {
                             write(false, "§cLeave §8(Connection)", playerName, {
                                 playerId: playerId,
@@ -816,19 +831,36 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                         const allPlayers = Module.allWorldPlayers;
                         for (const player of allPlayers) {
                             if (!player?.isValid()) continue;
-                            Module.playerLoopRunTime.forEach((event) => {
+                            let data = Module.tickData.get(player.id)!;
+                            const vel = player.getVelocity();
+                            data.instant = {
+                                rotation: player.getRotation(),
+                                velocity: vel,
+                                speedXZ: pythag(vel.x, vel.z),
+                            }
+                            if (data?.global) Module.playerLoopRunTime.forEach((event) => {
                                 if (!(!event.booleanData && player.isAdmin())) {
                                     try {
-                                        event.moduleFunction(player);
+                                        const newData = event.moduleFunction(data, player);
+                                        if (newData) data = newData;
                                     } catch (error) {
                                         Module.sendError(error as Error);
                                     }
                                 }
                             });
+                            data.global = {
+                                lastLocation: player.location,
+                                lastRotation: data.instant.rotation,
+                                lastVelocity: data.instant.velocity,
+                                lastSpeedXZ: data.instant.speedXZ,
+                            }
+                            //@ts-expect-error
+                            delete data.instant;
+                            Module.tickData.set(player.id, data);
                         }
                         Module.tickLoopRunTime.forEach((event) => {
                             try {
-                                event.moduleFunction();
+                                (event.moduleFunction as () => void)();
                             } catch (error) {
                                 Module.sendError(error as Error);
                             }
@@ -855,4 +887,5 @@ registerTimeStampModule();
 Module.ignite();
 import { setupFlagFunction } from "./util/flag";
 import { changeValueOfObject, getValueFromObject, waitShowActionForm } from "./util/util";
-import { logRestart } from "./assets/logSystem";
+import { logRestart } from "./assets/logSystem";import { pythag } from "./util/fastmath";
+

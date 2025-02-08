@@ -1,9 +1,10 @@
-import { Player, Vector3 } from "@minecraft/server";
+import { Player } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { fastAbs, fastBelow } from "../../util/fastmath";
 import { MinecraftEntityTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { checkRepetition } from "../../util/assets";
+import { TickData } from "../import";
 let runId: IntegratedSystemEvent;
 const entityFly = new Module()
     .addCategory("detection")
@@ -17,27 +18,17 @@ const entityFly = new Module()
     .onModuleDisable(() => {
         Module.clearPlayerTickEvent(runId);
     })
-    .initPlayer((playerId, player) => {
-        entityFlyData.set(playerId, {
+    .initPlayer((tickData, _playerId, player) => {
+        tickData.entityFly = {
             pastVelocityY: new Array(10).fill(0),
             lastNotRidingLocation: player.location,
             prefectCombo: 0,
             superCombo: 0,
             illegalFactorAmount: 0,
-        });
-    })
-    .initClear((playerId) => {
-        entityFlyData.delete(playerId);
+        }
+        return tickData;
     });
 entityFly.register();
-interface EntityFlyData {
-    pastVelocityY: number[];
-    lastNotRidingLocation: Vector3;
-    prefectCombo: number;
-    superCombo: number;
-    illegalFactorAmount: number;
-}
-const entityFlyData = new Map<string, EntityFlyData>();
 const SPEED_THRESHOLD = 0.35;
 const LOWEST_Y_THRESHOLD = 0.25;
 const MIN_COMBO_BEFORE_FLAG = 10;
@@ -46,9 +37,9 @@ const MIN_SUPER_COMBO = 20;
 const FACTOR_MIN_FLAG_AMOUNT = 4;
 const MIN_REPEAT_COUNT = 3;
 const FACTOR = 100;
-function tickEvent(player: Player) {
+function tickEvent(tickData: TickData, player: Player) {
     const isRiding = player.getComponent("riding")?.entityRidingOn;
-    const data = entityFlyData.get(player.id)!;
+    const data = tickData.entityFly;
     const { x, y: velocityY, z } = player.getVelocity();
     data.pastVelocityY.push(velocityY);
     data.pastVelocityY.shift();
@@ -99,5 +90,6 @@ function tickEvent(player: Player) {
             }
         } else if (data.illegalFactorAmount) data.illegalFactorAmount -= 0.5;
     }
-    entityFlyData.set(player.id, data);
+    tickData.entityFly = data;
+    return tickData;
 }

@@ -1,3 +1,57 @@
+import { Vector2, Vector3 } from "@minecraft/server";
+export interface TickData {
+    instant: {
+        rotation: Vector2;
+        velocity: Vector3;
+        speedXZ: number;
+    };
+    global: {
+        lastRotation: Vector2;
+        lastLocation: Vector3;
+        lastVelocity: Vector3;
+        lastSpeedXZ: number;
+    };
+    aim: {
+        buffer: number[];
+        initialize: {
+            i: number;
+            state: boolean;
+        };
+        previousYaw: number[];
+        previousPitch: number[];
+        previousDeltaYaw: number[];
+        previousDeltaPitch: number[];
+        yawAccelData: number[];
+        pitchAccelData: number[];
+        lastFlagTimestamp: number;
+    };
+    autoClicker: {
+        amount: number;
+        lastFlagTimestamp: number;
+    };
+    autoTool: {
+        startBreak: number;
+        lastSelectedSlot: number;
+        breakType: string;
+    };
+    elytaFly: {
+        startGlideTime: number;
+        startGlideSpeed: number;
+        isSpeedDecreasing: boolean;
+        highestGlidingSpeed: number;
+        isLastTickGliding: boolean;
+        usedRocket: boolean;
+        lastSpeedDeviation: number;
+        triggeredType2: boolean;
+    };
+    entityFly: {
+        pastVelocityY: number[];
+        lastNotRidingLocation: Vector3;
+        prefectCombo: number;
+        superCombo: number;
+        illegalFactorAmount: number;
+    };
+}
 export default [
     "./program/detection/firewall",
     "./program/detection/speed",

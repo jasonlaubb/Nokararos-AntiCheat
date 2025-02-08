@@ -7,8 +7,8 @@ new Module()
     .setDescription(rawtextTranslate("module.deviceban.description"))
     .setToggleId("deviceBan")
     .setPunishment("kick")
-    .initPlayer((_playerId, player) => {
-        if (player.isAdmin() || player.hasTag("matrix-debug:ignoreDeviceBan")) return;
+    .initPlayer((tickData, _playerId, player) => {
+        if (player.isAdmin() || player.hasTag("matrix-debug:ignoreDeviceBan")) return tickData;
         const playerDeviceType = player.clientSystemInfo.platformType;
         const banConfig = Module.config.sensitivity.deviceBan;
         let kickState: string = "none";
@@ -26,7 +26,8 @@ new Module()
                 break;
             }
         }
-        if (kickState === "none") return;
+        if (kickState === "none") return tickData;
         matrixKick(player, `Banned device (${kickState})`, `[Device Ban]`);
+        return tickData;
     })
     .register();

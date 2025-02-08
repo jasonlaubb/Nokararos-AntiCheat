@@ -3,6 +3,7 @@ import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { fastAbs } from "../../util/fastmath";
 import { arrayToList, getAverageDifference, fastAverage, getStandardDeviation } from "../../util/assets";
+import { TickData } from "../import";
 const EMPTY_ARRAY = new Array(100).fill(0);
 const SMALL_EMPTY_ARRAY = new Array(20).fill(0);
 interface AimData {
@@ -20,7 +21,6 @@ interface AimData {
     lastFlagTimestamp: number;
 }
 let eventId: IntegratedSystemEvent;
-const aimData = new Map<string, AimData>();
 const aim = new Module()
     .addCategory("detection")
     .setName(rawtextTranslate("module.aim.name"))
@@ -33,8 +33,8 @@ const aim = new Module()
     .onModuleDisable(() => {
         Module.clearPlayerTickEvent(eventId);
     })
-    .initPlayer((playerId) => {
-        aimData.set(playerId, {
+    .initPlayer((data) => {
+        data.aim = {
             buffer: EMPTY_BUFFER,
             initialize: {
                 i: 0,
@@ -47,15 +47,13 @@ const aim = new Module()
             yawAccelData: SMALL_EMPTY_ARRAY,
             pitchAccelData: SMALL_EMPTY_ARRAY,
             lastFlagTimestamp: 0,
-        });
-    })
-    .initClear((playerId) => {
-        aimData.delete(playerId);
+        };
+        return data;
     });
 aim.register();
-function tickEvent(player: Player) {
-    let data = aimData.get(player.id)!;
-    const { x: yaw, y: pitch } = player.getRotation();
+function tickEvent(tickData: TickData, player: Player) {
+    let data = tickData.aim!;
+    const { x: yaw, y: pitch } = tickData.instant.rotation;
     const deltaYaw = fastAbs(yaw - data.previousYaw[0]);
     const deltaPitch = fastAbs(pitch - data.previousPitch[0]);
     const yawAccel = fastAbs(deltaYaw - data.previousDeltaYaw[0]);
@@ -83,7 +81,8 @@ function tickEvent(player: Player) {
     data.previousYaw.pop();
     data.previousDeltaPitch.pop();
     data.previousDeltaYaw.pop();
-    aimData.set(player.id, data);
+    tickData.aim = data;
+    return tickData;
 }
 const FLAG_VALID_TIMESTAMP = 7000;
 const EXTREME_YAW_ACCELERATION = 0.01;

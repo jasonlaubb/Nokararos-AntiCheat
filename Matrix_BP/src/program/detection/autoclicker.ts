@@ -18,12 +18,13 @@ const autoClicker = new Module()
         system.clearRun(runId);
         world.afterEvents.entityHitEntity.unsubscribe(entityHit);
     })
-    .initPlayer((playerId, player) => {
+    .initPlayer((tickData, playerId) => {
         playerCPS[playerId] = [];
-        player.autoClickFlag = {
+        tickData.autoClicker = {
             amount: 0,
             lastFlagTimestamp: 0,
         };
+        return tickData;
     })
     .initClear((playerId) => {
         delete playerCPS[playerId];
@@ -34,22 +35,24 @@ function tickEvent() {
     const config = Module.config;
     const maxCps = config.sensitivity.antiAutoClicker.maxCps;
     for (const player of allPlayers) {
+        const data = Module.tickData.get(player.id)!;
         playerCPS[player.id] = playerCPS[player.id].filter((arr) => Date.now() - arr < CLICK_DURATION);
         const cps = playerCPS[player.id].length;
         const hasWeaknessEffect = player.getEffect(MinecraftEffectTypes.Weakness);
         if (!hasWeaknessEffect) {
             if (cps > maxCps) {
                 player.sendMessage(rawtextTranslate("module.autoclicker.reach", maxCps.toString(), cps.toString()));
-                player.addEffect(MinecraftEffectTypes.Weakness, 200, { showParticles: false });
+                player.addEffect(MinecraftEffectTypes.Weakness, 1000, { showParticles: false });
                 const now = Date.now();
-                if (now - player.autoClickFlag.lastFlagTimestamp > config.sensitivity.antiAutoClicker.minFlagIntervalMs) player.autoClickFlag.amount = 0;
-                player.autoClickFlag.lastFlagTimestamp = now;
-                player.autoClickFlag.amount++;
-                if (player.autoClickFlag.amount > config.sensitivity.antiAutoClicker.maxFlag) {
+                if (now - data.autoClicker!.lastFlagTimestamp > config.sensitivity.antiAutoClicker.minFlagIntervalMs) player.autoClickFlag.amount = 0;
+                data.autoClicker!.lastFlagTimestamp = now;
+                data.autoClicker!.amount++;
+                if (data.autoClicker!.amount > config.sensitivity.antiAutoClicker.maxFlag) {
                     player.flag(autoClicker, { cps, maxCps });
                 }
             }
-        } else {
+            Module.tickData.set(player.id, data);
+        } else if (cps <= maxCps) {
             player.removeEffect(MinecraftEffectTypes.Weakness);
         }
     }

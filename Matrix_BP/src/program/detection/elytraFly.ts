@@ -2,7 +2,7 @@ import { EquipmentSlot, ItemUseAfterEvent, Player, world } from "@minecraft/serv
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { MinecraftItemTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
-import { pythag } from "../../util/fastmath";
+import { TickData } from "../import";
 let runId: IntegratedSystemEvent;
 const elytraFly = new Module()
     .setName(rawtextTranslate("module.elytraFly.name"))
@@ -16,12 +16,10 @@ const elytraFly = new Module()
     })
     .onModuleDisable(() => {
         Module.clearPlayerTickEvent(runId);
-        elytraFlyData.clear();
         world.afterEvents.itemUse.unsubscribe(onItemUse);
     })
-    .initPlayer((playerId) => {
-        elytraFlyData.set(playerId, {
-            lastGlidingSpeed: 0,
+    .initPlayer((tickData) => {
+        tickData.elytaFly = {
             startGlideTime: 0,
             startGlideSpeed: 0,
             isSpeedDecreasing: false,
@@ -30,33 +28,18 @@ const elytraFly = new Module()
             usedRocket: false,
             lastSpeedDeviation: 0,
             triggeredType2: false,
-        });
-    })
-    .initClear((playerId) => {
-        elytraFlyData.delete(playerId);
+        };
+        return tickData;
     });
 elytraFly.register();
-interface ElytraFlyData {
-    lastGlidingSpeed: number;
-    startGlideTime: number;
-    startGlideSpeed: number;
-    isSpeedDecreasing: boolean;
-    highestGlidingSpeed: number;
-    isLastTickGliding: boolean;
-    usedRocket: boolean;
-    lastSpeedDeviation: number;
-    triggeredType2: boolean;
-}
-const elytraFlyData = new Map<string, ElytraFlyData>();
-function tickEvent(player: Player) {
-    const data = elytraFlyData.get(player.id)!;
+function tickEvent(tickData: TickData, player: Player) {
+    const data = tickData.elytaFly!;
     const now = Date.now();
     if (!data.isLastTickGliding && player.isGliding) {
         data.startGlideTime = now;
     }
-    const { x, z } = player.getVelocity();
-    const glidingSpeed = pythag(x, z);
-    const speedDeviation = data.lastGlidingSpeed / glidingSpeed;
+    const glidingSpeed = tickData.instant.speedXZ;
+    const speedDeviation = tickData.global.lastSpeedXZ / glidingSpeed;
     if (player.isGliding && !data.usedRocket && now - data.startGlideTime > 1000) {
         if (glidingSpeed > data.highestGlidingSpeed) {
             data.highestGlidingSpeed = glidingSpeed;
@@ -79,15 +62,15 @@ function tickEvent(player: Player) {
         data.highestGlidingSpeed = 0;
     }
     data.lastSpeedDeviation = speedDeviation;
-    data.lastGlidingSpeed = glidingSpeed;
     data.isLastTickGliding = player.isGliding;
-    elytraFlyData.set(player.id, data);
+    tickData.elytaFly = data;
+    return tickData;
 }
 function onItemUse({ itemStack, source }: ItemUseAfterEvent) {
     if (source.isGliding && itemStack.typeId === MinecraftItemTypes.FireworkRocket) {
-        const data = elytraFlyData.get(source.id)!;
-        data.usedRocket = true;
-        elytraFlyData.set(source.id, data);
+        const data = Module.tickData.get(source.id)!;
+        data.elytaFly.usedRocket = true;
+        Module.tickData.set(source.id, data);
     }
 }
 function dropElytra(player: Player) {
