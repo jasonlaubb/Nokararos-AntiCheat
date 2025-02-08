@@ -25,7 +25,7 @@ const entityFly = new Module()
             prefectCombo: 0,
             superCombo: 0,
             illegalFactorAmount: 0,
-        }
+        };
         return tickData;
     });
 entityFly.register();

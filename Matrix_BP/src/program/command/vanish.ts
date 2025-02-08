@@ -14,7 +14,7 @@ new Command()
                 if (!player.removeEffect(MinecraftEffectTypes.Invisibility)) {
                     system.run(() => player.runChatCommand("vanish"));
                     return;
-                };
+                }
                 player.sendMessage(fastText().addText("§bMatrix§a+ §7> §g").addTran("command.vanish.deleted").build());
             } else {
                 player.addEffect(MinecraftEffectTypes.Invisibility, 20000000, { showParticles: false });

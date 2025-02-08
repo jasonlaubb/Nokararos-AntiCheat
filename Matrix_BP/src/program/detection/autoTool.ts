@@ -22,7 +22,7 @@ const autoTool = new Module()
             startBreak: 0,
             breakType: "",
             lastSelectedSlot: 0,
-        }
+        };
         return tickData;
     });
 autoTool.register();

@@ -56,7 +56,7 @@ function tickEvent(tickData: TickData, player: Player) {
         pistonNotPushed &&
         now - player.timeStamp.knockBack > 2000 &&
         now - player.timeStamp.riptide > 5000 &&
-        (previousVelY < 0 || (previousVelY < 0 && velocityY === 0) || (velocityY > 0 && previousVelY / velocityY > 4 && previousVelY > 2.5 && fastAbs(tickData.global.lastVelocity.y- velocityY) < 0.5)) &&
+        (previousVelY < 0 || (previousVelY < 0 && velocityY === 0) || (velocityY > 0 && previousVelY / velocityY > 4 && previousVelY > 2.5 && fastAbs(tickData.global.lastVelocity.y - velocityY) < 0.5)) &&
         !player.isRiding() &&
         !player.isFlying &&
         !player.isGliding &&

@@ -41,7 +41,7 @@ interface BanInfo {
     time: number;
     responser: string;
 }
-function matrixKick (player: Player, reason: string = "No reason provided", responser: string = "Unknown") {
+function matrixKick(player: Player, reason: string = "No reason provided", responser: string = "Unknown") {
     try {
         const { successCount } = world.getDimension(MinecraftDimensionTypes.Overworld).runCommand(`kick "${player.name}" §cYou have been kicked. §7[§bMatrix§7]\n§bReason: §e${reason}§r\n§bResponser: §e${responser}§r`);
         if (successCount !== 1) throw new Error("Failed to kick player");
@@ -57,8 +57,13 @@ function matrixKick (player: Player, reason: string = "No reason provided", resp
 }
 const banHandler = {
     isBanned: (player: Player) => {
-        const token = world.getDynamicProperty(player.getTags().find((tag) => tag.startsWith("matrix:isBanned::"))?.slice(7) ?? `isBanned::${player.name}`);
-        return token ? JSON.parse(token as string) as BanInfo : false;
+        const token = world.getDynamicProperty(
+            player
+                .getTags()
+                .find((tag) => tag.startsWith("matrix:isBanned::"))
+                ?.slice(7) ?? `isBanned::${player.name}`
+        );
+        return token ? (JSON.parse(token as string) as BanInfo) : false;
     },
     ban: (player: Player, responser: string, indefinitely: boolean = true, time: number = 0, reason: string = "No reason provided") => {
         world.setDynamicProperty(`isBanned::${player.name}`, JSON.stringify({ responser, reason, dateEnd: Date.now() + time, indefinitely: indefinitely, time }));
@@ -73,8 +78,11 @@ const banHandler = {
             if (!banHandler.unban(player.name)) {
                 world.setDynamicProperty(player.getTags().find((tag) => tag.startsWith("matrix:isBanned::"))!);
                 console.log(`banHandler :: kickAction :: ${player.name} has changed the name after being banned`);
-            };
-            player.getTags().filter((tag) => tag.startsWith("matrix:isBanned::")).forEach((tag) => player.removeTag(tag));
+            }
+            player
+                .getTags()
+                .filter((tag) => tag.startsWith("matrix:isBanned::"))
+                .forEach((tag) => player.removeTag(tag));
             return;
         }
         const timerString = banInfo.indefinitely ? "Indefinitely" : getTimeFromTimeString(banInfo.time - Date.now());
@@ -99,12 +107,15 @@ const banHandler = {
         return state;
     },
     bannedList: () => {
-        return world.getDynamicPropertyIds().filter((x) => x.startsWith("isBanned::")).map((x) => x.slice(10));
-    }
-}
+        return world
+            .getDynamicPropertyIds()
+            .filter((x) => x.startsWith("isBanned::"))
+            .map((x) => x.slice(10));
+    },
+};
 const muteHandler = {
     isMuted: (player: Player) => {
-        return world.getDynamicProperty(`isMuted::${player.id}`) as number ?? false;
+        return (world.getDynamicProperty(`isMuted::${player.id}`) as number) ?? false;
     },
     mute: (player: Player, time: number) => {
         world.setDynamicProperty(`isMuted::${player.id}`, Date.now() + time);
@@ -117,7 +128,8 @@ const muteHandler = {
             player.sendMessage(rawtextTranslate("command.moderation.mute.expired"));
             try {
                 player.runCommand(`ability @s mute true`);
-            } catch {} finally {
+            } catch {
+            } finally {
                 player.addTag("matrix:cancelChatMessage");
             }
             world.setDynamicProperty(`isMuted::${player.id}`);
@@ -127,7 +139,7 @@ const muteHandler = {
                 if (event.playerId !== player.id) return;
                 system.clearRun(id);
                 world.afterEvents.playerLeave.unsubscribe(eventId);
-            })
+            });
         }
         try {
             player.runCommand(`ability @s mute true`);
@@ -138,12 +150,13 @@ const muteHandler = {
     unmute: (player: Player) => {
         try {
             player.runCommand(`ability @s mute false`);
-        } catch {} finally {
+        } catch {
+        } finally {
             player.addTag("matrix:cancelChatMessage");
         }
         world.setDynamicProperty(`isMuted::${player.id}`);
-    }
-}
+    },
+};
 function onPlayerSpawn(player: Player) {
     if (player.isAdmin()) return;
     // Check if player is banned

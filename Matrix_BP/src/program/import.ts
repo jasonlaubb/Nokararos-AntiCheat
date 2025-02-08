@@ -88,7 +88,7 @@ export interface TickData {
         isVoidScaffold: boolean[];
         lastRotX: number;
         lastLocation: Vector3;
-    },
+    };
     speed: {
         lastAttackTimestamp: number;
         lastRidingEndTimestamp: number;
@@ -101,7 +101,7 @@ export interface TickData {
         lastTriggerLocation: Vector3;
         lastTimerFlagTimestamp: number;
         timerMainFlagAmount: number;
-    }
+    };
 }
 export default [
     "./program/detection/firewall",

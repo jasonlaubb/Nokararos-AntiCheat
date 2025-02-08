@@ -60,7 +60,6 @@ function tickEvent(tickData: TickData, player: Player) {
     return tickData;
 }
 
-
 function calculateClipStartLocation(speed: number[], loc: Vector3[], currentSpeed: number): Vector3 | undefined {
     if (speed[0] < MIN_SPEED && speed[0] > MAX_SPEED && currentSpeed < MIN_SPEED) {
         return loc[1];

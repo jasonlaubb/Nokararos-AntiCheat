@@ -114,7 +114,7 @@ function entityHitEntity({ damagingEntity: player, hitEntity: target }: EntityHi
     Module.tickData.set(player.id, tickData);
 }
 
-function tickEvent(tickData: TickData,player: Player) {
+function tickEvent(tickData: TickData, player: Player) {
     player.killAuraIdList = [];
     return tickData;
 }

@@ -844,23 +844,24 @@ function* loadModuleRegistry(): Generator<void, void, void> {
                                 rotation: player.getRotation(),
                                 velocity: vel,
                                 speedXZ: pythag(vel.x, vel.z),
-                            }
-                            if (data?.global) Module.playerLoopRunTime.forEach((event) => {
-                                if (!(!event.booleanData && player.isAdmin())) {
-                                    try {
-                                        const newData = event.moduleFunction(data, player);
-                                        if (newData) data = newData;
-                                    } catch (error) {
-                                        Module.sendError(error as Error);
+                            };
+                            if (data?.global)
+                                Module.playerLoopRunTime.forEach((event) => {
+                                    if (!(!event.booleanData && player.isAdmin())) {
+                                        try {
+                                            const newData = event.moduleFunction(data, player);
+                                            if (newData) data = newData;
+                                        } catch (error) {
+                                            Module.sendError(error as Error);
+                                        }
                                     }
-                                }
-                            });
+                                });
                             data.global = {
                                 lastLocation: player.location,
                                 lastRotation: data.instant.rotation,
                                 lastVelocity: data.instant.velocity,
                                 lastSpeedXZ: data.instant.speedXZ,
-                            }
+                            };
                             //@ts-expect-error
                             delete data.instant;
                             Module.tickData.set(player.id, data);

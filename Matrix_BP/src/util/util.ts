@@ -225,12 +225,12 @@ export function getTimeFromTimeString(ms: number) {
 /**
  * @description If the location is the same, return true.
  */
-export function compareLoc (a: VectorXZ, b: VectorXZ) {
+export function compareLoc(a: VectorXZ, b: VectorXZ) {
     return a.x === b.x && a.z === b.z;
 }
 /**
  * @description If the location is the same, return true.
  */
-export function compareLoc3d (a: Vector3, b: Vector3) {
+export function compareLoc3d(a: Vector3, b: Vector3) {
     return a.x === b.x && a.y === b.y && a.z === b.z;
 }

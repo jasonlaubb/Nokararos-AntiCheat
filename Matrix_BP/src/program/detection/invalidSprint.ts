@@ -18,7 +18,7 @@ const invalidSprint = new Module()
         Module.clearPlayerTickEvent(runId);
     })
     .initPlayer((tickData, _playerId, player) => {
-        tickData.invalidSprint ={
+        tickData.invalidSprint = {
             flagCount: 0,
             nonBlindnessSprintState: player.isSprinting,
         };
@@ -36,7 +36,7 @@ function tickEvent(tickData: TickData, player: Player) {
             return tickData;
         }
         return tickData;
-    };
+    }
     const hasEffect = player.getEffect(MinecraftEffectTypes.Blindness);
     if ((player.isSneaking || !isMovementKeyPressed(player)) && !player.isSwimming && !compareLoc(player.location, tickData.global.lastLocation)) {
         tickData.invalidSprint.flagCount++;
