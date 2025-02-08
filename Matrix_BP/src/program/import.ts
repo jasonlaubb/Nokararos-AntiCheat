@@ -1,4 +1,5 @@
-import { Vector2, Vector3 } from "@minecraft/server";
+import { Vector2, Vector3, VectorXZ } from "@minecraft/server";
+import { PredictionData } from "./detection/predictionModule";
 export interface TickData {
     instant: {
         rotation: Vector2;
@@ -74,6 +75,33 @@ export interface TickData {
         lastLocationList: Vector3[];
         lastSpeedList: number[];
     };
+    predictionModule: PredictionData;
+    scaffold: {
+        blockLogs: number[];
+        lastPlaceTimeStamp: number;
+        lastDiag: VectorXZ;
+        lastExtender: number;
+        potentialDiagFlags: number;
+        potentialRotFlags: number;
+        potentialLowExtenderFlags: number;
+        godBridgeAmount: number;
+        isVoidScaffold: boolean[];
+        lastRotX: number;
+        lastLocation: Vector3;
+    },
+    speed: {
+        lastAttackTimestamp: number;
+        lastRidingEndTimestamp: number;
+        flagAmount: number;
+        lastFlagTimestamp: number;
+        lastStopLocation: Vector3;
+        lastSleep: number;
+        previousSpeed: number[];
+        timerFlagAmount: number;
+        lastTriggerLocation: Vector3;
+        lastTimerFlagTimestamp: number;
+        timerMainFlagAmount: number;
+    }
 }
 export default [
     "./program/detection/firewall",

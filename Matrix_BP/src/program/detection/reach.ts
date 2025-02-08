@@ -15,13 +15,14 @@ const reach = new Module()
         locationTrackData = {};
         world.afterEvents.entityHitEntity.unsubscribe(onEntityAttack);
     })
-    .initPlayer((playerId) => {
+    .initPlayer((tickData, playerId) => {
         locationTrackData[playerId] = {
             locationData: [],
             lastValidTimeStamp: 0,
             buffer: 0,
             lastFlag: 0,
         };
+        return tickData;
     })
     .initClear((playerId) => {
         delete locationTrackData[playerId];

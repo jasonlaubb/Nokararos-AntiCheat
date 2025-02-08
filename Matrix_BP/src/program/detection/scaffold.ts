@@ -14,50 +14,33 @@ const LOG_CLEAR_TIME = 750;
 const MAX_ROTATION_X_DIFFERENCE = 10;
 const MAX_LOW_EXTENDER_ROTATION_X = 50;
 const LOW_EXTENDER_THRESHOLD = 1;
-interface ScaffoldDataMap {
-    blockLogs: number[];
-    lastPlaceTimeStamp: number;
-    lastLocation: Vector3;
-    lastDiag: VectorXZ;
-    lastExtender: number;
-    lastRotX: number;
-    potentialDiagFlags: number;
-    potentialRotFlags: number;
-    potentialLowExtenderFlags: number;
-    godBridgeAmount: number;
-    isVoidScaffold: boolean[];
-}
-const scaffoldDataMap = new Map<string, ScaffoldDataMap>();
 const scaffold = new Module()
     .addCategory("detection")
     .setName(rawtextTranslate("module.scaffold.name"))
     .setDescription(rawtextTranslate("module.scaffold.description"))
     .setToggleId("antiScaffold")
     .setPunishment("kick")
-    .initPlayer((playerId) => {
-        scaffoldDataMap.set(playerId, {
+    .initPlayer((tickData) => {
+        tickData.scaffold = {
             blockLogs: [],
             lastPlaceTimeStamp: 0,
-            lastLocation: { x: 0, y: 0, z: 0 },
             lastDiag: { x: 0, z: 0 },
             lastExtender: 0,
-            lastRotX: 0,
             potentialDiagFlags: 0,
             potentialRotFlags: 0,
             potentialLowExtenderFlags: 0,
             godBridgeAmount: 0,
             isVoidScaffold: new Array(3).fill(false),
-        });
-    })
-    .initClear((playerId) => {
-        scaffoldDataMap.delete(playerId);
+            lastRotX: 0,
+            lastLocation: { x: 0, y: 0, z: 0 },
+        };
+        return tickData;
     })
     .onModuleEnable(() => {
         world.afterEvents.playerPlaceBlock.subscribe(onBlockPlace);
     })
     .onModuleDisable(() => {
         world.afterEvents.playerPlaceBlock.unsubscribe(onBlockPlace);
-        scaffoldDataMap.clear();
     });
 scaffold.register();
 function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
@@ -88,7 +71,8 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
             return;
         }
     }
-    const data = scaffoldDataMap.get(player.id)!;
+    const tickData = Module.tickData.get(player.id)!;
+    const data = tickData.scaffold;
     if (distance > HIGH_DISTANCE_THRESHOLD && absRotX > HIGH_ROTATION_THRESHOLD) {
         // Type 4
         player.flag(scaffold, { t: "4", distance, absRotX });
@@ -173,7 +157,8 @@ function onBlockPlace(event: PlayerPlaceBlockAfterEvent) {
     data.lastRotX = rotX;
     data.isVoidScaffold.push(voidScaffold);
     data.isVoidScaffold.shift();
-    scaffoldDataMap.set(player.id, data);
+    tickData.scaffold = data;
+    Module.tickData.set(player.id, tickData);
 }
 
 function isLowExtenderScaffolding({ x: x1, y: y1, z: z1 }: Vector3, { x: x2, y: y2, z: z2 }: Vector3): boolean {

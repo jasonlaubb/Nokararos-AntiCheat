@@ -4,6 +4,7 @@ import { calculateDistance, fastHypot, fastAbs, pythag } from "../../util/fastma
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { rawtextTranslate } from "../../util/rawtext";
 import { world } from "@minecraft/server";
+import { TickData } from "../import";
 const MAX_DEVIATION = 4.1;
 const MAX_FLAG_AMOUNT = 7;
 interface TimerData {
@@ -30,7 +31,7 @@ const timer = new Module()
     .setDescription(rawtextTranslate("module.timer.description"))
     .setToggleId("antiTimer")
     .setPunishment("kick")
-    .initPlayer((playerId, player) => {
+    .initPlayer((tickData, playerId, player) => {
         timerData.set(playerId, {
             lastLocation: player.location,
             lastReset: 0,
@@ -45,6 +46,7 @@ const timer = new Module()
             flyingNotOnGround: false,
             lastRespawn: Date.now(),
         });
+        return tickData;
     })
     .initClear((playerId) => {
         timerData.delete(playerId);
@@ -113,8 +115,8 @@ function checkTimer() {
         timerData.set(player.id, data);
     }
 }
-function playerTickEvent(player: Player) {
-    if (player.isAdmin()) return;
+function playerTickEvent(tickData: TickData, player: Player) {
+    if (player.isAdmin()) return tickData;
     const data = timerData.get(player.id)!;
     const now = Date.now();
     const isTickIgnored = data.isTickIgnored;
@@ -146,13 +148,14 @@ function playerTickEvent(player: Player) {
     ) {
         if (!data.isTickIgnored) data.isTickIgnored = true;
         timerData.set(player.id, data);
-        return;
+        return tickData;
     }
     data.totalDistance += distance;
     if (noVelocity) data.lastNoSpeedLocation = player.location;
     data.totalVelocity += fastHypot(x, z);
     data.lastLocation = player.location;
     timerData.set(player.id, data);
+    return tickData;
 }
 
 function playerAttack({ damagingEntity: player }: EntityHitEntityAfterEvent) {
