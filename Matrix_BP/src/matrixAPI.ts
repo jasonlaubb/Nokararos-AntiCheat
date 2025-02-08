@@ -5,6 +5,12 @@ import { fastText, rawtext, rawtextTranslate } from "./util/rawtext";
 import { Punishment, matrixKick } from "./program/system/moderation";
 import { write } from "./assets/logSystem";
 import program, { TickData } from "./program/import";
+import { registerModeration } from "./program/system/moderation";
+import { registerTimeStampModule } from "./program/system/playerProperty";
+import { setupFlagFunction } from "./util/flag";
+import { changeValueOfObject, getValueFromObject, waitShowActionForm } from "./util/util";
+import { logRestart } from "./assets/logSystem";
+import { pythag } from "./util/fastmath";
 // The class that store the tick event that is handled by the Module class
 type IntegratedPlayerCallback = (tickData: TickData, player: Player) => TickData;
 export class IntegratedSystemEvent {
@@ -880,13 +886,7 @@ function* loadModuleRegistry(): Generator<void, void, void> {
     yield;
 }
 export { Module, Command, Config };
-import { registerModeration } from "./program/system/moderation";
 registerModeration();
-import { registerTimeStampModule } from "./program/system/playerProperty";
 registerTimeStampModule();
 // Start the AntiCheat
 Module.ignite();
-import { setupFlagFunction } from "./util/flag";
-import { changeValueOfObject, getValueFromObject, waitShowActionForm } from "./util/util";
-import { logRestart } from "./assets/logSystem";import { pythag } from "./util/fastmath";
-
