@@ -103,6 +103,7 @@ export interface TickData {
         timerMainFlagAmount: number;
         lastSprint: boolean;
         lastEnderPeal: number;
+        lastRiding: boolean;
     };
 }
 export default [

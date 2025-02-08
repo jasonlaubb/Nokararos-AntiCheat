@@ -37,6 +37,7 @@ const speed = new Module()
             timerMainFlagAmount: 0,
             lastSprint: player.isSprinting,
             lastEnderPeal: 0,
+            lastRiding: player.isRiding(),
         };
         return tickData;
     });
@@ -75,6 +76,9 @@ function tickEvent(tickData: TickData, player: Player) {
         speedLevel > 3 ||
         isPlayerInSolid(player.location, player.getHeadLocation(), player.dimension);
     const distance = pythag(player.location.x - tickData.global.lastLocation.x, player.location.z - tickData.global.lastLocation.z);
+    if (player.isRiding() !== data.lastRiding) {
+        data.lastEnderPeal = Date.now();
+    }
     if (!bypass) {
         const velocityDelta = pythag(velocityX - tickData.global.lastVelocity.x, velocityZ - tickData.global.lastVelocity.z);
         const debugTag = player.hasTag("matrix:speed-debug");
@@ -123,6 +127,7 @@ function tickEvent(tickData: TickData, player: Player) {
     data.previousSpeed.push(distance);
     data.previousSpeed.shift();
     data.lastSprint = player.isSprinting;
+    data.lastRiding = player.isRiding();
     // Update data value.
     tickData.speed = data;
     return tickData;
