@@ -1,7 +1,7 @@
-import { Dimension, EntityHitEntityAfterEvent, GameMode, Player, ScriptEventCommandMessageAfterEvent, system, Vector3, world } from "@minecraft/server";
+import { Dimension, EntityHitEntityAfterEvent, EquipmentSlot, GameMode, Player, ScriptEventCommandMessageAfterEvent, system, Vector3, world } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { pythag } from "../../util/fastmath";
-import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
+import { MinecraftEffectTypes, MinecraftEnchantmentTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { rawtextTranslate } from "../../util/rawtext";
 import { TickData } from "../import";
 let eventId: IntegratedSystemEvent;
@@ -90,7 +90,7 @@ function tickEvent(tickData: TickData, player: Player) {
         } else if (distance > 0.2 && !player.isInWater && !player.isSwimming && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = tickData.global.lastSpeedXZ;
             const normalDistance = distance * Module.config.sensitivity.antiSpeed.maxVelocityExaggeration;
-            if (distance > VELOCITY_DELTA_THRESHOLD && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * (1.2 ** speedLevel)) {
+        if (distance > VELOCITY_DELTA_THRESHOLD && !isSwiftSneak(player) && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * (1.2 ** speedLevel)) {
                 if (data.timerFlagAmount < 1) {
                     data.lastTriggerLocation = player.location;
                 }
@@ -142,4 +142,16 @@ function isPlayerInSolid(location: Vector3, headLocation: Vector3, dimension: Di
     } catch {
         return false;
     }
+}
+function isSwiftSneak(player: Player) {
+    if (!player.isSneaking) return false;
+    const leg = player.getComponent("equippable")!.getEquipmentSlot(EquipmentSlot.Legs).getItem();
+    if (!leg) return false;
+    if (leg.typeId.endsWith("leggings") && leg.typeId.startsWith("minecraft:")) {
+        const enchantment = leg.getComponent("enchantable");
+        if (enchantment) {
+            return enchantment.hasEnchantment(MinecraftEnchantmentTypes.SwiftSneak);
+        }
+    }
+    return false;
 }
