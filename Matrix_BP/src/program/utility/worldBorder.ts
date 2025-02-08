@@ -3,14 +3,16 @@ import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { fastText, rawtextTranslate } from "../../util/rawtext";
 import { fastAbs } from "../../util/fastmath";
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
+import { TickData } from "../import";
 let eventId: IntegratedSystemEvent;
 new Module()
     .addCategory("utility")
     .setName(rawtextTranslate("module.worldborder.name"))
     .setDescription(rawtextTranslate("module.worldborder.description"))
     .setToggleId("worldBorder")
-    .initPlayer((_playerId, player) => {
+    .initPlayer((tickData, _playerId, player) => {
         player.removeTag("matrix:worldBorderBlocked");
+        return tickData;
     })
     .onModuleEnable(() => {
         eventId = Module.subscribePlayerTickEvent(worldBorder, false);
@@ -19,8 +21,8 @@ new Module()
         Module.clearPlayerTickEvent(eventId);
     });
 
-function worldBorder(player: Player) {
-    if (player.hasTag("matrix:worldBorderBlocked")) return;
+function worldBorder(tickData: TickData, player: Player) {
+    if (player.hasTag("matrix:worldBorderBlocked")) return tickData;
     const worldBorderConfig = Module.config.worldBorder;
     const maxDifferent = worldBorderConfig.borderLength * 0.5;
     const centerLocation = worldBorderConfig.useWorldSpawn ? world.getDefaultSpawnLocation() : worldBorderConfig.centerLocation;
@@ -49,4 +51,5 @@ function worldBorder(player: Player) {
             player.inputPermissions.movementEnabled = true;
         }, 100);
     }
+    return tickData;
 }

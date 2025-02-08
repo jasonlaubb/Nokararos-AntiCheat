@@ -7,8 +7,9 @@ export function registerModeration() {
     new Module()
         .lockModule()
         .addCategory("system")
-        .initPlayer((_playerId, player) => {
+        .initPlayer((tickData, _playerId, player) => {
             onPlayerSpawn(player);
+            return tickData;
         })
         .register();
 }

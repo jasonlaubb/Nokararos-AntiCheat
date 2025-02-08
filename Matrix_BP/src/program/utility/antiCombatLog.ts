@@ -21,12 +21,13 @@ new Module()
         world.afterEvents.entityDie.unsubscribe(entityDie);
         world.afterEvents.playerLeave.unsubscribe(playerLeave);
     })
-    .initPlayer((_playerId, player) => {
+    .initPlayer((tickData, _playerId, player) => {
         player.removeTag("matrix:inCombat");
         player
             .getTags()
             .filter((tag) => tag.startsWith("matrix:combatInfo::"))
             .forEach((tag) => player.removeTag(tag));
+        return tickData;
     });
 function entityDie({ deadEntity: player }: EntityDieAfterEvent) {
     if (player.hasTag("matrix:inCombat") && player instanceof Player) {

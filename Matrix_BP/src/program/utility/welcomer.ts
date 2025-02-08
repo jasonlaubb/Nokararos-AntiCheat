@@ -7,7 +7,7 @@ new Module()
     .setName(rawtextTranslate("module.welcomer.name"))
     .setDescription(rawtextTranslate("module.welcomer.description"))
     .setToggleId("welcomer")
-    .initPlayer((_playerId, player) => {
+    .initPlayer((tickData, _playerId, player) => {
         world.sendMessage(
             fastText()
                 .addText("§bMatrix§a+ §7> §g")
@@ -16,6 +16,7 @@ new Module()
                 .addTranRawText("module.welcomer.device", rawtextTranslate(parseDeviceType(player.clientSystemInfo.platformType)))
                 .build()
         );
+        return tickData;
     })
     .register();
 function parseDeviceType(deviceType: PlatformType): string {

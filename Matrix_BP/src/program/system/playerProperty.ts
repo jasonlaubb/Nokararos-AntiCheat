@@ -18,12 +18,13 @@ export function registerTimeStampModule() {
             world.afterEvents.entityHitEntity.subscribe(onPlayerAttack);
             world.afterEvents.pistonActivate.subscribe(onPistonPush);
         })
-        .initPlayer((_playerId, player) => {
+        .initPlayer((tickData, _playerId, player) => {
             player.timeStamp = {
                 knockBack: 0,
                 riptide: 0,
                 pistonPush: 0,
             };
+            return tickData;
         })
         .register();
 }

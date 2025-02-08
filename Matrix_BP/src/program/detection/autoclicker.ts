@@ -44,7 +44,7 @@ function tickEvent() {
                 player.sendMessage(rawtextTranslate("module.autoclicker.reach", maxCps.toString(), cps.toString()));
                 player.addEffect(MinecraftEffectTypes.Weakness, 1000, { showParticles: false });
                 const now = Date.now();
-                if (now - data.autoClicker!.lastFlagTimestamp > config.sensitivity.antiAutoClicker.minFlagIntervalMs) player.autoClickFlag.amount = 0;
+                if (now - data.autoClicker!.lastFlagTimestamp > config.sensitivity.antiAutoClicker.minFlagIntervalMs) data.autoClicker.amount = 0;
                 data.autoClicker!.lastFlagTimestamp = now;
                 data.autoClicker!.amount++;
                 if (data.autoClicker!.amount > config.sensitivity.antiAutoClicker.maxFlag) {

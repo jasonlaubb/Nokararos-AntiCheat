@@ -16,11 +16,12 @@ new Module()
         spamData.clear();
         world.beforeEvents.chatSend.unsubscribe(onPlayerSendMessage);
     })
-    .initPlayer((playerId) => {
+    .initPlayer((tickData, playerId) => {
         spamData.set(playerId, {
             lastMessages: {},
             lastMessageTime: 0,
         });
+        return tickData;
     })
     .initClear((playerId) => {
         spamData.delete(playerId);
