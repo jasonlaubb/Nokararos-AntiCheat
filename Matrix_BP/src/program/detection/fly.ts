@@ -79,7 +79,7 @@ function tickEvent(tickData: TickData, player: Player) {
             }
         }
     }
-    if (data.flagAmount >= 0.05 && ((now - data.lastFlagTimestamp > 8000 && player.isOnGround) || (!player.isOnGround && velocityY === 0 && now - data.lastFlagTimestamp > 1200))) {
+    if (data.flagAmount >= 0.05 && ((now - data.lastFlagTimestamp > 6000 && player.isOnGround) || (surroundAir && fastAbs(velocityY) < MAX_VELOCITY_Y && now - data.lastFlagTimestamp > 1200))) {
         data.flagAmount -= 0.05;
         if (hasFlyDebugTag) player.sendMessage(`<flyDebug> §c(-) decreased to ${data.flagAmount}`);
     }
