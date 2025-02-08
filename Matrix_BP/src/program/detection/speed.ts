@@ -1,7 +1,7 @@
-import { Dimension, EntityHitEntityAfterEvent, EquipmentSlot, GameMode, Player, ScriptEventCommandMessageAfterEvent, system, Vector3, world } from "@minecraft/server";
+import { Dimension, EntityHitEntityAfterEvent, EquipmentSlot, GameMode, ItemUseAfterEvent, Player, Vector3, world } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { pythag } from "../../util/fastmath";
-import { MinecraftEffectTypes, MinecraftEnchantmentTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
+import { MinecraftEffectTypes, MinecraftEnchantmentTypes, MinecraftItemTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { rawtextTranslate } from "../../util/rawtext";
 import { TickData } from "../import";
 let eventId: IntegratedSystemEvent;
@@ -12,12 +12,14 @@ const speed = new Module()
     .setPunishment("ban")
     .onModuleEnable(() => {
         world.afterEvents.entityHitEntity.subscribe(onPlayerAttack);
-        system.afterEvents.scriptEventReceive.subscribe(onRidingEnded);
+        //system.afterEvents.scriptEventReceive.subscribe(onRidingEnded);
+        world.afterEvents.itemUse.subscribe(itemUse);
         eventId = Module.subscribePlayerTickEvent(tickEvent, false);
     })
     .onModuleDisable(() => {
         world.afterEvents.entityHitEntity.unsubscribe(onPlayerAttack);
-        system.afterEvents.scriptEventReceive.unsubscribe(onRidingEnded);
+        //system.afterEvents.scriptEventReceive.unsubscribe(onRidingEnded);
+        world.afterEvents.itemUse.unsubscribe(itemUse);
         Module.clearPlayerTickEvent(eventId);
     })
     .initPlayer((tickData, _playerId, player) => {
@@ -34,6 +36,7 @@ const speed = new Module()
             lastTimerFlagTimestamp: 0,
             timerMainFlagAmount: 0,
             lastSprint: player.isSprinting,
+            lastEnderPeal: 0,
         };
         return tickData;
     });
@@ -91,7 +94,7 @@ function tickEvent(tickData: TickData, player: Player) {
         } else if (distance > 0.2 && !player.isInWater && !player.isSwimming && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = tickData.global.lastSpeedXZ;
             const normalDistance = distance * Module.config.sensitivity.antiSpeed.maxVelocityExaggeration;
-            if (velocitySpeed > 0 && tickData.instant.speedXZ > 0 && distance > VELOCITY_DELTA_THRESHOLD && data.lastSprint === player.isSprinting && !isSwiftSneak(player) && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
+            if (velocitySpeed > 0 && tickData.instant.speedXZ > 0 && now - data.lastEnderPeal > 1200 && distance > VELOCITY_DELTA_THRESHOLD && data.lastSprint === player.isSprinting && !isSwiftSneak(player) && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
                 if (data.timerFlagAmount < 1) {
                     data.lastTriggerLocation = player.location;
                 }
@@ -130,12 +133,12 @@ function onPlayerAttack({ damagingEntity: player }: EntityHitEntityAfterEvent) {
     data.speed.lastAttackTimestamp = Date.now();
     Module.tickData.set(player.id, data);
 }
-function onRidingEnded({ id, sourceEntity: player }: ScriptEventCommandMessageAfterEvent) {
+/*function onRidingEnded({ id, sourceEntity: player }: ScriptEventCommandMessageAfterEvent) {
     if (id != "matrix:ridingEnded" || !player || !(player instanceof Player)) return;
     const data = Module.tickData.get(player.id)!;
     data.speed.lastRidingEndTimestamp = Date.now();
     Module.tickData.set(player.id, data);
-}
+}*/
 function isPlayerInSolid(location: Vector3, headLocation: Vector3, dimension: Dimension) {
     try {
         const isBodyInSolid = dimension.getBlock(location)?.isSolid;
@@ -156,4 +159,10 @@ function isSwiftSneak(player: Player) {
         }
     }
     return false;
+}
+function itemUse({ itemStack, source }: ItemUseAfterEvent) {
+    if (itemStack.typeId !== MinecraftItemTypes.EnderPearl) return;
+    const data = Module.tickData.get(source.id)!;
+    data.speed.lastEnderPeal = Date.now();
+    Module.tickData.set(source.id, data);
 }
