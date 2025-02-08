@@ -10,7 +10,7 @@ const namespoof = new Module()
     .setName(rawtextTranslate("module.namespoof.name"))
     .setDescription(rawtextTranslate("module.namespoof.description"))
     .setToggleId("antiNamespoof")
-    .setPunishment("crash")
+    .setPunishment("kick")
     .onModuleEnable(() => {
         world.afterEvents.playerSpawn.subscribe(playerSpawn);
     })

@@ -29,7 +29,7 @@ const timer = new Module()
     .setName(rawtextTranslate("module.timer.name"))
     .setDescription(rawtextTranslate("module.timer.description"))
     .setToggleId("antiTimer")
-    .setPunishment("crash")
+    .setPunishment("kick")
     .initPlayer((playerId, player) => {
         timerData.set(playerId, {
             lastLocation: player.location,

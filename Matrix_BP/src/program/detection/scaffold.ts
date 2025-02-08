@@ -33,7 +33,7 @@ const scaffold = new Module()
     .setName(rawtextTranslate("module.scaffold.name"))
     .setDescription(rawtextTranslate("module.scaffold.description"))
     .setToggleId("antiScaffold")
-    .setPunishment("crash")
+    .setPunishment("kick")
     .initPlayer((playerId) => {
         scaffoldDataMap.set(playerId, {
             blockLogs: [],
