@@ -4,4 +4,4 @@
 
 [FAQ](/misc/faq.md)
 [Discord](https://discord.gg/CqZGXeRKPJ)
-[Download (CF)](https://www.curseforge.com/minecraft-bedrock/addons/matrix-anti/files)
+[Download now](/misc/download.md)

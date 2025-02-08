@@ -25,6 +25,12 @@ No complicated setup is required, here is the few step.
 
 5. Do `-help` to view what command can you use.
 
+## When I type help command, it shows something like "level 1", it is not working!
+
+Do `-op`, thank you. Stop asking this question.
+
+If it is not working, please make sure Matrix is above any chatRank addon (but below addon with chat command).
+
 ## How to change the punishment of the modules?
 
 Method 1: configui command
@@ -42,6 +48,20 @@ Method 1: configui command
 Method 2: set command
 
 Run `-set modules/(module's toggle id)/punishment (punishment)` to set the punishment.
+
+## Why Matrix is not working
+
+Can you try:
+
+1. Deleting Matrix from your Realm's settings
+
+2. Downloading your realm's world to your device
+
+4. Removing Matrix from your world (if it exists)
+
+5. Adding latest Matrix version to your world
+
+6. Reuploading your world back to your realm
 
 ## How to select a player whose name contains whitespace(s)?
 
@@ -82,3 +102,13 @@ Use `-setmodule <module's toggle id> false` to disable the module.
 Similarly, use `-setmodule <module's toggle id> true` to enable the module.
 
 You can also execute `-listmodule` to view the modules (including toggle id).
+
+# -op isnt working because it says command.op.start command.op.require command.op.require.cancel
+
+Make sure you have enabled the resources pack of Matrix Anticheat. If it is not displaying, you can run the .mcaddon file again to let Minecraft installs that again.
+
+# Where is the chat rank and anti spam feature?
+
+You can do `-setmodule chatRank enable` to enable it.
+
+Make sure to place Matrix below any addon with custom chat command.

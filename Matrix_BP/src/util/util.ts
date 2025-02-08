@@ -43,6 +43,9 @@ export function getAngleLimit(platformType: PlatformType): number {
             return KILLAURA_CONSOLE_ANGLE_LIMIT;
     }
 }
+export function isConsolePlayer({ clientSystemInfo: { platformType } }: Player) {
+    return platformType === PlatformType.Console;
+}
 export function getValueFromObject(object: any, keys: string[]) {
     try {
         for (const key of keys) {

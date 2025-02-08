@@ -2,6 +2,7 @@ import { Player } from "@minecraft/server";
 import { MinecraftEffectTypes } from "../../node_modules/@minecraft/vanilla-data/lib/index";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
+import { isConsolePlayer } from "../../util/util";
 let runId: IntegratedSystemEvent;
 interface SprintData {
     flagCount: number;
@@ -45,12 +46,12 @@ function tickEvent(player: Player) {
         return;
     };
     const hasEffect = player.getEffect(MinecraftEffectTypes.Blindness);
-    if ((player.isSneaking || !isMovementKeyPressed(player)) && !player.isSwimming) {
+    if ((player.isSneaking || !isMovementKeyPressed(player)) && !isConsolePlayer(player) && !player.isSwimming) {
         data.flagCount++;
         if (data.flagCount > Module.config.sensitivity.antiInvalidSprint.maxFlag) {
             player.flag(invalidSprint, { t: "1" });
         }
-    } else if (data.flagCount > 0) data.flagCount--;
+    } else if (data.flagCount > 0) data.flagCount = 0;
     if (hasEffect && player.isSprinting && !data.nonBlindnessSprintState) {
         player.flag(invalidSprint, { t: "2" });
     }

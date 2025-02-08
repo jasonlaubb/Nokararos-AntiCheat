@@ -3,10 +3,10 @@
 window.$docsify = {
     el: "#app",
     repo: 'https://github.com/jasonlaubb/Matrix-AntiCheat',
-    logo: '/images/logo.png',
-    loadSidebar: true,
+    logo: '/images/matrix_icon_64x.png',
+    loadSidebar: false,
     name: "Matrix AntiCheat",
-    hideSidebar: false,
+    hideSidebar: true,
     auto2top: true,
     coverpage: true,
     notFoundPage: true,
@@ -16,15 +16,4 @@ window.$docsify = {
     themeColor: "#383838",
     externalLinkRel: false,
     subMaxLevel: 2,
-    search: {
-        maxAge: 1,
-        placeholder: {
-          '/': 'Type to search',
-        },
-        noData: {
-          '/': 'No Results Found',
-        },
-        depth: 6,
-        hideOtherSidebarContent: true,
-    },
 }
