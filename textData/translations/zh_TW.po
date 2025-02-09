@@ -1,30 +1,30 @@
 #: pack.description
 msgid "§7§¶The Supreme Anti-Cheat Solution for Minecraft Bedrock. Required Beta API to work."
-msgstr "§7§¶我的世界基岩版最佳的反外挂解决方案，需要实验性API。"
+msgstr "§7§¶我的世界基岩版最佳的反外掛作弊解決方案，此模組需要開啟實驗性API。"
 
 #: permissions.chatmute
 msgid "§bMatrix§a+ §7> §cYou have been muted from the server!"
-msgstr "§bMatrix§a+ §7> §c你已被服务器禁言！"
+msgstr "§bMatrix§a+ §7> §c你已被伺服器禁言！"
 
 #: disconnectionScreen.unexpectedPacket
 msgid "Oops, something went wrong."
-msgstr "哎呀，出现了问题。"
+msgstr "哎呀，出現了問題。"
 
 #: menu.loadingLevel
 msgid "Protected by Matrix AntiCheat"
-msgstr "受到Matrix反外挂保护"
+msgstr "受到Matrix反外掛作弊保護"
 
 #: json.packet
 msgid "§bMatrix§a+ §7> §e%1 §g packet§7(%2)§g received from %3"
-msgstr "§bMatrix§a+ §7> §e%1 §g数据包§7(%2)§g 从 %3 接收"
+msgstr "§bMatrix§a+ §7> §e%1 §g數據包§7(%2)§g 從 %3 接收"
 
 #: error.happened
 msgid "§bMatrix§a+ §7> §gThere is some error from the script, please report it to the developer when you have time."
-msgstr "§bMatrix§a+ §7> §g脚本出现了一些错误，请有时间时向开发者报告。"
+msgstr "§bMatrix§a+ §7> §gScript出現了一些錯誤，麻煩您報告給開發者方便處理。"
 
 #: error.name
 msgid "§7- Error: §e%s"
-msgstr "§7- 错误: §e%s"
+msgstr "§7- 錯誤: §e%s"
 
 #: error.description
 msgid "§7- Description: §e%s"
@@ -32,31 +32,31 @@ msgstr "§7- 描述: §e%s"
 
 #: error.stack
 msgid "§7- Stack: §e%s"
-msgstr "§7- 堆栈: §e%s"
+msgstr "§7- 堆棧: §e%s"
 
 #: util.flag.alert
 msgid "§c§lCheat Alert! §r§7A cheater (%1§r§7) has been detected automatically by Matrix AntiCheat! We have automatically blocked it. §3(moduleId: %2, punishment: %3)§r"
-msgstr "§c§l作弊警报！§r§7检测到一个作弊者 (%1§r§7)，已被Matrix反外挂自动阻止。§3(moduleId: %2, 惩罚: %3)§r"
+msgstr "§c§l作弊警報！§r§7檢測到一個作弊者 (%1§r§7)，已被Matrix反外掛作弊自動阻止。§3(moduleId: %2, 懲罰: %3)§r"
 
 #: function.help
 msgid "§bMatrix§a+ §7> §gAre you looking for help? Join our Discord Server: https://discord.gg/%1. Feel free to ask there. You are currently on Matrix anticheat version %2. You can use -op to gain matrix administrator permission and use -help to get help for the commands."
-msgstr "§bMatrix§a+ §7> §g你在寻找帮助吗？加入我们的Discord服务器: https://discord.gg/%1。可以随时在那里询问。你当前使用的是Matrix反外挂版本 %2。你可以使用 -op 获得Matrix管理员权限，并使用 -help 获取命令帮助。"
+msgstr "§bMatrix§a+ §7> §g你需要幫助嗎？加入我們的Discord伺服器: https://discord.gg/%1。並隨時提問。你當前使用的是Matrix反外掛作弊版本 %2。你可以使用 -op 獲得Matrix管理員櫂限，及使用 -help 查詢指令。"
 
 #: function.help.typeA
 msgid "§7>> §gIs the chat command not working? Try to disable or place Matrix Anticheat above any-type of the chat rank addon."
-msgstr "§7>> §g聊天命令无法使用吗？请尝试禁用或将Matrix反外挂放在任何聊天等级插件之上。"
+msgstr "§7>> §g聊天命令不起作用嗎？請嘗試停用或將Matrix反外掛作弊放在所有模組之上。"
 
 #: function.help.typeB
 msgid "§7>> §gIs that nothing working? Don't forget to enable Beta API and update our Matrix anticheat to the latest"
-msgstr "§7>> §g没有任何功能工作吗？别忘了启用实验性API并将我们的Matrix反外挂更新到最新版本。"
+msgstr "§7>> §g功能都不起作用嗎？別忘了啟用實驗性API並將我們的Matrix反外掛作弊更新到最新版本。"
 
 #: function.script.online
 msgid "§7>> §aScript is active! It is so nice to have you here."
-msgstr "§7>> §a脚本已激活！很高兴你在这里。"
+msgstr "§7>> §aScript已激活！感謝你使用Matrix反外掛作弊。"
 
 #: function.script.offline
 msgid "§7>> §cScript is inactive! Please check if you have Beta-API enabled."
-msgstr "§7>> §c脚本未激活！请检查是否启用了实验性API。"
+msgstr "§7>> §cScript仍未激活！請檢查是否啟用了實驗性API。"
 
 #: moderation.permanent
 msgid "UNUSED_STRING"
@@ -64,7 +64,7 @@ msgstr "永久"
 
 #: moderation.softban.banned
 msgid "UNUSED_STRING"
-msgstr "§c你已被软禁§r"
+msgstr "§c你已被暫時封禁§r"
 
 #: moderation.softban.until
 msgid "UNUSED_STRING"
@@ -72,7 +72,7 @@ msgstr "直到 %s"
 
 #: ui.runcommand
 msgid "Run Command!"
-msgstr "运行命令！"
+msgstr "執行命令！"
 
 #: ui.exit
 msgid "Exit"
@@ -80,43 +80,43 @@ msgstr "退出"
 
 #: ui.closechat
 msgid "§7>> §gPlease close the chat to receive your user interface (UI)."
-msgstr "§7>> §g请关闭聊天以接收用户界面（UI）。"
+msgstr "§7>> §g請關閉聊天以接收用戶界面（UI）。"
 
 #: ui.config.title
 msgid "Press the button to continue"
-msgstr "按下按钮以继续"
+msgstr "按下按鈕繼續"
 
 #: ui.config.button
 msgid "Continue >w<"
-msgstr "继续 >w<"
+msgstr "繼續 >w<"
 
 #: ui.config.body
 msgid "You can change the config in the config file. You can also use the command -set <path> <value> to change a config value."
-msgstr "您可以在配置文件中更改配置。您还可以使用命令 -set <路径> <值> 来更改配置值。"
+msgstr "您可以在配置文件中更改配置。您還可以使用命令 -set <路徑> <值> 來更改配置值。"
 
 #: ui.config.selector
 msgid "Config Selector | Matrix AntiCheat"
-msgstr "配置选择器 | Matrix反外挂"
+msgstr "配置選擇器 | Matrix反外掛作弊"
 
 #: ui.config.editor
 msgid "Config Editor | Matrix AntiCheat"
-msgstr "配置编辑器 | Matrix反外挂"
+msgstr "配置編輯器 | Matrix反外掛作弊"
 
 #: ui.config.value
 msgid "New value you want to set"
-msgstr "您想设置的新值"
+msgstr "您想設置的新值"
 
 #: ui.config.loc
 msgid "§gCurrent path of the config: §e%s"
-msgstr "§g当前配置路径: §e%s"
+msgstr "§g當前配置路徑: §e%s"
 
 #: commandsynax.unknown
 msgid "Unknown command: %s, you can type -help to get some useful information about the commands."
-msgstr "未知命令: %s，您可以输入 -help 获取有关命令的一些有用信息。"
+msgstr "未知命令: %s，您可以輸入 -help 獲取有關命令的一些有用信息。"
 
 #: commandsynax.permission
 msgid "No permission to use this command. The minimum permission required is 'level %s'"
-msgstr "没有权限使用此命令。所需的最低权限是 'level %s'"
+msgstr "沒有權限使用此命令。所需的最低權限是 'level %s'"
 
 #: commandsystem.disabled
 msgid "Oops, this command has been disabled."
@@ -124,191 +124,191 @@ msgstr "哎呀，命令已被禁用。"
 
 #: commandsynax.unknownsubcommand
 msgid "Unknown subcommand: %s, you can use -help <command> to know what subcommand you can use."
-msgstr "未知子命令: %s，您可以使用 -help <命令> 来了解可以使用的子命令。"
+msgstr "未知子命令: %s，您可以使用 -help <命令> 來瞭解可以使用的子命令。"
 
 #: commandsynax.empty
 msgid "Oops, you have to type something if you want to use some commands."
-msgstr "哎呀，如果您想使用某些命令，必须输入一些内容。"
+msgstr "哎呀，如果您想使用某些命令，必須輸入一些內容。"
 
 #: commandsynax.tips
 msgid "§7>> §gUse -help <command> to get some useful information about the commands."
-msgstr "§7>> §g使用 -help <命令> 获取有关命令的一些有用信息。"
+msgstr "§7>> §g使用 -help <命令> 獲取有關命令的一些有用信息。"
 
 #: commandsynax.missing
 msgid "You missed a parameter '%s' which is required."
-msgstr "您缺少一个必需的参数 '%s'。"
+msgstr "您缺少一個必需的參數 '%s'。"
 
 #: commandsynax.missing.subcommand
 msgid "This is a subcommand! You have to type -help <command> to know what subcommand you can use."
-msgstr "这是一个子命令！您必须输入 -help <命令> 来了解可以使用的子命令。"
+msgstr "這是一個子命令！您必須輸入 -help <命令> 來瞭解可以使用的子命令。"
 
 #: commandsynax.syntax.boolean
 msgid "Syntax error: The parameter '%1' is a boolean value, but you have typed '%2 >>%3<< %4'. Only 'true' or 'false' are allowed'."
-msgstr "语法错误: 参数 '%1' 是布尔值，但您输入的是 '%2 >>%3<< %4'。仅允许 'true' 或 'false'。"
+msgstr "語法錯誤: 參數 '%1' 是布爾值，但您輸入的是 '%2 >>%3<< %4'。僅允許 'true' 或 'false'。"
 
 #: commandsynax.syntax.string.low
 msgid "Syntax error: The parameter '%1' required a string that contains at least %5 characters, but you have typed '%2 >>%3<< %4'."
-msgstr "语法错误: 参数 '%1' 需要一个包含至少 %5 个字符的字符串，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要一個包含至少 %5 個字符的字符串，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.string.high
 msgid "Syntax error: The parameter '%1' required a string that contains at most %5 characters, but you have typed '%2 >>%3<< %4'."
-msgstr "语法错误: 参数 '%1' 需要一个包含最多 %5 个字符的字符串，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要一個包含最多 %5 個字符的字符串，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.integer.nan
 msgid "Syntax error: The parameter '%1' required a integer, but you have typed '%2 >>%3<< %4'."
-msgstr "语法错误: 参数 '%1' 需要一个整数，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要一個整數，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.number.nan
 msgid "Syntax error: The parameter '%1' required a valid number, but you have typed '%2 >>%3<< %4'."
-msgstr "语法错误: 参数 '%1' 需要一个有效的数字，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要一個有效的數字，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.number.low
 msgid "Syntax error: The parameter '%1' required a number that is larger than %5, but you have typed '%2 >>%3<< %4' which is out of range."
-msgstr "语法错误: 参数 '%1' 需要一个大于 %5 的数字，但您输入的是 '%2 >>%3<< %4'，超出了范围。"
+msgstr "語法錯誤: 參數 '%1' 需要一個大於 %5 的數字，但您輸入的是 '%2 >>%3<< %4'，超出了範圍。"
 
 #: commandsynax.syntax.number.high
 msgid "Syntax error: The parameter '%1' required a number that is smaller than %5, but you have typed '%2 >>%3<< %4' which is out of range."
-msgstr "语法错误: 参数 '%1' 需要一个小于 %5 的数字，但您输入的是 '%2 >>%3<< %4'，超出了范围。"
+msgstr "語法錯誤: 參數 '%1' 需要一個小於 %5 的數字，但您輸入的是 '%2 >>%3<< %4'，超出了範圍。"
 
 #: commandsynax.syntax.code
 msgid "Syntax error: The parameter '%1' required a code with length that is equal to %5, but you have typed '%2 >>%3<< %4', which is out of range."
-msgstr "语法错误: 参数 '%1' 需要一个长度等于 %5 的代码，但您输入的是 '%2 >>%3<< %4'，超出了范围。"
+msgstr "語法錯誤: 參數 '%1' 需要一個長度等於 %5 的代碼，但您輸入的是 '%2 >>%3<< %4'，超出了範圍。"
 
 #: commandsynax.syntax.purecode
 msgid "Syntax error: The parameter '%1' required a purecode that only formed by number (0-9), upper and lower case letters (a-z or A-Z), but you have typed '%2 >>%3<< %4'"
-msgstr "语法错误: 参数 '%1' 需要一个仅由数字 (0-9)、大小写字母 (a-z 或 A-Z) 组成的纯代码，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要一個僅由數字 (0-9)、大小寫字母 (a-z 或 A-Z) 組成的純代碼，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.choice
 msgid "Syntax error: The parameter '%1' required a choice between %5, but you have typed '%2 >>%3<< %4'"
-msgstr "语法错误: 参数 '%1' 需要在 %5 之间进行选择，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要在 %5 之間進行選擇，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.player
 msgid "Syntax error: The parameter '%1' required a player which is online, but you have typed '%2 >>%3<< %4'"
-msgstr "语法错误: 参数 '%1' 需要一个在线玩家，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要一個在線玩家，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: commandsynax.syntax.target
 msgid "Syntax error: The parameter '%1' required a target which is online and not an administrator, but you have typed '%2 >>%3<< %4'"
-msgstr "语法错误: 参数 '%1' 需要一个在线且不是管理员的目标，但您输入的是 '%2 >>%3<< %4'。"
+msgstr "語法錯誤: 參數 '%1' 需要一個在線且不是管理員的目標，但您輸入的是 '%2 >>%3<< %4'。"
 
 #: module.phase.name
 msgid "Anti Phase"
-msgstr "反相位"
+msgstr "禁止穿牆"
 
 #: module.phase.description
 msgid "Prevent the player from passing through the walls with the illegal movement packet."
-msgstr "防止玩家通过非法移动数据包穿过墙壁。"
+msgstr "防止玩家通過非法移動數據包穿過牆壁。"
 
 #: module.firewall.name
 msgid "Firewall"
-msgstr "防火墙"
+msgstr "防火牆"
 
 #: module.firewall.description
 msgid "Prevent the player who contains bad packets from accessing the server. For example, spam bot."
-msgstr "防止包含恶意数据包的玩家访问服务器。例如，垃圾邮件机器人。"
+msgstr "防止包含惡意數據包的玩家訪問伺服器。例如，刷頻機器人。"
 
 #: module.namespoof.name
 msgid "Anti Name Spoofer"
-msgstr "反名字欺骗"
+msgstr "禁止改名模組"
 
 #: module.namespoof.description
 msgid "Prevent the player from changing their name to a invalid name and join the server."
-msgstr "防止玩家将名字更改为无效名称并加入服务器。"
+msgstr "防止玩家將名字更改爲無效的名字並加入伺服器。"
 
 #: module.killaura.name
 msgid "Anti KillAura"
-msgstr "反KillAura"
+msgstr "禁止自動攻擊"
 
 #: module.killaura.description
 msgid "Prevent the player from hitting other players with the illegal kill packet."
-msgstr "防止玩家使用非法击杀数据包攻击其他玩家。"
+msgstr "防止玩家使用非法擊殺數據包攻擊其他玩家。"
 
 #: module.scaffold.name
 msgid "Anti Scaffold"
-msgstr "反脚手架"
+msgstr "禁止自動搭橋(即自動在下方放置方塊)"
 
 #: module.scaffold.description
 msgid "Prevent the player from using the auto-brige hack to gain unfair advantage."
-msgstr "防止玩家使用自动搭桥外挂以获得不公平的优势。"
+msgstr "防止玩家使用自動搭橋外掛(即自動在下方放置方塊)並造成不公平。"
 
 #: module.insteabreak.name
 msgid "Anti Insteabreak"
-msgstr "反瞬间破坏"
+msgstr "禁止瞬間破壞"
 
 #: module.insteabreak.description
 msgid "Prevent the player from breaking the block without breaking time. These type of hack is not working on realm or a BDS server that is configured correctly."
-msgstr "防止玩家在没有破坏时间的情况下破坏方块。这类外挂在Realm或正确配置的BDS服务器上无法生效。"
+msgstr "防止玩家一次擊破中立即被破壞方塊。這類外掛在Realm或正確配置的BDS服務器上無法生效。"
 
 #: module.reach.name
 msgid "Anti Reach"
-msgstr "反远程攻击"
+msgstr "禁止遠程攻擊"
 
 #: module.reach.description
 msgid "An advanced anti reach solution that provided reach detection up to 4.5 blocks."
-msgstr "一种先进的反远程攻击解决方案，检测范围可达4.5个方块。"
+msgstr "一種先進的反遠程攻擊解決方案，檢測範圍可達4.5個方塊。"
 
 #: module.speed.name
 msgid "Anti Speed"
-msgstr "反速度"
+msgstr "禁止非法移動"
 
 #: module.speed.description
 msgid "The latest and strongest anti speed engine. Used the property of 'bds prediction' phenomenon to indentify the illegal movement from the players."
-msgstr "最新最强的反速度引擎。利用'bds预测'现象的特性来识别玩家的非法移动。"
+msgstr "最新最強的反非法移動引擎。利用'bds預測'現象的特性來識別玩家的非法移動。"
 
 #: module.fly.name
 msgid "Anti Fly"
-msgstr "反飞行"
+msgstr "禁止飛行外掛"
 
 #: module.fly.description
 msgid "Prevent most of the fly hacks from working. There is a small probability of false positive."
-msgstr "防止大部分飞行外挂生效。存在小概率的误报。"
+msgstr "防止大部分飛行外掛生效。存在小概率的誤報。"
 
 #: module.timer.name
 msgid "Anti Timer"
-msgstr "反计时器"
+msgstr "禁止加速器"
 
 #: module.timer.description
 msgid "Prevent someone speed up their game speed to get an unfair advantage."
-msgstr "防止某人加快游戏速度以获得不公平的优势。"
+msgstr "防止某人加快遊戲速度並造成不公平。"
 
 #: module.itemcheck.name
 msgid "Item check"
-msgstr "物品检查"
+msgstr "物品檢查"
 
 #: module.itemcheck.description
 msgid "Prevent the player from using the illegal item from the server."
-msgstr "防止玩家使用服务器上的非法物品。"
+msgstr "防止玩家使用伺服器上的非法物品。"
 
 #: module.hop.name
 msgid "Anti Hop"
-msgstr "反跳跃"
+msgstr "禁止快速移動"
 
 #: module.hop.description
 msgid "An extra checks against the illegal movement motion, to prevent a silent bypass."
-msgstr "额外检查非法移动动作，以防止静默绕过。"
+msgstr "額外檢查非法移動動作，以防止靜默繞過。"
 
 #: module.aim.name
 msgid "Aim check"
-msgstr "瞄准检查"
+msgstr "瞄準檢查"
 
 #: module.aim.description
 msgid "An extra checks against the illegal aim, to prevent the killaura or aim assist, credit to 4urxa."
-msgstr "额外检查非法瞄准，以防止KillAura或瞄准辅助，感谢4urxa。"
+msgstr "額外檢查非法瞄準，以防止KillAura或瞄準輔助，感謝4urxa提供。"
 
 #: module.invalidSprint.name
 msgid "Anti invalid sprint"
-msgstr "反无效冲刺"
+msgstr "禁止無效衝刺"
 
 #: module.invalidSprint.description
 msgid "Prevent the player from using the illegal sprint packet client."
-msgstr "防止玩家使用非法冲刺数据包客户端。"
+msgstr "防止玩家使用非法衝刺數據包客戶端。"
 
 #: command.about.description
 msgid "Show some basic information about Matrix AntiCheat."
-msgstr "显示有关Matrix反外挂的一些基本信息。"
+msgstr "顯示有關Matrix反外掛作弊的一些基本信息。"
 
 #: command.about.title
 msgid "§bMatrix§a+ §7> §gAbout Matrix AntiCheat <3"
-msgstr "§bMatrix§a+ §7> §g关于Matrix反外挂 <3"
+msgstr "§bMatrix§a+ §7> §g關於Matrix反外掛作弊 <3"
 
 #: command.about.author
 msgid "Author: jasonlaubb (Discord: @uwu_the_great)"
@@ -320,91 +320,91 @@ msgstr "Github: %s"
 
 #: command.about.version
 msgid "Current version: %s"
-msgstr "当前版本: %s"
+msgstr "當前版本: %s"
 
 #: command.about.joindc
 msgid "Want to download? Join our Discord Server: https://discord.gg/%s"
-msgstr "想要下载吗？加入我们的Discord服务器: https://discord.gg/%s"
+msgstr "想下載嗎？加入我們的Discord伺服器: https://discord.gg/%s"
 
 #: ad.running
 msgid "§bMatrix§a+ §7> §gMatrix Anticheat is protecting your game experience. Discord server: https://discord.gg/%s"
-msgstr "§bMatrix§a+ §7> §gMatrix反外挂正在保护您的游戏体验。Discord服务器: https://discord.gg/%s"
+msgstr "§bMatrix§a+ §7> §gMatrix反外掛作弊正在保護您的遊戲體驗。Discord服務器: https://discord.gg/%s"
 
 #: command.help.description
 msgid "Get the useful information about the commands."
-msgstr "获取有关命令的有用信息。"
+msgstr "獲取有關指令的資訊。"
 
 #: command.help.command.name
 msgid "Command's name"
-msgstr "命令名称"
+msgstr "指令名稱"
 
 #: command.help.command.name.description
 msgid "The name of the command that you need help."
-msgstr "您需要帮助的命令名称。"
+msgstr "您需要幫助的指令名稱。"
 
 #: command.help.title
 msgid "The command list of Matrix AntiCheat:"
-msgstr "Matrix反外挂的命令列表："
+msgstr "Matrix反外掛作弊的指令列表："
 
 #: command.help.target.title
 msgid "Showing the usage of the selected command: %s"
-msgstr "显示所选命令的用法: %s"
+msgstr "顯示所選指令的用法: %s"
 
 #: command.help.target.notfound
 msgid "Not able to find the command, make sure you type a valid command so that we can show you the correct information."
-msgstr "无法找到命令，请确保您输入有效的命令，以便我们能为您提供正确的信息。"
+msgstr "找不到指令，請確保您輸入有效的指令，以便我們能爲您提供正確的信息。"
 
 #: command.help.m.description
 msgid "§gDescription of the command: §e%s§g"
-msgstr "§g命令描述: §e%s§g"
+msgstr "§g指令描述: §e%s§g"
 
 #: command.help.m.usage
 msgid "§gUsage of the command: §e"
-msgstr "§g命令用法: §e"
+msgstr "§g指令用法: §e"
 
 #: command.help.m.usage.empty
 msgid "§gUsage of the command: §eJust type the command name!"
-msgstr "§g命令用法: §e只需输入命令名称！"
+msgstr "§g指令用法: §e只需輸入命令名稱！"
 
 #: command.help.option.string
 msgid "string (A string that formed with any characters)"
-msgstr "字符串（由任何字符组成的字符串）"
+msgstr "字符串（由任何字符組成的字符串）"
 
 #: command.help.option.number
 msgid "number (A float number or a integer)"
-msgstr "数字（浮点数或整数）"
+msgstr "數字（浮點數或整數）"
 
 #: command.help.option.integer
 msgid "number (Integer only, including negative)"
-msgstr "数字（仅限整数，包括负数）"
+msgstr "數字（僅限整數，包括負數）"
 
 #: command.help.option.boolean
 msgid "boolean (A boolean value, true or false)"
-msgstr "布尔值（布尔值，真或假）"
+msgstr "布爾值（布爾值，真或假）"
 
 #: command.help.option.code
 msgid "code (A code with length that is equal to a specific number)"
-msgstr "代码（长度等于特定数字的代码）"
+msgstr "代碼（長度等於特定數字的代碼）"
 
 #: command.help.option.purecode
 msgid "purecode (A purecode that only formed by number (0-9), upper and lower case letters (a-z or A-Z))"
-msgstr "纯代码（仅由数字（0-9）、大小写字母（a-z 或 A-Z）组成的纯代码）"
+msgstr "純代碼（僅由數字（0-9）、大小寫字母（a-z 或 A-Z）組成的純代碼）"
 
 #: command.help.option.choice
 msgid "choice (A choice between a list of options)"
-msgstr "选择（在选项列表之间进行选择）"
+msgstr "選擇（在選項列表之間進行選擇）"
 
 #: command.help.option.player
 msgid "player (A player name of a player that is online)"
-msgstr "玩家（在线玩家的名称）"
+msgstr "玩家（在線玩家的名稱）"
 
 #: command.help.option.target
 msgid "target (A player name of a player that is online but not an administrator of the server)"
-msgstr "目标（在线但不是服务器管理员的玩家名称）"
+msgstr "目標（在線但不是服務器管理員的玩家名稱）"
 
 #: command.help.target.type
 msgid "§gType: §e%s"
-msgstr "§g类型: §e%s"
+msgstr "§g類型: §e%s"
 
 #: command.help.target.description
 msgid "§gDescription: §e%s"
@@ -412,655 +412,655 @@ msgstr "§g描述: §e%s"
 
 #: command.help.target.optional
 msgid " (optional)"
-msgstr "（可选）"
+msgstr "（可選）"
 
 #: command.op.description
 msgid "Make yourself to be an administrator of the server, just by a command."
-msgstr "通过一个命令将自己设为服务器管理员。"
+msgstr "通過一個命令將自己設爲服務器管理員。"
 
 #: command.op.password
 msgid "admin password"
-msgstr "管理员密码"
+msgstr "管理員密碼"
 
 #: command.op.password.description
 msgid "The password that you have been set as the password for the command. If you have not set a password, just don't type anything here."
-msgstr "您为命令设置的密码。如果您没有设置密码，请在此处保持空白。"
+msgstr "你設置指令的密碼。如果你沒有設置密碼，請在此處保持空白。"
 
 #: command.op.statement.mismatch
 msgid "You have not set a password yet, you can just keep it empty."
-msgstr "您尚未设置密码，可以保持为空。"
+msgstr "您尚未設置密碼，可以保持爲空。"
 
 #: command.op.statement.missing
 msgid "You should type the password as the password has been set."
-msgstr "您应该输入已设置的密码。"
+msgstr "您應輸入已設置好的密碼。"
 
 #: command.op.statement.already
 msgid "You have the administrator permission already. What do you want anymore by using me?"
-msgstr "您已经拥有管理员权限。您还想要什么？"
+msgstr "您已經擁有管理員權限。"
 
 #: command.op.overheat.password
 msgid "Huh, just try later, I have almost overheated myself."
-msgstr "呃，稍后再试，我快要过热了。"
+msgstr "呃，稍後再試，我快要過熱了。"
 
 #: command.op.overheat.normal
 msgid "You should finish the verification first!"
-msgstr "您应该先完成验证！"
+msgstr "您應該先完成驗證！"
 
 #: command.op.success
 msgid "You have been set as an administrator of the server."
-msgstr "您已被设为服务器管理员。"
+msgstr "您已被設爲伺服器管理員。"
 
 #: command.op.start
 msgid "Seems like the server has no password yet, let's start a simple verification to verify about you're an administrator of the server or not."
-msgstr "看起来服务器还没有密码，让我们开始一个简单的验证，以确认您是否是服务器管理员。"
+msgstr "看起來伺服器還沒有密碼，讓我們開始一個簡單的驗證，以確認您是否是服務器管理員。"
 
 #: command.op.success.fast
 msgid "Success! We are able to verify you're an administrator of the server, you have been set as an administrator of the server."
-msgstr "成功！我们已验证您是服务器管理员，您已被设为服务器管理员。"
+msgstr "成功！我們已驗證您是服務器管理員，您已被設爲服務器管理員。"
 
 #: command.op.require
 msgid "Please type the following slash command (/) in the chat: '%s'."
-msgstr "请在聊天中输入以下斜杠命令（/）: '%s'。"
+msgstr "請在聊天中輸入以下斜槓指令（/）: '%s'。"
 
 #: command.op.require.cancel
 msgid "If you want to cancel the verification, just type the slash command (/) in chat: '%s'."
-msgstr "如果您想取消验证，请在聊天中输入斜杠命令（/）: '%s'。"
+msgstr "如果您想取消驗證，請在聊天中輸入斜槓指令（/）: '%s'。"
 
 #: command.op.verify.failed
 msgid "Sorry, but you have typed a wrong command, please try again."
-msgstr "抱歉，您输入了错误的命令，请再试一次。"
+msgstr "抱歉，您輸入了錯誤的指令，請再試一次。"
 
 #: command.op.verify.success
 msgid "Success! You have been set as an administrator of the server."
-msgstr "成功！您已被设为服务器管理员。"
+msgstr "成功！您已被設爲服務器管理員。"
 
 #: command.op.verify.cancel
 msgid "You have canceled the verification."
-msgstr "您已取消验证。"
+msgstr "您已取消驗證。"
 
 #: command.op.incorrect
 msgid "You have typed the incorrect password, please try again later."
-msgstr "您输入了错误的密码，请稍后再试。"
+msgstr "您輸入了錯誤的密碼，請稍後再試。"
 
 #: command.deop.description
 msgid "Remove yourself from the administrators of the server."
-msgstr "将自己从服务器管理员中移除。"
+msgstr "將自己從服務器管理員中移除。"
 
 #: command.deop.success
 msgid "You have been removed from the administrators of the server."
-msgstr "您已从服务器管理员中移除。"
+msgstr "您已從服務器管理員中移除。"
 
 #: command.setmodule.description
 msgid "Toggle a module on or off."
-msgstr "开启或关闭模块。"
+msgstr "開啓或關閉模塊。"
 
 #: command.setmodule.module
 msgid "module's id"
-msgstr "模块ID"
+msgstr "模塊ID"
 
 #: command.setmodule.module.description
 msgid "The id of the module that you want to toggle on or off."
-msgstr "您要开启或关闭的模块的ID。"
+msgstr "您要開啓或關閉的模塊的ID。"
 
 #: command.setmodule.state
 msgid "target state"
-msgstr "目标状态"
+msgstr "目標狀態"
 
 #: command.setmodule.state.description
 msgid "State that you want to switch on or off for the module."
-msgstr "您想为模块切换的状态。"
+msgstr "您想爲模塊切換的狀態。"
 
 #: command.setmodule.success.enabled
 msgid "Success! The module has been enabled by yourself."
-msgstr "成功！您已启用该模块。"
+msgstr "成功！您已啓用該模塊。"
 
 #: command.setmodule.success.disabled
 msgid "Success! The module has been disabled by yourself."
-msgstr "成功！您已禁用该模块。"
+msgstr "成功！您已禁用該模塊。"
 
 #: command.setmodule.notfound
 msgid "Not able to find the module, make sure you type a valid module. You can use '-listmodules' to see the list of modules."
-msgstr "无法找到模块，请确保您输入有效的模块。您可以使用 '-listmodules' 查看模块列表。"
+msgstr "無法找到模塊，請確保您輸入有效的模塊。您可以使用 '-listmodules' 查看模塊列表。"
 
 #: command.setmodule.already.enabled
 msgid "The module has already been enabled. Do you want to disable it?"
-msgstr "该模块已经启用。您要禁用它吗？"
+msgstr "該模塊已經啓用。您要禁用它嗎？"
 
 #: command.setmodule.already.disabled
 msgid "The module has already been disabled. Do you mean to enable it?"
-msgstr "该模块已经禁用。您是想启用它吗？"
+msgstr "該模塊已經禁用。您是想啓用它嗎？"
 
 #: command.listmodule.description
 msgid "Show the list of modules."
-msgstr ""
+msgstr "展示模塊列表清單"
 
 #: command.listmodule.title
 msgid "The list of the modules"
-msgstr ""
+msgstr "模塊列表清單"
 
 #: command.listmodule.body
 msgid "Here is the list of modules. The button is the id of the module. Green means enabled, red means disabled. What a simple system, right?"
-msgstr ""
+msgstr "這是模組列表。按鈕是模組的id。綠色表示啟用，紅色表示停用。這是一個多麼簡單的系統啊，對吧？"
 
 #: command.listmodule.toggle.title
 msgid "Toggling the module"
-msgstr ""
+msgstr "切換模組"
 
 #: command.listmodule.toggle.body
 msgid "You can still use '-setmodule' to toggle a module on or off."
-msgstr ""
+msgstr "你可以使用'-setmodule'來開啓或關閉模塊。"
 
 #: command.listmodule.toggle.enable
 msgid "I want to enable this module."
-msgstr ""
+msgstr "我想啓用這個模塊。"
 
 #: command.listmodule.toggle.disable
 msgid "I want to disable this module."
-msgstr ""
+msgstr "我想禁用這個模塊。"
 
 #: command.listmodule.toggle.state
 msgid "What do you want to do with this module"
-msgstr ""
+msgstr "您想利用這個模塊來做什麼"
 
 #: command.set.invalid
 msgid "Unknown path: %s, make sure you type a valid path. Use slash (/) to separate the path."
-msgstr ""
+msgstr "未知路徑: %s，請確保您輸入了有效的路徑。使用斜杠（/）來分隔路徑。"
 
 #: command.set.number
 msgid "The path you want to set must be a number."
-msgstr ""
+msgstr "您要設置的路徑必須是一個數字。"
 
 #: command.set.boolean
 msgid "The path you want to set must be a boolean. Only 'true' or 'false' is allowed."
-msgstr ""
+msgstr "您要設置的路徑必須是一個布爾值。僅允許 'true' 或 'false'。"
 
 #: command.set.success
 msgid "Success! The path '%1' has been set to '%2'."
-msgstr ""
+msgstr "設置成功！路徑 '%1' 已設置爲 '%2'。"
 
 #: command.set.description
 msgid "Change the config dynamically. Without the data lost for different versions."
-msgstr ""
+msgstr "動態更改配置。不會因不同版本而丟失數據。"
 
 #: command.set.key
 msgid "path (key)"
-msgstr ""
+msgstr "路徑（key）"
 
 #: command.set.key.description
 msgid "The path that you want to set. You should type it with slash (/) to separate the path. For example, 'modules/antiSpeed'."
-msgstr ""
+msgstr "您要設置的路徑。您應該使用斜杠（/）來分隔路徑。例如，'modules/antiSpeed'。"
 
 #: command.set.value
 msgid "value"
-msgstr ""
+msgstr "值"
 
 #: command.set.value.description
 msgid "The value that you want to set. It should be a string, a boolean or a number depending on the type of the path."
-msgstr ""
+msgstr "您要設置的值。它應該是一個字符串、一個布爾值或一個數字，具體取決於路徑的類型。"
 
 #: command.matrixui.description
 msgid "Open the Matrix AntiCheat UI panel."
-msgstr ""
+msgstr "打開Matrix反外掛作弊UI面板。"
 
 #: command.vanish.description
 msgid "Make yourself invisible to other players. Even ESP will not be able to see you."
-msgstr ""
+msgstr "使自己對其他玩家不可見。即使ESP也無法看到你。"
 
 #: command.vanish.success
 msgid "You have been vanished. Type this command again to make yourself visible again."
-msgstr ""
+msgstr "您已使自己對其他玩家不可見。再次輸入此命令即可使自己可見。"
 
 #: command.vanish.deleted
 msgid "You are no longer to be vanished."
-msgstr ""
+msgstr "您不再對其他玩家不可見。"
 
 #: command.vanish.failed
 msgid "Sorry, but you need to place Matrix anticheat above any-type of addon that includes 'player.json' entities file to use this command."
-msgstr ""
+msgstr "抱歉，但您需要將Matrix反外掛作弊放在包含'player.json'實體文件的任何類型的插件之上才能使用此命令。"
 
 #: command.moderation.target
 msgid "Target player"
-msgstr ""
+msgstr "目標玩家"
 
 #: command.moderation.target.description
 msgid "The player that you want to use this command on."
-msgstr ""
+msgstr "您要對其使用此命令的玩家。"
 
 #: command.moderation.duration
 msgid "Duration"
-msgstr ""
+msgstr "持續時間"
 
 #: command.moderation.duration.description
 msgid "The duration of the moderation action that you want to use this command on, in minutes. You leave it empty in order to set a permanent moderation action."
-msgstr ""
+msgstr "您要對其使用此命令的管理操作的持續時間，以分鐘爲單位。您可以將其保持空白以設置永久管理操作。"
 
 #: command.moderation.admin
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "您無法為管理員或您自己完成審核操作"
 
 #: command.moderation.success
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "%2 對 %1 採取了審核措施"
 
 #: command.moderation.action
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "§7>> §g審核行動：§e%s"
 
 #: command.moderation.removal.failed
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "在使用移除審核或任何相關審核指令之前，您必須確保目標玩家受到審核。"
 
 #: command.moderation.tempkick
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "暫時踢出"
 
 #: command.moderation.kick
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "踢出"
 
 #: command.moderation.ban
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "永久封禁"
 
 #: command.moderation.unban
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "解除封禁"
 
 #: command.moderation.softban
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "暫時封禁"
 
 #: command.moderation.unsoftban
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "解除暫時封禁"
 
 #: command.moderation.mute
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "禁言"
 
 #: command.moderation.unmute
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "解除禁言"
 
 #: command.moderation.freeze
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "凍結"
 
 #: command.moderation.unfreeze
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "解除凍結"
 
 #: command.moderation.warn
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "警告"
 
 #: command.moderation.clearwarn
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "解除所有警告"
 
 #: command.moderation.warn.amount
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "§7>> §g 警告次數︰ %s"
 
 #: command.tempkick.description
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "暫時將玩家踢出伺服器。"
 
 #: command.kick.description
 msgid "Kick a player."
-msgstr ""
+msgstr "踢出一名玩家"
 
 #: command.ban.description
 msgid "Ban a player."
-msgstr ""
+msgstr "永久封禁一名玩家"
 
 #: command.unban.description
 msgid "Unban a player."
-msgstr ""
+msgstr "解除封禁一名玩家"
 
 #: command.softban.description
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "暫時封禁一名玩家"
 
 #: command.unsoftban.description
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "解除暫時封禁一名玩家"
 
 #: command.mute.description
 msgid "Mute a player."
-msgstr ""
+msgstr "禁言一名玩家"
 
 #: command.unmute.description
 msgid "Unmute a player."
-msgstr ""
+msgstr "解除禁言一名玩家"
 
 #: command.freeze.description
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "凍結一名玩家"
 
 #: command.unfreeze.description
 msgid "UNUSED_STRING"
-msgstr ""
+msgstr "解除凍結一名玩家"
 
 #: command.warn.description
 msgid "Warn a player."
-msgstr ""
+msgstr "警告一名玩家"
 
 #: command.banlist.empty
 msgid "Hopefully, there is no banned player right now."
-msgstr ""
+msgstr "很好，目前仍沒有被封禁的玩家。"
 
 #: command.banlist.banned
 msgid "There is %1 banned player(s) on this server: §e%s"
-msgstr ""
+msgstr "此服務器上有 %1 名被封禁的玩家: §e%s"
 
 #: command.banlist.description
 msgid "Show the list of banned players."
-msgstr ""
+msgstr "顯示被封禁玩家的列表。"
 
 #: command.clearwarn.description
 msgid "Clear all warnings of a player."
-msgstr ""
+msgstr "清除一名玩家的所有警告。"
 
 #: command.invsee.description
 msgid "See the inventory of a player."
-msgstr ""
+msgstr "查看一名玩家的背包。"
 
 #: command.invsee.notice
 msgid "You can open the inventory ui by opening your inventory."
-msgstr ""
+msgstr "您可以通過打開您的背包來打開背包UI。"
 
 #: command.invsee.self
 msgid "You can not see your own inventory, this might cause some issues."
-msgstr ""
+msgstr "您不能查看自己的背包，這可能會導致一些問題。"
 
 #: command.setpassword.description
 msgid "Set a password for getting operator permissions."
-msgstr ""
+msgstr "設置獲取管理員權限的密碼。"
 
 #: command.setpassword.password
 msgid "New password"
-msgstr ""
+msgstr "新密碼"
 
 #: command.setpassword.password.description
 msgid "The password that you want to set."
-msgstr ""
+msgstr "您要設置的密碼。"
 
 #: command.setpassword.success
 msgid "The password has been set."
-msgstr ""
+msgstr "密碼已設置。"
 
 #: command.setpassword.strength
 msgid "Your password should include lowerCase, upperCase, numbers and special characters."
-msgstr ""
+msgstr "您的密碼應包括小寫字母、大寫字母、數字和特殊字符。"
 
 #: command.clearpassword.description
 msgid "Clear the password."
-msgstr ""
+msgstr "清除密碼。"
 
 #: command.clearpassword.success
 msgid "The password has been cleared."
-msgstr ""
+msgstr "密碼已清除。"
 
 #: command.clearpassword.already
 msgid "There is no password set."
-msgstr ""
+msgstr "沒有設置密碼。"
 
 #: command.configui.description
 msgid "Configure the settings of Matrix anticheat by a user interface."
-msgstr ""
+msgstr "通過用戶界面配置Matrix反外掛作弊的設置。"
 
 #: command.setadmin.description
 msgid "Set a player as an administrator."
-msgstr ""
+msgstr "將一名玩家設置爲管理員。"
 
 #: command.setadmin.level
 msgid "Administrator level"
-msgstr ""
+msgstr "管理員等級"
 
 #: command.setadmin.level.description
 msgid "The level of the administrator that you want to set. (Set to 0 in order to remove the player as an administrator)"
-msgstr ""
+msgstr "您要設置的管理員等級。 （設置爲0以將玩家移除爲管理員）"
 
 #: command.setadmin.failed
 msgid "Failed to change the player's administrator level."
-msgstr ""
+msgstr "無法更改玩家的管理員等級。"
 
 #: command.setadmin.level.display
 msgid "§7>> §gAdministrator level: §eLevel %s"
-msgstr ""
+msgstr "§7>> §g管理員等級: §e等級 %s"
 
 #: command.setrank.description
 msgid "Set a player's rank."
-msgstr ""
+msgstr "設置一名玩家的等級。"
 
 #: command.setrank.rank
 msgid "Ranks"
-msgstr ""
+msgstr "等級"
 
 #: command.setrank.rank.description
 msgid "The rank of the player that you want to set. Use comma (,) to separate multiple ranks."
-msgstr ""
+msgstr "您要設置的玩家的等級。使用逗號（,）來分隔多個等級。"
 
 #: command.setrank.success
 msgid "%1's rank has been set to %2."
-msgstr ""
+msgstr "%1的等級已設置爲 %2。"
 
 #: action.hint.exit.matrix:inv_container
 msgid "Tap the §lInventory button§r to open their Inventory."
-msgstr ""
+msgstr "點擊§l背包按鈕§r 打開他們的背包。"
 
 #: action.hint.exit.console.matrix:inv_container
 msgid "Press §l:_input_key.inventory:§r to open their Inventory"
-msgstr ""
+msgstr "按§l:_input_key.inventory:§r 打開他們的背包"
 
 #: module.welcomer.message
 msgid "Welcome! §e%s§r§g has joined the server!"
-msgstr ""
+msgstr "歡迎! §e%s§r§g 已加入服務器！"
 
 #: module.welcomer.device
 msgid "§7>> §gDevice: §e%s"
-msgstr ""
+msgstr "§7>> §g設備: §e%s"
 
 #: module.welcomer.device.console
 msgid "gaming console"
-msgstr ""
+msgstr "遊戲機"
 
 #: module.welcomer.device.pc
 msgid "computer"
-msgstr ""
+msgstr "電腦"
 
 #: module.welcomer.device.mobile
 msgid "mobile phone"
-msgstr ""
+msgstr "手機"
 
 #: module.welcomer.device.unknown
 msgid "unknown"
-msgstr ""
+msgstr "未知"
 
 #: module.welcomer.name
 msgid "Welcomer"
-msgstr ""
+msgstr "歡迎者"
 
 #: module.welcomer.description
 msgid "Send a welcome message when a player joins the server."
-msgstr ""
+msgstr "當玩家加入服務器時發送歡迎消息。"
 
 #: module.worldborder.name
 msgid "World Border"
-msgstr ""
+msgstr "世界邊界"
 
 #: module.worldborder.description
 msgid "Generate a border to block the players from going out of the world."
-msgstr ""
+msgstr "生成一個邊界，阻止玩家走出世界。"
 
 #: module.worldborder.danger
 msgid "Stop moving, you have arrived the boundary of the world!"
-msgstr ""
+msgstr "停止移動，您已到達世界邊界！"
 
 #: module.worldborder.title
 msgid "§c§lStopped!§r"
-msgstr ""
+msgstr "§c§l停止！§r"
 
 #: module.worldborder.subtitle
 msgid "§eYou will be auto teleported to the spawn in %s seconds."
-msgstr ""
+msgstr "§e您將在 %s 秒內自動傳送到出生點。"
 
 #: module.chatrank.name
 msgid "Chat Rank & Anti Spam"
-msgstr ""
+msgstr "聊天等級和禁垃圾"
 
 #: module.chatrank.description
 msgid "Prevent the spamming on your server and provide a chat rank system."
-msgstr ""
+msgstr "防止您的伺服器上的垃圾信息並提供聊天等級系統。"
 
 #: module.chatrank.bad
 msgid "Your message contains some sensitive word(s) which is not allowed."
-msgstr ""
+msgstr "您的訊息包含一些不允許的敏感詞。"
 
 #: module.chatrank.slow
 msgid "Slow mode enabled! Please enter your message %s second(s) later."
-msgstr ""
+msgstr "慢速模式已啓用！請在 %s 秒後輸入您的訊息。"
 
 #: module.chatrank.repeated
 msgid "Please don't spam messages."
-msgstr ""
+msgstr "請不要發送垃圾訊息(刷頻)。"
 
 #: module.afk.name
 msgid "Anti AFK"
-msgstr ""
+msgstr "禁掛機"
 
 #: module.afk.description
 msgid "Disconnect the player if they are not active for a long time."
-msgstr ""
+msgstr "如果玩家長時間不活動，則將其斷開連接。"
 
 #: module.afk.disconnect
 msgid "%s has been disconnected due to AFK on this server for a long time."
-msgstr ""
+msgstr "%s因長時間在此服務器上掛機而被斷開連接。"
 
 #: module.clog.name
 msgid "Anti Combat Log"
-msgstr ""
+msgstr "防止記錄戰鬥"
 
 #: module.clog.description
 msgid "Prevent someone leaves the combat log. Very basic so use others for your own anti combat log."
-msgstr ""
+msgstr "防止有人離開戰鬥日誌。非常基本，所以使用其他人的反戰鬥日誌。"
 
 #: module.clog.in.combat
 msgid "§gYou are in combat. §7§l(§r§e%s second(s) left§7§l)§r"
-msgstr ""
+msgstr "§您正在戰鬥中。 §7§l（§r§e 還剩 %s 秒§7§l）§r"
 
 #: module.clog.face.combat
 msgid "You are now in combat with §e%s§g."
-msgstr ""
+msgstr "您現在正在與§e%s§g 戰鬥。"
 
 #: module.clog.leave.combat
 msgid "You are no longer in combat with %s."
-msgstr ""
+msgstr "您不再與 %s 戰鬥。"
 
 #: module.clog.killed
 msgid "§c§lCombat log detected!§r§7 %1 has left the game during combat with %2."
-msgstr ""
+msgstr "§c§l檢測到戰鬥日誌！§r§7 %1 在與 %2 戰鬥時離開了遊戲。"
 
 #: module.captcha.name
 msgid "Captcha against bots"
-msgstr ""
+msgstr "禁止機器人驗證"
 
 #: module.captcha.description
 msgid "Prevent the spamming bot from attacking the current server."
-msgstr ""
+msgstr "防止刷頻機器人攻擊當前服務器。"
 
 #: module.captcha.detected
 msgid "§c§lSuspicious client detected!§r§7 %s has been disconnected due to using a suspicious client."
-msgstr ""
+msgstr "§c§l檢測到可疑客戶端！§r§7 %s 因使用可疑客戶端而被斷開連接。"
 
 #: module.captcha.keepmove
 msgid "§bMatrix§a+ §7> §gContinue your rotation movement for %s seconds more."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g繼續旋轉運動 %s 秒。"
 
 #: module.captcha.checking
 msgid "§bMatrix§a+ §7> §gChecking your client... Please wait."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g正在檢查您的客戶端... 請稍候。"
 
 #: module.captcha.continue
 msgid "§bMatrix§a+ §7> §gPlease §e§lMOVE YOUR ROTATION§r§g to continue the check process."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g請§e§l移動您的旋轉§r§g 以繼續檢查過程。"
 
 #: module.captcha.title
 msgid "Captcha GUI | Matrix Anticheat"
-msgstr ""
+msgstr "驗證碼GUI | Matrix反外掛作弊"
 
 #: module.captcha.submit
 msgid "I have finished the question!"
-msgstr ""
+msgstr "我已回答問題！"
 
 #: module.captcha.selectui
 msgid "§bPlease answer the question below correctly to verify you're a human."
-msgstr ""
+msgstr "§b請正確回答下面的問題以驗證您是一個人。"
 
 #: module.captcha.why
 msgid "§aWhy do you need to verify? Because we want to prevent the spamming bot from attacking the current server."
-msgstr ""
+msgstr "§a為什麼需要驗證？因爲我們想防止刷頻機器人攻擊當前服務器。"
 
 #: module.captcha.question
 msgid "§gQuestion: §eWhat is the correct answer of %1 plus %2?"
-msgstr ""
+msgstr "§g問題: §e%1 加 %2 的正確答案是什麼？"
 
 #: module.captcha.youranswer
 msgid "§gSelect the correct answer in below slider"
-msgstr ""
+msgstr "§g在下面滑塊中選擇正確答案"
 
 #: module.captcha.recontinue
 msgid "§bMatrix§a+ §7> §gYou make it wrong, please try again."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g回答錯誤，請再試一次。"
 
 #: module.captcha.verified
 msgid "§bMatrix§a+ §7> §gYou have been verified as a human, and you can now use the server."
-msgstr ""
+msgstr "§bMatrix§a+ §7> §g您已被驗證爲人類，現在可以使用服務器。"
 
 #: module.autoclicker.name
 msgid "Anti Auto Clicker"
-msgstr ""
+msgstr "禁止自動點擊"
 
 #: module.autoclicker.description
 msgid "Prevent the high cps auto clicker from working."
-msgstr ""
+msgstr "防止高cps自動點擊生效。"
 
 #: module.autoclicker.reach
 msgid "§c§lHey! §7Auto clicker is not allowed on this server. You have %2 out of %1 clicks per second now."
-msgstr ""
+msgstr "§c§l嘿！ §7在此伺服器上不允許自動點擊。您現在每秒點擊 %2 次，最多 %1 次。"
 
 #: item.matrix.itemui
 msgid "§r§l§bMatrix §gAnticheat §eUI§a panel§r"
-msgstr ""
+msgstr "§r§l§bMatrix §g反外掛作弊 §eUI§a 面板§r"
 
 #: directpanel.title
 msgid "Tell me, what do you want to do?"
-msgstr ""
+msgstr "告訴我，您想做什麼？"
 
 #: directpanel.body
 msgid "Select an action from below buttons. I can generate the command string for you."
-msgstr ""
+msgstr "從下面的按鈕中選擇一個操作。我可以爲您生成命令字符串。"
 
 #: directpanel.button
 msgid "Run '%s' command."
-msgstr ""
+msgstr "執行 '%s' 指令。"
 
 #: directpanel.enter
 msgid "Enter the command string"
-msgstr ""
+msgstr "輸入指令字符串"
 
 #: directpanel.build
 msgid "Let build and run your command together."
-msgstr ""
+msgstr "讓我們一起構建並執行您的指令。"
 
 #: module.prediction.name
 msgid "Prediction Module"
-msgstr ""
+msgstr "預測模塊"
 
 #: module.prediction.description
 msgid "An advanced check that can detect more fly hacker."
-msgstr ""
+msgstr "一個高級檢查，可以檢測到更多飛行作弊者。"
 
 #: flag.detected.title
 msgid "§bMatrix§i│ §eSuspicious client detected"
@@ -1092,7 +1092,7 @@ msgstr "   §7[?] 這是§c誤報§7嗎？請您有空時向開發人員回報�
 
 #: command.moderation.reason.description
 msgid "The reason for the moderation action."
-msgstr "进行管理操作的原因。"
+msgstr "進行管理操作的原因。"
 
 #: command.moderation.reason
 msgid "Reason"
@@ -1100,11 +1100,11 @@ msgstr "原因"
 
 #: module.entityFly.name
 msgid "Anti Entity Fly"
-msgstr "反实体飞行"
+msgstr "反實體飛行"
 
 #: module.entityFly.description
 msgid "Prevent the entity fly from working."
-msgstr "防止实体飞行生效。"
+msgstr "防止實體飛行生效。"
 
 #: command.echestwipe.success
 msgid "The echest of %s has been wiped successfully."
@@ -1116,7 +1116,7 @@ msgstr "清空玩家的末影箱。"
 
 #: command.fastlog.description
 msgid "Get the log in today, yesterday or the day before yesterday"
-msgstr "获取今天、昨天或前天的日志。"
+msgstr "獲取今天、昨天或前天的日誌。"
 
 #: command.log.day
 msgid "Day"
@@ -1124,63 +1124,63 @@ msgstr "天"
 
 #: command.log.day.description
 msgid "The day of the logs(s)"
-msgstr "日志的日期"
+msgstr "日誌的日期"
 
 #: command.log.nodata
 msgid "No data. Unable to get the log that you want in the database."
-msgstr "没有数据。无法在数据库中获取您想要的日志。"
+msgstr "沒有數據。無法在數據庫中獲取您想要的日誌。"
 
 #: command.log.description
 msgid "View the recent logs in the database"
-msgstr "查看数据库中的最近日志。"
+msgstr "查看數據庫中的最近日志。"
 
 #: command.log.amount
 msgid "Amount"
-msgstr "数量"
+msgstr "數量"
 
 #: command.log.amount.description
 msgid "The amount of the latest logs that you what to view."
-msgstr "您想查看的最新日志的数量。"
+msgstr "您想查看的最新日誌的數量。"
 
 #: command.daylog.description
 msgid "View all of the logs in a specific day."
-msgstr "查看特定日期的所有日志。"
+msgstr "查看特定日期的所有日誌。"
 
 #: command.log.month
 msgid "The month of the log(s)."
-msgstr "日志的月份。"
+msgstr "日誌的月份。"
 
 #: command.log.years
 msgid "The years of the log(s)."
-msgstr "日志的年份。"
+msgstr "日誌的年份。"
 
 #: command.log.invalid
 msgid "Invalid time: You should not select a time that is in the future."
-msgstr "无效时间：您不应选择未来的时间。"
+msgstr "無效時間：您不應選擇未來的時間。"
 
 #: command.logui.description
 msgid "Select one of the the restart point and view all of the log(s) during the restart point to the next restart point."
-msgstr "选择一个重启点，查看该重启点到下一个重启点期间的所有日志。"
+msgstr "選擇一箇重啓點，查看該重啓點到下一箇重啓點期間的所有日誌。"
 
 #: command.logui.title
 msgid "Select one of the restart point in below"
-msgstr "在下面选择一个重启点"
+msgstr "在下面選擇一箇重啓點"
 
 #: command.logui.button
 msgid "Server initialization #%s"
-msgstr "服务器初始化 #%s"
+msgstr "服務器初始化 #%s"
 
 #: ui.log.title
 msgid "Log record | Timezone: %s"
-msgstr "日志记录 | 时区: %s"
+msgstr "日誌記錄 | 時區: %s"
 
 #: ui.log.body
 msgid "Click into the §gbutton§f of the log can see the §adetail information§f of the selected log. If you want to exit this ui, you can click the 'X' in the corner."
-msgstr "点击日志的 §g按钮§f 可以查看所选日志的 §a详细信息§f。要退出此界面，请点击角落中的 'X'。"
+msgstr "點擊日誌的 §g按鈕§f 可以查看所選日誌的 §a詳細信息§f。要退出此界面，請點擊角落中的 'X'。"
 
 #: ui.log.detail
 msgid "Detail information"
-msgstr "详细信息"
+msgstr "詳細信息"
 
 #: command.echestwipe.description
 msgid "Clear a player's ender chest"
@@ -1188,121 +1188,121 @@ msgstr "清空玩家的末影箱。"
 
 #: command.help.sd
 msgid "Get the command list"
-msgstr "获取命令列表"
+msgstr "獲取命令列表"
 
 #: command.logui.sd
 msgid "View logs by restart time"
-msgstr "按重启时间查看日志"
+msgstr "按重啓時間查看日誌"
 
 #: command.daylog.sd
 msgid "View logs by date"
-msgstr "按日期查看日志"
+msgstr "按日期查看日誌"
 
 #: command.fastlog.ad
 msgid "View logs in past few days"
-msgstr "查看过去几天的日志"
+msgstr "查看過去幾天的日誌"
 
 #: command.setpassword.sd
 msgid "Change password"
-msgstr "更改密码"
+msgstr "更改密碼"
 
 #: command.configui.sd
 msgid "Edit config"
-msgstr "编辑配置"
+msgstr "編輯配置"
 
 #: command.op.sd
 msgid "Gain matrix admin"
-msgstr "获得Matrix管理员权限"
+msgstr "獲得Matrix管理員權限"
 
 #: command.deop.sd
 msgid "Remove your admin perm"
-msgstr "移除您的管理员权限"
+msgstr "移除您的管理員權限"
 
 #: command.vanish.sd
 msgid "(Un)vanish yourself"
-msgstr "（隐身/显现）"
+msgstr "（隱身/顯現）"
 
 #: command.about.sd
 msgid "Get info of Matrix-anti"
-msgstr "获取Matrix反外挂的信息"
+msgstr "獲取Matrix反外掛的信息"
 
 #: command.crash.description
 msgid "Crash a player."
-msgstr "使玩家崩溃。"
+msgstr "使玩家崩潰。"
 
 #: module.mobaura.name
 msgid "Anti Mob Aura"
-msgstr "反生物光环"
+msgstr "反生物光環"
 
 #: module.mobaura.description
 msgid "Spawn dummy when player attack a mob, checks if the player is attacking the dummy."
-msgstr "玩家攻击生物时生成虚拟目标，检查玩家是否在攻击虚拟目标。"
+msgstr "玩家攻擊生物時生成虛擬目標，檢查玩家是否在攻擊虛擬目標。"
 
 #: module.elytraFly.name
 msgid "Anti Elytra Fly"
-msgstr "反翅膀飞行"
+msgstr "反翅膀飛行"
 
 #: module.elytraFly.description
 msgid "Prevent the player from using the illegal elytra flying."
-msgstr "防止玩家使用非法的翅膀飞行。"
+msgstr "防止玩家使用非法的翅膀飛行。"
 
 #: module.autotool.name
 msgid "Anti Auto Tool"
-msgstr ""
+msgstr "禁上自動工具"
 
 #: module.autotool.description
 msgid "Checks if player is using autoTool hack to break blocks."
-msgstr ""
+msgstr "檢查玩家是否使用自動工具作弊來破壞方塊。"
 
 #: module.deviceban.name
 msgid "Device Ban"
-msgstr ""
+msgstr "設備封禁"
 
 #: module.deviceban.description
 msgid "Prevent the player from using a banned device to join the server."
-msgstr ""
+msgstr "防止玩家使用被封禁的設備加入服務器。"
 
 #: command.ban.finish
 msgid "§bMatrix§a+ §7>§g %1 has been banned by %2."
-msgstr ""
+msgstr "bMatrix§a+ §7>§g %1 已被 %2 封禁。"
 
 #: command.unban.finish
 msgid "§bMatrix§a+ §7>§g %1 has been unbanned by %2."
-msgstr ""
+msgstr "bMatrix§a+ §7>§g %1 已被 %2 解封。"
 
 #: command.kick.finish
 msgid "§bMatrix§a+ §7>§g %1 has been kicked by %2."
-msgstr ""
+msgstr "bMatrix§a+ §7>§g %1 已被 %2 踢出。"
 
 #: command.mute.finish
 msgid "§bMatrix§a+ §7>§g %1 has been muted by %2."
-msgstr ""
+msgstr "bMatrix§a+ §7>§g %1 已被 %2 禁言。"
 
 #: command.unmute.finish
 msgid "§bMatrix§a+ §7>§g %1 has been unmuted by %2."
-msgstr ""
+msgstr "bMatrix§a+ §7>§g %1 已被 %2 解除禁言。"
 
 #: command.warn.finish
 msgid "§bMatrix§a+ §7>§g %1 has been warned by %2. §7(Warns: %3)"
-msgstr ""
+msgstr "bMatrix§a+ §7>§g %1 已被 %2 警告。 §7（警告次數: %3）"
 
 #: command.clearwarn.finish
 msgid "§bMatrix§a+ §7> §gAll the warnings of %1 has been cleared by %2."
-msgstr ""
+msgstr "bMatrix§a+ §7> §g %1 的所有警告已被 %2 清除。"
 
 #: command.unban.notfound
 msgid "§bMatrix§a+ §7> §cThe player %1 has not been banned yet. You can use -banlist to see the list of banned players."
-msgstr ""
+msgstr "bMatrix§a+ §7> §c玩家 %1 還沒有被封禁。您可以使用 -banlist 查看被封禁玩家的列表。"
 
 #: command.unmute.notfound
 msgid "§bMatrix§a+ §7> §cThe player %1 has not been muted yet."
-msgstr ""
+msgstr "bMatrix§a+ §7> §c玩家 %1 還沒有被禁言。"
 
 #: command.moderation.ban.expired
 msgid "§bMatrix§a+ §7> §aYour ban has expired!"
-msgstr ""
+msgstr "bMatrix§a+ §7> §a您的封禁已過期！"
 
 #: command.moderation.mute.expired
 msgid "§bMatrix§a+ §7> §aYou're no longer to be muted"
-msgstr ""
+msgstr "bMatrix§a+ §7> §a您不再被禁言"
 
