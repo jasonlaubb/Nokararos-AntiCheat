@@ -1,3 +1,4 @@
+#: translator: Yummysheep
 #: pack.description
 msgid "§7§¶The Supreme Anti-Cheat Solution for Minecraft Bedrock. Required Beta API to work."
 msgstr "§7§¶我的世界基岩版最佳的反外掛作弊解決方案，此模組需要開啟實驗性API。"
