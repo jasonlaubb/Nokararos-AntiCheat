@@ -1322,3 +1322,11 @@ msgstr ""
 msgid "The flag type that states what is the target that anticheat should send the notification to them when there is cheater detected."
 msgstr ""
 
+#: command.fastlog.sd
+msgid "View log in previous day"
+msgstr ""
+
+#: command.echestwipe.sd
+msgid "Clear player echest"
+msgstr ""
+

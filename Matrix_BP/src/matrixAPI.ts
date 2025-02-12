@@ -574,7 +574,7 @@ export class DirectPanel {
             //@ts-expect-error
             const result = await ui.show(player);
             if (result.canceled || (result.formValues![0] as string).length == 0) return;
-            currentString += " " + notPlayerTarget ? result.formValues![0] : '"' + playerNameArray[result.formValues![0] as number] + '"';
+            currentString += " " + (notPlayerTarget ? result.formValues![0] : '"' + playerNameArray[result.formValues![0] as number] + '"');
         }
         for (const optionalOption of commandSelected.optionalOption) {
             const body = fastText()
@@ -599,7 +599,7 @@ export class DirectPanel {
             if ((result.formValues![0] as string).length == 0) {
                 break;
             }
-            currentString += " " + notPlayerTarget ? result.formValues![0] : '"' + playerNameArray[result.formValues![0] as number] + '"';
+            currentString += " " + (notPlayerTarget ? result.formValues![0] : '"' + playerNameArray[result.formValues![0] as number] + '"');
         }
         // Run the command for it.
         player.runChatCommand(currentString);
