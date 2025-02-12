@@ -109,7 +109,7 @@ function tickEvent(tickData: TickData, player: Player) {
             player.removeTag("matrix:checkingGlideTag");
             if (!player.isGliding || isEquippedWithElytra(player)) return;
             player.teleport(data.lastFlaggedLocation);
-            player.flag(fly, { t: "4" });
+            player.flag(fly, { t: "4 (BDS disabler)" });
         });
         data.lastFlaggedLocation = player.location;
     }
