@@ -997,3 +997,9 @@ msgstr "Flag type"
 
 msgid "command.setflagmsgto.type.description"
 msgstr "The flag type that states what is the target that anticheat should send the notification to them when there is cheater detected."
+
+msgid "command.fastlog.sd"
+msgstr "View log in previous day"
+
+msgid "command.echestwipe.sd"
+msgstr "Clear player echest"

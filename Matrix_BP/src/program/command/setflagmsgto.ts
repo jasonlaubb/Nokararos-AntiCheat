@@ -18,4 +18,5 @@ new Command()
     .onExecute(async (player, type) => {
         const flagMode = type as string;
         player.runChatCommand(`set flag/flagMode ${flagMode}`);
-    });
+    })
+	.register();
