@@ -547,7 +547,7 @@ export class DirectPanel {
         for (const command of allCommands) {
             const theAction = command.shortDescription ?? command.description;
             const commandId = command.availableId[0];
-            ui.button(fastText().addText("§1").addRawText(theAction).addText("§j").endline().addTran("directpanel.button", commandId).build());
+            ui.button(fastText().addText("§7．§1").addRawText(theAction).addText("§7．§j").endline().addTran("directpanel.button", commandId).build());
         }
         // Close the chat and continue... Easy right?
         const result = await waitShowActionForm(ui, player);
