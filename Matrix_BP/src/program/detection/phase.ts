@@ -59,7 +59,7 @@ function tickEvent(tickData: TickData, player: Player) {
         if (containsSolid) {
             system.runTimeout(() => {
                 if (player?.isValid()) player.teleport(data.lastLocationList[0]);
-            }, 10);
+            }, Module.config.sensitivity.antiPhase.locationCorrectDelay);
         }
     }
 

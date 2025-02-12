@@ -107,7 +107,8 @@ export default {
         },
         antiPhase: {
             enhanceDetection: true,
-        }
+            locationCorrectDelay: 10,
+        },
     },
     flag: {
         banDuration: 604800,
