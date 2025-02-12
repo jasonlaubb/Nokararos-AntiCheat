@@ -50,7 +50,7 @@ function tickEvent(tickData: TickData, player: Player) {
             player.flag(antiPhase, { passedBlock: containsSolid.typeId });
         }
     }
-    if (Module.config.sensitivity.antiPhase.enhanceDetection && !clipStartLocation && check) {
+    if (Module.config.sensitivity.antiPhase.enhanceDetection && !clipStartLocation && check && currentSpeed > MAX_SPEED) {
         const blockLocations = straightLocations(data.lastLocationList[0], player.location);
         let containsSolid = undefined;
         try {
