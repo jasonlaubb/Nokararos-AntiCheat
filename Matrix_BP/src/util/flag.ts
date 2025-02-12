@@ -3,6 +3,7 @@ import { Module } from "../matrixAPI";
 import { fastText, rawtext, rawtextTranslate } from "./rawtext";
 import { banHandler, matrixKick, crashPlayer } from "../program/system/moderation";
 import { write } from "../assets/logSystem";
+import { sendMessages } from "./util";
 export function setupFlagFunction() {
     Player.prototype.flag = function (detected: Module, data?: { [key: string]: string | number | (string | number)[] }) {
         if (this.isAdmin()) return;
@@ -30,15 +31,31 @@ export function setupFlagFunction() {
                 ...data,
             });
         }
-        if (bypass || punishment !== "crash") {
-            world.sendMessage(flagMessage.build());
-        } else {
-            const build = flagMessage.build();
-            world.getPlayers({ excludeNames: [this.name] }).forEach((p) => {
-                p.sendMessage(build);
-            });
+        const build = flagMessage.build();
+        switch (Module.config.flag.flagMode) {
+            case "none": {
+                break;
+            }
+            case "admin": {
+                sendMessages(world.getAllPlayers().filter((player) => player.isAdmin()), build);
+                break;
+            }
+            case "tag": {
+                sendMessages(world.getPlayers({
+                    tags: ["matrix:flag"],
+                }), build);
+                break;
+            }
+            case "hidden": {
+                sendMessages(world.getPlayers({
+                    excludeNames: [this.name],
+                }), build);
+                break;
+            }
+            default: {
+                world.sendMessage(build);
+            }
         }
-        if (bypass) return this.sendMessage("<debug> You are §aimmune§f to punishments, because you have §ematrix-debug:punishmentResistance§f tag.");
         try {
             switch (punishment) {
                 case "kick": {

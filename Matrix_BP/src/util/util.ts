@@ -1,4 +1,4 @@
-import { Dimension, MemoryTier, PlatformType, Player, system, Vector3, VectorXZ } from "@minecraft/server";
+import { Dimension, MemoryTier, PlatformType, Player, RawMessage, system, Vector3, VectorXZ } from "@minecraft/server";
 import { ActionFormData, ActionFormResponse, FormCancelationReason, ModalFormData, ModalFormResponse } from "@minecraft/server-ui";
 import { fastBelow, fastSurround } from "./fastmath";
 import { MinecraftBlockTypes } from "../node_modules/@minecraft/vanilla-data/lib/index";
@@ -233,4 +233,9 @@ export function compareLoc(a: VectorXZ, b: VectorXZ) {
  */
 export function compareLoc3d(a: Vector3, b: Vector3) {
     return a.x === b.x && a.y === b.y && a.z === b.z;
+}
+export function sendMessages (players: Player[], message: (RawMessage | string)[] | RawMessage | string) {
+    players.forEach((player) => {
+        player.sendMessage(message);
+    })
 }
