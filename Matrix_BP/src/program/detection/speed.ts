@@ -98,7 +98,11 @@ function tickEvent(tickData: TickData, player: Player) {
         } else if (distance > 0.2 && !player.isInWater && !player.isSwimming && !data.previousSpeed.includes(distance)) {
             const velocitySpeed = tickData.global.lastSpeedXZ;
             const normalDistance = distance * Module.config.sensitivity.antiSpeed.maxVelocityExaggeration;
-            if (velocitySpeed > 0 && tickData.instant.speedXZ > 0 && now - data.lastEnderPeal > 1200 && distance > VELOCITY_DELTA_THRESHOLD && data.lastSprint === player.isSprinting && !isSwiftSneak(player) && player.isSprinting ? normalDistance * 0.7 : normalDistance > velocitySpeed * 1.2 ** speedLevel) {
+            if (
+                velocitySpeed > 0 && tickData.instant.speedXZ > 0 && now - data.lastEnderPeal > 1200 && distance > VELOCITY_DELTA_THRESHOLD && data.lastSprint === player.isSprinting && !isSwiftSneak(player) && player.isSprinting
+                    ? normalDistance * 0.7
+                    : normalDistance > velocitySpeed * 1.2 ** speedLevel
+            ) {
                 if (data.timerFlagAmount < 1) {
                     data.lastTriggerLocation = player.location;
                 }

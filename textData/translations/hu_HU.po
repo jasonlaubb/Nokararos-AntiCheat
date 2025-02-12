@@ -1306,3 +1306,19 @@ msgstr ""
 msgid "§bMatrix§a+ §7> §aYou're no longer to be muted"
 msgstr ""
 
+#: debug.pause
+msgid "§bMatrix§a+ §7> §7Punishment §e%1 §7to §e%2§r §7has been cancelled."
+msgstr ""
+
+#: command.setflagmsgto.description
+msgid "Change the flag mode"
+msgstr ""
+
+#: command.setflagmsgto.type
+msgid "Flag type"
+msgstr ""
+
+#: command.setflagmsgto.type.description
+msgid "The flag type that states what is the target that anticheat should send the notification to them when there is cheater detected."
+msgstr ""
+

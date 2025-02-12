@@ -1,4 +1,3 @@
-# translator: Yummysheep
 #: pack.description
 msgid "§7§¶The Supreme Anti-Cheat Solution for Minecraft Bedrock. Required Beta API to work."
 msgstr "§7§¶我的世界基岩版最佳的反外掛作弊解決方案，此模組需要開啟實驗性API。"
@@ -1306,4 +1305,20 @@ msgstr "bMatrix§a+ §7> §a您的封禁已過期！"
 #: command.moderation.mute.expired
 msgid "§bMatrix§a+ §7> §aYou're no longer to be muted"
 msgstr "bMatrix§a+ §7> §a您不再被禁言"
+
+#: debug.pause
+msgid "§bMatrix§a+ §7> §7Punishment §e%1 §7to §e%2§r §7has been cancelled."
+msgstr ""
+
+#: command.setflagmsgto.description
+msgid "Change the flag mode"
+msgstr ""
+
+#: command.setflagmsgto.type
+msgid "Flag type"
+msgstr ""
+
+#: command.setflagmsgto.type.description
+msgid "The flag type that states what is the target that anticheat should send the notification to them when there is cheater detected."
+msgstr ""
 

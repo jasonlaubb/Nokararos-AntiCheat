@@ -112,7 +112,7 @@ export default {
     },
     flag: {
         banDuration: 604800,
-        flagMode: "all", // "none", "all", "admin", "tag", "hidden"        
+        flagMode: "all", // "none", "all", "admin", "tag", "hidden"
     },
     worldBorder: {
         borderLength: 1000,

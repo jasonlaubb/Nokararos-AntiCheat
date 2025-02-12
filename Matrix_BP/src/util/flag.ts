@@ -37,19 +37,28 @@ export function setupFlagFunction() {
                 break;
             }
             case "admin": {
-                sendMessages(world.getAllPlayers().filter((player) => player.isAdmin()), build);
+                sendMessages(
+                    world.getAllPlayers().filter((player) => player.isAdmin()),
+                    build
+                );
                 break;
             }
             case "tag": {
-                sendMessages(world.getPlayers({
-                    tags: ["matrix:flag"],
-                }), build);
+                sendMessages(
+                    world.getPlayers({
+                        tags: ["matrix:flag"],
+                    }),
+                    build
+                );
                 break;
             }
             case "hidden": {
-                sendMessages(world.getPlayers({
-                    excludeNames: [this.name],
-                }), build);
+                sendMessages(
+                    world.getPlayers({
+                        excludeNames: [this.name],
+                    }),
+                    build
+                );
                 break;
             }
             default: {

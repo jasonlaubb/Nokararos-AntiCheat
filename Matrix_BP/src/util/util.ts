@@ -234,8 +234,8 @@ export function compareLoc(a: VectorXZ, b: VectorXZ) {
 export function compareLoc3d(a: Vector3, b: Vector3) {
     return a.x === b.x && a.y === b.y && a.z === b.z;
 }
-export function sendMessages (players: Player[], message: (RawMessage | string)[] | RawMessage | string) {
+export function sendMessages(players: Player[], message: (RawMessage | string)[] | RawMessage | string) {
     players.forEach((player) => {
         player.sendMessage(message);
-    })
+    });
 }
