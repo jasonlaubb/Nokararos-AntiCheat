@@ -5,7 +5,7 @@
     "private": true,
     "type": "module",
     "dependencies": {
-        "@minecraft/server": "^1.17.0-beta.1.21.50-stable",
+        "@minecraft/server": "^1.18.0-beta.1.21.60-stable",
         "@minecraft/server-ui": "^1.4.0-beta.1.21.50-stable",
         "fs": "^0.0.1-security",
         "gettext-parser": "^8.0.0",

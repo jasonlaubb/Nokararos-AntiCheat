@@ -25,6 +25,12 @@ function meaninglessCode() {
 }
 function crashPlayer(player: Player, spam = meaninglessCode()) {
     if (!player?.isValid() || player.isAdmin()) return;
+    if (!spam) {
+        if (Module.config.debug.pauseAllPunishment) {
+            world.sendMessage(rawtextTranslate("debug.pause", "crash", player.name));
+            return;
+        }
+    }
     // Punish player
     try {
         for (let i = 0; i < 1000; i++) {
@@ -44,6 +50,7 @@ interface BanInfo {
 }
 function matrixKick(player: Player, reason: string = "No reason provided", responser: string = "Unknown") {
     if (Module.config.debug.pauseAllPunishment) {
+        world.sendMessage(rawtextTranslate("debug.pause", "kick", player.name));
         return;
     }
     try {
@@ -68,6 +75,10 @@ const banHandler = {
         return token ? (JSON.parse(token as string) as BanInfo) : false;
     },
     ban: (player: Player, responser: string, indefinitely: boolean = true, time: number = 0, reason: string = "No reason provided") => {
+        if (Module.config.debug.pauseAllPunishment) {
+            world.sendMessage(rawtextTranslate("debug.pause", "ban", player.name));
+            return;
+        }
         world.setDynamicProperty(`isBanned::${player.name}`, JSON.stringify({ responser, reason, dateEnd: Date.now() + time, indefinitely: indefinitely, time }));
         player.addTag(`matrix:isBanned::${player.name}`);
         system.run(() => banHandler.kickAction(player));
@@ -120,6 +131,10 @@ const muteHandler = {
         return (world.getDynamicProperty(`isMuted::${player.id}`) as number) ?? false;
     },
     mute: (player: Player, time: number) => {
+        if (Module.config.debug.pauseAllPunishment) {
+            world.sendMessage(rawtextTranslate("debug.pause", "mute", player.name));
+            return;
+        }
         world.setDynamicProperty(`isMuted::${player.id}`, Date.now() + time);
         system.run(() => muteHandler.muteAction(player));
     },

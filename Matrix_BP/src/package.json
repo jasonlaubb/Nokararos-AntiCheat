@@ -4,7 +4,7 @@
     "description": "The TypeScript src in Matrix AntiCheat",
     "private": true,
     "dependencies": {
-        "@minecraft/vanilla-data": "^1.21.50",
+        "@minecraft/vanilla-data": "^1.21.60",
         "crypto-es": "^2.1.0",
         "matrix-anticheat": "file:../.."
     }
