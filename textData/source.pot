@@ -984,3 +984,6 @@ msgstr "§bMatrix§a+ §7> §aYour ban has expired!"
 
 msgid "command.moderation.mute.expired"
 msgstr "§bMatrix§a+ §7> §aYou're no longer to be muted"
+
+msgid "debug.pause"
+msgstr "§bMatrix§a+ §7> §7Punishment §e%1 §7to §e%2§r §7has been cancelled."

@@ -1,7 +1,6 @@
 import { Punishment } from "../program/system/moderation";
 
 export default {
-    disableConsoleOutput: false,
     security: {
         containsPassword: false,
         passwordHash: "",
@@ -46,14 +45,9 @@ export default {
         vanish: true,
         kick: true,
         ban: true,
-        softban: true,
         mute: true,
         crash: true,
         unmute: true,
-        unfreeze: true,
-        unsoftban: true,
-        warn: true,
-        clearwarn: true,
         invsee: true,
         setpassword: true,
         clearpassword: true,
@@ -114,6 +108,8 @@ export default {
     },
     flag: {
         banDuration: 604800,
+        flagMode: "all", // "none", "all", "admin", "tag", "hidden"
+        hideFlagMessageToCheaterOnCrash: true,
     },
     worldBorder: {
         borderLength: 1000,
@@ -134,4 +130,7 @@ export default {
         debug: false,
     },
     userRecruitmentFunction: true,
+    debug: {
+        pauseAllPunishment: false, // Stop all punishment on util function.
+    },
 };
