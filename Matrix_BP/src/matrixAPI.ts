@@ -44,7 +44,7 @@ export class IntegratedSystemEvent {
  * @warn You are not allowed to copy or modify this system unless you have declared yours as a fork from us.
  */
 class Module {
-    public static readonly version: [number, number, number] = [6, 0, 33];
+    public static readonly version: [number, number, number] = [6, 0, 34];
     public static readonly discordInviteLink = "CqZGXeRKPJ";
     // Map that store almost everything. (Temporary)
     public static readonly tickData = new Map<string, TickData>();
