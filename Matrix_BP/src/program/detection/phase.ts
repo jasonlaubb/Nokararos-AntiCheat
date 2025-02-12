@@ -1,4 +1,4 @@
-import { Player, Vector3 } from "@minecraft/server";
+import { Player, system, Vector3 } from "@minecraft/server";
 import { IntegratedSystemEvent, Module } from "../../matrixAPI";
 import { rawtextTranslate } from "../../util/rawtext";
 import { fastAbs } from "../../util/fastmath";
@@ -38,8 +38,8 @@ function tickEvent(tickData: TickData, player: Player) {
     const currentSpeed = tickData.instant.speedXZ;
 
     const clipStartLocation = calculateClipStartLocation(data.lastSpeedList, data.lastLocationList, currentSpeed);
-
-    if (clipStartLocation && Date.now() - player.timeStamp.knockBack > 3500 && !player.isFlying && Math.abs(y) < MAX_SPEED) {
+    const check = Date.now() - player.timeStamp.knockBack > 3500 && !player.isFlying && Math.abs(y) < MAX_SPEED;
+    if (clipStartLocation && check) {
         const blockLocations = straightLocations(clipStartLocation, player.location);
         let containsSolid = undefined;
         try {
@@ -48,6 +48,18 @@ function tickEvent(tickData: TickData, player: Player) {
         if (containsSolid) {
             player.teleport(clipStartLocation);
             player.flag(antiPhase, { passedBlock: containsSolid.typeId });
+        }
+    }
+    if (Module.config.sensitivity.antiPhase.enhanceDetection && !clipStartLocation && check) {
+        const blockLocations = straightLocations(data.lastLocationList[0], player.location);
+        let containsSolid = undefined;
+        try {
+            containsSolid = blockLocations.map((block) => player.dimension.getBlock(block)).find((block) => block?.isSolid);
+        } catch {}
+        if (containsSolid) {
+            system.runTimeout(() => {
+                if (player?.isValid()) player.teleport(data.lastLocationList[0]);
+            }, 10);
         }
     }
 

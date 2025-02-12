@@ -105,6 +105,9 @@ export default {
         antiScaffold: {
             scaffoldBlockLimit: 4,
         },
+        antiPhase: {
+            enhanceDetection: true,
+        }
     },
     flag: {
         banDuration: 604800,
