@@ -17,18 +17,28 @@
     "subpacks": [
         {
             "folder_name": "Matrix-fpsboost",
-            "name": "§aMatrix AntiCheat with FPS Booster",
+            "name": "§aEnable FPS Booster",
             "memory_tier": 0
         },
         {
             "folder_name": "Matrix-nocrit",
-            "name": "§eMatrix AntiCheat that delete critical particles only",
+            "name": "§eDelete critical particles only",
             "memory_tier": 0
         },
         {
             "folder_name": "Matrix-vanilla",
-            "name": "§cVanilla Matrix AntiCheat with no FPS Booster",
+            "name": "§cDisable FPS Booster",
             "memory_tier": 0
+        }
+    ],
+    "settings": [
+        {
+            "type": "label",
+            "text": "FPS booster can delete the particle you don't need to increase the performance of the server. Also, it can also be used for anti hit particles spamming."
+        },
+        {
+            "type": "label",
+            "text": "Move the slide to the left to enable FPS booster and right for disabling."
         }
     ]
 }
